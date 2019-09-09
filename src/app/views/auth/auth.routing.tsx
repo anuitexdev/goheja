@@ -2,14 +2,16 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import SignInScreen from './signIn/signIn';
 import SignUpScreen from './signUp/signUp';
+import ForgotPasswordScreen from './forgotPassword/forgotPassword';
 
 const AppNavigator = createStackNavigator(
   {
-    Home: SignInScreen,
-    signUp: SignUpScreen
+    signIn: SignInScreen,
+    signUp: SignUpScreen,
+    forgotPassword: ForgotPasswordScreen
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'signIn',
     headerMode: "none"
   },
 );
