@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 interface State {
     email: string,
     password: string,
+    showPassword: boolean
 }
 
 interface Props {
@@ -27,10 +28,10 @@ class SignInScreen extends Component<Props, State> {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            showPassword: true
         }
     }
-
 
     private onSubmit = async () => {
         await this.props.signIn(this.state);
@@ -44,70 +45,64 @@ class SignInScreen extends Component<Props, State> {
         this.setState({ password });
     }
 
-        this.toggleSwitch = this.toggleSwitch.bind(this);
-        this.state = {
-            showPassword: true
-        }
-    }
+
+
     public signUpRedirect = () => {
         this.props.navigation.navigate('signUp');
     }
 
-    toggleSwitch() {
+    public toggleSwitch = () => {
         this.setState({ showPassword: !this.state.showPassword });
+    }
     public forgotPasswordRedirect = () => {
         this.props.navigation.navigate('forgotPassword');
     }
 
-    private onSubmit() { }
-
     render() {
         return (
-           <ScrollView>
-           <Header/>
-           <View style ={styles.container}>
-           <Text style ={styles.screenTitle}>Login</Text>
-           <View style={styles.formField}>
-               <Text style={styles.label}>Email</Text>
-               <TextInput 
-               placeholder='Type your email address...'
-               style={styles.input}
-               ></TextInput>
-           </View>
-           <View style={styles.formField}>
-               <Text style={styles.label}>Password</Text>
-               <TextInput
-               secureTextEntry={true}
-               placeholder='Type your password...'
-               secureTextEntry={this.state.showPassword}
-               onChangeText={(password) => this.setState({ password })}
-               style={styles.input}
-               />
-               <Icon 
-               style={ styles.showPassword } 
-               size={25} 
-               name={'ios-eye'}
-               onPress={this.toggleSwitch}
-               value={!this.state.showPassword}
-               />  
-           </View>
-           <View style={styles.signInErrors}>
-                <Text style={styles.textErrors}>
-                Email or Password is incorrect
+            <ScrollView>
+                <Header />
+                <View style={styles.container}>
+                    <Text style={styles.screenTitle}>Login</Text>
+                    <View style={styles.formField}>
+                        <Text style={styles.label}>Email</Text>
+                        <TextInput
+                            placeholder='Type your email address...'
+                            style={styles.input}
+                        ></TextInput>
+                    </View>
+                    <View style={styles.formField}>
+                        <Text style={styles.label}>Password</Text>
+                        <TextInput
+                            placeholder='Type your password...'
+                            secureTextEntry={this.state.showPassword}
+                            onChangeText={(password) => this.setState({ password })}
+                            style={styles.input}
+                        />
+                        <Icon
+                            style={styles.showPassword}
+                            size={25}
+                            name={'ios-eye'}
+                            onPress={this.toggleSwitch}
+                        />
+                    </View>
+                    <View style={styles.signInErrors}>
+                        <Text style={styles.textErrors}>
+                            Email or Password is incorrect
                 </Text>
-           </View>
-           <View style={styles.links}>
-           <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
-           <TouchableOpacity style={styles.signInBtn}>
-           <Text style={styles.signInText}>Login</Text>
-           </TouchableOpacity>
-           </View>
-           <View style={styles.signUpRedirect}>
-           <Text style={styles.haveAccount}>Don’t have a Go-heja account?</Text>
-           <Text style={styles.signUpLink} onPress={this.signUpRedirect}>Signup for free</Text>
-           </View>
-       </View>
-       </ScrollView>
+                    </View>
+                    <View style={styles.links}>
+                        <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
+                        <TouchableOpacity style={styles.signInBtn}>
+                            <Text style={styles.signInText} onPress={this.onSubmit}>Login</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.signUpRedirect}>
+                        <Text style={styles.haveAccount}>Don’t have a Go-heja account?</Text>
+                        <Text style={styles.signUpLink} onPress={this.signUpRedirect}>Signup for free</Text>
+                    </View>
+                </View>
+            </ScrollView>
         )
     }
 }
