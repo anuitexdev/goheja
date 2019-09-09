@@ -61,5 +61,6 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
-*.sqlite
+*.db
+*.opendb
 /.vs
