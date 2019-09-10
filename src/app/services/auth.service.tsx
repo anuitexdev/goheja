@@ -1,49 +1,33 @@
 import { environment } from "../enviroments/enviroment.prod";
 import UserSignInData from "../shared/models/userSignInData";
 import axiosInstance from '../shared/interceptors/axios.interceptor';
+import UserSignUpData from '../shared/models/userSignUpData';
 
 export class AuthService {
     public signIn(userData: UserSignInData): Promise<string> {
-        //test
+
         return axiosInstance.post(`${environment.backendUrl}/auth/signIn`, userData)
-          .then(function (response) {
+          .then((response) =>  {
             console.log(response);
             return response;
           })
-          .catch(function (error) {
+          .catch((error) => {
             console.log(error);
             return error;
           });
-        //
-        // return fetch(`${environment.backendUrl}/auth/signIn`, {
-        //     method: 'POST',
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(userData)
-        // }).then(res => res.json());
     }
 
-    public signUp(userData: any): Promise<string> {
+    public signUp(userData: UserSignUpData): Promise<string> {
 
         return axiosInstance.post(`${environment.backendUrl}/auth/signUp`, userData)
-        .then(function (response) {
+        .then((response) => {
           console.log(response);
           return response;
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
           return error;
         });
-        // return fetch(`${environment.backendUrl}/auth/signUp`, {
-        //     method: 'POST',
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(userData)
-        // }).then(res => res.json());
     }
 }
 export default new AuthService();

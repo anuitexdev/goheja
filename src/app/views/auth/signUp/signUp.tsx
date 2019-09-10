@@ -6,6 +6,7 @@ import styles from '../styles';
 import  WelcomeScreen  from './welcome';
 import  BasicInfoScreen  from './basicInfo';
 import Header from '../../../components/header';
+import UserSignUpData from "src/app/shared/models/userSignUpData";
 class SignUpScreen extends Component {
 
     constructor(props) {
@@ -18,7 +19,7 @@ class SignUpScreen extends Component {
             <ScrollView>
                 <Header/>
                 
-                <BasicInfoScreen/>
+                <BasicInfoScreen signUp={this.props.signUp}/>
             </ScrollView>
            </Fragment>
         )
@@ -33,6 +34,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
+   
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);
