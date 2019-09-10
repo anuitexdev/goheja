@@ -8,16 +8,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 class BasicInfoScreen extends Component {
 
 
-    constructor(props) {
+    constructor(props:any) {
         super(props);
 
-        this.toggleSwitch = this.toggleSwitch.bind(this);
         this.state = {
             showPassword: true,
         }
     }
 
-    toggleSwitch() {
+    toggleSwitch =() => {
         this.setState({ showPassword: !this.state.showPassword });
     }
     
@@ -60,7 +59,7 @@ class BasicInfoScreen extends Component {
                 size={25} 
                 name={'ios-eye'} 
                 onPress={this.toggleSwitch}
-                value={!this.state.showPassword}/>  
+                />  
             </View>
             <View style={styles.nextBtnWrapper}>
                 <TouchableOpacity style={styles.nextBtn}>

@@ -1,49 +1,36 @@
 import { environment } from "../enviroments/enviroment.prod";
 import UserSignInData from "../shared/models/userSignInData";
 import axiosInstance from '../shared/interceptors/axios.interceptor';
-
+import { AsyncStorage } from 'react-native';
 export class AuthService {
+
+    public setUser(accessToken: string): void {
+        AsyncStorage.setItem('accessToken', accessToken)
+    }
+
     public signIn(userData: UserSignInData): Promise<string> {
-        //test
         return axiosInstance.post(`${environment.backendUrl}/auth/signIn`, userData)
-          .then(function (response) {
-            console.log(response);
-            return response;
-          })
-          .catch(function (error) {
-            console.log(error);
-            return error;
-          });
-        //
-        // return fetch(`${environment.backendUrl}/auth/signIn`, {
-        //     method: 'POST',
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(userData)
-        // }).then(res => res.json());
+            .then( (response) => {
+                console.log(response);
+                return response;
+            })
+            .catch( (error) => {
+                console.log(error);
+                return error;
+            });
     }
 
     public signUp(userData: any): Promise<string> {
 
         return axiosInstance.post(`${environment.backendUrl}/auth/signUp`, userData)
-        .then(function (response) {
-          console.log(response);
-          return response;
-        })
-        .catch(function (error) {
-          console.log(error);
-          return error;
-        });
-        // return fetch(`${environment.backendUrl}/auth/signUp`, {
-        //     method: 'POST',
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(userData)
-        // }).then(res => res.json());
+            .then( (response) => {
+                console.log(response);
+                return response;
+            })
+            .catch( (error) => {
+                console.log(error);
+                return error;
+            });
     }
 }
 export default new AuthService();

@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { Text, View, Button, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import styles from '../styles';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 
@@ -10,7 +10,7 @@ interface Props {
 }
 class WelcomeScreen extends Component<Props> {
 
-    constructor(props) {
+    constructor(props: any) {
         super(props);
     }
     render(){

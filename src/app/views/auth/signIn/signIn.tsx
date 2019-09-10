@@ -12,6 +12,7 @@ import UserSignInData from "src/app/shared/models/userSignInData";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import Header from '../../../components/header';
 import Icon from 'react-native-vector-icons/Ionicons';
+
 interface State {
     email: string,
     password: string,
@@ -27,17 +28,17 @@ class SignInScreen extends Component<Props, State> {
     constructor(props: any) {
         super(props);
         this.state = {
+            showPassword: true,
             email: '',
             password: '',
-            showPassword: true
         }
     }
 
     private onSubmit = async () => {
-        await this.props.signIn(this.state);
+        await this.props.signIn({ email :this.state.email,password: this.state.password });
     }
 
-    public changeEmail = (email: string) => {
+    public changeEmail = (email: string) => {        
         this.setState({ email });
     }
 
@@ -69,6 +70,7 @@ class SignInScreen extends Component<Props, State> {
                         <TextInput
                             placeholder='Type your email address...'
                             style={styles.input}
+                            onChangeText = {this.changeEmail}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
@@ -76,7 +78,7 @@ class SignInScreen extends Component<Props, State> {
                         <TextInput
                             placeholder='Type your password...'
                             secureTextEntry={this.state.showPassword}
-                            onChangeText={(password) => this.setState({ password })}
+                            onChangeText = {this.changePassword}
                             style={styles.input}
                         />
                         <Icon
