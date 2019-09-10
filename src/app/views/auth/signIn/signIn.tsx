@@ -35,15 +35,7 @@ class SignInScreen extends Component<Props, State> {
     }
 
     private onSubmit = async () => {
-        await this.props.signIn({ email :this.state.email,password: this.state.password });
-    }
-
-    public changeEmail = (email: string) => {        
-        this.setState({ email });
-    }
-
-    public changePassword = (password: string) => {
-        this.setState({ password });
+        await this.props.signIn({ email: this.state.email, password: this.state.password });
     }
 
     public signUpRedirect = () => {
@@ -57,6 +49,10 @@ class SignInScreen extends Component<Props, State> {
         this.props.navigation.navigate('forgotPassword');
     }
 
+    private handleChange = (data: any) => {
+        this.setState(data);
+    }
+
     render() {
         return (
             <ScrollView>
@@ -67,9 +63,8 @@ class SignInScreen extends Component<Props, State> {
                         <Text style={styles.label}>Email</Text>
                         <TextInput
                             placeholder='Type your email address...'
-                            onChangeText={this.changeEmail}
                             style={styles.input}
-                            onChangeText = {this.changeEmail}
+                            onChangeText={(email) => this.handleChange({ email })}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
@@ -77,7 +72,7 @@ class SignInScreen extends Component<Props, State> {
                         <TextInput
                             placeholder='Type your password...'
                             secureTextEntry={this.state.showPassword}
-                            onChangeText = {this.changePassword}
+                            onChangeText={(password) => this.handleChange({ password })}
                             style={styles.input}
                         />
                         <Icon

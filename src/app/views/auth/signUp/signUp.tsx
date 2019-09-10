@@ -1,40 +1,43 @@
 import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { Text, View, ScrollView } from "react-native";
-import styles from '../styles';
-import  WelcomeScreen  from './welcome';
-import  BasicInfoScreen  from './basicInfo';
+import { ScrollView } from "react-native";
+import WelcomeScreen from './welcome';
+import BasicInfoScreen from './basicInfo';
 import Header from '../../../components/header';
-import UserSignUpData from "src/app/shared/models/userSignUpData";
-class SignUpScreen extends Component {
+import { NavigationParams, NavigationScreenProp } from 'react-navigation';
+import { NavigationState } from 'react-navigation';
 
-    constructor(props) {
-        super(props);
+interface Props {
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>,
+    isWelcomeScreen: boolean,
+}
+
+class SignUpScreen extends Component<Props> {
+
+    constructor(props: any) {
+        super(props)
     }
 
-    render(){
-        return(
-           <Fragment>
-            <ScrollView>
-                <Header/>
-                
-                <BasicInfoScreen signUp={this.props.signUp}/>
-            </ScrollView>
-           </Fragment>
+    render() {
+        return (
+            <Fragment>
+                <ScrollView>
+                    <Header />
+                    {this.props.isWelcomeScreen ? <WelcomeScreen navigation={this.props.navigation} /> : <BasicInfoScreen />}
+
+                </ScrollView>
+            </Fragment>
         )
     }
 }
 
-// <WelcomeScreen navigation={this.props.navigation}/>
-
-
-
 const mapStateToProps = (state: any) => ({
+    isWelcomeScreen: state.AuthReducer.isWelcomeScreen,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-   
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);

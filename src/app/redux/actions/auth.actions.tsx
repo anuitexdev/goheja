@@ -2,26 +2,26 @@ import AuthService from '../../services/auth.service'
 import UserSignInData from 'src/app/shared/models/userSignInData';
 import UserSignUpData from '../../shared/models/userSignUpData';
 
-export function sucsessAuth(userToken: string) {
+export const sucsessAuth = (userToken: string) => {
     return { type: 'AUTH_SUCCESS', userToken };
 }
 
-export function failedAuth(err: any) {
+export const failedAuth = (err: any) => {
     return { type: 'AUTH_FAILED', err }
 }
 
-export function signIn(userData: UserSignInData) {
+export const signIn = (userData: UserSignInData) => {
     return async (dispatch: any) => {
-        await AuthService.signIn(userData).then(res => {   
+        await AuthService.signIn(userData).then(res => {
             dispatch(sucsessAuth(res));
         }
         ).catch(err => {
             dispatch(failedAuth(err));
-        })
+        });
     }
 }
 
-export function signUp(userData: UserSignUpData) {
+export const signUp = (userData: UserSignUpData) => {
     return async (dispatch: any) => {
         await AuthService.signUp(userData).then(res => {
             dispatch(sucsessAuth(res));
@@ -30,4 +30,8 @@ export function signUp(userData: UserSignUpData) {
             dispatch(failedAuth(err));
         })
     }
+}
+
+export const changeScreen = () => {
+    return { type: 'CHANGE_SCREEN' };
 }
