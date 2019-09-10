@@ -2,13 +2,13 @@ import AuthDefaultState from "../states/auth.state";
 
 const AuthReducer = (state = AuthDefaultState, action: any) => {
     switch (action.type) {
-        case "SIGNIN_SUCCESS": {
+        case "AUTH_SUCCESS": {
             return {
                 ...state,
                 userToken: action.userToken
             }
         }
-        case "SIGNIN_FAILED": {
+        case "AUTH_FAILED": {
             return {
                 ...state,
                 userToken: action.err

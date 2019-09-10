@@ -46,8 +46,6 @@ class SignInScreen extends Component<Props, State> {
         this.setState({ password });
     }
 
-
-
     public signUpRedirect = () => {
         this.props.navigation.navigate('signUp');
     }
@@ -69,6 +67,7 @@ class SignInScreen extends Component<Props, State> {
                         <Text style={styles.label}>Email</Text>
                         <TextInput
                             placeholder='Type your email address...'
+                            onChangeText={this.changeEmail}
                             style={styles.input}
                             onChangeText = {this.changeEmail}
                         ></TextInput>

@@ -6,7 +6,7 @@ const axiosInstance = axios.create();
 
 axiosInstance.interceptors.request.use( async (config) => {
 
-  const accessToken =await AsyncStorage.getItem('accessToken');
+  const accessToken = await AsyncStorage.getItem('accessToken');
 
 
   if (accessToken) {
