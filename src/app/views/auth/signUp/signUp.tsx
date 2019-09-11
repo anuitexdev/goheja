@@ -37,7 +37,6 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);
