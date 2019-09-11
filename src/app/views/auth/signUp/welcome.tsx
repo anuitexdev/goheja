@@ -12,7 +12,7 @@ interface Props {
 }
 class WelcomeScreen extends Component<Props> {
 
-    constructor(props: any) {
+    constructor(props: Props) {
         super(props);
     }
 
@@ -57,9 +57,6 @@ class WelcomeScreen extends Component<Props> {
         this.props.navigation.navigate('signIn');
     }
 }
-
-
-
 
 const mapStateToProps = (state: any) => ({
 });

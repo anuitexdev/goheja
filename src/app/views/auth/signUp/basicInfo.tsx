@@ -21,7 +21,7 @@ interface Props {
 
 class BasicInfoScreen extends Component<Props, State> {
 
-    constructor(props: any) {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
@@ -81,7 +81,6 @@ class BasicInfoScreen extends Component<Props, State> {
                         secureTextEntry={this.state.showPassword}
                         style={styles.input}
                         onChangeText={(password) => this.handleChange({ password })}
-
                     />
                     <Icon
                         style={styles.showPassword}

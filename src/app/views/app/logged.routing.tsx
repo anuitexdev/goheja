@@ -9,7 +9,6 @@ const AppNavigator = createStackNavigator(
     Home: AppScreen,
 
   },
-
 );
 
 export default AppNavigator;

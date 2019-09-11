@@ -25,7 +25,7 @@ interface Props {
 }
 
 class SignInScreen extends Component<Props, State> {
-    constructor(props: any) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             showPassword: true,
@@ -56,7 +56,7 @@ class SignInScreen extends Component<Props, State> {
     render() {
         return (
             <ScrollView>
-                <Header />
+                <Header/>
                 <View style={styles.container}>
                     <Text style={styles.screenTitle}>Login</Text>
                     <View style={styles.formField}>
