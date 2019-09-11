@@ -24,7 +24,7 @@ export const signIn = (userData: UserSignInData) => {
 export const signUp = (userData: UserSignUpData) => {
     return async (dispatch: any) => {
         await AuthService.signUp(userData).then(res => {
-            dispatch(sucsessAuth(res));
+            dispatch(sucsessAuth(' '));
         }
         ).catch(err => {
             dispatch(failedAuth(err));
