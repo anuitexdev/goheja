@@ -21,7 +21,8 @@ interface State {
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
-    signIn: (user: UserSignInData) => void
+    signIn: (user: UserSignInData) => void,
+    isLogged: boolean,
 }
 
 class SignInScreen extends Component<Props, State> {
@@ -36,6 +37,10 @@ class SignInScreen extends Component<Props, State> {
 
     private onSubmit = async () => {
         await this.props.signIn({ email: this.state.email, password: this.state.password });
+
+        if (this.props.isLogged) {
+            this.props.navigation.navigate('Home');
+        }
     }
 
     public signUpRedirect = () => {
@@ -103,6 +108,7 @@ class SignInScreen extends Component<Props, State> {
     }
 }
 const mapStateToProps = (state: any) => ({
+    isLogged: state.AuthReducer.isLogged,
     
 });
 

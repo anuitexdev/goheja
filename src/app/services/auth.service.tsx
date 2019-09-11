@@ -10,7 +10,7 @@ export class AuthService {
         AsyncStorage.setItem('accessToken', accessToken)
     }
 
-    public signIn(userData: UserSignInData): Promise<string> {
+    public signIn(userData: UserSignInData): Promise<any> {
         
         return axiosInstance.post(`${enviroment.backendUrl}`, userData)
             .then((response) => {
@@ -23,7 +23,7 @@ export class AuthService {
             });
     }
 
-    public signUp(userData: UserSignUpData): Promise<string> {
+    public signUp(userData: UserSignUpData): Promise<any> {
 
         return axiosInstance.post(`${enviroment.backendUrl}/auth/signUp`, userData)
             .then((response) => {
