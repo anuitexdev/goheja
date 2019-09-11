@@ -88,7 +88,7 @@ class SignInScreen extends Component<Props, State> {
                     <View style={styles.signInErrors}>
                         <Text style={styles.textErrors}>
                             Email or Password is incorrect
-                </Text>
+                        </Text>
                     </View>
                     <View style={styles.links}>
                         <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
@@ -106,6 +106,7 @@ class SignInScreen extends Component<Props, State> {
     }
 }
 const mapStateToProps = (state: any) => ({
+    
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

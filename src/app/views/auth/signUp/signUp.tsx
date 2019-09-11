@@ -6,9 +6,7 @@ import styles from '../styles';
 import  WelcomeScreen  from './welcome';
 import  BasicInfoScreen  from './basicInfo';
 import Header from '../../../components/header';
-import UserSignUpData from "src/app/shared/models/userSignUpData";
 class SignUpScreen extends Component {
-
     constructor(props) {
         super(props);
     }
@@ -18,15 +16,15 @@ class SignUpScreen extends Component {
            <Fragment>
             <ScrollView>
                 <Header/>
-                
-                <BasicInfoScreen signUp={this.props.signUp}/>
+                <WelcomeScreen  navigation={this.props.navigation}/>
+                <BasicInfoScreen/>
             </ScrollView>
            </Fragment>
         )
     }
 }
 
-// <WelcomeScreen navigation={this.props.navigation}/>
+
 
 
 

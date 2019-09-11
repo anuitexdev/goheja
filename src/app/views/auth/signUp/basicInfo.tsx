@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { Text, View, TouchableOpacity, TextInput } from "react-native";
+import { Text, View, TouchableOpacity, TextInput, ToastAndroid } from "react-native";
 import styles from '../styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../redux/actions/auth.actions';
@@ -20,7 +20,6 @@ interface Props {
 }
 
 class BasicInfoScreen extends Component<Props, State> {
-
 
     constructor(props: any) {
         super(props);
@@ -67,7 +66,6 @@ class BasicInfoScreen extends Component<Props, State> {
                 onChangeText={(lastName: string) => {
                     this.setState({ lastName });
                 }}
-                // onChange={(e) => this.handleChange(e)}
                 ></TextInput>
             </View>
             <View style={styles.formField}>
@@ -78,7 +76,6 @@ class BasicInfoScreen extends Component<Props, State> {
                 onChangeText={(email: string) => {
                     this.setState({ email });
                 }}
-                // onChange={(e) => this.handleChange(e)}
                 ></TextInput>
             </View>
             <View style={styles.formField}>
@@ -86,7 +83,6 @@ class BasicInfoScreen extends Component<Props, State> {
                 <TextInput 
                 placeholder='Type your password...'
                 secureTextEntry={this.state.showPassword}
-                // onChange={(e) => this.handleChange(e)}
                 style={styles.input}
                 onChangeText={(password: string) => {
                     this.setState({ password });
@@ -117,7 +113,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    signUp: (userData: UserSignUpData) => dispatch(actions.signIn(userData))
+    signUp: (userData: UserSignUpData) => dispatch(actions.signUp(userData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BasicInfoScreen);
