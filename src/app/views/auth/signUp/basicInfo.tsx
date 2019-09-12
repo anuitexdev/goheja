@@ -6,6 +6,7 @@ import styles from '../styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../shared/models/userSignUpData.model';
+import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 
 interface State {
     firstName: string,
@@ -16,6 +17,7 @@ interface State {
 }
 
 interface Props {
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>,
     signUp: (user: UserSignUpData) => void
 }
 
@@ -40,6 +42,9 @@ class BasicInfoScreen extends Component<Props, State> {
     private onSubmit = async () => {
         const { showPassword, ...userDto } = this.state;
         await this.props.signUp(userDto);
+        console.log(this.props);
+        
+        this.props.navigation.navigate('yourSelfAthlete');
     }
 
     private handleChange = (data: any) => {
