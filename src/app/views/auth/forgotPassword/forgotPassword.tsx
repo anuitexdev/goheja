@@ -5,13 +5,12 @@ import { Text } from "react-native";
 
 class ForgotPasswordScreen extends Component {
 
-    render(){
-        return(
-        <Text>Forgot Password works</Text>
+    render() {
+        return (
+            <Text>Forgot Password works</Text>
         )
     }
 }
-
 
 const mapStateToProps = (state: any) => ({
 });

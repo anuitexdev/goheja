@@ -1,7 +1,7 @@
 
 
 import { createStackNavigator } from 'react-navigation-stack';
-import AppScreen from './appScreen';
+import HomeScreen from '../views/app/homeScreen';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
@@ -10,7 +10,7 @@ import { View } from 'react-native';
 
 const AppNavigator = createStackNavigator(
   {
-    Home: AppScreen,
+    Home: HomeScreen,
   }
 );
 
@@ -48,7 +48,7 @@ const TabNavigator = createMaterialBottomTabNavigator({
 }
 )
 
-const AppDrawerNavigator = createDrawerNavigator({
+const LoggedInNavigation   = createDrawerNavigator({
   TestH: {
     navigationOptions: {
       headerMode: 'screen',
@@ -78,7 +78,7 @@ const AppDrawerNavigator = createDrawerNavigator({
 
 
 
-export default AppDrawerNavigator;
+export default LoggedInNavigation;
 
 
 

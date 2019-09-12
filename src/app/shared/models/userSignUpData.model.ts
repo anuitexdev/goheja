@@ -6,7 +6,6 @@ export default class UserSignUpData {
         this.email = '',
         this.password = ''
     }
-
     firstName: string;
     lastName: string;
     email: string;

@@ -1,6 +1,6 @@
 import AuthService from '../../services/auth.service'
-import UserSignInData from 'src/app/shared/models/userSignInData';
-import UserSignUpData from '../../shared/models/userSignUpData';
+import UserSignInData from 'src/app/shared/models/userSignInData.model';
+import UserSignUpData from '../../shared/models/userSignUpData.model';
 import { Alert } from 'react-native';
 
 export const successAuth = (userToken: string, type: string) => {

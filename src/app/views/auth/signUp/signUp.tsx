@@ -23,7 +23,7 @@ class SignUpScreen extends Component<Props> {
         return (
             <Fragment>
                 <ScrollView>
-                    <Header/>
+                    <Header />
                     {this.props.isWelcomeScreen ? <WelcomeScreen navigation={this.props.navigation} /> : <BasicInfoScreen />}
 
                 </ScrollView>

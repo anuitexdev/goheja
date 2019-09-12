@@ -12,13 +12,12 @@ import React from 'react';
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import Navigation from "./app.routing";
+import Navigation from "./navigation/app.routing";
 import reducers from './redux/reducers';
 
 let store = createStore(reducers, applyMiddleware(thunk));
 
 const App = () => {
-  // const usingHermes = typeof HermesInternal === 'object' && HermesInternal !== null;
 
   return (
     <Provider store={store}>
