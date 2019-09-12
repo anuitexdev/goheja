@@ -7,7 +7,7 @@ export const successAuth = (userToken: string, type: string) => {
     if (type === 'login') {
         return { type: 'LOGIN_SUCCESS', userToken }
     } else {
-        return {type: 'REGISTER_SUCCESS', userToken}
+        return { type: 'REGISTER_SUCCESS', userToken }
     }
 }
 

@@ -1,4 +1,4 @@
-import  enviroment  from "../enviroments/enviroment";
+import enviroment from "../enviroments/enviroment";
 import UserSignInData from "../shared/models/userSignInData";
 import axiosInstance from '../shared/interceptors/axios.interceptor';
 import { AsyncStorage } from 'react-native';
@@ -10,8 +10,12 @@ export class AuthService {
         AsyncStorage.setItem('accessToken', accessToken)
     }
 
+    public getUser(): Promise<string | null> {
+        return AsyncStorage.getItem('accessToken');
+    }
+
     public signIn(userData: UserSignInData): Promise<any> {
-        
+
         return axiosInstance.post(`${enviroment.backendUrl}`, userData)
             .then((response) => {
                 console.log(response);

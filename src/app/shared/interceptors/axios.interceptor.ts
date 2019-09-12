@@ -2,7 +2,9 @@ import axios from 'axios';
 import promise from 'promise';
 import {AsyncStorage} from 'react-native';
 
-const axiosInstance = axios.create();
+const axiosInstance = axios.create({
+  headers: {'User-Agent': 'g0Heja-20-hanse'}
+});
 
 axiosInstance.interceptors.request.use( async (config) => {
 
