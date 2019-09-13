@@ -6,7 +6,7 @@ import styles from './styles';
 import { SegmentedControls } from 'react-native-radio-buttons';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/Ionicons";
-import * as actions from '../../../../redux/actions/auth.actions';
+import * as actions from '../../../../../redux/actions/auth.actions';
 
 interface Props {
     nextStepNumber: (nextStepNumber: number) => void,
@@ -38,7 +38,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         this.setState({ isDateTimePickerVisible: false });
     };
 
-    public handleDatePicked = date => {
+    public handleDatePicked = (date: Date) => {
         this.setState({
             birthDate: date,
         })

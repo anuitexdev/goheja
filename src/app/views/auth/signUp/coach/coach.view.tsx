@@ -2,7 +2,7 @@ import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
 import { ScrollView } from 'react-native';
-import Header from '../../../components/header';
+import Header from '../../../../components/header';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
 

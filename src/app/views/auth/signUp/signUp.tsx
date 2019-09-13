@@ -2,12 +2,12 @@ import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
 import { ScrollView } from "react-native";
-import WelcomeScreen from './welcome';
-import CoachBasicInfoScreen from '../coach/basicInfo/basicInfo';
+import WelcomeScreen from './welcome/welcome';
+import CoachBasicInfoScreen from './coach/basicInfo/basicInfo.view';
 import Header from '../../../components/header';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
-import AthleteScreen from '../athlete/athlete.view';
+import AthleteScreen from './athlete/athlete.view';
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
