@@ -2,16 +2,14 @@ import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import Header from '../../../../components/header';
-import { NavigationParams, NavigationScreenProp } from 'react-navigation';
-import { NavigationState } from 'react-navigation';
-import styles from '../styles';
+import styles from './styles';
 import { SegmentedControls } from 'react-native-radio-buttons';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/Ionicons";
+import * as actions from '../../../../redux/actions/auth.actions';
 
 interface Props {
-    navigation: NavigationScreenProp<NavigationState, NavigationParams>,
+    nextStepNumber: (nextStepNumber: number) => void,
 }
 
 interface State {
@@ -48,7 +46,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
     };
 
     private onSubmit = () => {
-        this.props.navigation.navigate('unitsAthlete');        
+        this.props.nextStepNumber(3);
     }
 
     private setSelectedOption(value: any) {
@@ -64,7 +62,6 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         return (
             <Fragment>
                 <ScrollView>
-                    <Header />
 
                     <View style={styles.container}>
                         <Text style={styles.pageHeader}>Tell us about yourself</Text>
@@ -74,19 +71,19 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                             <View >
                                 <Text style={styles.label}>Birth Day</Text>
                                 <TouchableOpacity onPress={this.showDateTimePicker} style={styles.datePicker}>
-                                <TextInput
-                                    placeholder='Choose birth date…'
-                                    style={styles.input}
-                                    editable ={false}
-                                    onFocus={this.showDateTimePicker}
-                                    value = {this.state.birthDate}
-                                ></TextInput>
-                                <Icon
-                                style={styles.dateIcon}
-                                size={25}
-                                name={'ios-calendar'}
-                            
-                            />
+                                    <TextInput
+                                        placeholder='Choose birth date…'
+                                        style={styles.input}
+                                        editable={false}
+                                        onFocus={this.showDateTimePicker}
+                                        value={this.state.birthDate}
+                                    ></TextInput>
+                                    <Icon
+                                        style={styles.dateIcon}
+                                        size={25}
+                                        name={'ios-calendar'}
+
+                                    />
                                 </TouchableOpacity>
                                 <DateTimePicker
                                     isVisible={this.state.isDateTimePickerVisible}
@@ -104,8 +101,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         backTint={'#fff'}
                                         selectedBackgroundColor={'#4D5A5F'}
                                         onSelection={this.setSelectedOption.bind(this)}
-                                        containerBorderTint ={'#cfd8dc'}
-                                        separatorTint ={'#cfd8dc'}
+                                        containerBorderTint={'#cfd8dc'}
+                                        separatorTint={'#cfd8dc'}
                                         optionStyle={{
                                             paddingBottom: 12,
                                             paddingTop: 12,
@@ -135,6 +132,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
+    nextStepNumber: (nextStepNumber: number) => dispatch(actions.changeStep(nextStepNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(YourSelfAthleteScreen);

@@ -2,7 +2,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import React from "react";
 import { Text, View, TouchableOpacity, TextInput, ToastAndroid } from "react-native";
-import styles from '../styles';
+import styles from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../shared/models/userSignUpData.model';

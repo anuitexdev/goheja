@@ -1,27 +1,30 @@
 import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { ScrollView, Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import Header from '../../../../components/header';
-import { NavigationParams, NavigationScreenProp } from 'react-navigation';
-import { NavigationState } from 'react-navigation';
-import styles from '../styles';
+import styles from './styles';
 import UnitButtons from "../../../../components/unitButtons";
+import * as actions from '../../../../redux/actions/auth.actions';
 
 interface Props {
-    navigation: NavigationScreenProp<NavigationState, NavigationParams>,
+    nextStepNumber: (nextStepNumber: number) => void
+}
+
+interface State {
+
 }
 
 
-class UnitsAthleteScreen extends Component<Props> {
+class UnitsAthleteScreen extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props)
 
     }
 
-    private onSubmit() {
-        this.props.navigation.navigate('');
+    private onSubmit = () => {
+        this.props.nextStepNumber(4);
     }
 
     render() {
@@ -29,7 +32,6 @@ class UnitsAthleteScreen extends Component<Props> {
         return (
             <Fragment>
                 <ScrollView>
-                    <Header />
 
                     <View style={styles.container}>
                         <Text style={styles.pageHeader}>Tell us about your units</Text>
@@ -55,6 +57,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
+    nextStepNumber: (nextStepNumber: number) => dispatch(actions.changeStep(nextStepNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UnitsAthleteScreen);

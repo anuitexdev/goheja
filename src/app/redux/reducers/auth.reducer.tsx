@@ -29,6 +29,12 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
                 role: action.role
             }
         }
+        case "CHANGE_STEP": {
+            return {
+                ...state,
+                currentStep: action.currentStep
+            }
+        }
         default: return { ...state };
     }
 }
