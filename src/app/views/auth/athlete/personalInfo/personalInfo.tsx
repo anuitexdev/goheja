@@ -5,7 +5,7 @@ import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import Header from '../../../../components/header';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
-import styles from './styles';
+import styles from '../styles';
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
