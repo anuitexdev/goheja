@@ -9,8 +9,7 @@ import BasicInfoAthleteScreen from './basicInfo/basicInfo';
 import YourSelfAthleteScreen from './yourself/yourselfAthlete';
 import UnitsAthleteScreen from './units/units';
 import PersonalInfoScreen from './personalInfo/personalInfo';
-
-
+import Wizard from '../../../components/wizard/wizard.view';
 interface Props {
     // navigation: NavigationScreenProp<NavigationState, NavigationParams>,
     currentStep: number,
@@ -30,6 +29,7 @@ console.log(this.props.currentStep);
         return (
             <Fragment>
                 <ScrollView>
+                <Wizard/>
             <View> 
             {this.props.currentStep === 1 ? <BasicInfoAthleteScreen/> :
              this.props.currentStep === 2 ? <YourSelfAthleteScreen/> :

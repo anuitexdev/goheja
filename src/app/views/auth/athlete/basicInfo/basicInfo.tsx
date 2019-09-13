@@ -53,7 +53,6 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Wizard/>
                 <Text style={styles.screenTitle}>Your basic info</Text>
                 <View style={styles.formField}>
                     <Text style={styles.label}>First Name</Text>

@@ -4,24 +4,35 @@ const window = Dimensions.get('window');
 export default StyleSheet.create({
     btnContainer:{
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
     },
     unitBtn:{
         backgroundColor: '#eceff1',
-
+        // borderRadius: 1000,
+        // paddingTop: 34,
+        // paddingRight: 38,
+        // paddingLeft: 39,
+        // paddingBottom: 33
+        height: 138,
+        width:138,
         borderRadius: 1000,
-        paddingTop: 34,
-        paddingRight: 38,
-        paddingLeft: 39,
-        paddingBottom: 33
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     activeUnitBtn: {
         backgroundColor: '#4d5a5f',
+         // borderRadius: 1000,
+        // paddingTop: 34,
+        // paddingRight: 38,
+        // paddingLeft: 39,
+        // paddingBottom: 33
+        height: 138,
+        width:138,
         borderRadius: 1000,
-        paddingTop: 34,
-        paddingRight: 38,
-        paddingLeft: 39,
-        paddingBottom: 33
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     unitBtnTopText:{
         color: '#384564',
@@ -31,11 +42,13 @@ export default StyleSheet.create({
     },
     unitBtnBottomText:{
         color: '#384564',
-        fontWeight: '900'
+        fontWeight: 'bold',
+        fontSize: 40
     },
     activeUnitBtnBottomText:{
         color: '#fff',
-        fontWeight: '900'
+        fontWeight: 'bold',
+        fontSize: 40
     }
 
 

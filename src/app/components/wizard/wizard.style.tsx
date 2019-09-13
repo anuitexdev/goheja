@@ -6,7 +6,10 @@ export default StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginBottom: 30
+        marginBottom: 30,
+        marginTop: 10,
+        marginLeft:20,
+        marginRight: 20
     },
     step: {
         borderRadius: 1000,

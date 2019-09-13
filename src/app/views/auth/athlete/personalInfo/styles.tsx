@@ -54,7 +54,7 @@ export default StyleSheet.create({
     personalNextBtnWrapper: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        alignItems: 'flex-end',
+        alignItems: 'center',
     },
     prompt: {
         marginLeft: 5,

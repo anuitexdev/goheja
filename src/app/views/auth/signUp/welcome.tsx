@@ -29,15 +29,15 @@ class WelcomeScreen extends Component<Props> {
 
                 <View style={styles.buttonVariants}>
                     <TouchableOpacity
-                        style={styles.welcomeButtons}>
+                        style={styles.welcomeButtons}
+                        onPress={() => this.redirectToWelcome('coach')}>
                         <Text style={styles.buttonText}
-                            onPress={() => this.redirectToWelcome('coach')}
                         >I’m an Coach</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.welcomeButtons}>
+                        style={styles.welcomeButtons}
+                        onPress={() => this.redirectToWelcome('athlete')}>
                         <Text style={styles.buttonText}
-                            onPress={() => this.redirectToWelcome('athlete')}
                         >I’m an Athlete</Text>
                     </TouchableOpacity>
                 </View>
