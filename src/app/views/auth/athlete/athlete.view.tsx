@@ -1,14 +1,19 @@
 import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import Header from '../../../components/header';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
+import BasicInfoAthleteScreen from './basicInfo/basicInfo';
+import YourSelfAthleteScreen from './yourself/yourselfAthlete';
+import UnitsAthleteScreen from './units/units';
+import PersonalInfoScreen from './personalInfo/personalInfo';
 
 
 interface Props {
-    navigation: NavigationScreenProp<NavigationState, NavigationParams>,
+    // navigation: NavigationScreenProp<NavigationState, NavigationParams>,
+    currentStep: number,
 }
 
 
@@ -16,6 +21,7 @@ class AthleteScreen extends Component<Props> {
 
     constructor(props: Props) {
         super(props)
+console.log(this.props.currentStep);
 
     }
 
@@ -24,8 +30,14 @@ class AthleteScreen extends Component<Props> {
         return (
             <Fragment>
                 <ScrollView>
-                    <Header />
-                    
+            <View> 
+            {this.props.currentStep === 1 ? <BasicInfoAthleteScreen/> :
+             this.props.currentStep === 2 ? <YourSelfAthleteScreen/> :
+             this.props.currentStep === 3 ? <UnitsAthleteScreen/> :
+             this.props.currentStep === 4 ? <PersonalInfoScreen/> :
+             <BasicInfoAthleteScreen/>
+            }
+            </View>
                 </ScrollView>
             </Fragment>
         )
@@ -33,7 +45,7 @@ class AthleteScreen extends Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-
+    currentStep: state.AuthReducer.currentStep
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

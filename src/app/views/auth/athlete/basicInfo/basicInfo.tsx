@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { Text, View, TouchableOpacity, TextInput, ToastAndroid } from "react-native";
-import styles from '../../styles';
+import { Text, View, TouchableOpacity, TextInput } from "react-native";
+import styles from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../shared/models/userSignUpData.model';
@@ -17,13 +17,14 @@ interface State {
 }
 
 interface Props {
-    navigation: NavigationScreenProp<NavigationState, NavigationParams>,
     signUp: (user: UserSignUpData) => void
+    nextStepNumber: (nextStepNumber: number) => void,
+    currentStep: number;
 }
 
 class BasicInfoAthleteScreen extends Component<Props, State> {
 
-    constructor(props: any) {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
@@ -42,10 +43,8 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
     private onSubmit = async () => {
         const { showPassword, ...userDto } = this.state;
         await this.props.signUp(userDto);
-        console.log(this.props);
-        
-        this.props.navigation.navigate('yourSelfAthlete');
-    }
+         this.props.nextStepNumber(2)
+    }    
 
     private handleChange = (data: any) => {
         this.setState(data);
@@ -106,10 +105,12 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
+    currentStep: state.AuthReducer.currentStep
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
     signUp: (userData: UserSignUpData) => dispatch(actions.signUp(userData)),
+    nextStepNumber: (nextStepNumber: number) => dispatch(actions.changeStep(nextStepNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BasicInfoAthleteScreen);

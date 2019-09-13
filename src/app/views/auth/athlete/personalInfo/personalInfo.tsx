@@ -3,12 +3,11 @@ import { connect } from "react-redux";
 import React from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import Header from '../../../../components/header';
-import { NavigationParams, NavigationScreenProp } from 'react-navigation';
-import { NavigationState } from 'react-navigation';
-import styles from '../styles';
+import styles from './styles';
+import * as actions from '../../../../redux/actions/auth.actions';
 
 interface Props {
-    navigation: NavigationScreenProp<NavigationState, NavigationParams>,
+    nextStepNumber: (nextStepNumber: number) => void
 }
 
 
@@ -20,7 +19,7 @@ class PersonalInfoScreen extends Component<Props> {
     }
 
     public onSubmit = () => {
-
+        this.props.nextStepNumber(5);
     }
 
     render() {
@@ -28,7 +27,6 @@ class PersonalInfoScreen extends Component<Props> {
         return (
             <Fragment>
                 <ScrollView>
-                    <Header />
                     <View style={styles.container}>
 
                         <Text style={styles.pageHeader}>Personal information</Text>
@@ -97,6 +95,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
+    nextStepNumber: (nextStepNumber: number) => dispatch(actions.changeStep(nextStepNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PersonalInfoScreen);
