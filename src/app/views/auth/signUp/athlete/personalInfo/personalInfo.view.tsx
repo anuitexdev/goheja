@@ -2,9 +2,8 @@ import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import Header from '../../../../components/header';
 import styles from './styles';
-import * as actions from '../../../../redux/actions/auth.actions';
+import * as actions from '../../../../../redux/actions/auth.actions';
 
 interface Props {
     nextStepNumber: (nextStepNumber: number) => void

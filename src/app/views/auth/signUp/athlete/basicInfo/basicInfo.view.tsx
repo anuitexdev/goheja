@@ -4,10 +4,9 @@ import React from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import styles from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
-import * as actions from '../../../../redux/actions/auth.actions';
-import UserSignUpData from '../../../../shared/models/userSignUpData.model';
-import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
-import Wizard from '../../../../components/wizard/wizard.view';
+import * as actions from '../../../../../redux/actions/auth.actions';
+import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
+
 interface State {
     firstName: string,
     lastName: string,

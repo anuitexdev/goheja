@@ -2,9 +2,9 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
-import styles from '../styles';
+import styles from '../../styles';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
-import * as actions from '../../../redux/actions/auth.actions';
+import * as actions from '../../../../redux/actions/auth.actions';
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,

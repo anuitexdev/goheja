@@ -2,19 +2,16 @@ import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
-import Header from '../../../../components/header';
 import styles from './styles';
-import UnitButtons from "../../../../components/unitButtons";
-import * as actions from '../../../../redux/actions/auth.actions';
+import UnitButtons from "../../../../../components/unitButtons";
+import * as actions from '../../../../../redux/actions/auth.actions';
 
 interface Props {
     nextStepNumber: (nextStepNumber: number) => void
 }
 
 interface State {
-
 }
-
 
 class UnitsAthleteScreen extends Component<Props, State> {
 

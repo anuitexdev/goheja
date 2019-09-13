@@ -2,14 +2,14 @@ import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
 import { ScrollView, View } from 'react-native';
-import Header from '../../../components/header';
-import { NavigationParams, NavigationScreenProp } from 'react-navigation';
-import { NavigationState } from 'react-navigation';
-import BasicInfoAthleteScreen from './basicInfo/basicInfo';
-import YourSelfAthleteScreen from './yourself/yourselfAthlete';
-import UnitsAthleteScreen from './units/units';
-import PersonalInfoScreen from './personalInfo/personalInfo';
-import Wizard from '../../../components/wizard/wizard.view';
+
+import BasicInfoAthleteScreen from './basicInfo/basicInfo.view';
+import YourSelfAthleteScreen from './yourself/yourselfAthlete.view';
+import UnitsAthleteScreen from './units/units.view';
+import PersonalInfoScreen from './personalInfo/personalInfo.view';
+import SuccessRegisterScreen from './successRegister/successRegister.view';
+import Wizard from '../../../../components/wizard/wizard.view';
+
 interface Props {
     // navigation: NavigationScreenProp<NavigationState, NavigationParams>,
     currentStep: number,
@@ -29,12 +29,13 @@ console.log(this.props.currentStep);
         return (
             <Fragment>
                 <ScrollView>
-                <Wizard/>
+             {this.props.currentStep <5 ? <Wizard/> : null}   
             <View> 
             {this.props.currentStep === 1 ? <BasicInfoAthleteScreen/> :
              this.props.currentStep === 2 ? <YourSelfAthleteScreen/> :
              this.props.currentStep === 3 ? <UnitsAthleteScreen/> :
              this.props.currentStep === 4 ? <PersonalInfoScreen/> :
+             this.props.currentStep === 5 ? <SuccessRegisterScreen/> :
              <BasicInfoAthleteScreen/>
             }
             </View>
