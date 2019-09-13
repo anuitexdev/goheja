@@ -17,7 +17,7 @@ class WelcomeScreen extends Component<Props> {
     }
 
     public redirectToWelcome = () => {
-        this.props.changeScreen();       
+        this.props.changeScreen();
         this.props.navigation.navigate('signUp');
     }
 

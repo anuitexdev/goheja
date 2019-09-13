@@ -23,8 +23,8 @@ class SignUpScreen extends Component<Props> {
         return (
             <Fragment>
                 <ScrollView>
-                    <Header/>
-                    {this.props.isWelcomeScreen ? <WelcomeScreen navigation={this.props.navigation} /> : <BasicInfoScreen />}
+                    <Header />
+                    {this.props.isWelcomeScreen ? <WelcomeScreen navigation={this.props.navigation} /> : <BasicInfoScreen navigation={this.props.navigation}/>}
 
                 </ScrollView>
             </Fragment>
@@ -37,7 +37,6 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen);

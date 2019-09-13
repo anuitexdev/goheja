@@ -5,7 +5,8 @@ import { Text, View, TouchableOpacity, TextInput, ToastAndroid } from "react-nat
 import styles from '../styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../redux/actions/auth.actions';
-import UserSignUpData from '../../../shared/models/userSignUpData';
+import UserSignUpData from '../../../shared/models/userSignUpData.model';
+import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 
 interface State {
     firstName: string,
@@ -16,12 +17,17 @@ interface State {
 }
 
 interface Props {
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>,
     signUp: (user: UserSignUpData) => void
 }
 
 class BasicInfoScreen extends Component<Props, State> {
 
+<<<<<<< HEAD
     constructor(props: any) {
+=======
+    constructor(props: Props) {
+>>>>>>> 31b77a0e7dca76ff531f3ececcbe1ca162242e19
         super(props);
 
         this.state = {
@@ -40,6 +46,9 @@ class BasicInfoScreen extends Component<Props, State> {
     private onSubmit = async () => {
         const { showPassword, ...userDto } = this.state;
         await this.props.signUp(userDto);
+        console.log(this.props);
+        
+        this.props.navigation.navigate('yourSelfAthlete');
     }
 
     private handleChange = (data: any) => {

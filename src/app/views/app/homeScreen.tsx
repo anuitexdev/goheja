@@ -4,10 +4,10 @@ import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
 
 interface Props {
-    navigation: NavigationScreenProp<NavigationState, NavigationParams>
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>,
 }
 
-class AppScreen extends Component<Props> {
+class HomeScreen extends Component<Props> {
     static navigationOptions = {
         drawerLabel: 'Notifications',
     };
@@ -25,4 +25,4 @@ class AppScreen extends Component<Props> {
     }
 };
 
-export default AppScreen;
+export default HomeScreen;

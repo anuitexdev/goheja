@@ -7,7 +7,7 @@ import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
 
 import * as actions from '../../../redux/actions/auth.actions';
-import UserSignInData from "src/app/shared/models/userSignInData";
+import UserSignInData from "src/app/shared/models/userSignInData.model";
 
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import Header from '../../../components/header';
@@ -21,7 +21,8 @@ interface State {
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
-    signIn: (user: UserSignInData) => void
+    signIn: (user: UserSignInData) => void,
+    isLogged: boolean,
 }
 
 class SignInScreen extends Component<Props, State> {
@@ -36,6 +37,10 @@ class SignInScreen extends Component<Props, State> {
 
     private onSubmit = async () => {
         await this.props.signIn({ email: this.state.email, password: this.state.password });
+
+        if (this.props.isLogged) {
+            this.props.navigation.navigate('Home');
+        }
     }
 
     public signUpRedirect = () => {
@@ -56,7 +61,7 @@ class SignInScreen extends Component<Props, State> {
     render() {
         return (
             <ScrollView>
-                <Header/>
+                <Header />
                 <View style={styles.container}>
                     <Text style={styles.screenTitle}>Login</Text>
                     <View style={styles.formField}>
@@ -103,7 +108,7 @@ class SignInScreen extends Component<Props, State> {
     }
 }
 const mapStateToProps = (state: any) => ({
-    
+    isLogged: state.AuthReducer.isLogged,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
