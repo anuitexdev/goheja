@@ -9,7 +9,7 @@ class Header extends Component {
         return (
            <View
            style={{
-             height: 197,
+             height: 80,
              backgroundColor: '#eceff1',
              justifyContent: 'center',
            }}>        

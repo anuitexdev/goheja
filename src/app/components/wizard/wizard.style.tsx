@@ -58,7 +58,6 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     check: {
-        display: 'none',
         height: 12,
         width: 6,
         borderBottomWidth: 3.5,
