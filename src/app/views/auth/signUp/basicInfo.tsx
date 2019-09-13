@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../shared/models/userSignUpData.model';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
-
+import Wizard from '../../../components/wizard/wizard.view';
 interface State {
     firstName: string,
     lastName: string,
@@ -23,11 +23,7 @@ interface Props {
 
 class BasicInfoScreen extends Component<Props, State> {
 
-<<<<<<< HEAD
     constructor(props: any) {
-=======
-    constructor(props: Props) {
->>>>>>> 31b77a0e7dca76ff531f3ececcbe1ca162242e19
         super(props);
 
         this.state = {
@@ -58,6 +54,7 @@ class BasicInfoScreen extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
+                <Wizard/>
                 <Text style={styles.screenTitle}>Your basic info</Text>
                 <View style={styles.formField}>
                     <Text style={styles.label}>First Name</Text>
