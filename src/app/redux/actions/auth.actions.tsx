@@ -15,6 +15,10 @@ export const failedAuth = (err: any) => {
     return { type: 'AUTH_FAILED', err }
 }
 
+export const changeScreen = (role: string) => {
+    return { type: 'CHANGE_SCREEN', role };
+}
+
 export const signIn = (userData: UserSignInData) => {
     return async (dispatch: any) => {
         await AuthService.signIn(userData).then(res => {
@@ -50,6 +54,3 @@ export const signUp = (userData: UserSignUpData) => {
     }
 }
 
-export const changeScreen = () => {
-    return { type: 'CHANGE_SCREEN' };
-}

@@ -25,7 +25,8 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
         case "CHANGE_SCREEN": {
             return {
                 ...state,
-                isWelcomeScreen: false
+                isWelcomeScreen: false,
+                role: action.role
             }
         }
         default: return { ...state };
