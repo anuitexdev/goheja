@@ -13,7 +13,7 @@ interface Props {
 }
 
 class Wizard extends Component<Props, State> {
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
     }
 
