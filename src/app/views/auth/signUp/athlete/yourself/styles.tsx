@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
-const window = Dimensions.get('window');
+import window from '../../../../../theme/variables';
 
 export default StyleSheet.create({
     container: {
@@ -19,6 +19,14 @@ export default StyleSheet.create({
     },
     nextBtnText: {
         color: '#f2f8ff'
+    },
+    nextBtnDisabled: {
+        paddingRight: 20,
+        paddingLeft: 20,
+        paddingBottom: 12,
+        paddingTop: 12,
+        backgroundColor: '#cfd8dc',
+        borderRadius: 2,
     },
     nextBtn: {
         paddingRight: 20,
