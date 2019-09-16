@@ -110,7 +110,6 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         style={styles.dateIcon}
                                         size={25}
                                         name={'ios-calendar'}
-
                                     />
                                 </TouchableOpacity>
                                 <DateTimePicker

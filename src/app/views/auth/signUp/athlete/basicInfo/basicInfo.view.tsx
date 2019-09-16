@@ -13,6 +13,12 @@ interface State {
     email: string,
     password: string,
     showPassword: boolean,
+    errors: {
+        firstNameError: boolean,
+        lastNameError: boolean,
+        emailError: boolean,
+        passwordError: boolean
+    }
 }
 
 interface Props {
@@ -32,9 +38,28 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
             email: '',
             password: '',
             showPassword: true,
+            errors: {
+                emailError: false,
+                firstNameError: false,
+                lastNameError: false,
+                passwordError: false
+            }
         }  
     }
-
+    
+    public signUpValidation(email: string, password: string, fname: string, lname: string) {
+        const mailRegExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        const passwordRegExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        const fnameRegExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+        const lnameRegExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+        const validationObject = {
+            mailError: mailRegExp.test(email),
+            passwordError: passwordRegExp.test(password),
+            fNameError: fnameRegExp.test(fname),
+            lNameError: lnameRegExp.test(lname),
+        }
+        return validationObject;
+    }
     private toggleSwitch = () => {
         this.setState({ showPassword: !this.state.showPassword });
     }
@@ -45,8 +70,19 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
          this.props.nextStepNumber(2)
     }    
 
+
     private handleChange = (data: any) => {
         this.setState(data);
+        const validationError = this.signUpValidation(this.state.email, this.state.password, this.state.firstName, this.state.lastName);
+        this.setState({
+            errors:{
+            emailError: validationError.mailError,
+            passwordError: validationError.passwordError,
+            firstNameError: validationError.fNameError,
+            lastNameError: validationError.lNameError,
+            }
+        })
+        console.log(this.state);
     }
 
     render() {
@@ -93,7 +129,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                     />
                 </View>
                 <View style={styles.nextBtnWrapper}>
-                    <TouchableOpacity style={styles.nextBtn} onPress={this.onSubmit}>
+                    <TouchableOpacity style={this.state.errors.emailError && this.state.errors.passwordError && this.state.errors.lastNameError && this.state.errors.firstNameError ? styles.nextBtn : styles.nextBtnDisabled} disabled={!this.state.errors.emailError && !this.state.errors.passwordError && !this.state.errors.lastNameError && !this.state.errors.firstNameError} onPress={this.onSubmit}>
                         <Text style={styles.nextBtnText}>Next</Text>
                     </TouchableOpacity>
                 </View>

@@ -4,7 +4,8 @@ import React from "react";
 import styles from './unitButtonsStyles';
 
 interface State {
-    isActive: boolean
+    isActive: boolean,
+    unitError: boolean
 }
 
 interface Props {
@@ -17,12 +18,22 @@ class UnitButtons extends Component<Props, State> {
         super(props);
         this.state = {
             isActive: false,
+            unitError: false
         }
     }
 
+    private unitValidation(value: string) {
+        if (value !== '') {
+            return true;
+        }
+        return false;
+    }
+
     public changeBtn = (value: string) => {
+        const unitError = this.unitValidation(value);
         this.setState({
-            isActive: !this.state.isActive
+            isActive: !this.state.isActive,
+            unitError: unitError
         });
         return value;
     }
