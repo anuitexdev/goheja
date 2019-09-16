@@ -31,7 +31,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
             isDateTimePickerVisible: false,
             birthDate: '',
             birthDateError: false,
-            genderError: true,
+            genderError: false,
         }
     }
 
@@ -44,7 +44,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
     };
 
     public handleDatePicked = (date: Date) => {
-   const formattedDate = moment(date).format('DD-MM-YYYY');
+        const formattedDate = moment(date).format('DD-MM-YYYY');
 
         const birthDateError = this.birthDateValidation(formattedDate);
 
