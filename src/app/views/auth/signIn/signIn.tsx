@@ -12,11 +12,19 @@ import UserSignInData from "src/app/shared/models/userSignInData.model";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import Header from '../../../components/header';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { string } from "prop-types";
 
 interface State {
     email: string,
     password: string,
-    showPassword: boolean
+    showPassword: boolean,
+    emailError: boolean,
+    passwordError: boolean,
+}
+
+interface ValidationObject{
+    emailError: boolean,
+    passwordError: boolean,
 }
 
 interface Props {
@@ -32,6 +40,8 @@ class SignInScreen extends Component<Props, State> {
             showPassword: true,
             email: '',
             password: '',
+            emailError: true,
+            passwordError: true,
         }
     }
 
@@ -54,8 +64,41 @@ class SignInScreen extends Component<Props, State> {
         this.props.navigation.navigate('forgotPassword');
     }
 
-    private handleChange = (data: any) => {
-        this.setState(data);
+    private handleChange = (data: any ) => {
+        const validationErrors = this.signInValidation(data);
+        this.setState({
+            ...data,
+            emailError: validationErrors.emailError,
+            passwordError: validationErrors.passwordError,
+        });
+    }
+
+    public signInValidation(data: any): ValidationObject {
+        const mailReqExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        const passwordReqExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
+        if (data.email) {
+            return {
+                emailError: mailReqExp.test(data.email),
+                passwordError: this.state.passwordError,
+            }
+        }
+        if (data.password) {
+            return {
+                emailError: this.state.emailError,
+                passwordError: passwordReqExp.test(data.password),
+            }
+        }
+        if (data.email && data.password) {
+            return {
+                emailError: mailReqExp.test(data.email),
+                passwordError: passwordReqExp.test(data.password),
+            }
+        }
+        return {
+            emailError: false,
+            passwordError: false
+        }
     }
 
     render() {
@@ -87,11 +130,13 @@ class SignInScreen extends Component<Props, State> {
                             onPress={this.toggleSwitch}
                         />
                     </View>
-                    <View style={styles.signInErrors}>
-                        <Text style={styles.textErrors}>
-                            Email or Password is incorrect
+                    {!this.state.emailError || !this.state.passwordError ?
+                        <View style={styles.signInErrors}>
+                            <Text style={styles.textErrors}>
+                                Email or Password is incorrect
                         </Text>
-                    </View>
+                        </View> : null
+                    }
                     <View style={styles.links}>
                         <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
                         <TouchableOpacity style={styles.signInBtn}>

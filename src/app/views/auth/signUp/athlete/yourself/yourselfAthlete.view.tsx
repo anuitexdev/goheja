@@ -7,15 +7,18 @@ import { SegmentedControls } from 'react-native-radio-buttons';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/Ionicons";
 import * as actions from '../../../../../redux/actions/auth.actions';
-import DatePicker from 'react-native-datepicker';
+import moment from 'moment';
+
 interface Props {
     nextStepNumber: (nextStepNumber: number) => void,
 }
 
 interface State {
-    selectedOption: string,
+    gender: string,
     isDateTimePickerVisible: boolean,
-    birthDate: any
+    birthDate: any,
+    birthDateError: boolean,
+    genderError: boolean,
 }
 
 class YourSelfAthleteScreen extends Component<Props, State> {
@@ -24,9 +27,11 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         super(props)
 
         this.state = {
-            selectedOption: '',
+            gender: 'Male',
             isDateTimePickerVisible: false,
-            birthDate: ''
+            birthDate: '',
+            birthDateError: false,
+            genderError: true,
         }
     }
 
@@ -39,8 +44,13 @@ class YourSelfAthleteScreen extends Component<Props, State> {
     };
 
     public handleDatePicked = (date: Date) => {
+   const formattedDate = moment(date).format('DD-MM-YYYY');
+
+        const birthDateError = this.birthDateValidation(formattedDate);
+
         this.setState({
-            birthDate: date,
+            birthDate: formattedDate,
+            birthDateError
         })
         this.hideDateTimePicker();
     };
@@ -49,9 +59,27 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         this.props.nextStepNumber(3);
     }
 
-    private setSelectedOption(value: any) {
-        console.log(value);
+    private birthDateValidation(value: string) {
+        if (value !== '') {
+            return true;
+        };
+        return false;
 
+    }
+    private genderValidation(value: string) {
+        if (value !== '') {
+            return true;
+        }
+        return false;
+    }
+
+    private setSelectedOption = (value: string) => {
+
+        const genderError = this.genderValidation(value);
+        this.setState({
+            genderError,
+            gender: value,
+        });
     }
 
     render() {
@@ -99,9 +127,10 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         selectedTint={'#fff'}
                                         backTint={'#fff'}
                                         selectedBackgroundColor={'#4D5A5F'}
-                                        onSelection={this.setSelectedOption.bind(this)}
+                                        onSelection={this.setSelectedOption}
                                         containerBorderTint={'#cfd8dc'}
                                         separatorTint={'#cfd8dc'}
+                                        selectedOption={this.state.gender}
                                         optionStyle={{
                                             paddingBottom: 12,
                                             paddingTop: 12,
@@ -114,7 +143,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                         </View>
 
                         <View style={styles.nextBtnWrapper}>
-                            <TouchableOpacity style={styles.nextBtn} onPress={this.onSubmit}>
+                            <TouchableOpacity style={styles.nextBtn} disabled={!this.state.birthDateError || !this.state.genderError} onPress={this.onSubmit}>
                                 <Text style={styles.nextBtnText}>Next</Text>
                             </TouchableOpacity>
                         </View>
