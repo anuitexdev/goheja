@@ -1,7 +1,7 @@
 import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { ScrollView, View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
@@ -24,18 +24,12 @@ class SuccessRegisterScreen extends Component<Props, State> {
     render() {
 
         return (
-            <Fragment>
-                <ScrollView>
-                <View style ={styles.pageWrapper}>
-                    <View style={styles.container}>
-
-        
-                    
-                    </View>
-                    </View>
-         
-                </ScrollView>
-            </Fragment>
+            <View style ={styles.pageWrapper}>
+                <View style={styles.backgroundCheck}><View style={styles.check}></View></View>
+                <Text style={styles.welcome}>Welcome to Go-Heja</Text>
+                <Text style={styles.approve}>We`ve sent you an account confirmation email approve request.</Text>
+                <Text style={styles.approve}>Please approve the email to continue</Text>
+            </View>
         )
     }
 }

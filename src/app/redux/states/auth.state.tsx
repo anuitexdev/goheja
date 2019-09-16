@@ -3,7 +3,7 @@ let AuthDefaultState = {
     isWelcomeScreen: true,
     isLogged: false,
     role: '',
-    currentStep: 1
+    currentStep: 5
 }
 
 export default AuthDefaultState;
