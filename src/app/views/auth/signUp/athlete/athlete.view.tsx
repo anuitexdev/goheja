@@ -20,8 +20,6 @@ class AthleteScreen extends Component<Props> {
 
     constructor(props: Props) {
         super(props)
-console.log(this.props.currentStep);
-
     }
 
     render() {

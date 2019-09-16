@@ -42,8 +42,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
     private onSubmit = async () => {
         const { showPassword, ...userDto } = this.state;
         await this.props.signUp(userDto);
-        console.log(this.props);
-        
+  
         this.props.navigation.navigate('yourSelfAthlete');
     }
 
