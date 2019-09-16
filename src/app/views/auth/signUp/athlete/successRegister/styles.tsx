@@ -44,5 +44,4 @@ export default StyleSheet.create({
         transform: [{ rotate: '30deg'}],
         zIndex: 999
     }
-
 })

@@ -7,7 +7,7 @@ import { SegmentedControls } from 'react-native-radio-buttons';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/Ionicons";
 import * as actions from '../../../../../redux/actions/auth.actions';
-
+import DatePicker from 'react-native-datepicker';
 interface Props {
     nextStepNumber: (nextStepNumber: number) => void,
 }
@@ -82,7 +82,6 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         style={styles.dateIcon}
                                         size={25}
                                         name={'ios-calendar'}
-
                                     />
                                 </TouchableOpacity>
                                 <DateTimePicker

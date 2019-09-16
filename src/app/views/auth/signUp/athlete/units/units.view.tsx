@@ -33,10 +33,8 @@ class UnitsAthleteScreen extends Component<Props, State> {
                     <View style={styles.container}>
                         <Text style={styles.pageHeader}>Tell us about your units</Text>
                         <View>
-
                             <UnitButtons />
                         </View>
-
                         <View style={styles.nextBtnWrapper}>
                             <TouchableOpacity style={styles.nextBtn} onPress={this.onSubmit}>
                                 <Text style={styles.nextBtnText}>Next</Text>
