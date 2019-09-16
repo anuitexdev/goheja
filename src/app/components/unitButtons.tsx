@@ -22,9 +22,18 @@ class UnitButtons extends Component<Props, State> {
         }
     }
 
+    private unitValidation(value: string) {
+        if (value !== '') {
+            return true;
+        }
+        return false;
+    }
+
     public changeBtn = (value: string) => {
+        const unitError = this.unitValidation(value);
         this.setState({
-            isActive: !this.state.isActive
+            isActive: !this.state.isActive,
+            unitError: unitError
         });
         return value;
     }
