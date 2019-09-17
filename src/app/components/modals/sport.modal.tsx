@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Text, Modal, Alert, View, TouchableWithoutFeedback } from "react-native";
-import { TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handler';
+import { Text, Modal, View, TouchableWithoutFeedback } from "react-native";
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as actions from '../../redux/actions/modal.actions';
 
 
 
 interface State {
-    modalVisible: boolean;
+
 }
 
 interface Props {
+    modalVisible: boolean;
+    modalClose: () => void,
+    modalOpen: () => void,
 }
 
 class SportModal extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.state = {
-            modalVisible: false,
-        }
     }
 
 
-    setModalVisible = () => {
-        console.log('click')
-        this.setState({ modalVisible: !this.state.modalVisible })
+    public setModalVisible = () => {
+        this.props.modalOpen();
+    }
+
+    public hideModal = () => {
+        this.props.modalClose();
     }
 
     render() {
@@ -31,21 +35,18 @@ class SportModal extends Component<Props, State> {
             <View>
                 <View style={{ marginTop: 22 }}>
                     <TouchableOpacity
-                        onPress={this.setModalVisible.bind(this, false)}>
+                        onPress={this.setModalVisible}>
                         <Text>show</Text>
                     </TouchableOpacity>
                 </View>
                 <Modal
                     animationType="slide"
                     transparent={false}
-                    visible={this.state.modalVisible}
-                // onRequestClose={() => {
-                //     Alert.alert('Modal has been closed.');
-                // }}
+                    visible={this.props.modalVisible}
                 >
-                <TouchableWithoutFeedback onPress={this.setModalVisible.bind(this, false)}>
-                    <Text>HIDE</Text>
-                </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={this.hideModal}>
+                        <Text>HIDE</Text>
+                    </TouchableWithoutFeedback>
                 </Modal>
             </View>
         )
@@ -53,10 +54,13 @@ class SportModal extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-    currentStep: state.AuthReducer.currentStep
+    modalVisible: state.ModalReducer.openModal,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
+    modalClose: () => dispatch(actions.modalClose()),
+    modalOpen: () => dispatch(actions.modalOpen()),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SportModal);
