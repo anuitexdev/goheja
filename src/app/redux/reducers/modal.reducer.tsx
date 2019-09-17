@@ -15,6 +15,12 @@ const ModalReducer = (state = ModalDefaultState, action: any) => {
                 openModal: true,
             }
         }
+        case "CHANGE_MODAL": {
+            return {
+                ...state,
+                modalNumber: action.payload,
+            }
+        }
 
         default: return { ...state };
     }
