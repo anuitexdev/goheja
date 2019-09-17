@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import * as actions from '../../redux/actions/modal.actions';
-import { Text, Modal, Alert, View, TouchableWithoutFeedback } from "react-native";
+import { Text, Modal, Alert, View, TouchableWithoutFeedback, TextInput } from "react-native";
 import { TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handler';
 import sport from './sport.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface State {
-
+    activeInputNumber: number
 }
 
 interface Props {
@@ -19,12 +19,30 @@ interface Props {
 class SportModal extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
+        this.state = {
+            activeInputNumber: 0,
+        }
+     
     }
+
+    
 
 
     public setModalVisible = () => {
         this.props.modalOpen();
     }
+
+    public changeFocus = (activeInputNumber: number) => {
+        this.setState({
+            activeInputNumber: activeInputNumber
+        })
+    }
+
+    // public disabledFocus = () => {
+    //     this.setState({
+    //         hasFocus: false
+    //     })
+    // }
 
     public hideModal = () => {
         this.props.modalClose();
@@ -33,14 +51,8 @@ class SportModal extends Component<Props, State> {
     render() {
         return (
             <View>
-                <View style={{ marginTop: 22 }}>
-                    <TouchableOpacity
-                        onPress={this.setModalVisible}>
-                        <Text>show</Text>
-                    </TouchableOpacity>
-                </View>
                 <Modal
-                    animationType="slide"
+                    animationType="fade"
                     transparent={false}
                     visible={this.props.modalVisible}
                 >
@@ -69,11 +81,36 @@ class SportModal extends Component<Props, State> {
                         <Text style={sport.subtitle}>
                             What’s your Runing Lactate Threshold
                         </Text>
+
                         <View style={sport.fullComponent}>
-                            <Text>
-                            COMPONENT
-                            </Text>
+                            <TextInput 
+                                ref='input1'
+                                placeholder="0"
+                                onFocus={() =>this.changeFocus(1)}
+                                maxLength={1}
+                                style={this.state.activeInputNumber === 1 ? sport.focusInput : sport.infoInput} 
+                                onChangeText={() => this.refs['input2'].focus()}
+                                >
+                            </TextInput>
+                            <TextInput 
+                                placeholder="0"
+                                ref='input2'
+                                maxLength={1}
+                                onFocus={() => this.changeFocus(2)}
+                                onChangeText={() => this.refs['input3'].focus()}
+                                style={this.state.activeInputNumber === 2 ? sport.focusInput : sport.infoInput} 
+                                >
+                            </TextInput>
+                            <TextInput  
+                                ref='input3'
+                                style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, {marginRight: 0}]} 
+                                placeholder="0"
+                                maxLength={1}
+                                onFocus={ () => this.changeFocus(3) }
+                            >
+                            </TextInput>
                         </View>
+
                         <View style={sport.footerBtns}>
                             <TouchableOpacity>
                                 <Text style={sport.skipBtn}>
