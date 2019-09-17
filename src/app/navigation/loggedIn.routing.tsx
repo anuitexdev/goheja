@@ -1,7 +1,5 @@
-
-
 import { createStackNavigator } from 'react-navigation-stack';
-import HomeScreen from '../views/app/homeScreen';
+import HomeScreen from '../views/home/homeScreen';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
