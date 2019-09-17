@@ -15,7 +15,6 @@ interface Props {
 class SportsView extends Component<Props, State> {
     constructor(props: Props) {
         super(props)
-
     }
 
     public selectSport = () => {

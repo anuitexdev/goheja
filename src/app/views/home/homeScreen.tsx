@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import React, {  Component } from 'react';
+import React, { Component } from 'react';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
 import Header from '../../components/header';
@@ -17,12 +17,10 @@ class HomeScreen extends Component<Props> {
 
     render() {
         return (
-           <View>
-                <Header/>
-                <SportsView/>
-          
-
-           </View>
+            <View>
+                <Header />
+                <SportsView />
+            </View>
         );
     }
 };
