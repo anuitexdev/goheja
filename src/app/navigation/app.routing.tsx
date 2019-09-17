@@ -1,11 +1,13 @@
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import AuthRouting from './auth.routing';
 import LoggedInNavigation from "./loggedIn.routing";
+import AppNavigator from "./loggedIn.routing";
+
 
 export default createAppContainer(createSwitchNavigator({
-    Home: LoggedInNavigation,
+    Home: AppNavigator,
     Auth: AuthRouting,
-},
+    },
     {
         initialRouteName: 'Home',
     }

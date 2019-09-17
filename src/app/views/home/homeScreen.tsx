@@ -1,8 +1,9 @@
-import { Text, Button } from 'react-native';
+import { Text, Button, View } from 'react-native';
 import React, { Fragment, Component } from 'react';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
-import SportModal from '../../components/modals/sport.modal';
+import Header from '../../components/header';
+import SportsView from './sports/sports.view';
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
@@ -15,9 +16,10 @@ class HomeScreen extends Component<Props> {
 
     render() {
         return (
-            <Fragment>
-                <SportModal/>
-            </Fragment>
+           <View>
+                <Header/>
+                <SportsView/>
+           </View>
         );
     }
 };
