@@ -64,8 +64,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
             return true;
         };
         return false;
-
     }
+
     private genderValidation(value: string) {
         if (value !== '') {
             return true;

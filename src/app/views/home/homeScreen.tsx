@@ -2,6 +2,7 @@ import { Text, Button } from 'react-native';
 import React, { Fragment, Component } from 'react';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
+import SportModal from '../../components/modals/sport.modal';
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
@@ -15,11 +16,7 @@ class HomeScreen extends Component<Props> {
     render() {
         return (
             <Fragment>
-                <Button
-                    title='Go to Auth'
-                    onPress={() => this.props.navigation.navigate('Auth')}
-                />
-                <Text>Main App Page</Text>
+                <SportModal/>
             </Fragment>
         );
     }
