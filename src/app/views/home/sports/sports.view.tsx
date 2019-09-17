@@ -2,25 +2,28 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import sports from './sports.styles';
-import SportModal from '../../../components/modals/sport.modal'
-interface State {
+import * as actions from '../../../redux/actions/modal.actions';
+import SportModal from '../../../components/modals/sport.modal';
 
+interface State {
 }
 
 interface Props {
-
+    modalOpen: () => void,
 }
 
 class SportsView extends Component<Props, State> {
     constructor(props: Props) {
         super(props)
-        this.state = {
 
-        }
+    }
+
+    public selectSport = () => {
+        this.props.modalOpen();
     }
 
     render() {
-        return(
+        return (
             <View style={sports.container}>
                 <Text style={sports.title}>
                     Hi Dafni : &#x2769;
@@ -32,31 +35,37 @@ class SportsView extends Component<Props, State> {
                     Configure Your sports
                 </Text>
                 <View style={sports.categories}>
-                    <View style={[sports.category, {marginRight: 20}]}>
-                        <Text style={{fontWeight: 'bold', fontSize: 20, color: '#272e43'}}>
-                            Cycling
+                    <TouchableOpacity onPress={this.selectSport}>
+                        <View style={[sports.category, { marginRight: 20 }]}>
+                            <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
+                                Cycling
                         </Text>
-                    </View>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.selectSport}>
+                        <View style={sports.category}>
+                            <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
+                                Swimming
+                        </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <TouchableOpacity onPress={this.selectSport}>
                     <View style={sports.category}>
-                        <Text style={{fontWeight: 'bold', fontSize: 20, color: '#272e43'}}>
-                            Swimming
-                        </Text>
-                    </View>
-                </View>
-                <View style={sports.category}>
-                    <Text style={{fontWeight: 'bold', fontSize: 20, color: '#272e43'}}>
-                        Running
+                        <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
+                            Running
                     </Text>
-                </View>
+                    </View>
+                </TouchableOpacity>
                 <View style={sports.footer}>
                     <TouchableOpacity
-                    onPress={() => Alert.alert('asd')}>
+                        onPress={() => Alert.alert('asd')}>
                         <Text style={sports.skipButton}>
                             Skip >
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <SportModal/>
+                <SportModal />
             </View>
         )
     }
@@ -64,10 +73,10 @@ class SportsView extends Component<Props, State> {
 
 
 const mapStateToProps = (state: any) => ({
-
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
+    modalOpen: () => dispatch(actions.modalOpen()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SportsView);

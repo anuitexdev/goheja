@@ -44,9 +44,9 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                 lastNameError: false,
                 passwordError: false
             }
-        }  
+        }
     }
-    
+
     public signUpValidation(email: string, password: string, fname: string, lname: string) {
         const mailRegExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         const passwordRegExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
@@ -67,22 +67,21 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
     private onSubmit = async () => {
         const { showPassword, ...userDto } = this.state;
         await this.props.signUp(userDto);
-         this.props.nextStepNumber(2)
-    }    
+        this.props.nextStepNumber(2)
+    }
 
 
     private handleChange = (data: any) => {
         this.setState(data);
         const validationError = this.signUpValidation(this.state.email, this.state.password, this.state.firstName, this.state.lastName);
         this.setState({
-            errors:{
-            emailError: validationError.mailError,
-            passwordError: validationError.passwordError,
-            firstNameError: validationError.fNameError,
-            lastNameError: validationError.lNameError,
+            errors: {
+                emailError: validationError.mailError,
+                passwordError: validationError.passwordError,
+                firstNameError: validationError.fNameError,
+                lastNameError: validationError.lNameError,
             }
-        })
-        console.log(this.state);
+        });
     }
 
     render() {
