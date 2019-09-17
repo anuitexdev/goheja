@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Text, Modal, View, TouchableWithoutFeedback } from "react-native";
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, Modal, Alert, View, TouchableWithoutFeedback } from "react-native";
+import { TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handler';
+import sport from './sport.style';
+import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../redux/actions/modal.actions';
-
-
-
 interface State {
 
 }
@@ -44,9 +43,50 @@ class SportModal extends Component<Props, State> {
                     transparent={false}
                     visible={this.props.modalVisible}
                 >
-                    <TouchableWithoutFeedback onPress={this.hideModal}>
-                        <Text>HIDE</Text>
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(42, 50, 54, 0.3)'}}>
+                    <TouchableWithoutFeedback onPress={this.setModalVisible.bind(this, false)}>
+                        <Icon
+                        style={sport.showBtn}
+                        size={50}
+                        name={'ios-close'}
+                        />
                     </TouchableWithoutFeedback>
+                    <View style={sport.modalPage}>
+                        <TouchableWithoutFeedback onPress={this.setModalVisible.bind(this, false)}>
+                            <Text style={sport.backBtn}>
+                                Back
+                            </Text>
+                        </TouchableWithoutFeedback>
+                        <Text style={sport.title}>
+                            Running Lactate Threshold
+                        </Text>
+                        <Text style={sport.subtitle}>
+                            What’s your Runing Lactate Threshold
+                        </Text>
+                        <View style={sport.fullComponent}>
+                            <Text>
+                            COMPONENT
+                            </Text>
+                        </View>
+                        <View style={sport.footerBtns}>
+                            <TouchableOpacity>
+                                <Text style={sport.skipBtn}>
+                                    Skip >
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={sport.nextBtn}>
+                                    <Text style={sport.nextBtnText}>
+                                    I don't know
+                                    </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
                 </Modal>
             </View>
         )
