@@ -42,10 +42,6 @@ export default StyleSheet.create({
         fontSize: 16,
         marginTop:20
     },
-    fullComponent: {
-        paddingTop: 30,
-        paddingBottom: 30
-    },
     nextBtn: {
         backgroundColor: '#4d5a5f',
         borderRadius: 2,
@@ -68,5 +64,28 @@ export default StyleSheet.create({
         color: '#1373fa',
         fontSize: 16,
         textDecorationLine: 'underline',
+    },
+    fullComponent: {
+        paddingTop: 30,
+        paddingBottom: 30,
+        flexDirection: 'row'
+    },
+    infoInput: {
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#cdd4d7',
+        borderRadius: 2,
+        marginRight: 10,
+        fontSize: 35,
+        textAlign: 'center'
+    },
+    focusInput: {
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#1373fa',
+        borderRadius: 2,
+        textAlign: 'center',
+        marginRight: 10,
+        fontSize: 35
     }
 })
