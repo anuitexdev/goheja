@@ -9,6 +9,9 @@ import { View } from 'react-native';
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
+  },
+  {
+    headerMode: 'none'
   }
 );
 
@@ -76,7 +79,8 @@ const LoggedInNavigation   = createDrawerNavigator({
 
 
 
-export default LoggedInNavigation;
+// export default LoggedInNavigation;
+export default AppNavigator;
 
 
 

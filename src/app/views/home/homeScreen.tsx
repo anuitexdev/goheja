@@ -1,7 +1,9 @@
-import { Text, Button } from 'react-native';
+import { Text, Button, View } from 'react-native';
 import React, { Fragment, Component } from 'react';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
+import Header from '../../components/header';
+import SportsView from './sports/sports.view';
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
@@ -14,13 +16,10 @@ class HomeScreen extends Component<Props> {
 
     render() {
         return (
-            <Fragment>
-                <Button
-                    title='Go to Auth'
-                    onPress={() => this.props.navigation.navigate('Auth')}
-                />
-                <Text>Main App Page</Text>
-            </Fragment>
+           <View>
+                <Header/>
+                <SportsView/>
+           </View>
         );
     }
 };
