@@ -13,7 +13,7 @@ interface Props {
 }
 
 class Wizard extends Component<Props, State> {
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
     }
 
@@ -60,7 +60,8 @@ class Wizard extends Component<Props, State> {
                         this.props.currentStep > 4 ? 
                         <View style={wizard.check}>
                         </View> :
-                        <Text style={wizard.text}>
+                        <Text
+                        style={wizard.text}>
                         4
                         </Text>
                     }

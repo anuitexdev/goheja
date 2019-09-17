@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import React from "react";
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import UnitButtons from '../../../../../components/unitButtons';
 import * as actions from '../../../../../redux/actions/auth.actions';
 
 interface Props {

@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import sports from './sports.styles';
-
+import SportModal from '../../../components/modals/sport.modal'
 interface State {
 
 }
@@ -56,6 +56,7 @@ class SportsView extends Component<Props, State> {
                         </Text>
                     </TouchableOpacity>
                 </View>
+                <SportModal/>
             </View>
         )
     }
