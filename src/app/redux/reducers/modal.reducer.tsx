@@ -16,9 +16,15 @@ const ModalReducer = (state = ModalDefaultState, action: any) => {
             }
         }
         case "CHANGE_MODAL": {
-            return {
+            return {                    
                 ...state,
                 modalNumber: action.payload,
+            }
+        }
+        case "SET_SPORT_TYPE": {
+            return {
+                ...state,
+                selectedSport: action.payload,
             }
         }
 

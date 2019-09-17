@@ -10,6 +10,7 @@ interface State {
 
 interface Props {
     modalOpen: () => void,
+    setSportType: (type: string) => void,
 }
 
 class SportsView extends Component<Props, State> {
@@ -17,7 +18,8 @@ class SportsView extends Component<Props, State> {
         super(props)
     }
 
-    public selectSport = () => {
+    public selectSport = (sportType: string) => {
+        this.props.setSportType(sportType);
         this.props.modalOpen();
     }
 
@@ -34,14 +36,14 @@ class SportsView extends Component<Props, State> {
                     Configure Your sports
                 </Text>
                 <View style={sports.categories}>
-                    <TouchableOpacity onPress={this.selectSport}>
+                    <TouchableOpacity onPress={() =>this.selectSport('Cycling')}>
                         <View style={[sports.category, { marginRight: 20 }]}>
                             <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
                                 Cycling
                         </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={this.selectSport}>
+                    <TouchableOpacity onPress={() => this.selectSport('Swimming')}>
                         <View style={sports.category}>
                             <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
                                 Swimming
@@ -49,7 +51,7 @@ class SportsView extends Component<Props, State> {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={this.selectSport}>
+                <TouchableOpacity onPress={() =>this.selectSport('Running')}>
                     <View style={sports.category}>
                         <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
                             Running
@@ -76,6 +78,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
     modalOpen: () => dispatch(actions.modalOpen()),
+    setSportType: (type: string) => dispatch(actions.setSportType(type)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SportsView);

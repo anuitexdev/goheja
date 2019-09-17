@@ -10,3 +10,6 @@ export const modalOpen = () => {
 export const changeModal = (payload: number) => {
     return {type: 'CHANGE_MODAL', payload}
 }
+export const setSportType = (payload: string) => {
+    return {type: 'SET_SPORT_TYPE', payload}
+}
