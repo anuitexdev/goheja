@@ -21,9 +21,9 @@ interface Props {
 }
 
 class CyclingLactateView extends Component<Props, State> {
-    private input1:any;
-    private input2:any;
-    private input3:any;
+    private input1: any;
+    private input2: any;
+    private input3: any;
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -79,7 +79,7 @@ class CyclingLactateView extends Component<Props, State> {
         this.setState({
             thresholdValue: summaryValue,
         });
-        
+
     }
 
     render() {
@@ -115,7 +115,7 @@ class CyclingLactateView extends Component<Props, State> {
                     <Text style={cyclingStyles.title}>Threshold</Text>
                     <View style={cyclingStyles.fullComponent}>
                         <TextInput
-                        ref={(ref) => {  this.input1 = ref; }} 
+                            ref={(ref) => { this.input1 = ref; }}
                             placeholder="0"
                             onFocus={() => this.changeFocus(1)}
                             maxLength={1}
@@ -125,7 +125,7 @@ class CyclingLactateView extends Component<Props, State> {
                         </TextInput>
                         <TextInput
                             placeholder="0"
-                            ref={(ref) => { this.input2 = ref; }} 
+                            ref={(ref) => { this.input2 = ref; }}
                             maxLength={1}
                             onFocus={() => this.changeFocus(2)}
                             onChangeText={(value) => this.setValue('dozens', value)}
@@ -133,7 +133,7 @@ class CyclingLactateView extends Component<Props, State> {
                         >
                         </TextInput>
                         <TextInput
-                        ref={(ref) => { this.input3 = ref; }} 
+                            ref={(ref) => { this.input3 = ref; }}
                             style={[this.state.activeInputNumber === 3 ? cyclingStyles.focusInput : cyclingStyles.infoInput, { marginRight: 0 }]}
                             placeholder="0"
                             maxLength={1}
@@ -149,18 +149,25 @@ class CyclingLactateView extends Component<Props, State> {
                                 Skip >
                                 </Text>
                         </TouchableOpacity>
-                        {this.state.thresholdValue === 0 ? <TouchableOpacity style={cyclingStyles.nextBtn}>
-                            <Text style={cyclingStyles.nextBtnText}>
-                                I don't know
+                        {
+                            this.state.thresholdValue === 0 ?
+                                <TouchableOpacity
+                                    style={cyclingStyles.nextBtn}
+                                >
+                                    <Text
+                                        style={cyclingStyles.nextBtnText}
+                                    >
+                                        I don't know
+                            </Text>
+                                </TouchableOpacity> :
+                                <TouchableWithoutFeedback onPress={this.changeModal}>
+                                    <View style={cyclingStyles.nextBtn}>
+                                        <Text style={cyclingStyles.nextBtnText}>
+                                            Next
                                     </Text>
-                        </TouchableOpacity> :
-                            <TouchableWithoutFeedback onPress={this.changeModal}>
-                                <View style={cyclingStyles.nextBtn}>
-                                    <Text style={cyclingStyles.nextBtnText}>
-                                        Next
-                                    </Text>
-                                </View>
-                            </TouchableWithoutFeedback>}
+                                    </View>
+                                </TouchableWithoutFeedback>
+                        }
                     </View>
                 </View>
             </View>

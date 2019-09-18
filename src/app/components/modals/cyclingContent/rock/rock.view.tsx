@@ -111,18 +111,30 @@ class RockView extends Component<Props, State> {
                     </View>
 
                     <View style={cyclingStyles.footerBtns}>
-                        {false ? <TouchableOpacity style={cyclingStyles.nextBtn}>
-                            <Text style={cyclingStyles.nextBtnText}>
-                                I don't remember
+                        {
+                            false ?
+                                <TouchableOpacity
+                                    style={cyclingStyles.nextBtn}
+                                >
+                                    <Text
+                                        style={cyclingStyles.nextBtnText}
+                                    >
+                                        I don't remember
                                     </Text>
-                        </TouchableOpacity> :
-                            <TouchableWithoutFeedback onPress={this.changeModal}>
-                                <View style={cyclingStyles.nextBtn}>
-                                    <Text style={cyclingStyles.nextBtnText}>
-                                        Next
+                                </TouchableOpacity> :
+                                <TouchableWithoutFeedback
+                                    onPress={this.changeModal}
+                                >
+                                    <View
+                                        style={cyclingStyles.nextBtn}
+                                    >
+                                        <Text
+                                            style={cyclingStyles.nextBtnText}
+                                        >
+                                            Next
                                     </Text>
-                                </View>
-                            </TouchableWithoutFeedback>}
+                                    </View>
+                                </TouchableWithoutFeedback>}
                     </View>
                 </View>
             </View>

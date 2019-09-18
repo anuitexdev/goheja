@@ -110,10 +110,10 @@ class CyclingFtpView extends Component<Props, State> {
                     </TouchableWithoutFeedback>
                     <Text style={cyclingStyles.subtitle}>
                         What’s your
-                        </Text>
+                    </Text>
                     <Text style={cyclingStyles.title}>
                         Cycling FTP
-                        </Text>
+                    </Text>
 
                     <View style={cyclingStyles.fullComponent}>
                         <TextInput
@@ -151,18 +151,21 @@ class CyclingFtpView extends Component<Props, State> {
                                 Skip >
                                 </Text>
                         </TouchableOpacity>
-                        {this.state.ftpValue === 0 ? <TouchableOpacity style={cyclingStyles.nextBtn}>
-                            <Text style={cyclingStyles.nextBtnText}>
-                                I don't know
-                                    </Text>
-                        </TouchableOpacity> :
-                            <TouchableWithoutFeedback onPress={this.changeModal}>
-                                <View style={cyclingStyles.nextBtn}>
+                        {
+                            this.state.ftpValue === 0 ?
+                                <TouchableOpacity style={cyclingStyles.nextBtn}>
                                     <Text style={cyclingStyles.nextBtnText}>
-                                        Next
+                                        I don't know
                                     </Text>
-                                </View>
-                            </TouchableWithoutFeedback>}
+                                </TouchableOpacity> :
+                                <TouchableWithoutFeedback onPress={this.changeModal}>
+                                    <View style={cyclingStyles.nextBtn}>
+                                        <Text style={cyclingStyles.nextBtnText}>
+                                            Next
+                                    </Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                        }
                     </View>
                 </View>
             </View>

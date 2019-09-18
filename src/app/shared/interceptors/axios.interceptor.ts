@@ -1,7 +1,7 @@
 import axios from 'axios';
 import promise from 'promise';
 import {AsyncStorage} from 'react-native';
-import environment from 'src/app/environments/environment';
+import environment from '../../environments/environment';
 
 const axiosInstance = axios.create({
   headers: {'User-Agent': environment.userAgent}

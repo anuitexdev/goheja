@@ -116,14 +116,25 @@ class SpeedView extends Component<Props, State> {
                                 Skip >
                                 </Text>
                         </TouchableOpacity>
-                        {false ? <TouchableOpacity style={cyclingStyles.nextBtn}>
-                            <Text style={cyclingStyles.nextBtnText}>
+                        {
+                            false ?
+                             <TouchableOpacity 
+                             style={cyclingStyles.nextBtn}
+                             >
+                                <Text
+                                style={cyclingStyles.nextBtnText}
+                                >
                                 I don't know
-                                    </Text>
-                        </TouchableOpacity> :
-                            <TouchableWithoutFeedback onPress={this.changeModal}>
-                                <View style={cyclingStyles.nextBtn}>
-                                    <Text style={cyclingStyles.nextBtnText}>
+                                </Text>
+                            </TouchableOpacity> :
+                            <TouchableWithoutFeedback 
+                            onPress={this.changeModal}
+                            >
+                                <View 
+                                style={cyclingStyles.nextBtn}>
+                                    <Text 
+                                    style={cyclingStyles.nextBtnText}
+                                    >
                                         Next
                                     </Text>
                                 </View>
