@@ -22,7 +22,7 @@ class SportModal extends Component<Props, State> {
             <View>
                 <Modal
                     animationType="fade"
-                    transparent={false}
+                    transparent={true}
                     visible={this.props.modalVisible}
                 >
                 {this.props.selectedSport === 'Running' ? <RunningModals/> : null }

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from '../../../../redux/actions/modal.actions';
 import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import sport from './lactate.style';
+import threshold from './threshold.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface State {
@@ -44,47 +44,44 @@ class ThresholdView extends Component<Props, State> {
     public changeModal = () => {
         console.log('test');
         
-        this.props.changeModal(2);
+        this.props.changeModal(3);
     }
 
     render() {
         return (
    
 
-                    <View style={{
-                        flex: 1,
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: 'rgba(42, 50, 54, 0.3)'
-                    }}>
+                    <View style={threshold.backDrop}>
                         <TouchableWithoutFeedback onPress={this.hideModal}>
                             <Icon
-                                style={sport.showBtn}
+                                style={threshold.showBtn}
                                 size={50}
                                 name={'ios-close'}
                             />
                         </TouchableWithoutFeedback>
-                        <View style={sport.modalPage}>
+                        <View style={threshold.modalPage}>
                             <TouchableWithoutFeedback onPress={this.hideModal}>
-                                <Text style={sport.backBtn}>
+                                <Text style={threshold.backBtn}>
                                     Back
                             </Text>
                             </TouchableWithoutFeedback>
-                            <Text style={sport.title}>
-                                Test
+                            <Text style={threshold.title}>
+                                Running{"\n"}
+                                Threshold Pace
                         </Text>
-                            <Text style={sport.subtitle}>
-                                Test
+                            <Text style={threshold.subtitle}>
+                                What’s your Runing Threshold Pace
                         </Text>
 
-                            <View style={sport.fullComponent}>
+                            <View style={threshold.fullComponent}>
+                            <View style={{alignItems: 'center'}}>
+                            <View style={{flexDirection: 'row'}}>
                                 <TextInput
                                     ref='input1'
                                     placeholder="0"
                                     onFocus={() => this.changeFocus(1)}
                                     maxLength={1}
-                                    style={this.state.activeInputNumber === 1 ? sport.focusInput : sport.infoInput}
+                                    style={this.state.activeInputNumber === 1 ? threshold.focusInput : threshold.infoInput}
                                     onChangeText={() => this.refs['input2'].focus()}
                                 >
                                 </TextInput>
@@ -94,42 +91,64 @@ class ThresholdView extends Component<Props, State> {
                                     maxLength={1}
                                     onFocus={() => this.changeFocus(2)}
                                     onChangeText={() => this.refs['input3'].focus()}
-                                    style={this.state.activeInputNumber === 2 ? sport.focusInput : sport.infoInput}
+                                    style={[this.state.activeInputNumber === 2 ? threshold.focusInput : threshold.infoInput, { marginRight: 8 }]}
                                 >
                                 </TextInput>
-                                <Text>:</Text>
-                                <TextInput
-                                    ref='input3'
-                                    style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
-                                    placeholder="0"
-                                    maxLength={1}
-                                    onFocus={() => this.changeFocus(3)}
-                                >
-                                </TextInput>
-                                <TextInput
-                                    ref='input4'
-                                    style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
-                                    placeholder="0"
-                                    maxLength={1}
-                                    onFocus={() => this.changeFocus(3)}
-                                >
-                                </TextInput>
+                                </View>
+                                <Text style={{fontSize: 20, color: '#99a8af', marginTop: 13}}>
+                                    Min
+                                </Text>
+                            </View>
+                                <View style={threshold.colonWrapper}>
+                                    <Text style={threshold.colon}>
+                                    :
+                                    </Text>
+                                </View>
+                                <View style={{alignItems: 'center'}}>
+                                   <View style={{flexDirection: 'row'}}>
+                                        <TextInput
+                                        ref='input3'
+                                        style={[this.state.activeInputNumber === 3 ? threshold.focusInput : threshold.infoInput, { marginLeft: 8 }]}
+                                        placeholder="0"
+                                        maxLength={1}
+                                        onChangeText={() => this.refs['input4'].focus()}
+                                        onFocus={() => this.changeFocus(3)}
+                                        >
+                                        </TextInput>
+                                        <TextInput
+                                            ref='input4'
+                                            style={[this.state.activeInputNumber === 3 ? threshold.focusInput : threshold.infoInput, { marginRight: 0 }]}
+                                            placeholder="0"
+                                            maxLength={1}
+                                            onFocus={() => this.changeFocus(3)}
+                                        >
+                                        </TextInput>
+                                        <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>
+                                        <Text style={{fontWeight: 'bold'}}>
+                                            /km
+                                        </Text>
+                                    </View>
+                                   </View>
+                                    <Text style={{fontSize: 20, color: '#99a8af', marginTop: 13, marginRight: 24}}>
+                                        Sec
+                                    </Text>
+                                </View>
                             </View>
 
-                            <View style={sport.footerBtns}>
+                            <View style={threshold.footerBtns}>
                                 <TouchableOpacity>
-                                    <Text style={sport.skipBtn}>
+                                    <Text style={threshold.skipBtn}>
                                         Skip >
                                 </Text>
                                 </TouchableOpacity>
-                                {false ? <TouchableOpacity style={sport.nextBtn}>
-                                    <Text style={sport.nextBtnText}>
+                                {false ? <TouchableOpacity style={threshold.nextBtn}>
+                                    <Text style={threshold.nextBtnText}>
                                         I don't know
                                     </Text>
                                 </TouchableOpacity> :
                                     <TouchableWithoutFeedback  onPress={this.changeModal}>
-                                    <View style={sport.nextBtn}>
-                                        <Text style={sport.nextBtnText}>
+                                    <View style={threshold.nextBtn}>
+                                        <Text style={threshold.nextBtnText}>
                                             Next
                                     </Text>
                                     </View>

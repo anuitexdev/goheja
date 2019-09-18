@@ -49,13 +49,7 @@ class LactateView extends Component<Props, State> {
         return (
    
 
-                    <View style={{
-                        flex: 1,
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: 'rgba(42, 50, 54, 0.3)'
-                    }}>
+                    <View style={sport.backDrop}>
                         <TouchableWithoutFeedback onPress={this.hideModal}>
                             <Icon
                                 style={sport.showBtn}
@@ -76,34 +70,45 @@ class LactateView extends Component<Props, State> {
                                 What’s your Runing Lactate Threshold
                         </Text>
 
-                            <View style={sport.fullComponent}>
-                                <TextInput
-                                    ref='input1'
-                                    placeholder="0"
-                                    onFocus={() => this.changeFocus(1)}
-                                    maxLength={1}
-                                    style={this.state.activeInputNumber === 1 ? sport.focusInput : sport.infoInput}
-                                    onChangeText={() => this.refs['input2'].focus()}
-                                >
-                                </TextInput>
-                                <TextInput
-                                    placeholder="0"
-                                    ref='input2'
-                                    maxLength={1}
-                                    onFocus={() => this.changeFocus(2)}
-                                    onChangeText={() => this.refs['input3'].focus()}
-                                    style={this.state.activeInputNumber === 2 ? sport.focusInput : sport.infoInput}
-                                >
-                                </TextInput>
-                                <TextInput
-                                    ref='input3'
-                                    style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
-                                    placeholder="0"
-                                    maxLength={1}
-                                    onFocus={() => this.changeFocus(3)}
-                                >
-                                </TextInput>
-                            </View>
+                        <View style={sport.fullComponent}>
+                        <View style={{flexDirection: 'row'}}>
+                            <TextInput
+                                ref='input1'
+                                placeholder="0"
+                                onFocus={() => this.changeFocus(1)}
+                                maxLength={1}
+                                style={this.state.activeInputNumber === 1 ? sport.focusInput : sport.infoInput}
+                                onChangeText={() => this.refs['input2'].focus()}
+                            >
+                            </TextInput>
+                            <TextInput
+                                placeholder="0"
+                                ref='input2'
+                                maxLength={1}
+                                onFocus={() => this.changeFocus(2)}
+                                onChangeText={() => this.refs['input3'].focus()}
+                                style={this.state.activeInputNumber === 2 ? sport.focusInput : sport.infoInput}
+                            >
+                            </TextInput>
+                            <TextInput
+                                ref='input3'
+                                style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
+                                placeholder="0"
+                                maxLength={1}
+                                onFocus={() => this.changeFocus(3)}
+                            >
+                            </TextInput>
+                        </View>
+                        <Text
+                        style={{
+                          fontSize: 20,
+                          color: '#99a8af',
+                          marginTop: 13
+                        }}>
+                        bpm
+                        </Text>
+                        </View>
+
 
                             <View style={sport.footerBtns}>
                                 <TouchableOpacity>
