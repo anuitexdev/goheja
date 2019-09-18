@@ -17,7 +17,9 @@ interface Props {
 }
 
 class LactateView extends Component<Props, State> {
-
+    private input1: any;
+    private input2: any;
+    private input3: any;
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -71,25 +73,25 @@ class LactateView extends Component<Props, State> {
                         <View style={sport.fullComponent}>
                         <View style={{flexDirection: 'row'}}>
                             <TextInput
-                                ref='input1'
+                                ref={(ref) => this.input1 = ref}
                                 placeholder="0"
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? sport.focusInput : sport.infoInput}
-                                onChangeText={() => this.refs['input2'].focus()}
+                                onChangeText={() => this.input2.focus()}
                             >
                             </TextInput>
                             <TextInput
                                 placeholder="0"
-                                ref='input2'
+                                ref={(ref) => this.input2 = ref}
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
-                                onChangeText={() => this.refs['input3'].focus()}
+                                onChangeText={() => this.input3.focus()}
                                 style={this.state.activeInputNumber === 2 ? sport.focusInput : sport.infoInput}
                             >
                             </TextInput>
                             <TextInput
-                                ref='input3'
+                            ref={(ref) => this.input3 = ref}
                                 style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
                                 placeholder="0"
                                 maxLength={1}
