@@ -3,26 +3,37 @@ import { connect } from "react-redux";
 import * as actions from '../../../../redux/actions/modal.actions';
 import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import sport from './threshold.style';
+import cyclingStyles from './cyclingFtp.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface State {
-    activeInputNumber: number
+    activeInputNumber: number,
+    hundreds: string,
+    dozens: string,
+    units: string,
+    ftpValue: number;
 }
 
 interface Props {
-
     modalClose: () => void,
     modalOpen: () => void,
     changeModal: (value: number) => void,
 }
 
-class ThresholdView extends Component<Props, State> {
+class CyclingFtpView extends Component<Props, State> {
+
+    private input1: any;
+    private input2: any;
+    private input3: any;
 
     constructor(props: Props) {
         super(props);
         this.state = {
             activeInputNumber: 0,
+            hundreds: '',
+            dozens: '',
+            units: '',
+            ftpValue: 0,
         }
     }
 
@@ -41,7 +52,36 @@ class ThresholdView extends Component<Props, State> {
     }
 
     public changeModal = () => {
-        this.props.changeModal(3);
+        this.props.changeModal(2);
+    }
+
+    public setValue = async (type: string, value: string) => {
+
+        if (type === 'hundreds') {
+            await this.setState({
+                hundreds: value
+            })
+            this.input2.focus();
+        }
+
+        if (type === 'dozens') {
+            await this.setState({
+                dozens: value
+            })
+            this.input3.focus();
+        }
+
+        if (type === 'units') {
+            await this.setState({
+                units: value
+            })
+        }
+
+        const summaryValue = Number(this.state.hundreds + this.state.dozens + this.state.units);
+
+        this.setState({
+            ftpValue: summaryValue,
+        });
     }
 
     render() {
@@ -57,76 +97,68 @@ class ThresholdView extends Component<Props, State> {
             }}>
                 <TouchableWithoutFeedback onPress={this.hideModal}>
                     <Icon
-                        style={sport.showBtn}
+                        style={cyclingStyles.showBtn}
                         size={50}
                         name={'ios-close'}
                     />
                 </TouchableWithoutFeedback>
-                <View style={sport.modalPage}>
+                <View style={cyclingStyles.modalPage}>
                     <TouchableWithoutFeedback onPress={this.hideModal}>
-                        <Text style={sport.backBtn}>
+                        <Text style={cyclingStyles.backBtn}>
                             Back
                             </Text>
                     </TouchableWithoutFeedback>
-                    <Text style={sport.title}>
-                        Test
+                    <Text style={cyclingStyles.subtitle}>
+                        What’s your
                         </Text>
-                    <Text style={sport.subtitle}>
-                        Test
+                    <Text style={cyclingStyles.title}>
+                        Cycling FTP
                         </Text>
 
-                    <View style={sport.fullComponent}>
+                    <View style={cyclingStyles.fullComponent}>
                         <TextInput
-                            ref='input1'
+                            ref={(ref) => this.input1 = ref}
                             placeholder="0"
                             onFocus={() => this.changeFocus(1)}
                             maxLength={1}
-                            style={this.state.activeInputNumber === 1 ? sport.focusInput : sport.infoInput}
-                            onChangeText={() => this.refs['input2'].focus()}
+                            style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
+                            onChangeText={(value) => this.setValue('hundreds', value)}
                         >
                         </TextInput>
                         <TextInput
                             placeholder="0"
-                            ref='input2'
+                            ref={(ref) => this.input2 = ref}
                             maxLength={1}
                             onFocus={() => this.changeFocus(2)}
-                            onChangeText={() => this.refs['input3'].focus()}
-                            style={this.state.activeInputNumber === 2 ? sport.focusInput : sport.infoInput}
-                        >
-                        </TextInput>
-                        <Text>:</Text>
-                        <TextInput
-                            ref='input3'
-                            style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
-                            placeholder="0"
-                            maxLength={1}
-                            onFocus={() => this.changeFocus(3)}
+                            onChangeText={(value) => this.setValue('dozens', value)}
+                            style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
                         >
                         </TextInput>
                         <TextInput
-                            ref='input4'
-                            style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
+                            ref={(ref) => this.input3 = ref}
+                            style={[this.state.activeInputNumber === 3 ? cyclingStyles.focusInput : cyclingStyles.infoInput, { marginRight: 0 }]}
                             placeholder="0"
                             maxLength={1}
                             onFocus={() => this.changeFocus(3)}
+                            onChangeText={(value) => this.setValue('units', value)}
                         >
                         </TextInput>
                     </View>
 
-                    <View style={sport.footerBtns}>
+                    <View style={cyclingStyles.footerBtns}>
                         <TouchableOpacity>
-                            <Text style={sport.skipBtn}>
+                            <Text style={cyclingStyles.skipBtn}>
                                 Skip >
                                 </Text>
                         </TouchableOpacity>
-                        {false ? <TouchableOpacity style={sport.nextBtn}>
-                            <Text style={sport.nextBtnText}>
+                        {this.state.ftpValue === 0 ? <TouchableOpacity style={cyclingStyles.nextBtn}>
+                            <Text style={cyclingStyles.nextBtnText}>
                                 I don't know
                                     </Text>
                         </TouchableOpacity> :
                             <TouchableWithoutFeedback onPress={this.changeModal}>
-                                <View style={sport.nextBtn}>
-                                    <Text style={sport.nextBtnText}>
+                                <View style={cyclingStyles.nextBtn}>
+                                    <Text style={cyclingStyles.nextBtnText}>
                                         Next
                                     </Text>
                                 </View>
@@ -139,13 +171,12 @@ class ThresholdView extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
+    changeModal: (value: number) => dispatch(actions.changeCyclingModal(value)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ThresholdView);
+export default connect(mapStateToProps, mapDispatchToProps)(CyclingFtpView);

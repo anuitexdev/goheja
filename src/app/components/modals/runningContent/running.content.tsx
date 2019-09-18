@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import LactateView from './lactate/lactate.view';
-import ThresholdView from './lactate/lactate.view';
+import ThresholdView from './threshold/threshold.view';
 
 
 interface State {
 }
 
 interface Props {
-    modalNumber: number,
+    runningModalNumber: number,
 }
 
 class RunningModals extends Component<Props, State> {
@@ -20,14 +20,14 @@ class RunningModals extends Component<Props, State> {
     render() {
         return (
             <Fragment>
-                {this.props.modalNumber === 1 ? <LactateView /> : <ThresholdView />}
+                {this.props.runningModalNumber === 1 ? <LactateView /> : <ThresholdView />}
             </Fragment>
         )
     }
 }
 
 const mapStateToProps = (state: any) => ({
-    modalNumber: state.ModalReducer.modalNumber,
+    runningModalNumber: state.ModalReducer.runningModalNumber,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
