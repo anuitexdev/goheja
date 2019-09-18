@@ -1,6 +1,8 @@
 let ModalDefaultState = {
     openModal: false,
-    modalNumber: 1,
+    runningModalNumber: 1,
+    cyclingModalNumber: 1,
+    swimmingModalNumber: 1,
     selectedSport: '',
 }
 

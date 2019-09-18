@@ -11,8 +11,7 @@ interface State {
 }
 
 interface Props {
-    modalVisible: boolean;
-    modalNumber: number,
+
     modalClose: () => void,
     modalOpen: () => void,
     changeModal: (value: number) => void,
@@ -42,14 +41,12 @@ class ThresholdView extends Component<Props, State> {
     }
 
     public changeModal = () => {
-        console.log('test');
-        
         this.props.changeModal(3);
     }
 
     render() {
         return (
-   
+
 
                     <View style={threshold.backDrop}>
                         <TouchableWithoutFeedback onPress={this.hideModal}>
@@ -151,24 +148,23 @@ class ThresholdView extends Component<Props, State> {
                                         <Text style={threshold.nextBtnText}>
                                             Next
                                     </Text>
-                                    </View>
-                                    </TouchableWithoutFeedback>}
-                            </View>
-                        </View>
+                                </View>
+                            </TouchableWithoutFeedback>}
                     </View>
+                </View>
+            </View>
         )
     }
 }
 
 const mapStateToProps = (state: any) => ({
-    modalVisible: state.ModalReducer.openModal,
-    modalNumber: state.ModalReducer.modalNumber,
+
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeModal(value)),
+    changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThresholdView);

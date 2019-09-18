@@ -11,8 +11,6 @@ interface State {
 }
 
 interface Props {
-    modalVisible: boolean;
-    modalNumber: number,
     modalClose: () => void,
     modalOpen: () => void,
     changeModal: (value: number) => void,
@@ -41,13 +39,13 @@ class LactateView extends Component<Props, State> {
         this.props.modalClose();
     }
 
-    public changeModal = () => {    
+    public changeModal = () => {
         this.props.changeModal(2);
     }
 
     render() {
         return (
-   
+
 
                     <View style={sport.backDrop}>
                         <TouchableWithoutFeedback onPress={this.hideModal}>
@@ -62,12 +60,12 @@ class LactateView extends Component<Props, State> {
                                 <Text style={sport.backBtn}>
                                     Back
                             </Text>
-                            </TouchableWithoutFeedback>
-                            <Text style={sport.title}>
-                                Running Lactate Threshold
+                    </TouchableWithoutFeedback>
+                    <Text style={sport.title}>
+                        Running Lactate Threshold
                         </Text>
-                            <Text style={sport.subtitle}>
-                                What’s your Runing Lactate Threshold
+                    <Text style={sport.subtitle}>
+                        What’s your Runing Lactate Threshold
                         </Text>
 
                         <View style={sport.fullComponent}>
@@ -110,40 +108,38 @@ class LactateView extends Component<Props, State> {
                         </View>
 
 
-                            <View style={sport.footerBtns}>
-                                <TouchableOpacity>
-                                    <Text style={sport.skipBtn}>
-                                        Skip >
+                    <View style={sport.footerBtns}>
+                        <TouchableOpacity>
+                            <Text style={sport.skipBtn}>
+                                Skip >
                                 </Text>
-                                </TouchableOpacity>
-                                {false ? <TouchableOpacity style={sport.nextBtn}>
+                        </TouchableOpacity>
+                        {false ? <TouchableOpacity style={sport.nextBtn}>
+                            <Text style={sport.nextBtnText}>
+                                I don't know
+                                    </Text>
+                        </TouchableOpacity> :
+                            <TouchableWithoutFeedback onPress={this.changeModal}>
+                                <View style={sport.nextBtn}>
                                     <Text style={sport.nextBtnText}>
-                                        I don't know
+                                        Next
                                     </Text>
-                                </TouchableOpacity> :
-                                    <TouchableWithoutFeedback  onPress={this.changeModal}>
-                                    <View style={sport.nextBtn}>
-                                        <Text style={sport.nextBtnText}>
-                                            Next
-                                    </Text>
-                                    </View>
-                                    </TouchableWithoutFeedback>}
-                            </View>
-                        </View>
+                                </View>
+                            </TouchableWithoutFeedback>}
                     </View>
+                </View>
+            </View>
         )
     }
 }
 
 const mapStateToProps = (state: any) => ({
-    modalVisible: state.ModalReducer.openModal,
-    modalNumber: state.ModalReducer.modalNumber,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeModal(value)),
+    changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LactateView);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Modal, View} from "react-native";
 import RunningModals from './runningContent/running.content';
+import CyclingModals from './cyclingContent/cycling.content';
 
 interface State {
 }
@@ -9,12 +10,12 @@ interface State {
 interface Props {
     modalVisible: boolean;
     selectedSport: string,
+    modalNumber: number
 }
 
 class SportModal extends Component<Props, State> {
-
     constructor(props: Props) {
-        super(props);    
+        super(props);
     }
 
     render() {
@@ -25,7 +26,8 @@ class SportModal extends Component<Props, State> {
                     transparent={true}
                     visible={this.props.modalVisible}
                 >
-                {this.props.selectedSport === 'Running' ? <RunningModals/> : null }
+                {this.props.selectedSport === 'Running' ? <RunningModals/> :
+                 this.props.selectedSport === 'Cycling'? <CyclingModals/> : null}
          
                 </Modal>
             </View>

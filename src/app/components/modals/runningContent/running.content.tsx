@@ -10,7 +10,7 @@ interface State {
 }
 
 interface Props {
-    modalNumber: number,
+    runningModalNumber: number,
 }
 
 class RunningModals extends Component<Props, State> {
@@ -35,7 +35,7 @@ class RunningModals extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-    modalNumber: state.ModalReducer.modalNumber,
+    runningModalNumber: state.ModalReducer.runningModalNumber,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
