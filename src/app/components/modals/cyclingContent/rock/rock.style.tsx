@@ -35,7 +35,8 @@ export default StyleSheet.create({
     fullComponent: {
         paddingTop: 30,
         paddingBottom: 30,
-        flexDirection: 'row'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     infoInput: {
         borderStyle: 'solid',
@@ -85,4 +86,12 @@ export default StyleSheet.create({
         marginTop: 26,
         marginBottom: 50
     },
+    numberDot: {
+        padding: 0,
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end'    
+    },
+    textDot: {
+        fontSize: 36
+    }
 })
