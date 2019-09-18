@@ -206,13 +206,13 @@ class AwsomeView extends Component<Props, State> {
 
 const mapStateToProps = (state: any) => ({
   modalVisible: state.ModalReducer.openModal,
-  modalNumber: state.ModalReducer.modalNumber,
+  modalNumber: state.ModalReducer.runningModalNumber,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
   modalClose: () => dispatch(actions.modalClose()),
   modalOpen: () => dispatch(actions.modalOpen()),
-  changeModal: (value: number) => dispatch(actions.changeModal(value)),
+  changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
 });
 
 export default connect(

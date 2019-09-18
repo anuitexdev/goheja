@@ -23,11 +23,11 @@ class RunningModals extends Component<Props, State> {
         return (
             <Fragment>
                 {
-                    this.props.modalNumber === 1 ? <LactateView /> :
-                    this.props.modalNumber === 2 ? <ThresholdView /> : 
-                    this.props.modalNumber === 3 ? <AchievementsView /> :
-                    this.props.modalNumber === 4 ? <AwsomeView /> :
-                    this.props.modalNumber === 5 ? <RockView /> : null
+                    this.props.runningModalNumber === 1 ? <LactateView /> :
+                    this.props.runningModalNumber === 2 ? <ThresholdView /> : 
+                    this.props.runningModalNumber === 3 ? <AchievementsView /> :
+                    this.props.runningModalNumber === 4 ? <AwsomeView /> :
+                    this.props.runningModalNumber === 5 ? <RockView /> : null
                 }
             </Fragment>
         )
