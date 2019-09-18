@@ -7,7 +7,11 @@ import cyclingStyles from './lactate.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface State {
-    activeInputNumber: number
+    activeInputNumber: number,
+    hundreds: string,
+    dozens: string,
+    units: string,
+    thresholdValue: number;
 }
 
 interface Props {
@@ -24,6 +28,10 @@ class CyclingLactateView extends Component<Props, State> {
         super(props);
         this.state = {
             activeInputNumber: 0,
+            hundreds: '',
+            dozens: '',
+            units: '',
+            thresholdValue: 0,
         }
     }
 
@@ -43,6 +51,35 @@ class CyclingLactateView extends Component<Props, State> {
 
     public changeModal = () => {
         this.props.changeModal(3);
+    }
+
+    public setValue = async (type: string, value: string) => {
+
+        if (type === 'hundreds') {
+            await this.setState({
+                hundreds: value
+            })
+            this.input2.focus();
+        }
+
+        if (type === 'dozens') {
+            await this.setState({
+                dozens: value
+            })
+            this.input3.focus();
+        }
+
+        if (type === 'units') {
+            await this.setState({
+                units: value
+            })
+        }
+
+        const summaryValue = Number(this.state.hundreds + this.state.dozens + this.state.units);
+        this.setState({
+            thresholdValue: summaryValue,
+        });
+        
     }
 
     render() {
@@ -83,7 +120,7 @@ class CyclingLactateView extends Component<Props, State> {
                             onFocus={() => this.changeFocus(1)}
                             maxLength={1}
                             style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
-                            onChangeText={() => this.input2.focus()}
+                            onChangeText={(value) => this.setValue('hundreds', value)}
                         >
                         </TextInput>
                         <TextInput
@@ -91,7 +128,7 @@ class CyclingLactateView extends Component<Props, State> {
                             ref={(ref) => { this.input2 = ref; }} 
                             maxLength={1}
                             onFocus={() => this.changeFocus(2)}
-                            onChangeText={() => this.input3.focus()}
+                            onChangeText={(value) => this.setValue('dozens', value)}
                             style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
                         >
                         </TextInput>
@@ -100,6 +137,7 @@ class CyclingLactateView extends Component<Props, State> {
                             style={[this.state.activeInputNumber === 3 ? cyclingStyles.focusInput : cyclingStyles.infoInput, { marginRight: 0 }]}
                             placeholder="0"
                             maxLength={1}
+                            onChangeText={(value) => this.setValue('units', value)}
                             onFocus={() => this.changeFocus(3)}
                         >
                         </TextInput>
@@ -111,7 +149,7 @@ class CyclingLactateView extends Component<Props, State> {
                                 Skip >
                                 </Text>
                         </TouchableOpacity>
-                        {false ? <TouchableOpacity style={cyclingStyles.nextBtn}>
+                        {this.state.thresholdValue === 0 ? <TouchableOpacity style={cyclingStyles.nextBtn}>
                             <Text style={cyclingStyles.nextBtnText}>
                                 I don't know
                                     </Text>

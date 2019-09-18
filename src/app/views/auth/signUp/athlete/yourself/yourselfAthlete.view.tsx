@@ -143,7 +143,11 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                         </View>
 
                         <View style={styles.nextBtnWrapper}>
-                            <TouchableOpacity style={this.state.birthDateError && this.state.genderError ? styles.nextBtn : styles.nextBtnDisabled} disabled={!this.state.birthDateError && !this.state.genderError} onPress={this.onSubmit}>
+                            <TouchableOpacity
+                                style={this.state.birthDateError && this.state.genderError ? styles.nextBtn : styles.nextBtnDisabled}
+                                disabled={!this.state.birthDateError && !this.state.genderError}
+                                onPress={this.onSubmit}
+                            >
                                 <Text style={styles.nextBtnText}>Next</Text>
                             </TouchableOpacity>
                         </View>

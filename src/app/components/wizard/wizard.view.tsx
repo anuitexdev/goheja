@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { View, Text } from "react-native";
 import wizard from './wizard.style';
-import AuthReducer from '../../redux/reducers/auth.reducer';
 
 
 interface State {

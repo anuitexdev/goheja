@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as actions from '../../../../redux/actions/modal.actions';
-import {Text, View, TouchableWithoutFeedback, TextInput} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { Text, View, TouchableWithoutFeedback, TextInput } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import awsome from './awsome.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -41,8 +41,6 @@ class AwsomeView extends Component<Props, State> {
   };
 
   public changeModal = () => {
-    console.log('test');
-
     this.props.changeModal(5);
   };
 
@@ -66,8 +64,8 @@ class AwsomeView extends Component<Props, State> {
           </Text>
 
           <View style={awsome.fullComponent}>
-            <View style={{alignItems: 'center'}}>
-              <View style={{flexDirection: 'row'}}>
+            <View style={{ alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row' }}>
                 <TextInput
                   ref="input1"
                   placeholder="0"
@@ -89,25 +87,25 @@ class AwsomeView extends Component<Props, State> {
                     this.state.activeInputNumber === 2
                       ? awsome.focusInput
                       : awsome.infoInput,
-                    {marginRight: 8},
+                    { marginRight: 8 },
                   ]}></TextInput>
               </View>
-              <Text style={{fontSize: 20, color: '#99a8af', marginTop: 13}}>
+              <Text style={{ fontSize: 20, color: '#99a8af', marginTop: 13 }}>
                 H
               </Text>
             </View>
             <View style={awsome.colonWrapper}>
               <Text style={awsome.colon}>:</Text>
             </View>
-            <View style={{alignItems: 'center'}}>
-              <View style={{flexDirection: 'row'}}>
+            <View style={{ alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row' }}>
                 <TextInput
                   ref="input3"
                   style={[
                     this.state.activeInputNumber === 3
                       ? awsome.focusInput
                       : awsome.infoInput,
-                    {marginLeft: 8},
+                    { marginLeft: 8 },
                   ]}
                   placeholder="0"
                   maxLength={1}
@@ -119,7 +117,7 @@ class AwsomeView extends Component<Props, State> {
                     this.state.activeInputNumber === 3
                       ? awsome.focusInput
                       : awsome.infoInput,
-                    {marginRight: 0},
+                    { marginRight: 0 },
                   ]}
                   placeholder="0"
                   maxLength={1}
@@ -144,15 +142,15 @@ class AwsomeView extends Component<Props, State> {
             <View style={awsome.colonWrapper}>
               <Text style={awsome.colon}>:</Text>
             </View>
-            <View style={{alignItems: 'center'}}>
-              <View style={{flexDirection: 'row'}}>
+            <View style={{ alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row' }}>
                 <TextInput
                   ref="input3"
                   style={[
                     this.state.activeInputNumber === 3
                       ? awsome.focusInput
                       : awsome.infoInput,
-                    {marginLeft: 8},
+                    { marginLeft: 8 },
                   ]}
                   placeholder="0"
                   maxLength={1}
@@ -164,7 +162,7 @@ class AwsomeView extends Component<Props, State> {
                     this.state.activeInputNumber === 3
                       ? awsome.focusInput
                       : awsome.infoInput,
-                    {marginRight: 0},
+                    { marginRight: 0 },
                   ]}
                   placeholder="0"
                   maxLength={1}
@@ -186,17 +184,19 @@ class AwsomeView extends Component<Props, State> {
             <TouchableOpacity>
               <Text style={awsome.skipBtn}>Skip ></Text>
             </TouchableOpacity>
-            {false ? (
-              <TouchableOpacity style={awsome.nextBtn}>
-                <Text style={awsome.nextBtnText}>I don't know</Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableWithoutFeedback onPress={this.changeModal}>
-                <View style={awsome.nextBtn}>
-                  <Text style={awsome.nextBtnText}>Next</Text>
-                </View>
-              </TouchableWithoutFeedback>
-            )}
+            {
+              false ? (
+                <TouchableOpacity style={awsome.nextBtn}>
+                  <Text style={awsome.nextBtnText}>I don't know</Text>
+                </TouchableOpacity>
+              ) : (
+                  <TouchableWithoutFeedback onPress={this.changeModal}>
+                    <View style={awsome.nextBtn}>
+                      <Text style={awsome.nextBtnText}>Next</Text>
+                    </View>
+                  </TouchableWithoutFeedback>
+                )
+            }
           </View>
         </View>
       </View>

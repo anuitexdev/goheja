@@ -10,11 +10,6 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
                 isLogged: true,
             }
         }
-        case "LOGIN_SUCCESS": {
-            return {
-                ...state,
-            }
-        }
         case "AUTH_FAILED": {
             return {
                 ...state,

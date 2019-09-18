@@ -26,7 +26,9 @@ class SignUpScreen extends Component<Props> {
                 <ScrollView>
                     <Header />
                     { 
-                        !this.props.role ? <WelcomeScreen navigation={this.props.navigation} /> : this.props.role === 'athlete' ? <AthleteScreen/> : <CoachBasicInfoScreen navigation={this.props.navigation}/>
+                        !this.props.role ? <WelcomeScreen navigation={this.props.navigation} /> 
+                        : this.props.role === 'athlete' ? <AthleteScreen/> 
+                            : <CoachBasicInfoScreen navigation={this.props.navigation}/>
                     }
 
                 </ScrollView>

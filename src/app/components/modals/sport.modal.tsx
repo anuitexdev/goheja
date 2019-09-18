@@ -26,8 +26,10 @@ class SportModal extends Component<Props, State> {
                     transparent={true}
                     visible={this.props.modalVisible}
                 >
-                {this.props.selectedSport === 'Running' ? <RunningModals/> :
-                 this.props.selectedSport === 'Cycling'? <CyclingModals/> : null}
+                {
+                    this.props.selectedSport === 'Running' ? <RunningModals/> :
+                    this.props.selectedSport === 'Cycling'? <CyclingModals/> : null
+                }
          
                 </Modal>
             </View>
