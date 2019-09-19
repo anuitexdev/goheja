@@ -7,7 +7,11 @@ import cyclingStyles from './lactate.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface State {
-    activeInputNumber: number
+    activeInputNumber: number,
+    hundreds: string,
+    dozens: string,
+    units: string,
+    thresholdValue: number;
 }
 
 interface Props {
@@ -17,13 +21,17 @@ interface Props {
 }
 
 class CyclingLactateView extends Component<Props, State> {
-    private input1:any;
-    private input2:any;
-    private input3:any;
+    private input1: any;
+    private input2: any;
+    private input3: any;
     constructor(props: Props) {
         super(props);
         this.state = {
             activeInputNumber: 0,
+            hundreds: '',
+            dozens: '',
+            units: '',
+            thresholdValue: 0,
         }
     }
 
@@ -45,10 +53,21 @@ class CyclingLactateView extends Component<Props, State> {
         this.props.changeModal(3);
     }
 
+    public setValue = async (input: any, value: any) => {
+        await this.setState({
+             ...value,
+         })
+         input.focus();
+ 
+         const summaryValue = Number(this.state.hundreds + this.state.dozens + this.state.units);
+         
+         this.setState({
+            thresholdValue: summaryValue,
+         });     
+     }
+
     render() {
         return (
-
-
             <View style={{
                 flex: 1,
                 flexDirection: 'column',
@@ -88,7 +107,8 @@ class CyclingLactateView extends Component<Props, State> {
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
-                                onChangeText={() => this.input2.focus()}
+                                onChangeText={(hundreds) => this.setValue(this.input2, {hundreds})}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <TextInput
@@ -96,8 +116,9 @@ class CyclingLactateView extends Component<Props, State> {
                                 ref={(ref) => { this.input2 = ref; }} 
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
-                                onChangeText={() => this.input3.focus()}
+                                onChangeText={(dozens) => this.setValue(this.input3, {dozens})} 
                                 style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <TextInput
@@ -106,6 +127,8 @@ class CyclingLactateView extends Component<Props, State> {
                                 placeholder="0"
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(3)}
+                                onChangeText={(units) => this.setValue(this.input3, {units})}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                         </View>
@@ -126,18 +149,25 @@ class CyclingLactateView extends Component<Props, State> {
                                 Skip >
                                 </Text>
                         </TouchableOpacity>
-                        {false ? <TouchableOpacity style={cyclingStyles.nextBtn}>
-                            <Text style={cyclingStyles.nextBtnText}>
-                                I don't know
+                        {
+                            this.state.thresholdValue === 0 ?
+                                <TouchableOpacity
+                                    style={cyclingStyles.nextBtn}
+                                >
+                                    <Text
+                                        style={cyclingStyles.nextBtnText}
+                                    >
+                                        I don't know
+                            </Text>
+                                </TouchableOpacity> :
+                                <TouchableWithoutFeedback onPress={this.changeModal}>
+                                    <View style={cyclingStyles.nextBtn}>
+                                        <Text style={cyclingStyles.nextBtnText}>
+                                            Next
                                     </Text>
-                        </TouchableOpacity> :
-                            <TouchableWithoutFeedback onPress={this.changeModal}>
-                                <View style={cyclingStyles.nextBtn}>
-                                    <Text style={cyclingStyles.nextBtnText}>
-                                        Next
-                                    </Text>
-                                </View>
-                            </TouchableWithoutFeedback>}
+                                    </View>
+                                </TouchableWithoutFeedback>
+                        }
                     </View>
                 </View>
             </View>

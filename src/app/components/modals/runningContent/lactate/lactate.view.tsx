@@ -49,18 +49,18 @@ class LactateView extends Component<Props, State> {
         return (
 
 
-                    <View style={sport.backDrop}>
-                        <TouchableWithoutFeedback onPress={this.hideModal}>
-                            <Icon
-                                style={sport.showBtn}
-                                size={50}
-                                name={'ios-close'}
-                            />
-                        </TouchableWithoutFeedback>
-                        <View style={sport.modalPage}>
-                            <TouchableWithoutFeedback onPress={this.hideModal}>
-                                <Text style={sport.backBtn}>
-                                    Back
+            <View style={sport.backDrop}>
+                <TouchableWithoutFeedback onPress={this.hideModal}>
+                    <Icon
+                        style={sport.showBtn}
+                        size={50}
+                        name={'ios-close'}
+                    />
+                </TouchableWithoutFeedback>
+                <View style={sport.modalPage}>
+                    <TouchableWithoutFeedback onPress={this.hideModal}>
+                        <Text style={sport.backBtn}>
+                            Back
                             </Text>
                     </TouchableWithoutFeedback>
                     <Text style={sport.title}>
@@ -70,8 +70,8 @@ class LactateView extends Component<Props, State> {
                         What’s your Runing Lactate Threshold
                         </Text>
 
-                        <View style={sport.fullComponent}>
-                        <View style={{flexDirection: 'row'}}>
+                    <View style={sport.fullComponent}>
+                        <View style={{ flexDirection: 'row' }}>
                             <TextInput
                                 ref={(ref) => this.input1 = ref}
                                 placeholder="0"
@@ -93,7 +93,7 @@ class LactateView extends Component<Props, State> {
                             >
                             </TextInput>
                             <TextInput
-                            ref={(ref) => this.input3 = ref}
+                                ref={(ref) => this.input3 = ref}
                                 style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
                                 placeholder="0"
                                 maxLength={1}
@@ -103,14 +103,14 @@ class LactateView extends Component<Props, State> {
                             </TextInput>
                         </View>
                         <Text
-                        style={{
-                          fontSize: 20,
-                          color: '#99a8af',
-                          marginTop: 13
-                        }}>
-                        bpm
+                            style={{
+                                fontSize: 20,
+                                color: '#99a8af',
+                                marginTop: 13
+                            }}>
+                            bpm
                         </Text>
-                        </View>
+                    </View>
 
 
                     <View style={sport.footerBtns}>

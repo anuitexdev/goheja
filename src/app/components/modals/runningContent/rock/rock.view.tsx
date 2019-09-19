@@ -105,12 +105,13 @@ class RockView extends Component<Props, State> {
                                     >
                                     </TextInput>
                               </View>
-                              <Text
-                              style={{
-                                fontSize: 20,
-                                color: '#99a8af',
-                                marginTop: 13,
-                              }}>
+                            <Text
+                                style={{
+                                    fontSize: 20,
+                                    color: '#99a8af',
+                                    marginTop: 13,
+                                }}
+                            >
                               bpm
                             </Text>
                             </View>

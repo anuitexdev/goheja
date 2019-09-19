@@ -60,7 +60,7 @@ class SportsView extends Component<Props, State> {
                 </TouchableOpacity>
                 <View style={sports.footer}>
                     <TouchableOpacity
-                        onPress={() => Alert.alert('asd')}>
+                        onPress={() => Alert.alert('Will be soon')}>
                         <Text style={sports.skipButton}>
                             Skip >
                         </Text>

@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as actions from '../../../../redux/actions/modal.actions';
-import {Text, View, TouchableWithoutFeedback, TextInput} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { Text, View, TouchableWithoutFeedback, TextInput } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import awsome from './awsome.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -48,27 +48,25 @@ class AwsomeView extends Component<Props, State> {
   };
 
   public changeModal = () => {
-    console.log('test');
-
     this.props.changeModal(5);
   };
 
   render() {
     return (
-        <View style={awsome.backDrop}>
-            <TouchableWithoutFeedback onPress={this.hideModal}>
-                <Icon style={awsome.showBtn} size={50} name={'ios-close'} />
-            </TouchableWithoutFeedback>
+      <View style={awsome.backDrop}>
+        <TouchableWithoutFeedback onPress={this.hideModal}>
+          <Icon style={awsome.showBtn} size={50} name={'ios-close'} />
+        </TouchableWithoutFeedback>
         <View style={awsome.modalPage}>
-            <TouchableWithoutFeedback onPress={this.hideModal}>
-                <Text style={awsome.backBtn}>Back</Text>
-            </TouchableWithoutFeedback>
-            <Text style={awsome.title}>
-                WOW!{'\n'}
-                That’s awsome!
+          <TouchableWithoutFeedback onPress={this.hideModal}>
+            <Text style={awsome.backBtn}>Back</Text>
+          </TouchableWithoutFeedback>
+          <Text style={awsome.title}>
+            WOW!{'\n'}
+            That’s awsome!
             </Text>
-            <Text style={awsome.subtitle}>
-                How long did the ½ Marathon took you?
+          <Text style={awsome.subtitle}>
+            How long did the ½ Marathon took you?
             </Text>
 
             <View style={awsome.fullComponent}>
@@ -199,26 +197,26 @@ class AwsomeView extends Component<Props, State> {
                         }}>
                         Sec
                     </Text>
-                </View>
+            </View>
           </View>
 
-                <View style={awsome.footerBtns}>
-                        <TouchableOpacity>
-                        <Text style={awsome.skipBtn}>Skip ></Text>
-                        </TouchableOpacity>
-                    {false ? 
-                        (<TouchableOpacity style={awsome.nextBtn}>
-                            <Text style={awsome.nextBtnText}>I don't know</Text>
-                        </TouchableOpacity>) 
-                        : 
-                        (<TouchableWithoutFeedback onPress={this.changeModal}>
-                            <View style={awsome.nextBtn}>
-                            <Text style={awsome.nextBtnText}>Next</Text>
-                            </View>
-                        </TouchableWithoutFeedback>)}
+          <View style={awsome.footerBtns}>
+            <TouchableOpacity>
+              <Text style={awsome.skipBtn}>Skip ></Text>
+            </TouchableOpacity>
+            {false ?
+              (<TouchableOpacity style={awsome.nextBtn}>
+                <Text style={awsome.nextBtnText}>I don't know</Text>
+              </TouchableOpacity>)
+              :
+              (<TouchableWithoutFeedback onPress={this.changeModal}>
+                <View style={awsome.nextBtn}>
+                  <Text style={awsome.nextBtnText}>Next</Text>
                 </View>
-            </View>
+              </TouchableWithoutFeedback>)}
+          </View>
         </View>
+      </View>
     );
   }
 }
