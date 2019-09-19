@@ -79,6 +79,7 @@ class LactateView extends Component<Props, State> {
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? sport.focusInput : sport.infoInput}
                                 onChangeText={() => this.input2.focus()}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <TextInput
@@ -88,6 +89,7 @@ class LactateView extends Component<Props, State> {
                                 onFocus={() => this.changeFocus(2)}
                                 onChangeText={() => this.input3.focus()}
                                 style={this.state.activeInputNumber === 2 ? sport.focusInput : sport.infoInput}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <TextInput
@@ -96,6 +98,7 @@ class LactateView extends Component<Props, State> {
                                 placeholder="0"
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(3)}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                         </View>

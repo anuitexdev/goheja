@@ -79,6 +79,7 @@ class AwsomeView extends Component<Props, State> {
                         placeholder="0"
                         onFocus={() => this.changeFocus(1)}
                         maxLength={1}
+                        keyboardType={"number-pad"}
                         style={
                             this.state.activeInputNumber === 1
                             ? awsome.focusInput
@@ -90,6 +91,7 @@ class AwsomeView extends Component<Props, State> {
                         placeholder="0"
                         ref={ref => (this.input2 = ref)}
                         maxLength={1}
+                        keyboardType={"number-pad"}
                         onFocus={() => this.changeFocus(2)}
                         onChangeText={() => this.input3.focus()}
                         style={[
@@ -119,6 +121,7 @@ class AwsomeView extends Component<Props, State> {
                         ]}
                         placeholder="0"
                         maxLength={1}
+                        keyboardType={"number-pad"}
                         onChangeText={() => this.input4.focus()}
                         onFocus={() => this.changeFocus(3)}>
                         </TextInput>
@@ -132,6 +135,7 @@ class AwsomeView extends Component<Props, State> {
                         ]}
                         placeholder="0"
                         maxLength={1}
+                        keyboardType={"number-pad"}
                         onChangeText={() => this.input5.focus()}
                         onFocus={() => this.changeFocus(4)}>
                         </TextInput>
@@ -168,6 +172,7 @@ class AwsomeView extends Component<Props, State> {
                             ]}
                             placeholder="0"
                             maxLength={1}
+                            keyboardType={"number-pad"}
                             onChangeText={() => this.input6.focus()}
                             onFocus={() => this.changeFocus(5)}>
                         </TextInput>
@@ -181,6 +186,7 @@ class AwsomeView extends Component<Props, State> {
                             ]}
                             placeholder="0"
                             maxLength={1}
+                            keyboardType={"number-pad"}
                             onFocus={() => this.changeFocus(6)}>
                         </TextInput>
                     </View>

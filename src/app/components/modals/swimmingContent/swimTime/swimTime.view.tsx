@@ -110,6 +110,7 @@ class SwimTimeView extends Component<Props, State> {
                                         placeholder="0"
                                         maxLength={1}
                                         onChangeText={() => this.input4.focus()}
+                                        keyboardType={"number-pad"}
                                         onFocus={() => this.changeFocus(3)}
                                         >
                                         </TextInput>
@@ -118,13 +119,11 @@ class SwimTimeView extends Component<Props, State> {
                                             style={[this.state.activeInputNumber === 4 ? swimtime.focusInput : swimtime.infoInput, { marginRight: 0 }]}
                                             placeholder="0"
                                             maxLength={1}
+                                            keyboardType={"number-pad"}
                                             onFocus={() => this.changeFocus(4)}
                                         >
                                         </TextInput>
                                         <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>
-                                        <Text style={{fontWeight: 'bold'}}>
-                                            /km
-                                        </Text>
                                     </View>
                                    </View>
                                     <Text style={{fontSize: 20, color: '#99a8af', marginTop: 13, marginRight: 24}}>

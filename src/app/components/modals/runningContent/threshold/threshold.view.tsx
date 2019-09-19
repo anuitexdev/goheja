@@ -80,6 +80,7 @@ class ThresholdView extends Component<Props, State> {
                                 <TextInput
                                     ref={(ref) => this.input1 = ref }
                                     placeholder="0"
+                                    keyboardType={"number-pad"}
                                     onFocus={() => this.changeFocus(1)}
                                     maxLength={1}
                                     style={this.state.activeInputNumber === 1 ? threshold.focusInput : threshold.infoInput}
@@ -90,6 +91,7 @@ class ThresholdView extends Component<Props, State> {
                                     placeholder="0"
                                     ref={(ref) => this.input2 = ref }
                                     maxLength={1}
+                                    keyboardType={"number-pad"}
                                     onFocus={() => this.changeFocus(2)}
                                     onChangeText={() => this.input3.focus()}
                                     style={[this.state.activeInputNumber === 2 ? threshold.focusInput : threshold.infoInput, { marginRight: 8 }]}
@@ -114,6 +116,7 @@ class ThresholdView extends Component<Props, State> {
                                         maxLength={1}
                                         onChangeText={() => this.input4.focus()}
                                         onFocus={() => this.changeFocus(3)}
+                                        keyboardType={"number-pad"}
                                         >
                                         </TextInput>
                                         <TextInput
@@ -122,6 +125,7 @@ class ThresholdView extends Component<Props, State> {
                                             placeholder="0"
                                             maxLength={1}
                                             onFocus={() => this.changeFocus(4)}
+                                            keyboardType={"number-pad"}
                                         >
                                         </TextInput>
                                         <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>

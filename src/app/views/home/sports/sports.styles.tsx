@@ -29,7 +29,8 @@ export default StyleSheet.create({
         marginBottom: 30
     },
     categories: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        elevation: 0
     },
     category: {
         height: 130,
@@ -39,15 +40,12 @@ export default StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        shadowColor: "#4c93e6",
-        shadowOffset: {
-            width: 0,
-            height: 8,
-        },
-        shadowOpacity: 0.44,
-        shadowRadius: 10.32,
-        
-        elevation: 24,  
+        shadowColor: 'red',
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 10,
+        elevation: 30, 
+        margin: 10
     },
     footer: {
        position: 'absolute',

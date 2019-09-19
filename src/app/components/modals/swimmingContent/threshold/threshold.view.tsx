@@ -77,6 +77,7 @@ class ThresholdView extends Component<Props, State> {
                                     ref={(ref) => this.input1 = ref }
                                     placeholder="0"
                                     onFocus={() => this.changeFocus(1)}
+                                    keyboardType={"number-pad"}
                                     maxLength={1}
                                     style={this.state.activeInputNumber === 1 ? threshold.focusInput : threshold.infoInput}
                                     onChangeText={() => this.input2.focus()}
@@ -86,6 +87,7 @@ class ThresholdView extends Component<Props, State> {
                                     placeholder="0"
                                     ref={(ref) => this.input2 = ref }
                                     maxLength={1}
+                                    keyboardType={"number-pad"}
                                     onFocus={() => this.changeFocus(2)}
                                     onChangeText={() => this.input3.focus()}
                                     style={[this.state.activeInputNumber === 2 ? threshold.focusInput : threshold.infoInput, { marginRight: 8 }]}
@@ -122,7 +124,7 @@ class ThresholdView extends Component<Props, State> {
                                         </TextInput>
                                         <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>
                                         <Text style={{fontWeight: 'bold'}}>
-                                            /km
+                                            /100m
                                         </Text>
                                     </View>
                                    </View>

@@ -139,8 +139,8 @@ class SignInScreen extends Component<Props, State> {
                     }
                     <View style={styles.links}>
                         <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
-                        <TouchableOpacity style={styles.signInBtn}>
-                            <Text style={styles.signInText} onPress={this.onSubmit}>Login</Text>
+                        <TouchableOpacity style={false : styles.nextBtn } disabled={true} onPress={() => this.props.navigation.navigate('Home')}>
+                            <Text style={styles.signInText}>Login</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.signUpRedirect}>

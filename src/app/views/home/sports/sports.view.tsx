@@ -37,14 +37,14 @@ class SportsView extends Component<Props, State> {
                 </Text>
                 <View style={sports.categories}>
                     <TouchableOpacity onPress={() =>this.selectSport('Cycling')}>
-                        <View style={[sports.category, { marginRight: 20 }]}>
+                        <View style={sports.category}>
                             <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
                                 Cycling
                         </Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.selectSport('Swimming')}>
-                        <View style={sports.category}>
+                        <View style={[sports.category, {marginLeft: 20}]}>
                             <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
                                 Swimming
                         </Text>

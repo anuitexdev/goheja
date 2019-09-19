@@ -121,7 +121,15 @@ export default StyleSheet.create({
         paddingLeft: 20,
         paddingBottom: 12,
         paddingTop: 12,
-        backgroundColor: '#b6c0c6',
+        backgroundColor: '#4d5a5f',
+        borderRadius: 2,
+    },
+    nextBtnDisabled: {
+        paddingRight: 20,
+        paddingLeft: 20,
+        paddingBottom: 12,
+        paddingTop: 12,
+        backgroundColor: '#cfd8dc',
         borderRadius: 2,
     },
     nextBtnWrapper: {
