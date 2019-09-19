@@ -69,14 +69,14 @@ class RockView extends Component<Props, State> {
                     <TouchableWithoutFeedback onPress={this.hideModal}>
                         <Text style={cyclingStyles.backBtn}>
                             Back
-                            </Text>
+                        </Text>
                     </TouchableWithoutFeedback>
                     <Text style={cyclingStyles.title}>
                         30.5 kph
-                        </Text>
+                    </Text>
                     <Text style={cyclingStyles.subtitle}>
                         What was your Avg. Heart Rate during that 1h Flat Ride?
-                        </Text>
+                    </Text>
 
                     <View style={cyclingStyles.fullComponent}>
                         <View style={{flexDirection: 'row'}}>

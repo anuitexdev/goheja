@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from '../../../../redux/actions/modal.actions';
 import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import threshold from './threshold.style';
+import swimtime from './swimTime.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface State {
@@ -17,7 +17,7 @@ interface Props {
     changeModal: (value: number) => void,
 }
 
-class ThresholdView extends Component<Props, State> {
+class SwimTimeView extends Component<Props, State> {
     private input1: any;
     private input2: any;
     private input3: any;
@@ -52,29 +52,26 @@ class ThresholdView extends Component<Props, State> {
         return (
 
 
-                    <View style={threshold.backDrop}>
+                    <View style={swimtime.backDrop}>
                         <TouchableWithoutFeedback onPress={this.hideModal}>
                             <Icon
-                                style={threshold.showBtn}
+                                style={swimtime.showBtn}
                                 size={50}
                                 name={'ios-close'}
                             />
                         </TouchableWithoutFeedback>
-                        <View style={threshold.modalPage}>
+                        <View style={swimtime.modalPage}>
                             <TouchableWithoutFeedback onPress={this.hideModal}>
-                                <Text style={threshold.backBtn}>
+                                <Text style={swimtime.backBtn}>
                                     Back
                             </Text>
                             </TouchableWithoutFeedback>
-                            <Text style={threshold.title}>
-                                Running{"\n"}
-                                Threshold Pace
-                        </Text>
-                            <Text style={threshold.subtitle}>
-                                What’s your Runing Threshold Pace
+                            <Text style={swimtime.title}>
+                            What’s your best{"\n"}
+                            1000m Swim time?
                         </Text>
 
-                            <View style={threshold.fullComponent}>
+                            <View style={swimtime.fullComponent}>
                             <View style={{alignItems: 'center'}}>
                             <View style={{flexDirection: 'row'}}>
                                 <TextInput
@@ -82,7 +79,7 @@ class ThresholdView extends Component<Props, State> {
                                     placeholder="0"
                                     onFocus={() => this.changeFocus(1)}
                                     maxLength={1}
-                                    style={this.state.activeInputNumber === 1 ? threshold.focusInput : threshold.infoInput}
+                                    style={this.state.activeInputNumber === 1 ? swimtime.focusInput : swimtime.infoInput}
                                     onChangeText={() => this.input2.focus()}
                                 >
                                 </TextInput>
@@ -92,7 +89,7 @@ class ThresholdView extends Component<Props, State> {
                                     maxLength={1}
                                     onFocus={() => this.changeFocus(2)}
                                     onChangeText={() => this.input3.focus()}
-                                    style={[this.state.activeInputNumber === 2 ? threshold.focusInput : threshold.infoInput, { marginRight: 8 }]}
+                                    style={[this.state.activeInputNumber === 2 ? swimtime.focusInput : swimtime.infoInput, { marginRight: 8 }]}
                                 >
                                 </TextInput>
                                 </View>
@@ -100,8 +97,8 @@ class ThresholdView extends Component<Props, State> {
                                     Min
                                 </Text>
                             </View>
-                                <View style={threshold.colonWrapper}>
-                                    <Text style={threshold.colon}>
+                                <View style={swimtime.colonWrapper}>
+                                    <Text style={swimtime.colon}>
                                     :
                                     </Text>
                                 </View>
@@ -109,7 +106,7 @@ class ThresholdView extends Component<Props, State> {
                                    <View style={{flexDirection: 'row'}}>
                                         <TextInput
                                         ref={(ref) => this.input3 = ref }
-                                        style={[this.state.activeInputNumber === 3 ? threshold.focusInput : threshold.infoInput, { marginLeft: 8 }]}
+                                        style={[this.state.activeInputNumber === 3 ? swimtime.focusInput : swimtime.infoInput, { marginLeft: 8 }]}
                                         placeholder="0"
                                         maxLength={1}
                                         onChangeText={() => this.input4.focus()}
@@ -118,7 +115,7 @@ class ThresholdView extends Component<Props, State> {
                                         </TextInput>
                                         <TextInput
                                             ref={(ref) => this.input4 = ref }
-                                            style={[this.state.activeInputNumber === 4 ? threshold.focusInput : threshold.infoInput, { marginRight: 0 }]}
+                                            style={[this.state.activeInputNumber === 4 ? swimtime.focusInput : swimtime.infoInput, { marginRight: 0 }]}
                                             placeholder="0"
                                             maxLength={1}
                                             onFocus={() => this.changeFocus(4)}
@@ -136,20 +133,20 @@ class ThresholdView extends Component<Props, State> {
                                 </View>
                             </View>
 
-                            <View style={threshold.footerBtns}>
+                            <View style={swimtime.footerBtns}>
                                 <TouchableOpacity>
-                                    <Text style={threshold.skipBtn}>
+                                    <Text style={swimtime.skipBtn}>
                                         Skip >
                                 </Text>
                                 </TouchableOpacity>
-                                {false ? <TouchableOpacity style={threshold.nextBtn}>
-                                    <Text style={threshold.nextBtnText}>
+                                {false ? <TouchableOpacity style={swimtime.nextBtn}>
+                                    <Text style={swimtime.nextBtnText}>
                                         I don't know
                                     </Text>
                                 </TouchableOpacity> :
-                                    <TouchableWithoutFeedback  onPress={this.changeModal}>
-                                    <View style={threshold.nextBtn}>
-                                        <Text style={threshold.nextBtnText}>
+                                    <TouchableWithoutFeedback  onPress={this.hideModal}>
+                                    <View style={swimtime.nextBtn}>
+                                        <Text style={swimtime.nextBtnText}>
                                             Next
                                     </Text>
                                 </View>
@@ -168,7 +165,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
+    changeModal: (value: number) => dispatch(actions.changeSwimmingModal(value)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ThresholdView);
+export default connect(mapStateToProps, mapDispatchToProps)(SwimTimeView);

@@ -11,7 +11,6 @@ interface State {
 }
 
 interface Props {
-
     modalClose: () => void,
     modalOpen: () => void,
     changeModal: (value: number) => void,
@@ -45,7 +44,7 @@ class ThresholdView extends Component<Props, State> {
     }
 
     public changeModal = () => {
-        this.props.changeModal(3);
+        this.props.changeModal(2);
     }
 
     render() {
@@ -67,13 +66,10 @@ class ThresholdView extends Component<Props, State> {
                             </Text>
                             </TouchableWithoutFeedback>
                             <Text style={threshold.title}>
-                                Running{"\n"}
+                                What’s your{"\n"}
+                                Swimming
                                 Threshold Pace
                         </Text>
-                            <Text style={threshold.subtitle}>
-                                What’s your Runing Threshold Pace
-                        </Text>
-
                             <View style={threshold.fullComponent}>
                             <View style={{alignItems: 'center'}}>
                             <View style={{flexDirection: 'row'}}>
@@ -168,7 +164,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
+    changeModal: (value: number) => dispatch(actions.changeSwimmingModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThresholdView);
