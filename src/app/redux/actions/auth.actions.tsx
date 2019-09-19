@@ -19,8 +19,8 @@ export const changeScreen = (role: string) => {
     return { type: 'CHANGE_SCREEN', role };
 }
 
-export const changeStep = (currentStep: number) => {
-    return { type: 'CHANGE_STEP', currentStep}
+export const changeStep = (payload: any) => {
+    return { type: 'CHANGE_STEP', payload}
 }
 
 export const signIn = (userData: UserSignInData) => {

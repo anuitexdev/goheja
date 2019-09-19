@@ -21,16 +21,22 @@ const ModalReducer = (state = ModalDefaultState, action: any) => {
                 runningModalNumber: action.payload,
             }
         }
-        case "CHANGE_CYCLING_MODAL": {    
+        case "CHANGE_CYCLING_MODAL": {
             return {                    
                 ...state,
-                cyclingModalNumber: action.payload,
+                cyclingModalNumber: 1 + state.cyclingModalNumber,
+                cyclingData: {
+                    ...state.cyclingData,
+                    ...action.payload,
+                }
+                
             }
         }
         case "CHANGE_SWIMMING_MODAL": {    
             return {                    
                 ...state,
                 swimmingModalNumber: action.payload,
+                
             }
         }
         case "SET_SPORT_TYPE": {

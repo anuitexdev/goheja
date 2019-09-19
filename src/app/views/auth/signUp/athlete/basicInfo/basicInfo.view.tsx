@@ -23,7 +23,7 @@ interface State {
 
 interface Props {
     signUp: (user: UserSignUpData) => void
-    nextStepNumber: (nextStepNumber: number) => void,
+    nextStepNumber: (nextStepNumber: any) => void,
     currentStep: number;
 }
 
@@ -65,9 +65,9 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
     }
 
     private onSubmit = async () => {
-        const { showPassword, ...userDto } = this.state;
+        const { showPassword,errors, ...basicData } = this.state;
         // await this.props.signUp(userDto);
-        this.props.nextStepNumber(2)
+        this.props.nextStepNumber(basicData);
     }
 
 
@@ -143,7 +143,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
     signUp: (userData: UserSignUpData) => dispatch(actions.signUp(userData)),
-    nextStepNumber: (nextStepNumber: number) => dispatch(actions.changeStep(nextStepNumber))
+    nextStepNumber: (nextStepNumber: any) => dispatch(actions.changeStep(nextStepNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BasicInfoAthleteScreen);

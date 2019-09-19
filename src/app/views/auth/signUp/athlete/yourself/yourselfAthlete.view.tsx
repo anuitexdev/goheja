@@ -8,9 +8,11 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/Ionicons";
 import * as actions from '../../../../../redux/actions/auth.actions';
 import moment from 'moment';
+import AuthReducer from '../../../../../redux/reducers/auth.reducer';
 
 interface Props {
     nextStepNumber: (nextStepNumber: number) => void,
+    state: any,
 }
 
 interface State {
@@ -33,6 +35,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
             birthDateError: false,
             genderError: false,
         }
+        console.log(this.props.state);
+        
     }
 
     public showDateTimePicker = () => {
@@ -160,6 +164,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
+    state: state.AuthReducer,
 
 });
 

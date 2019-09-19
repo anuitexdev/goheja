@@ -17,7 +17,8 @@ interface State {
 interface Props {
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: number) => void,
+    changeModal: (value: {rock: number}) => void,
+    maxSpeed: number,
 }
 
 class RockView extends Component<Props, State> {
@@ -30,11 +31,12 @@ class RockView extends Component<Props, State> {
         super(props);
         this.state = {
             activeInputNumber: 0,
-            hundreds: '',
-            dozens: '',
-            units: '',
+            hundreds: '0',
+            dozens: '0',
+            units: '0',
             rockValue: 0,
         }
+        
     }
 
     public setModalVisible = () => {
@@ -52,7 +54,7 @@ class RockView extends Component<Props, State> {
     }
 
     public changeModal = () => {
-        this.props.changeModal(4);
+        this.props.changeModal({rock: this.state.rockValue});
         this.props.modalClose();
     }
 
@@ -94,7 +96,7 @@ class RockView extends Component<Props, State> {
                         </Text>
                     </TouchableWithoutFeedback>
                     <Text style={cyclingStyles.title}>
-                        30.5 kph {'\n'}
+                        {this.props.maxSpeed} kph {'\n'}
                         You Rock!
                     </Text>
                     <Text style={cyclingStyles.subtitle}>
@@ -180,12 +182,14 @@ class RockView extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
+    maxSpeed: state.ModalReducer.cyclingData.maxSpeed,
+    // maxSpeed: state.ModalReducer.cyclingData.maxSpeed,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeCyclingModal(value)),
+    changeModal: (value: {rock: number}) => dispatch(actions.changeCyclingModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RockView);

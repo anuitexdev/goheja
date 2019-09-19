@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View, TextInput, StyleSheet } from "react-native";
+import { Text, View, TextInput } from "react-native";
 import React from "react";
 import styles from '../styles';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
@@ -12,7 +12,6 @@ import UserSignInData from "src/app/shared/models/userSignInData.model";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import Header from '../../../components/header';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { string } from "prop-types";
 
 interface State {
     email: string,

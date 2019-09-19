@@ -17,7 +17,7 @@ interface State {
 interface Props {
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: number) => void,
+    changeModal: (value: {maxSpeed: number}) => void,
 }
 
 class SpeedView extends Component<Props, State> {
@@ -30,9 +30,9 @@ class SpeedView extends Component<Props, State> {
         super(props);
         this.state = {
             activeInputNumber: 0,
-            hundreds: '',
-            dozens: '',
-            units: '',
+            hundreds: '0',
+            dozens: '0',
+            units: '0',
             speedValue: 0,
         }
     }
@@ -52,7 +52,7 @@ class SpeedView extends Component<Props, State> {
     }
 
     public changeModal = () => {
-        this.props.changeModal(4);
+        this.props.changeModal({maxSpeed: this.state.speedValue});
     }
 
     
@@ -62,7 +62,7 @@ class SpeedView extends Component<Props, State> {
          })
          input.focus();
  
-         const summaryValue = Number(this.state.hundreds + this.state.dozens + this.state.units);
+         const summaryValue = Number(this.state.hundreds + this.state.dozens + '.' + this.state.units);
          
          this.setState({
             speedValue: summaryValue,
@@ -179,7 +179,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeCyclingModal(value)),
+    changeModal: (value: {maxSpeed: number}) => dispatch(actions.changeCyclingModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeedView);
