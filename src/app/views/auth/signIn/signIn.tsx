@@ -139,7 +139,7 @@ class SignInScreen extends Component<Props, State> {
                     }
                     <View style={styles.links}>
                         <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
-                        <TouchableOpacity style={false : styles.nextBtn } disabled={true} onPress={() => this.props.navigation.navigate('Home')}>
+                        <TouchableOpacity style={this.state.emailError || this.state.passwordError ? styles.signInBtn : styles.nextBtn } disabled={!this.state.emailError || !this.state.passwordError} onPress={() => this.props.navigation.navigate('Home')}>
                             <Text style={styles.signInText}>Login</Text>
                         </TouchableOpacity>
                     </View>

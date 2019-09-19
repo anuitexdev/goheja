@@ -66,7 +66,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
 
     private onSubmit = async () => {
         const { showPassword, ...userDto } = this.state;
-        await this.props.signUp(userDto);
+        // await this.props.signUp(userDto);
         this.props.nextStepNumber(2)
     }
 

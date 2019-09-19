@@ -74,10 +74,16 @@ class PersonalInfoScreen extends Component<Props> {
                         </View>
 
                         <View style={styles.personalNextBtnWrapper}>
-                            <TouchableOpacity style={styles.skipWrapper}>
+                            <TouchableOpacity
+                                style={styles.skipWrapper}
+                                onPress={this.onSubmit}
+                            >
                                 <Text>Skip ></Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.nextBtn} onPress={this.onSubmit}>
+                            <TouchableOpacity
+                                style={styles.nextBtn}
+                                onPress={this.onSubmit}
+                            >
                                 <Text style={styles.nextBtnText}>Next</Text>
                             </TouchableOpacity>
                         </View>
