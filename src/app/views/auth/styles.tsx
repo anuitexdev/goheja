@@ -67,12 +67,6 @@ export default StyleSheet.create({
         borderColor: '#cfd8dc',
         paddingLeft: 15
     },
-    inputError: {
-        borderRadius: 2,
-        borderWidth: 1,
-        borderColor: '#ff6464',
-        paddingLeft: 15
-    },
     label: {
         fontSize: 14,
         color: '#272e43',
