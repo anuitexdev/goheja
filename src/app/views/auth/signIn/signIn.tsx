@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View, TextInput } from "react-native";
+import { Text, View, TextInput, StyleSheet } from "react-native";
 import React from "react";
 import styles from '../styles';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
@@ -46,9 +46,9 @@ class SignInScreen extends Component<Props, State> {
     }
 
     private onSubmit = async () => {
-        await this.props.signIn({ email: this.state.email, password: this.state.password });
+        // await this.props.signIn({ email: this.state.email, password: this.state.password });
 
-        if (this.props.isLogged) {
+        if (!this.props.isLogged) {
             this.props.navigation.navigate('Home');
         }
     }
@@ -75,7 +75,7 @@ class SignInScreen extends Component<Props, State> {
 
     public signInValidation(data: any): ValidationObject {
         const mailReqExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-        const passwordReqExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+        const passwordReqExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
         if (data.email) {
             return {
@@ -111,7 +111,7 @@ class SignInScreen extends Component<Props, State> {
                         <Text style={styles.label}>Email</Text>
                         <TextInput
                             placeholder='Type your email address...'
-                            style={styles.input}
+                            style={this.state.emailError ? styles.input : styles.inputError}
                             onChangeText={(email) => this.handleChange({ email })}
                         ></TextInput>
                     </View>
@@ -121,7 +121,7 @@ class SignInScreen extends Component<Props, State> {
                             placeholder='Type your password...'
                             secureTextEntry={this.state.showPassword}
                             onChangeText={(password) => this.handleChange({ password })}
-                            style={styles.input}
+                            style={this.state.passwordError ? styles.input : styles.inputError}
                         />
                         <Icon
                             style={styles.showPassword}
@@ -130,7 +130,8 @@ class SignInScreen extends Component<Props, State> {
                             onPress={this.toggleSwitch}
                         />
                     </View>
-                    {!this.state.emailError || !this.state.passwordError ?
+                    {
+                        !this.state.emailError || !this.state.passwordError ?
                         <View style={styles.signInErrors}>
                             <Text style={styles.textErrors}>
                                 Email or Password is incorrect
@@ -139,7 +140,7 @@ class SignInScreen extends Component<Props, State> {
                     }
                     <View style={styles.links}>
                         <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
-                        <TouchableOpacity style={false : styles.nextBtn } disabled={true} onPress={() => this.props.navigation.navigate('Home')}>
+                        <TouchableOpacity style={!this.state.emailError || this.state.email === '' || !this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn} disabled={!this.state.emailError || !this.state.passwordError} onPress={this.onSubmit}>
                             <Text style={styles.signInText}>Login</Text>
                         </TouchableOpacity>
                     </View>

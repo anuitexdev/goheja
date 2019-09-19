@@ -161,7 +161,10 @@ export default StyleSheet.create({
         fontWeight: 'bold'
     },
     inputError: {
-        borderColor: 'red'
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15
     },
     shadow: {
         shadowColor: '#000',
