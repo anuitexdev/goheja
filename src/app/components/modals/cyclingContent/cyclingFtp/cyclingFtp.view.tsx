@@ -116,33 +116,43 @@ class CyclingFtpView extends Component<Props, State> {
                     </Text>
 
                     <View style={cyclingStyles.fullComponent}>
-                        <TextInput
-                            ref={(ref) => this.input1 = ref}
-                            placeholder="0"
-                            onFocus={() => this.changeFocus(1)}
-                            maxLength={1}
-                            style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
-                            onChangeText={(value) => this.setValue('hundreds', value)}
-                        >
-                        </TextInput>
-                        <TextInput
-                            placeholder="0"
-                            ref={(ref) => this.input2 = ref}
-                            maxLength={1}
-                            onFocus={() => this.changeFocus(2)}
-                            onChangeText={(value) => this.setValue('dozens', value)}
-                            style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
-                        >
-                        </TextInput>
-                        <TextInput
-                            ref={(ref) => this.input3 = ref}
-                            style={[this.state.activeInputNumber === 3 ? cyclingStyles.focusInput : cyclingStyles.infoInput, { marginRight: 0 }]}
-                            placeholder="0"
-                            maxLength={1}
-                            onFocus={() => this.changeFocus(3)}
-                            onChangeText={(value) => this.setValue('units', value)}
-                        >
-                        </TextInput>
+                        <View style={{flexDirection: 'row'}}>
+                            <TextInput
+                                ref={(ref) => this.input1 = ref}
+                                placeholder="0"
+                                onFocus={() => this.changeFocus(1)}
+                                maxLength={1}
+                                style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
+                                onChangeText={(value) => this.setValue('hundreds', value)}
+                            >
+                            </TextInput>
+                            <TextInput
+                                placeholder="0"
+                                ref={(ref) => this.input2 = ref}
+                                maxLength={1}
+                                onFocus={() => this.changeFocus(2)}
+                                onChangeText={(value) => this.setValue('dozens', value)}
+                                style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
+                            >
+                            </TextInput>
+                            <TextInput
+                                ref={(ref) => this.input3 = ref}
+                                style={[this.state.activeInputNumber === 3 ? cyclingStyles.focusInput : cyclingStyles.infoInput, { marginRight: 0 }]}
+                                placeholder="0"
+                                maxLength={1}
+                                onFocus={() => this.changeFocus(3)}
+                                onChangeText={(value) => this.setValue('units', value)}
+                            >
+                            </TextInput>
+                        </View>
+                        <Text
+                            style={{
+                            fontSize: 20,
+                            color: '#99a8af',
+                            marginTop: 13
+                            }}>
+                        watts
+                        </Text>
                     </View>
 
                     <View style={cyclingStyles.footerBtns}>

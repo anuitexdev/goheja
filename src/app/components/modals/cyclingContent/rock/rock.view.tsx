@@ -79,35 +79,43 @@ class RockView extends Component<Props, State> {
                         </Text>
 
                     <View style={cyclingStyles.fullComponent}>
-                        <TextInput
-                            ref={(ref) => this.input1 = ref}
-                            placeholder="0"
-                            onFocus={() => this.changeFocus(1)}
-                            maxLength={1}
-                            style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
-                            onChangeText={() => this.input2.focus()}
-                        >
-                        </TextInput>
-                        <TextInput
-                            placeholder="0"
-                            ref={(ref) => this.input2 = ref}
-                            maxLength={1}
-                            onFocus={() => this.changeFocus(2)}
-                            onChangeText={() => this.input3.focus()}
-                            style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
-                        >
-                        </TextInput>
-                        <View>
-                            <Text>.</Text>
+                        <View style={{flexDirection: 'row'}}>
+                            <TextInput
+                                ref={(ref) => this.input1 = ref}
+                                placeholder="0"
+                                onFocus={() => this.changeFocus(1)}
+                                maxLength={1}
+                                style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
+                                onChangeText={() => this.input2.focus()}
+                            >
+                            </TextInput>
+                            <TextInput
+                                placeholder="0"
+                                ref={(ref) => this.input2 = ref}
+                                maxLength={1}
+                                onFocus={() => this.changeFocus(2)}
+                                onChangeText={() => this.input3.focus()}
+                                style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
+                            >
+                            </TextInput>
+                            <TextInput
+                                ref={(ref) => this.input3 = ref}
+                                style={[this.state.activeInputNumber === 3 ? cyclingStyles.focusInput : cyclingStyles.infoInput, { marginRight: 0 }]}
+                                placeholder="0"
+                                maxLength={1}
+                                onFocus={() => this.changeFocus(3)}
+                            >
+                            </TextInput>
                         </View>
-                        <TextInput
-                            ref={(ref) => this.input3 = ref}
-                            style={[this.state.activeInputNumber === 3 ? cyclingStyles.focusInput : cyclingStyles.infoInput, { marginRight: 0 }]}
-                            placeholder="0"
-                            maxLength={1}
-                            onFocus={() => this.changeFocus(3)}
+                        <Text
+                            style={{
+                            fontSize: 20,
+                            color: '#99a8af',
+                            marginTop: 13
+                            }}
                         >
-                        </TextInput>
+                        bpm
+                        </Text>
                     </View>
 
                     <View style={cyclingStyles.footerBtns}>

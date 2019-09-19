@@ -19,6 +19,13 @@ interface Props {
 }
 
 class AwsomeView extends Component<Props, State> {
+  private input1: any;
+  private input2: any;
+  private input3: any;
+  private input4: any;
+  private input5: any;
+  private input6: any;
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -67,7 +74,7 @@ class AwsomeView extends Component<Props, State> {
             <View style={{ alignItems: 'center' }}>
               <View style={{ flexDirection: 'row' }}>
                 <TextInput
-                  ref="input1"
+                  ref={(ref) => this.input1 = ref}
                   placeholder="0"
                   onFocus={() => this.changeFocus(1)}
                   maxLength={1}
@@ -76,13 +83,13 @@ class AwsomeView extends Component<Props, State> {
                       ? awsome.focusInput
                       : awsome.infoInput
                   }
-                  onChangeText={() => this.refs['input2'].focus()}></TextInput>
+                  onChangeText={() => this.input2.focus()}></TextInput>
                 <TextInput
                   placeholder="0"
-                  ref="input2"
+                  ref={(ref) => this.input2 = ref}
                   maxLength={1}
                   onFocus={() => this.changeFocus(2)}
-                  onChangeText={() => this.refs['input3'].focus()}
+                  onChangeText={() => this.input3.focus()}
                   style={[
                     this.state.activeInputNumber === 2
                       ? awsome.focusInput
@@ -100,7 +107,7 @@ class AwsomeView extends Component<Props, State> {
             <View style={{ alignItems: 'center' }}>
               <View style={{ flexDirection: 'row' }}>
                 <TextInput
-                  ref="input3"
+                  ref={(ref) => this.input3 = ref}
                   style={[
                     this.state.activeInputNumber === 3
                       ? awsome.focusInput
@@ -109,10 +116,10 @@ class AwsomeView extends Component<Props, State> {
                   ]}
                   placeholder="0"
                   maxLength={1}
-                  onChangeText={() => this.refs['input4'].focus()}
+                  onChangeText={() => this.input4.focus()}
                   onFocus={() => this.changeFocus(3)}></TextInput>
                 <TextInput
-                  ref="input4"
+                  ref={(ref) => this.input4 = ref}
                   style={[
                     this.state.activeInputNumber === 3
                       ? awsome.focusInput
@@ -121,6 +128,7 @@ class AwsomeView extends Component<Props, State> {
                   ]}
                   placeholder="0"
                   maxLength={1}
+                  onChangeText={() => this.input5.focus()}
                   onFocus={() => this.changeFocus(3)}></TextInput>
                 <View
                   style={{
@@ -145,7 +153,7 @@ class AwsomeView extends Component<Props, State> {
             <View style={{ alignItems: 'center' }}>
               <View style={{ flexDirection: 'row' }}>
                 <TextInput
-                  ref="input3"
+                  ref={(ref) => this.input5 = ref}
                   style={[
                     this.state.activeInputNumber === 3
                       ? awsome.focusInput
@@ -154,10 +162,10 @@ class AwsomeView extends Component<Props, State> {
                   ]}
                   placeholder="0"
                   maxLength={1}
-                  onChangeText={() => this.refs['input4'].focus()}
+                  onChangeText={() => this.input6.focus()}
                   onFocus={() => this.changeFocus(3)}></TextInput>
                 <TextInput
-                  ref="input4"
+                  ref={(ref) => this.input6 = ref}
                   style={[
                     this.state.activeInputNumber === 3
                       ? awsome.focusInput
