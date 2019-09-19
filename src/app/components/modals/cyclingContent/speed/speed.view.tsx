@@ -7,7 +7,11 @@ import cyclingStyles from './speed.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface State {
-    activeInputNumber: number
+    activeInputNumber: number,
+    hundreds: string,
+    dozens: string,
+    units: string,
+    speedValue: number;
 }
 
 interface Props {
@@ -26,6 +30,10 @@ class SpeedView extends Component<Props, State> {
         super(props);
         this.state = {
             activeInputNumber: 0,
+            hundreds: '',
+            dozens: '',
+            units: '',
+            speedValue: 0,
         }
     }
 
@@ -46,6 +54,20 @@ class SpeedView extends Component<Props, State> {
     public changeModal = () => {
         this.props.changeModal(4);
     }
+
+    
+    public setValue = async (input: any, value: any) => {
+        await this.setState({
+             ...value,
+         })
+         input.focus();
+ 
+         const summaryValue = Number(this.state.hundreds + this.state.dozens + this.state.units);
+         
+         this.setState({
+            speedValue: summaryValue,
+         });     
+     }
 
     render() {
         return (
@@ -86,7 +108,8 @@ class SpeedView extends Component<Props, State> {
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
-                                onChangeText={() => this.input2.focus()}
+                                onChangeText={(hundreds) => this.setValue(this.input2, {hundreds})}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <TextInput
@@ -94,8 +117,9 @@ class SpeedView extends Component<Props, State> {
                                 ref={(ref) => this.input2 = ref}
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
-                                onChangeText={() => this.input3.focus()}
+                                onChangeText={(dozens) => this.setValue(this.input3, {dozens})}
                                 style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <View style={cyclingStyles.numberDot}>
@@ -107,6 +131,8 @@ class SpeedView extends Component<Props, State> {
                                 placeholder="0"
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(3)}
+                                onChangeText={(units) => this.setValue(this.input3, {units})}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                         </View>
@@ -127,7 +153,7 @@ class SpeedView extends Component<Props, State> {
                             </Text>
                         </TouchableOpacity>
 
-                        {false ? 
+                        {this.state.speedValue ===0 ? 
                         <TouchableOpacity style={cyclingStyles.nextBtn}>
                             <Text style={cyclingStyles.nextBtnText}>
                                 I don't know

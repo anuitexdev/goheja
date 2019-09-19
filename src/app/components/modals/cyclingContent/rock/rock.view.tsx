@@ -7,7 +7,11 @@ import cyclingStyles from './rock.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface State {
-    activeInputNumber: number
+    activeInputNumber: number,
+    hundreds: string,
+    dozens: string,
+    units: string,
+    rockValue: number;
 }
 
 interface Props {
@@ -26,6 +30,10 @@ class RockView extends Component<Props, State> {
         super(props);
         this.state = {
             activeInputNumber: 0,
+            hundreds: '',
+            dozens: '',
+            units: '',
+            rockValue: 0,
         }
     }
 
@@ -45,6 +53,20 @@ class RockView extends Component<Props, State> {
 
     public changeModal = () => {
         this.props.changeModal(4);
+        this.props.modalClose();
+    }
+
+    public setValue = async (input: any, value: any) => {
+        await this.setState({
+            ...value,
+        })
+        input.focus();
+
+        const summaryValue = Number(this.state.hundreds + this.state.dozens + this.state.units);
+
+        this.setState({
+            rockValue: summaryValue,
+        });
     }
 
     render() {
@@ -72,21 +94,24 @@ class RockView extends Component<Props, State> {
                         </Text>
                     </TouchableWithoutFeedback>
                     <Text style={cyclingStyles.title}>
-                        30.5 kph
+                        30.5 kph {'\n'}
+                        You Rock!
                     </Text>
                     <Text style={cyclingStyles.subtitle}>
-                        What was your Avg. Heart Rate during that 1h Flat Ride?
+                        What was your Avg. Heart Rate
                     </Text>
+                    <Text> during that 1h Flat Ride?</Text>
 
                     <View style={cyclingStyles.fullComponent}>
-                        <View style={{flexDirection: 'row'}}>
+                        <View style={{ flexDirection: 'row' }}>
                             <TextInput
                                 ref={(ref) => this.input1 = ref}
                                 placeholder="0"
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
-                                onChangeText={() => this.input2.focus()}
+                                onChangeText={(hundreds) => this.setValue(this.input2, { hundreds })}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <TextInput
@@ -94,8 +119,9 @@ class RockView extends Component<Props, State> {
                                 ref={(ref) => this.input2 = ref}
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
-                                onChangeText={() => this.input3.focus()}
+                                onChangeText={(dozens) => this.setValue(this.input3, { dozens })}
                                 style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <TextInput
@@ -104,23 +130,25 @@ class RockView extends Component<Props, State> {
                                 placeholder="0"
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(3)}
+                                onChangeText={(units) => this.setValue(this.input3, { units })}
+                                keyboardType={"number-pad"}
                             >
                             </TextInput>
                         </View>
                         <Text
                             style={{
-                            fontSize: 20,
-                            color: '#99a8af',
-                            marginTop: 13
+                                fontSize: 20,
+                                color: '#99a8af',
+                                marginTop: 13
                             }}
                         >
-                        bpm
+                            bpm
                         </Text>
                     </View>
 
                     <View style={cyclingStyles.footerBtns}>
                         {
-                            false ?
+                            this.state.rockValue === 0 ?
                                 <TouchableOpacity
                                     style={cyclingStyles.nextBtn}
                                 >
@@ -142,7 +170,8 @@ class RockView extends Component<Props, State> {
                                             Next
                                     </Text>
                                     </View>
-                                </TouchableWithoutFeedback>}
+                                </TouchableWithoutFeedback>
+                        }
                     </View>
                 </View>
             </View>
