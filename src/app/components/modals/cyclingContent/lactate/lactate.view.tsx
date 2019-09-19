@@ -106,17 +106,21 @@ class CyclingLactateView extends Component<Props, State> {
                             Back
                             </Text>
                     </TouchableWithoutFeedback>
+
                     <Text style={cyclingStyles.subtitle}>
                         What’s your
-                        </Text>
+                    </Text>
+
                     <Text style={cyclingStyles.title}>
                         Cycling Lactate
-                        </Text>
+                    </Text>
+                    
                     <Text style={cyclingStyles.title}>Threshold</Text>
+                    
                     <View style={cyclingStyles.fullComponent}>
                         <View style={{flexDirection: 'row'}}>
                             <TextInput
-                            ref={(ref) => {  this.input1 = ref; }} 
+                                ref={(ref) => {  this.input1 = ref; }} 
                                 placeholder="0"
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
@@ -134,7 +138,7 @@ class CyclingLactateView extends Component<Props, State> {
                             >
                             </TextInput>
                             <TextInput
-                            ref={(ref) => { this.input3 = ref; }} 
+                                ref={(ref) => { this.input3 = ref; }} 
                                 style={[this.state.activeInputNumber === 3 ? cyclingStyles.focusInput : cyclingStyles.infoInput, { marginRight: 0 }]}
                                 placeholder="0"
                                 maxLength={1}
@@ -143,11 +147,12 @@ class CyclingLactateView extends Component<Props, State> {
                             </TextInput>
                         </View>
                         <Text
-                        style={{
-                          fontSize: 20,
-                          color: '#99a8af',
-                          marginTop: 13
-                        }}>
+                            style={{
+                                fontSize: 20,
+                                color: '#99a8af',
+                                marginTop: 13
+                            }}
+                        >
                         bpm
                         </Text>
                     </View>

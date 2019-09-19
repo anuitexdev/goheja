@@ -22,11 +22,12 @@ class CyclingModals extends Component<Props, State> {
     render() {
         return (
             <Fragment>
-                {this.props.cyclingModalNumber === 1 ? <CyclingFtpView /> :
+            
+                {
+                    this.props.cyclingModalNumber === 1 ? <CyclingFtpView /> :
                     this.props.cyclingModalNumber === 2 ? <CyclingLactateView /> :
-                        this.props.cyclingModalNumber === 3 ? <SpeedView /> :
-                            this.props.cyclingModalNumber === 4 ? <RockView /> :
-                                <CyclingFtpView />
+                    this.props.cyclingModalNumber === 3 ? <SpeedView /> :
+                    this.props.cyclingModalNumber === 4 ? <RockView /> :    <CyclingFtpView />
                 }
 
             </Fragment>

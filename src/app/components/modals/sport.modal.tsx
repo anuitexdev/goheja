@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Modal, View} from "react-native";
 import RunningModals from './runningContent/running.content';
 import CyclingModals from './cyclingContent/cycling.content';
+import SwimmingModals from './swimmingContent/swimming.content';
 
 interface State {
 }
@@ -28,6 +29,7 @@ class SportModal extends Component<Props, State> {
                 >
                 {
                     this.props.selectedSport === 'Running' ? <RunningModals/> :
+                    this.props.selectedSport === 'Swimming' ? <SwimmingModals/> :
                     this.props.selectedSport === 'Cycling'? <CyclingModals/> : null
                 }
          
@@ -40,11 +42,11 @@ class SportModal extends Component<Props, State> {
 const mapStateToProps = (state: any) => ({
     modalVisible: state.ModalReducer.openModal,
     modalNumber: state.ModalReducer.modalNumber,
-    selectedSport: state.ModalReducer.selectedSport,
-
+    selectedSport: state.ModalReducer.selectedSport
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SportModal);

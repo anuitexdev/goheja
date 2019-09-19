@@ -69,17 +69,17 @@ class SpeedView extends Component<Props, State> {
                     <TouchableWithoutFeedback onPress={this.hideModal}>
                         <Text style={cyclingStyles.backBtn}>
                             Back
-                            </Text>
+                        </Text>
                     </TouchableWithoutFeedback>
                     <Text style={cyclingStyles.title}>
                         What’s your 1h Flat
-                        </Text>
+                    </Text>
                     <Text style={cyclingStyles.subtitle}>
                         Ride Max Speed?
-                        </Text>
+                    </Text>
 
                     <View style={cyclingStyles.fullComponent}>
-                       <View style={{flexDirection: 'row'}}>
+                        <View style={{flexDirection: 'row'}}>
                             <TextInput
                                 ref={(ref) => this.input1 = ref}
                                 placeholder="0"
@@ -109,46 +109,37 @@ class SpeedView extends Component<Props, State> {
                                 onFocus={() => this.changeFocus(3)}
                             >
                             </TextInput>
-                       </View>
-                       <Text
-                       style={{
-                         fontSize: 20,
-                         color: '#99a8af',
-                         marginTop: 13
-                       }}>
+                        </View>
+                        <Text
+                        style={{
+                            fontSize: 20,
+                            color: '#99a8af',
+                            marginTop: 13
+                        }}>
                        kph
-                       </Text>
+                        </Text>
                     </View>
 
                     <View style={cyclingStyles.footerBtns}>
                         <TouchableOpacity>
                             <Text style={cyclingStyles.skipBtn}>
                                 Skip >
-                                </Text>
+                            </Text>
                         </TouchableOpacity>
-                        {
-                            false ?
-                             <TouchableOpacity 
-                             style={cyclingStyles.nextBtn}
-                             >
-                                <Text
-                                style={cyclingStyles.nextBtnText}
-                                >
+
+                        {false ? 
+                        <TouchableOpacity style={cyclingStyles.nextBtn}>
+                            <Text style={cyclingStyles.nextBtnText}>
                                 I don't know
+                            </Text>
+                        </TouchableOpacity> :
+                        <TouchableWithoutFeedback onPress={this.changeModal}>
+                            <View style={cyclingStyles.nextBtn}>
+                                <Text style={cyclingStyles.nextBtnText}>
+                                    Next
                                 </Text>
-                            </TouchableOpacity> :
-                            <TouchableWithoutFeedback 
-                            onPress={this.changeModal}
-                            >
-                                <View 
-                                style={cyclingStyles.nextBtn}>
-                                    <Text 
-                                    style={cyclingStyles.nextBtnText}
-                                    >
-                                        Next
-                                    </Text>
-                                </View>
-                            </TouchableWithoutFeedback>}
+                            </View>
+                        </TouchableWithoutFeedback>}
                     </View>
                 </View>
             </View>

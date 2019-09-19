@@ -108,9 +108,11 @@ class CyclingFtpView extends Component<Props, State> {
                             Back
                             </Text>
                     </TouchableWithoutFeedback>
+
                     <Text style={cyclingStyles.subtitle}>
                         What’s your
                     </Text>
+
                     <Text style={cyclingStyles.title}>
                         Cycling FTP
                     </Text>
@@ -159,7 +161,7 @@ class CyclingFtpView extends Component<Props, State> {
                         <TouchableOpacity>
                             <Text style={cyclingStyles.skipBtn}>
                                 Skip >
-                                </Text>
+                            </Text>
                         </TouchableOpacity>
                         {
                             this.state.ftpValue === 0 ?
