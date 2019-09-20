@@ -102,7 +102,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
     render() {
         const options = [
             "Male",
-            "Female"
+            "Female",
+            "Neither"
         ];
         return (
             <Fragment>
@@ -151,8 +152,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         optionStyle={{ 
                                             paddingBottom: 12,
                                             paddingTop: 12,
-                                            paddingLeft: 48,
-                                            paddingRight: 48,
+                                            paddingLeft: 12,
+                                            paddingRight: 12,
                                         }}
                                     />
                                 </View>
