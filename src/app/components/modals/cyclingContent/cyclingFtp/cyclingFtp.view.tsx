@@ -17,7 +17,7 @@ interface State {
 interface Props {
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: number) => void,
+    changeModal: (value: {ftp: number}) => void,
 }
 
 class CyclingFtpView extends Component<Props, State> {
@@ -30,9 +30,9 @@ class CyclingFtpView extends Component<Props, State> {
         super(props);
         this.state = {
             activeInputNumber: 0,
-            hundreds: '',
-            dozens: '',
-            units: '',
+            hundreds: '0',
+            dozens: '0',
+            units: '0',
             ftpValue: 0,
         }
     }
@@ -52,7 +52,7 @@ class CyclingFtpView extends Component<Props, State> {
     }
 
     public changeModal = () => {
-        this.props.changeModal(2);
+        this.props.changeModal({ftp: this.state.ftpValue});
     }
 
     public setValue = async (input: any, value: any) => {
@@ -177,7 +177,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeCyclingModal(value)),
+    changeModal: (value:  {ftp: number}) => dispatch(actions.changeCyclingModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CyclingFtpView);

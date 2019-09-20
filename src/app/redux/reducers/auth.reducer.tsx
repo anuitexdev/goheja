@@ -27,7 +27,11 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
         case "CHANGE_STEP": {
             return {
                 ...state,
-                currentStep: action.currentStep
+                currentStep: 1 + state.currentStep,
+                signUpData: {
+                    ...state.signUpData,
+                    ...action.payload,
+                }
             }
         }
         default: return { ...state };

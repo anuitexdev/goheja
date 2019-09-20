@@ -10,7 +10,7 @@ export const modalOpen = () => {
 export const changeRunningModal = (payload: number) => {
     return {type: 'CHANGE_RUNNING_MODAL', payload}
 }
-export const changeCyclingModal = (payload: number) => {
+export const changeCyclingModal = (payload: any) => {
     return {type: 'CHANGE_CYCLING_MODAL', payload}
 }
 export const changeSwimmingModal = (payload: number) => {
