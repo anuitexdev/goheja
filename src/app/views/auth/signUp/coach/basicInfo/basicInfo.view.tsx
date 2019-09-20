@@ -13,6 +13,7 @@ interface State {
     lastName: string,
     email: string,
     password: string,
+    confirmPassword: string,
     showPassword: boolean,
 }
 
@@ -31,6 +32,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
             lastName: '',
             email: '',
             password: '',
+            confirmPassword: '',
             showPassword: true,
         }
     }
@@ -85,6 +87,21 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         secureTextEntry={this.state.showPassword}
                         style={styles.input}
                         onChangeText={(password) => this.handleChange({ password })}
+                    />
+                    <Icon
+                        style={styles.showPassword}
+                        size={25}
+                        name={'ios-eye'}
+                        onPress={this.toggleSwitch}
+                    />
+                </View>
+                <View style={styles.formField}>
+                    <Text style={styles.label}>Confirm Password</Text>
+                    <TextInput
+                        placeholder='Type your password...'
+                        secureTextEntry={this.state.showPassword}
+                        style={styles.input}
+                        onChangeText={(confirmPassword) => this.handleChange({ confirmPassword })}
                     />
                     <Icon
                         style={styles.showPassword}
