@@ -6,12 +6,14 @@ import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
 
 interface Props {
-    nextStepNumber: (nextStepNumber: number) => void
+    nextStepNumber: (nextStepNumber: any) => void,
+    state: any
 }
 
 interface State {
     isActive: boolean,
-    unitError: boolean
+    unitError: boolean,
+    units: string
 }
 
 class UnitsAthleteScreen extends Component<Props, State> {
@@ -20,8 +22,11 @@ class UnitsAthleteScreen extends Component<Props, State> {
         super(props)
         this.state = {
             isActive: false,
-            unitError: false
+            unitError: false,
+            units: ''
         }
+
+        console.log(this.props.state);
     }
 
     private unitValidation(value: string) {
@@ -31,17 +36,20 @@ class UnitsAthleteScreen extends Component<Props, State> {
         return false;
     }
 
-    public changeBtn = (value: string) => {
+    public changeBtn = async (value: string) => {
         const unitError = this.unitValidation(value);
-        this.setState({
+       await this.setState({
             isActive: !this.state.isActive,
-            unitError: unitError
+            unitError: unitError,
+            units: value
         });
+        console.log(this.state);
+        
         return value;
     }
 
     private onSubmit = () => {
-        this.props.nextStepNumber(4);
+        this.props.nextStepNumber({units: this.state.units});
     }
 
     render() {
@@ -79,7 +87,7 @@ class UnitsAthleteScreen extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-    
+    state: state.AuthReducer,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

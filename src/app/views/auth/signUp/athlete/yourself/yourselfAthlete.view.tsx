@@ -11,7 +11,7 @@ import moment from 'moment';
 import AuthReducer from '../../../../../redux/reducers/auth.reducer';
 
 interface Props {
-    nextStepNumber: (nextStepNumber: number) => void,
+    nextStepNumber: (nextStepNumber: any) => void,
     state: any,
 }
 
@@ -60,7 +60,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
     };
 
     private onSubmit = () => {
-        this.props.nextStepNumber(3);
+        const { isDateTimePickerVisible, birthDateError, genderError, ...basicData } = this.state;
+        this.props.nextStepNumber(basicData);
     }
 
     private birthDateValidation(value: string) {

@@ -4,9 +4,11 @@ import React from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
+import AuthReducer from '../../../../../redux/reducers/auth.reducer';
 
 interface Props {
-    nextStepNumber: (nextStepNumber: number) => void
+    nextStepNumber: (nextStepNumber: number) => void,
+    state: any
 }
 
 
@@ -14,6 +16,8 @@ class PersonalInfoScreen extends Component<Props> {
 
     constructor(props: Props) {
         super(props)
+
+        console.log(this.props.state);
 
     }
 
@@ -96,7 +100,7 @@ class PersonalInfoScreen extends Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-
+    state: state.AuthReducer,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

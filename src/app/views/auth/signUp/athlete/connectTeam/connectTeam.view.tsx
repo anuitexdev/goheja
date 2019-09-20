@@ -14,6 +14,8 @@ interface State {
 
 }
 
+
+
 class SuccessRegisterScreen extends Component<Props, State> {
 
     constructor(props: Props) {
@@ -39,7 +41,7 @@ class SuccessRegisterScreen extends Component<Props, State> {
                     <TouchableOpacity style={connectTeam.skipWrapper}>
                         <Text style={{fontFamily: 'Roboto-Regular'}}>Skip ></Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={connectTeam.nextBtn}>
+                    <TouchableOpacity style={connectTeam.nextBtn} onPress={() => this.props.nextStepNumber(1)}>
                         <Text style={connectTeam.nextBtnText}>Next</Text>
                     </TouchableOpacity>
                 </View>

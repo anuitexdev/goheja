@@ -15,7 +15,6 @@ let AuthDefaultState = {
         height: '',
         weight: '',
         fat: '',
-        
     }
 }
 
