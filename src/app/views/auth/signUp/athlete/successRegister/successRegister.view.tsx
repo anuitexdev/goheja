@@ -7,7 +7,8 @@ import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
 
 interface Props {
-    nextStepNumber: (nextStepNumber: number) => void
+    nextStepNumber: (nextStepNumber: number) => void,
+    state: any,
 }
 
 interface State {
@@ -18,6 +19,7 @@ class SuccessRegisterScreen extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props)
+console.log(this.props.state);
 
     }
 
@@ -35,6 +37,7 @@ class SuccessRegisterScreen extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
+    state: state
 
 });
 

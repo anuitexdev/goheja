@@ -11,13 +11,15 @@ import AthleteScreen from './athlete/athlete.view';
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
-    role: string,
+    role: number,
 }
 
 class SignUpScreen extends Component<Props> {
 
     constructor(props: Props) {
         super(props)
+        console.log(this.props);
+        
     }
 
     render() {
@@ -26,8 +28,8 @@ class SignUpScreen extends Component<Props> {
                 <ScrollView>
                     <Header />
                     { 
-                        !this.props.role ? <WelcomeScreen navigation={this.props.navigation} /> 
-                        : this.props.role === 'athlete' ? <AthleteScreen/> 
+                        this.props.role === -1 ? <WelcomeScreen navigation={this.props.navigation} /> 
+                        : this.props.role === 1 ? <AthleteScreen/> 
                             : <CoachBasicInfoScreen navigation={this.props.navigation}/>
                     }
 
@@ -38,7 +40,7 @@ class SignUpScreen extends Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-    role: state.AuthReducer.role,
+    role: state.AuthReducer.signUpData.userType,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

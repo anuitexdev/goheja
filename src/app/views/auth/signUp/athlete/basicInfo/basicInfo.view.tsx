@@ -8,9 +8,9 @@ import * as actions from '../../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
 
 interface State {
-    firstName: string,
+    firstname: string,
     lastName: string,
-    email: string,
+    auth: string,
     password: string,
     showPassword: boolean,
     errors: {
@@ -33,9 +33,9 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
         super(props);
 
         this.state = {
-            firstName: '',
+            firstname: '',
             lastName: '',
-            email: '',
+            auth: '',
             password: '',
             showPassword: true,
             errors: {
@@ -73,7 +73,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
 
     private handleChange = (data: any) => {
         this.setState(data);
-        const validationError = this.signUpValidation(this.state.email, this.state.password, this.state.firstName, this.state.lastName);
+        const validationError = this.signUpValidation(this.state.auth, this.state.password, this.state.firstname, this.state.lastName);
         this.setState({
             errors: {
                 emailError: validationError.mailError,
@@ -93,7 +93,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                     <TextInput
                         placeholder='Type your first name...'
                         style={styles.input}
-                        onChangeText={(firstName) => this.handleChange({ firstName })}
+                        onChangeText={(firstname) => this.handleChange({ firstname })}
                     ></TextInput>
                 </View>
                 <View style={styles.formField}>
@@ -109,7 +109,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                     <TextInput
                         placeholder='Type your email address...'
                         style={styles.input}
-                        onChangeText={(email) => this.handleChange({ email })}
+                        onChangeText={(auth) => this.handleChange({ auth })}
                     ></TextInput>
                 </View>
                 <View style={styles.formField}>

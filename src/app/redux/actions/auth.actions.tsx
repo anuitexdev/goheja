@@ -15,8 +15,15 @@ export const failedAuth = (err: any) => {
     return { type: 'AUTH_FAILED', err }
 }
 
-export const changeScreen = (role: string) => {
-    return { type: 'CHANGE_SCREEN', role };
+export const successTeamCode = (data: any) =>{
+    return {type: 'SUCCESS_GROUP_CODE', data};
+}
+export const failedTeamCode = (data: any) =>{
+    return {type: 'FAILED_GROUP_CODE', data};
+}
+
+export const changeScreen = (role: number) => {
+    return { type: 'CHANGE_SCREEN',userType: role };
 }
 
 export const changeStep = (payload: any) => {
@@ -43,7 +50,7 @@ export const signIn = (userData: UserSignInData) => {
     }
 }
 
-export const signUp = (userData: UserSignUpData) => {
+export const signUp = (userData: any) => {
     return async (dispatch: any) => {
         await AuthService.signUp(userData).then(res => {
 
@@ -55,6 +62,22 @@ export const signUp = (userData: UserSignUpData) => {
             dispatch(successAuth('', 'register'));
         }
         );
+    }
+}
+export const sendCode = (code: string) => {
+    return async (dispatch: any) => {
+        await AuthService.sendCode(code).then(res => {
+
+            if (res instanceof Error) {
+                Alert.alert(res.message);
+                dispatch(failedTeamCode({specGroup: '',teamcode: code}));
+                return;
+            }
+            console.log(res);
+            Alert.alert(`specGroup: ${ res.data.Content}`);
+            dispatch(successTeamCode({specGroup: res.data.Content,teamcode: code}));
+        }
+        ).catch( err =>   dispatch(failedTeamCode({specGroup: '',teamcode: code})));
     }
 }
 

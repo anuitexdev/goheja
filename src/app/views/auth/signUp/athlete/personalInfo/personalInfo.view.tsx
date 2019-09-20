@@ -4,25 +4,53 @@ import React from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
-import AuthReducer from '../../../../../redux/reducers/auth.reducer';
 
 interface Props {
-    nextStepNumber: (nextStepNumber: number) => void,
-    state: any
+    nextStepNumber: (nextStepNumber: any) => void,
+    signUp: (data: any) => void,
+    signUpData: any,
+}
+
+interface State {
+    height: number,
+    weight: number,
+    fat: number,
+    signUpData: any,
+
 }
 
 
-class PersonalInfoScreen extends Component<Props> {
+class PersonalInfoScreen extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props)
 
-        console.log(this.props.state);
+        this.state = {
+            height: 0,
+            weight: 0,
+            fat: 0,
+            signUpData: this.props.signUpData,
 
+        }
     }
 
-    public onSubmit = () => {
-        this.props.nextStepNumber(5);
+    public onInputChange = async (value: any) => {
+        await this.setState({
+            ...value,
+        });
+    }
+
+    public onSubmit = async () => {
+        this.props.nextStepNumber(this.state);
+       await this.setState({
+           signUpData: {
+            ...this.state.signUpData,
+            height: this.state.height,
+            weight: this.state.weight,
+            fat: this.state.fat,
+           }
+        });
+        this.props.signUp(this.state.signUpData);
     }
 
     render() {
@@ -44,6 +72,7 @@ class PersonalInfoScreen extends Component<Props> {
                                 <TextInput
                                     style={styles.input}
                                     placeholder='Type your height…'
+                                    onChangeText={(height) => this.onInputChange({ height: Number(height) })}
                                 />
                                 <Text style={styles.formUnit}>CM</Text>
                             </View>
@@ -58,6 +87,7 @@ class PersonalInfoScreen extends Component<Props> {
                                 <TextInput
                                     style={styles.input}
                                     placeholder='Type your weight'
+                                    onChangeText={(weight) => this.onInputChange({ weight: Number(weight) })}
                                 />
                                 <Text style={styles.formUnit}>KG</Text>
                             </View>
@@ -72,6 +102,7 @@ class PersonalInfoScreen extends Component<Props> {
                                 <TextInput
                                     style={styles.input}
                                     placeholder='Type your body fat…'
+                                    onChangeText={(fat) => this.onInputChange({ fat: Number(fat) })}
                                 />
                                 <Text style={styles.formUnit}>%</Text>
                             </View>
@@ -100,11 +131,12 @@ class PersonalInfoScreen extends Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-    state: state.AuthReducer,
+    signUpData: state.AuthReducer.signUpData,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    nextStepNumber: (nextStepNumber: number) => dispatch(actions.changeStep(nextStepNumber))
+    nextStepNumber: (nextStepNumber: any) => dispatch(actions.changeStep(nextStepNumber)),
+    signUp: (data: any) => dispatch(actions.signUp(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PersonalInfoScreen);

@@ -8,7 +8,7 @@ import * as actions from '../../../../redux/actions/auth.actions';
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
-    changeScreen: (role: string) => void
+    changeScreen: (role: number) => void
 }
 class WelcomeScreen extends Component<Props> {
 
@@ -16,7 +16,7 @@ class WelcomeScreen extends Component<Props> {
         super(props);
     }
 
-    public redirectToWelcome = (role: string) => {
+    public redirectToWelcome = (role: number) => {
         this.props.changeScreen(role);
         this.props.navigation.navigate('signUp');
     }
@@ -30,13 +30,13 @@ class WelcomeScreen extends Component<Props> {
                 <View style={styles.buttonVariants}>
                     <TouchableOpacity
                         style={styles.welcomeButtons}
-                        onPress={() => this.redirectToWelcome('coach')}>
+                        onPress={() => this.redirectToWelcome(0)}>
                         <Text style={styles.buttonText}
                         >I’m an Coach</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.welcomeButtons}
-                        onPress={() => this.redirectToWelcome('athlete')}>
+                        onPress={() => this.redirectToWelcome(1)}>
                         <Text style={styles.buttonText}
                         >I’m an Athlete</Text>
                     </TouchableOpacity>
@@ -62,7 +62,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    changeScreen: (role: string) => dispatch(actions.changeScreen(role))
+    changeScreen: (role: number) => dispatch(actions.changeScreen(role))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WelcomeScreen);

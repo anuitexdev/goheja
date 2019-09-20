@@ -1,9 +1,11 @@
 export default class UserSignInData {
   constructor() {
-    this.email = '';
-    this.password = '';
+    this.mail = '';
+    this.psw = '';
+    this.specGroup ='';
   }
-  email: string;
-  password: string;
+  mail: string;
+  psw: string;
+  specGroup: string;
 
 }

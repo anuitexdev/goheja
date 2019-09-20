@@ -17,11 +17,34 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
                 isLogged: false,
             }
         }
-        case "CHANGE_SCREEN": {
+        case "SUCCESS_GROUP_CODE": {
+            return {
+                ...state,
+                signUpData: {
+                    ...state.signUpData,
+                    specGroup: action.data.specGroup,
+                    teamcode: action.data.teamcode,
+                } 
+            }
+        }
+        case "FAILED_GROUP_CODE": {
+            return {
+                ...state,
+                signUpData: {
+                    ...state.signUpData,
+                    specGroup: action.data.specGroup,
+                    teamcode: action.data.teamcode,
+                } 
+            }
+        }
+        case "CHANGE_SCREEN": {            
             return {
                 ...state,
                 isWelcomeScreen: false,
-                role: action.role
+                signUpData: {
+                    ...state.signUpData,
+                    userType: action.userType
+                }
             }
         }
         case "CHANGE_STEP": {

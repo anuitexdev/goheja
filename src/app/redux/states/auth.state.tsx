@@ -2,19 +2,22 @@ let AuthDefaultState = {
     userToken: '',
     isWelcomeScreen: true,
     isLogged: false,
-    role: '',
     currentStep: 0,
+
     signUpData:{
-        firstName: '',
+        userType: -1,
+        firstname: '',
         lastName: '',
-        email: '',
+        auth: '',
         password: '',
-        birthDate: '',
-        gender: '',
+        dob: '',
+        gender: 0,
         units: '',
         height: '',
         weight: '',
         fat: '',
+        teamcode: '',
+        specGroup: '',
     }
 }
 

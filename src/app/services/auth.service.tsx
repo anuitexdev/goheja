@@ -16,7 +16,7 @@ export class AuthService {
 
     public signIn(userData: UserSignInData): Promise<any> {
 
-        return axiosInstance.post(`${environment.backendUrl}`, userData)
+        return axiosInstance.post(`${environment.backendUrl}Security/`, userData)
             .then((response) => {
                 console.log(response);
                 return response;
@@ -27,9 +27,22 @@ export class AuthService {
             });
     }
 
-    public signUp(userData: UserSignUpData): Promise<any> {
+    public signUp(userData: any): Promise<any> {
 
-        return axiosInstance.post(`${environment.backendUrl}/auth/signUp`, userData)
+        return axiosInstance.post(`${environment.backendUrl}Users`, userData)
+            .then((response) => {
+                console.log(response);
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+                return error;
+            });
+    }
+
+    public sendCode(code: string): Promise<any> {
+
+        return axiosInstance.get(`${environment.backendUrl}/General/${code}`)
             .then((response) => {
                 console.log(response);
                 return response;

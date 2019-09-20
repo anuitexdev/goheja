@@ -8,7 +8,6 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/Ionicons";
 import * as actions from '../../../../../redux/actions/auth.actions';
 import moment from 'moment';
-import AuthReducer from '../../../../../redux/reducers/auth.reducer';
 
 interface Props {
     nextStepNumber: (nextStepNumber: any) => void,
@@ -16,9 +15,10 @@ interface Props {
 }
 
 interface State {
-    gender: string,
+    gender: number,
     isDateTimePickerVisible: boolean,
-    birthDate: any,
+    formatedBirthDate: any,
+    dob: any,
     birthDateError: boolean,
     genderError: boolean,
 }
@@ -29,11 +29,12 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         super(props)
 
         this.state = {
-            gender: 'Male',
+            gender: 0,
             isDateTimePickerVisible: false,
-            birthDate: '',
+            formatedBirthDate: '',
             birthDateError: false,
             genderError: false,
+            dob: new Date(),
         }
         console.log(this.props.state);
         
@@ -51,16 +52,17 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         const formattedDate = moment(date).format('DD-MM-YYYY');
 
         const birthDateError = this.birthDateValidation(formattedDate);
-
+        let signUpDate = moment(date).format('YYYY-MM-DDTHH:mm:ss:SSZ')
         this.setState({
-            birthDate: formattedDate,
-            birthDateError
+            dob: signUpDate,
+            birthDateError,
+            formatedBirthDate: formattedDate,
         })
         this.hideDateTimePicker();
     };
 
     private onSubmit = () => {
-        const { isDateTimePickerVisible, birthDateError, genderError, ...basicData } = this.state;
+        const { isDateTimePickerVisible, birthDateError, genderError,formatedBirthDate, ...basicData } = this.state;
         this.props.nextStepNumber(basicData);
     }
 
@@ -71,19 +73,29 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         return false;
     }
 
-    private genderValidation(value: string) {
-        if (value !== '') {
+    private genderValidation(value: number) {
+        if (value !== 0) {
             return true;
         }
         return false;
     }
 
     private setSelectedOption = (value: string) => {
+        let genderValue= 0;
+        if (value === 'Male') {
+            genderValue = 1;
+        } 
+        if(value === 'Female') {
+            genderValue = 2;
+        }
+        if(value === 'Neither') {
+            genderValue = 3;
+        }
 
-        const genderError = this.genderValidation(value);
+        const genderError = this.genderValidation(genderValue);
         this.setState({
             genderError,
-            gender: value,
+            gender: genderValue,
         });
     }
 
@@ -109,7 +121,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         style={styles.input}
                                         editable={false}
                                         onFocus={this.showDateTimePicker}
-                                        value={this.state.birthDate}
+                                        value={this.state.formatedBirthDate}
                                     ></TextInput>
                                     <Icon
                                         style={styles.dateIcon}
@@ -135,8 +147,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         onSelection={this.setSelectedOption}
                                         containerBorderTint={'#cfd8dc'}
                                         separatorTint={'#cfd8dc'}
-                                        selectedOption={this.state.gender}
-                                        optionStyle={{
+                                        selectedOption={this.state.gender === 1 ? 'Male' : this.state.gender === 2 ? 'Female' : this.state.gender === 3 ? 'Neither': 'Male'}
+                                        optionStyle={{ 
                                             paddingBottom: 12,
                                             paddingTop: 12,
                                             paddingLeft: 48,

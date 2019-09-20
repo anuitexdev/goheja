@@ -45,7 +45,7 @@ class SignInScreen extends Component<Props, State> {
     }
 
     private onSubmit = async () => {
-        // await this.props.signIn({ email: this.state.email, password: this.state.password });
+        await this.props.signIn({ mail: this.state.email, psw: this.state.password, specGroup: 'gohejacode' });
 
         if (!this.props.isLogged) {
             this.props.navigation.navigate('Home');
@@ -85,13 +85,13 @@ class SignInScreen extends Component<Props, State> {
         if (data.password) {
             return {
                 emailError: this.state.emailError,
-                passwordError: passwordReqExp.test(data.password),
+                passwordError: data.password.length !== 0,
             }
         }
         if (data.email && data.password) {
             return {
                 emailError: mailReqExp.test(data.email),
-                passwordError: passwordReqExp.test(data.password),
+                passwordError: data.password.length !== 0,
             }
         }
         return {
