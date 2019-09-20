@@ -6,7 +6,7 @@ import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
 
 interface Props {
-    nextStepNumber: (nextStepNumber: any) => void,
+    nextStepNumber: (nextStepData: any) => void,
     signUp: (data: any) => void,
     signUpData: any,
 }
@@ -72,7 +72,8 @@ class PersonalInfoScreen extends Component<Props, State> {
                                 <TextInput
                                     style={styles.input}
                                     placeholder='Type your height…'
-                                    onChangeText={(height) => this.onInputChange({ height: Number(height) })}
+                                    keyboardType='phone-pad'
+                                    onChangeText={(height) => this.onInputChange({ height })}
                                 />
                                 <Text style={styles.formUnit}>CM</Text>
                             </View>
@@ -87,7 +88,8 @@ class PersonalInfoScreen extends Component<Props, State> {
                                 <TextInput
                                     style={styles.input}
                                     placeholder='Type your weight'
-                                    onChangeText={(weight) => this.onInputChange({ weight: Number(weight) })}
+                                    keyboardType='phone-pad'
+                                    onChangeText={(weight) => this.onInputChange({ weight })}
                                 />
                                 <Text style={styles.formUnit}>KG</Text>
                             </View>
@@ -102,7 +104,8 @@ class PersonalInfoScreen extends Component<Props, State> {
                                 <TextInput
                                     style={styles.input}
                                     placeholder='Type your body fat…'
-                                    onChangeText={(fat) => this.onInputChange({ fat: Number(fat) })}
+                                    keyboardType='phone-pad'
+                                    onChangeText={(fat) => this.onInputChange({ fat })}
                                 />
                                 <Text style={styles.formUnit}>%</Text>
                             </View>
@@ -135,7 +138,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    nextStepNumber: (nextStepNumber: any) => dispatch(actions.changeStep(nextStepNumber)),
+    nextStepNumber: (nextStepData: any) => dispatch(actions.changeStep(nextStepData)),
     signUp: (data: any) => dispatch(actions.signUp(data)),
 });
 

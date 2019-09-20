@@ -1,6 +1,6 @@
 import AuthService from '../../services/auth.service'
 import UserSignInData from 'src/app/shared/models/userSignInData.model';
-import UserSignUpData from '../../shared/models/userSignUpData.model';
+
 import { Alert } from 'react-native';
 
 export const successAuth = (userToken: string, type: string) => {
@@ -26,7 +26,7 @@ export const changeScreen = (role: number) => {
     return { type: 'CHANGE_SCREEN',userType: role };
 }
 
-export const changeStep = (payload: any) => {
+export const changeStep = (payload: any) => {   
     return { type: 'CHANGE_STEP', payload}
 }
 
@@ -74,7 +74,6 @@ export const sendCode = (code: string) => {
                 return;
             }
             console.log(res);
-            Alert.alert(`specGroup: ${ res.data.Content}`);
             dispatch(successTeamCode({specGroup: res.data.Content,teamcode: code}));
         }
         ).catch( err =>   dispatch(failedTeamCode({specGroup: '',teamcode: code})));

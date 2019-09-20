@@ -6,7 +6,7 @@ import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
 
 interface Props {
-    nextStepNumber: (nextStepNumber: any) => void,
+    nextStepNumber: (nextStepData: any) => void,
     state: any
 }
 
@@ -25,8 +25,6 @@ class UnitsAthleteScreen extends Component<Props, State> {
             unitError: false,
             units: ''
         }
-
-        console.log(this.props.state);
     }
 
     private unitValidation(value: string) {
@@ -42,9 +40,7 @@ class UnitsAthleteScreen extends Component<Props, State> {
             isActive: !this.state.isActive,
             unitError: unitError,
             units: value
-        });
-        console.log(this.state);
-        
+        });        
         return value;
     }
 
@@ -91,7 +87,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    nextStepNumber: (nextStepNumber: number) => dispatch(actions.changeStep(nextStepNumber))
+    nextStepNumber: (nextStepData: any) => dispatch(actions.changeStep(nextStepData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UnitsAthleteScreen);

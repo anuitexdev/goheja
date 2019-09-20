@@ -15,16 +15,16 @@ interface Props {
   modalNumber: number;
   modalClose: () => void;
   modalOpen: () => void;
-  changeModal: (value: number) => void;
+  changeModal: (numberStep: number) => void;
 }
 
 class AwsomeView extends Component<Props, State> {
-  private input1: any;
-  private input2: any;
-  private input3: any;
-  private input4: any;
-  private input5: any;
-  private input6: any;
+  private inputDozentsOfHours: any;
+  private inputUnitsOfHours: any;
+  private inputDozentsOfMinutes: any;
+  private inputUnitsOfMinutes: any;
+  private inputDozentsOfSeconds: any;
+  private inputUnitsOfSeconds: any;
 
   constructor(props: Props) {
     super(props);
@@ -64,16 +64,16 @@ class AwsomeView extends Component<Props, State> {
           <Text style={awsome.title}>
             WOW!{'\n'}
             That’s awsome!
-            </Text>
+          </Text>
           <Text style={awsome.subtitle}>
             How long did the ½ Marathon took you?
-            </Text>
+          </Text>
 
             <View style={awsome.fullComponent}>
                 <View style={{alignItems: 'center'}}>
                     <View style={{flexDirection: 'row'}}>
                         <TextInput
-                        ref={ref => (this.input1 = ref)}
+                        ref={ref => (this.inputDozentsOfHours = ref)}
                         placeholder="0"
                         onFocus={() => this.changeFocus(1)}
                         maxLength={1}
@@ -83,15 +83,15 @@ class AwsomeView extends Component<Props, State> {
                             ? awsome.focusInput
                             : awsome.infoInput
                         }
-                        onChangeText={() => this.input2.focus()}>
+                        onChangeText={() => this.inputUnitsOfHours.focus()}>
                         </TextInput>
                         <TextInput
                         placeholder="0"
-                        ref={ref => (this.input2 = ref)}
+                        ref={ref => (this.inputUnitsOfHours = ref)}
                         maxLength={1}
                         keyboardType={"number-pad"}
                         onFocus={() => this.changeFocus(2)}
-                        onChangeText={() => this.input3.focus()}
+                        onChangeText={() => this.inputDozentsOfMinutes.focus()}
                         style={[
                             this.state.activeInputNumber === 2
                             ? awsome.focusInput
@@ -110,7 +110,7 @@ class AwsomeView extends Component<Props, State> {
                 <View style={{alignItems: 'center'}}>
                     <View style={{flexDirection: 'row'}}>
                         <TextInput
-                        ref={ref => (this.input3 = ref)}
+                        ref={ref => (this.inputDozentsOfMinutes = ref)}
                         style={[
                             this.state.activeInputNumber === 3
                             ? awsome.focusInput
@@ -120,11 +120,11 @@ class AwsomeView extends Component<Props, State> {
                         placeholder="0"
                         maxLength={1}
                         keyboardType={"number-pad"}
-                        onChangeText={() => this.input4.focus()}
+                        onChangeText={() => this.inputUnitsOfMinutes.focus()}
                         onFocus={() => this.changeFocus(3)}>
                         </TextInput>
                         <TextInput
-                        ref={ref => (this.input4 = ref)}
+                        ref={ref => (this.inputUnitsOfMinutes = ref)}
                         style={[
                             this.state.activeInputNumber === 4
                             ? awsome.focusInput
@@ -134,7 +134,7 @@ class AwsomeView extends Component<Props, State> {
                         placeholder="0"
                         maxLength={1}
                         keyboardType={"number-pad"}
-                        onChangeText={() => this.input5.focus()}
+                        onChangeText={() => this.inputDozentsOfSeconds.focus()}
                         onFocus={() => this.changeFocus(4)}>
                         </TextInput>
                         <View
@@ -161,7 +161,7 @@ class AwsomeView extends Component<Props, State> {
                 <View style={{alignItems: 'center'}}>
                     <View style={{flexDirection: 'row'}}>
                         <TextInput
-                            ref={ref => (this.input5 = ref)}
+                            ref={ref => (this.inputDozentsOfSeconds = ref)}
                             style={[
                                 this.state.activeInputNumber === 5
                                 ? awsome.focusInput
@@ -171,11 +171,11 @@ class AwsomeView extends Component<Props, State> {
                             placeholder="0"
                             maxLength={1}
                             keyboardType={"number-pad"}
-                            onChangeText={() => this.input6.focus()}
+                            onChangeText={() => this.inputUnitsOfSeconds.focus()}
                             onFocus={() => this.changeFocus(5)}>
                         </TextInput>
                         <TextInput
-                            ref={ref => (this.input6 = ref)}
+                            ref={ref => (this.inputUnitsOfSeconds = ref)}
                             style={[
                                 this.state.activeInputNumber === 6
                                 ? awsome.focusInput
@@ -229,10 +229,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
   modalClose: () => dispatch(actions.modalClose()),
   modalOpen: () => dispatch(actions.modalOpen()),
-  changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
+  changeModal: (numberStep: number) => dispatch(actions.changeRunningModal(numberStep)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AwsomeView);
+export default connect(mapStateToProps, mapDispatchToProps)(AwsomeView);

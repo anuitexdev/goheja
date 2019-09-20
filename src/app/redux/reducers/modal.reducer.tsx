@@ -15,28 +15,28 @@ const ModalReducer = (state = ModalDefaultState, action: any) => {
                 openModal: true,
             }
         }
-        case "CHANGE_RUNNING_MODAL": {    
-            return {                    
+        case "CHANGE_RUNNING_MODAL": {
+            return {
                 ...state,
                 runningModalNumber: action.payload,
             }
         }
         case "CHANGE_CYCLING_MODAL": {
-            return {                    
+            return {
                 ...state,
-                cyclingModalNumber: 1 + state.cyclingModalNumber,
+                cyclingModalNumber: ++state.cyclingModalNumber,
                 cyclingData: {
                     ...state.cyclingData,
                     ...action.payload,
                 }
-                
+
             }
         }
-        case "CHANGE_SWIMMING_MODAL": {    
-            return {                    
+        case "CHANGE_SWIMMING_MODAL": {
+            return {
                 ...state,
                 swimmingModalNumber: action.payload,
-                
+
             }
         }
         case "SET_SPORT_TYPE": {

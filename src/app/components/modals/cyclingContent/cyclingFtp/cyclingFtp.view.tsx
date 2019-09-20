@@ -22,9 +22,9 @@ interface Props {
 
 class CyclingFtpView extends Component<Props, State> {
 
-    private input1: any;
+    private inputHundreds: any;
     private input2: any;
-    private input3: any;
+    private inputUnits: any;
 
     constructor(props: Props) {
         super(props);
@@ -103,7 +103,7 @@ class CyclingFtpView extends Component<Props, State> {
                     <View style={cyclingStyles.fullComponent}>
                         <View style={{flexDirection: 'row'}}>
                             <TextInput
-                                ref={(ref) => this.input1 = ref}
+                                ref={(ref) => this.inputHundreds = ref}
                                 placeholder="0"
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
@@ -117,18 +117,18 @@ class CyclingFtpView extends Component<Props, State> {
                                 ref={(ref) => this.input2 = ref}
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
-                                onChangeText={(dozens) => this.setValue(this.input3, {dozens})}
+                                onChangeText={(dozens) => this.setValue(this.inputUnits, {dozens})}
                                 style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <TextInput
-                                ref={(ref) => this.input3 = ref}
+                                ref={(ref) => this.inputUnits = ref}
                                 style={[this.state.activeInputNumber === 3 ? cyclingStyles.focusInput : cyclingStyles.infoInput, { marginRight: 0 }]}
                                 placeholder="0"
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(3)}
-                                onChangeText={(units) => this.setValue(this.input3, {units})}
+                                onChangeText={(units) => this.setValue(this.inputUnits, {units})}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>

@@ -18,7 +18,7 @@ import reducers from './redux/reducers';
 let store = createStore(reducers, applyMiddleware(thunk));
 
 const App = () => {
-
+  console.disableYellowBox = true;
   return (
     <Provider store={store}>
       <Navigation />

@@ -10,7 +10,7 @@ import * as actions from '../../../../../redux/actions/auth.actions';
 import moment from 'moment';
 
 interface Props {
-    nextStepNumber: (nextStepNumber: any) => void,
+    nextStepNumber: (nextStepData: any) => void,
     state: any,
 }
 
@@ -35,9 +35,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
             birthDateError: false,
             genderError: false,
             dob: new Date(),
-        }
-        console.log(this.props.state);
-        
+        }        
     }
 
     public showDateTimePicker = () => {
@@ -183,7 +181,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    nextStepNumber: (nextStepNumber: number) => dispatch(actions.changeStep(nextStepNumber))
+    nextStepNumber: (nextStepData: any) => dispatch(actions.changeStep(nextStepData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(YourSelfAthleteScreen);

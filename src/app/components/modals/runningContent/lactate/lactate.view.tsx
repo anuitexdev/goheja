@@ -13,13 +13,13 @@ interface State {
 interface Props {
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: number) => void,
+    changeModal: (numberStep: number) => void,
 }
 
 class LactateView extends Component<Props, State> {
-    private input1: any;
-    private input2: any;
-    private input3: any;
+    private inputHundreds: any;
+    private inputDozens: any;
+    private inputUnits: any;
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -73,27 +73,27 @@ class LactateView extends Component<Props, State> {
                     <View style={sport.fullComponent}>
                         <View style={{ flexDirection: 'row' }}>
                             <TextInput
-                                ref={(ref) => this.input1 = ref}
+                                ref={(ref) => this.inputHundreds = ref}
                                 placeholder="0"
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? sport.focusInput : sport.infoInput}
-                                onChangeText={() => this.input2.focus()}
+                                onChangeText={() => this.inputDozens.focus()}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <TextInput
                                 placeholder="0"
-                                ref={(ref) => this.input2 = ref}
+                                ref={(ref) => this.inputDozens = ref}
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
-                                onChangeText={() => this.input3.focus()}
+                                onChangeText={() => this.inputUnits.focus()}
                                 style={this.state.activeInputNumber === 2 ? sport.focusInput : sport.infoInput}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <TextInput
-                                ref={(ref) => this.input3 = ref}
+                                ref={(ref) => this.inputUnits = ref}
                                 style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
                                 placeholder="0"
                                 maxLength={1}
@@ -144,7 +144,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
+    changeModal: (numberStep: number) => dispatch(actions.changeRunningModal(numberStep)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LactateView);

@@ -24,7 +24,7 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
                     ...state.signUpData,
                     specGroup: action.data.specGroup,
                     teamcode: action.data.teamcode,
-                } 
+                }
             }
         }
         case "FAILED_GROUP_CODE": {
@@ -34,10 +34,10 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
                     ...state.signUpData,
                     specGroup: action.data.specGroup,
                     teamcode: action.data.teamcode,
-                } 
+                }
             }
         }
-        case "CHANGE_SCREEN": {            
+        case "CHANGE_SCREEN": {
             return {
                 ...state,
                 isWelcomeScreen: false,
@@ -50,7 +50,7 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
         case "CHANGE_STEP": {
             return {
                 ...state,
-                currentStep: 1 + state.currentStep,
+                currentStep: ++state.currentStep,
                 signUpData: {
                     ...state.signUpData,
                     ...action.payload,

@@ -6,6 +6,7 @@ import styles from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
+import * as regExps from '../../../../../shared/validation/regexps';
 
 interface State {
     firstname: string,
@@ -24,9 +25,9 @@ interface State {
 }
 
 interface Props {
-    signUp: (user: UserSignUpData) => void
-    nextStepNumber: (nextStepNumber: any) => void,
     currentStep: number;
+    signUp: (user: UserSignUpData) => void
+    nextStepNumber: (nextStepData: any) => void,
 }
 
 class BasicInfoAthleteScreen extends Component<Props, State> {
@@ -52,16 +53,11 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
     }
 
     public signUpValidation(email: string, password: string, fname: string, lname: string, confirmPassword: string) {
-        const mailRegExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-        const passwordRegExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-        const fnameRegExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-        const lnameRegExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-
         const validationObject = {
-            mailError: mailRegExp.test(email),
-            passwordError: passwordRegExp.test(password),
-            fNameError: fnameRegExp.test(fname),
-            lNameError: lnameRegExp.test(lname),
+            mailError: regExps.mailReqExp.test(email),
+            passwordError: regExps.mailReqExp.test(password),
+            fNameError: regExps.firstNameRegExp.test(fname),
+            lNameError:  regExps.lastNameRegExp.test(lname),
             confPassError: password === confirmPassword
         }
         return validationObject;
@@ -72,7 +68,6 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
 
     private onSubmit = async () => {
         const { showPassword, errors, confirmPassword, ...basicData } = this.state;
-        // await this.props.signUp(userDto);
         this.props.nextStepNumber(basicData);
     }
 
@@ -93,8 +88,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
     }
 
     private checkValid(){
-        console.log(this.state.errors);
-        return Object.values(this.state.errors).filter(el => el == false).length > 0 ? false : true
+        return Object.values(this.state.errors).filter((el: any) => el == false).length > 0 ? false : true
     }
 
     render() {
@@ -160,9 +154,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                         style={
                             this.checkValid() ? styles.nextBtn : styles.nextBtnDisabled
                         } 
-                        disabled={
-                            !this.checkValid()
-                        } 
+                        disabled={!this.checkValid()} 
                         onPress={this.onSubmit}
                     >
                         <Text style={styles.nextBtnText}>Next</Text>
@@ -179,7 +171,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
     signUp: (userData: UserSignUpData) => dispatch(actions.signUp(userData)),
-    nextStepNumber: (nextStepNumber: any) => dispatch(actions.changeStep(nextStepNumber))
+    nextStepNumber: (nextStepData: any) => dispatch(actions.changeStep(nextStepData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BasicInfoAthleteScreen);

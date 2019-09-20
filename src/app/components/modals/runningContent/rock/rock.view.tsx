@@ -15,7 +15,7 @@ interface Props {
     modalNumber: number,
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: number) => void,
+    changeModal: (numberStep: number) => void,
 }
 
 class RockView extends Component<Props, State> {
@@ -149,7 +149,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
+    changeModal: (numberStep: number) => dispatch(actions.changeRunningModal(numberStep)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RockView);

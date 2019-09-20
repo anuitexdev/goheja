@@ -40,7 +40,6 @@ export class AuthService {
     }
 
     public sendCode(code: string): Promise<any> {
-
         return axiosInstance.get(`${environment.backendUrl}/General/${code}`)
             .then((response) => {
                 console.log(response);

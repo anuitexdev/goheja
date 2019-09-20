@@ -1,6 +1,7 @@
 export const environment = {
-    production: true,
-    backendUrl: 'http://localhost:3000/api'
+    production: false,
+    backendUrl: 'https://go-heja.com/testweb/api/',
+    userAgent: 'g0Heja-20-hanse',
 }
 
 

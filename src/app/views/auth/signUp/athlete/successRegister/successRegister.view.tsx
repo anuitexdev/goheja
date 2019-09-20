@@ -7,7 +7,6 @@ import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
 
 interface Props {
-    nextStepNumber: (nextStepNumber: number) => void,
     state: any,
 }
 
@@ -19,8 +18,6 @@ class SuccessRegisterScreen extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props)
-console.log(this.props.state);
-
     }
 
     render() {
@@ -42,7 +39,6 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    nextStepNumber: (nextStepNumber: number) => dispatch(actions.changeStep(nextStepNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SuccessRegisterScreen);

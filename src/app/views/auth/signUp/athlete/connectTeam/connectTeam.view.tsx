@@ -7,7 +7,7 @@ import connectTeam from './connectTeam.style';
 import * as actions from '../../../../../redux/actions/auth.actions';
 
 interface Props {
-    nextStepNumber: (nextStepNumber: number) => void,
+    nextStepNumber: (data: any) => void,
     sendCode: (code: string) => void,
 }
 
@@ -33,7 +33,7 @@ class SuccessRegisterScreen extends Component<Props, State> {
 
     private sendCode = (value: string) =>{
         this.props.sendCode(value);
-        this.props.nextStepNumber(1);
+        this.props.nextStepNumber({});
 
     }
 
@@ -79,7 +79,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    nextStepNumber: (nextStepNumber: number) => dispatch(actions.changeStep(nextStepNumber)),
+    nextStepNumber: (data: any) => dispatch(actions.changeStep(data)),
     sendCode: (code: string) => dispatch(actions.sendCode(code)),
 });
 

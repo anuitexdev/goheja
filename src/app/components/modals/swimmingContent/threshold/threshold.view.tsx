@@ -13,14 +13,14 @@ interface State {
 interface Props {
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: number) => void,
+    changeModal: (numberStep: number) => void,
 }
 
 class ThresholdView extends Component<Props, State> {
-    private input1: any;
-    private input2: any;
-    private input3: any;
-    private input4: any;
+    private inputDozentsOfMinutes: any;
+    private inputUnitsOfMinutes: any;
+    private inputDozentsOfSeconds: any;
+    private inputUnitsOfSeconds: any;
 
     constructor(props: Props) {
         super(props);
@@ -74,22 +74,22 @@ class ThresholdView extends Component<Props, State> {
                             <View style={{alignItems: 'center'}}>
                             <View style={{flexDirection: 'row'}}>
                                 <TextInput
-                                    ref={(ref) => this.input1 = ref }
+                                    ref={(ref) => this.inputDozentsOfMinutes = ref }
                                     placeholder="0"
                                     onFocus={() => this.changeFocus(1)}
                                     keyboardType={"number-pad"}
                                     maxLength={1}
                                     style={this.state.activeInputNumber === 1 ? threshold.focusInput : threshold.infoInput}
-                                    onChangeText={() => this.input2.focus()}
+                                    onChangeText={() => this.inputUnitsOfMinutes.focus()}
                                 >
                                 </TextInput>
                                 <TextInput
                                     placeholder="0"
-                                    ref={(ref) => this.input2 = ref }
+                                    ref={(ref) => this.inputUnitsOfMinutes = ref }
                                     maxLength={1}
                                     keyboardType={"number-pad"}
                                     onFocus={() => this.changeFocus(2)}
-                                    onChangeText={() => this.input3.focus()}
+                                    onChangeText={() => this.inputDozentsOfSeconds.focus()}
                                     style={[this.state.activeInputNumber === 2 ? threshold.focusInput : threshold.infoInput, { marginRight: 8 }]}
                                 >
                                 </TextInput>
@@ -106,16 +106,16 @@ class ThresholdView extends Component<Props, State> {
                                 <View style={{alignItems: 'center'}}>
                                    <View style={{flexDirection: 'row'}}>
                                         <TextInput
-                                        ref={(ref) => this.input3 = ref }
+                                        ref={(ref) => this.inputDozentsOfSeconds = ref }
                                         style={[this.state.activeInputNumber === 3 ? threshold.focusInput : threshold.infoInput, { marginLeft: 8 }]}
                                         placeholder="0"
                                         maxLength={1}
-                                        onChangeText={() => this.input4.focus()}
+                                        onChangeText={() => this.inputUnitsOfSeconds.focus()}
                                         onFocus={() => this.changeFocus(3)}
                                         >
                                         </TextInput>
                                         <TextInput
-                                            ref={(ref) => this.input4 = ref }
+                                            ref={(ref) => this.inputUnitsOfSeconds = ref }
                                             style={[this.state.activeInputNumber === 4 ? threshold.focusInput : threshold.infoInput, { marginRight: 0 }]}
                                             placeholder="0"
                                             maxLength={1}
@@ -166,7 +166,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeSwimmingModal(value)),
+    changeModal: (numberStep: number) => dispatch(actions.changeSwimmingModal(numberStep)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThresholdView);
