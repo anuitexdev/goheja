@@ -2,7 +2,6 @@ import environment from "../environments/environment";
 import UserSignInData from "../shared/models/userSignInData.model";
 import axiosInstance from '../shared/interceptors/axios.interceptor';
 import { AsyncStorage } from 'react-native';
-import UserSignUpData from '../shared/models/userSignUpData.model';
 
 export class AuthService {
 

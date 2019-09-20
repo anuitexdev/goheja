@@ -78,7 +78,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
 
     private handleChange = async (data: any) => {
         await this.setState(data);
-        const validationError = this.signUpValidation(this.state.email, this.state.password, this.state.firstName, this.state.lastName, this.state.confirmPassword);
+        const validationError = this.signUpValidation(this.state.auth, this.state.password, this.state.firstname, this.state.lastName, this.state.confirmPassword);
         await this.setState({
             errors: {
                 emailError: validationError.mailError,
