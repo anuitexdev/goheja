@@ -8,12 +8,13 @@
     "lint": "eslint ."
   },
   "rnpm": {
-		"assets": [
-			"./assets/fonts/"
-		]
-	},
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
   "dependencies": {
     "@react-navigation/drawer": "^5.0.0-alpha.0",
+    "@types/react-native-fbsdk": "^1.0.0",
     "@types/react-native-vector-icons": "^6.4.1",
     "@types/react-navigation-material-bottom-tabs": "^0.3.1",
     "@types/react-redux": "^7.1.2",
@@ -22,6 +23,7 @@
     "react": "16.8.6",
     "react-native": "0.60.5",
     "react-native-datepicker": "^1.7.2",
+    "react-native-fbsdk": "^1.0.4",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-modal-datetime-picker": "^7.5.0",
     "react-native-paper": "^2.16.0",
