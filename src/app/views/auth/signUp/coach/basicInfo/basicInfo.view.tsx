@@ -7,19 +7,21 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
+import RNPickerSelect from 'react-native-picker-select';
 
 interface State {
     firstName: string,
     lastName: string,
     email: string,
+    phone: string,
     password: string,
     confirmPassword: string,
     showPassword: boolean,
 }
 
 interface Props {
-    navigation: NavigationScreenProp<NavigationState, NavigationParams>,
-    signUp: (user: UserSignUpData) => void
+    signUp: (user: UserSignUpData) => void,
+    changeCoachStep: (data: any) => void,
 }
 
 class CoachBasicInfoScreen extends Component<Props, State> {
@@ -31,6 +33,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
             firstName: '',
             lastName: '',
             email: '',
+            phone: '',
             password: '',
             confirmPassword: '',
             showPassword: true,
@@ -43,9 +46,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
 
     private onSubmit = async () => {
         const { showPassword, ...userDto } = this.state;
-        await this.props.signUp(userDto);
-  
-        this.props.navigation.navigate('yourSelfAthlete');
+        await this.props.changeCoachStep(userDto);
+
     }
 
     private handleChange = (data: any) => {
@@ -73,13 +75,35 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     ></TextInput>
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Email Address</Text>
+                    <Text style={styles.label}>Email</Text>
                     <TextInput
                         placeholder='Type your email address...'
                         style={styles.input}
                         onChangeText={(email) => this.handleChange({ email })}
                     ></TextInput>
                 </View>
+
+                <View style={styles.formField}>
+                    <Text style={styles.label}>Phone No.</Text>
+
+                    <RNPickerSelect
+                        onValueChange={(value) => console.log(value)}
+
+                        items={[
+                            { label: '+31 - Netherlands', value: '+31' },
+                            { label: 'Baseball', value: 'baseball' },
+                            { label: 'Hockey', value: 'hockey' },
+                        ]}
+                        style={styles.phoneSelect}
+                    />
+                    <TextInput
+                        placeholder='Type your phone no...'
+                        style={styles.input}
+                        onChangeText={(phone) => this.handleChange({ phone })}
+                    ></TextInput>
+
+                </View>
+
                 <View style={styles.formField}>
                     <Text style={styles.label}>Password</Text>
                     <TextInput
@@ -96,7 +120,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     />
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Confirm Password</Text>
+                    <Text style={styles.label}>Password Confirmation</Text>
                     <TextInput
                         placeholder='Type your password...'
                         secureTextEntry={this.state.showPassword}
@@ -125,6 +149,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
     signUp: (userData: UserSignUpData) => dispatch(actions.signUp(userData)),
+    changeCoachStep: (data: any) => dispatch(actions.changeCoachStep(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoachBasicInfoScreen);

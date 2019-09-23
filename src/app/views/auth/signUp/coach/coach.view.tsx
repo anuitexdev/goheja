@@ -2,20 +2,25 @@ import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
 import { ScrollView } from 'react-native';
-import Header from '../../../../components/header';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
+import CoachBasicInfoScreen from './basicInfo/basicInfo.view';
+import UnitsCoachScreen from './units/units.view';
+import YourSelfCoachScreen from './yourself/yourself.view';
+import ConfirmationScreen from './confirmation/confirmation.view';
+
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
+    currentStep: number,
 }
 
 
 class CoachScreen extends Component<Props> {
 
     constructor(props: Props) {
-        super(props)
-
+        super(props)  
+        
     }
 
     render() {
@@ -23,7 +28,12 @@ class CoachScreen extends Component<Props> {
         return (
             <Fragment>
                 <ScrollView>
-                    <Header />
+                {   this.props.currentStep === 0 ? <CoachBasicInfoScreen/>:
+                    this.props.currentStep === 1 ? <UnitsCoachScreen/> :
+                    this.props.currentStep === 2 ? <YourSelfCoachScreen/> :
+                    this.props.currentStep === 3 ? <ConfirmationScreen/> :
+                    null
+                }
 
                 </ScrollView>
             </Fragment>
@@ -32,6 +42,7 @@ class CoachScreen extends Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
+    currentStep: state.AuthReducer.coachCurrentStep,
 
 });
 

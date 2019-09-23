@@ -4,11 +4,12 @@ import React from "react";
 import { Text, View } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import styles from './resetPassword.style';
-import { NavigationScreenProp, NavigationState, NavigationParams } from "react-navigation";
 
 interface State {
     password: string,
     confirmPassword: string,
+    passwordError: boolean;
+    confirmPasswordError: boolean;
 }
 
 interface Props {
@@ -22,15 +23,36 @@ class ResetPasswordScreen extends Component<Props, State> {
         this.state = {
             password: '',
             confirmPassword: '',
+            passwordError: false,
+            confirmPasswordError: false,
         }
     }
 
 
 
     private handleChange = async (data: any) => {
+        const errors = this.validatePassword(data);
         await this.setState({
             ...data,
+            ...errors
         })
+    }
+
+    private validatePassword = (data: any) => {
+        let passwordError = this.state.passwordError;
+        let confirmPasswordError = this.state.confirmPasswordError;
+
+        if(data.password || data.password === ''){
+        passwordError = data.password === '';
+        }
+        if(data.confirmPassword || data.confirmPassword === ''){
+            confirmPasswordError = this.state.password !== data.confirmPassword;
+        }
+
+        return {
+            passwordError,
+            confirmPasswordError
+        }
     }
 
     private onSubmit = () => {
@@ -49,7 +71,7 @@ class ResetPasswordScreen extends Component<Props, State> {
                         <Text style={styles.label}>New Password</Text>
                         <TextInput
                             placeholder='Type your new password...'
-                            style={styles.input}
+                            style={this.state.passwordError ? styles.inputError: styles.input}
                             onChangeText={(password) => this.handleChange({ password })}
                         ></TextInput>
                     </View>
@@ -57,18 +79,19 @@ class ResetPasswordScreen extends Component<Props, State> {
                         <Text style={styles.label}>New Password (again)</Text>
                         <TextInput
                             placeholder='Type your new password (again)...'
-                            style={styles.input}
+                            style={this.state.confirmPasswordError ? styles.inputError: styles.input}
                             onChangeText={(confirmPassword) => this.handleChange({ confirmPassword })}
                         ></TextInput>
                     </View>
-
+                    { this.state.confirmPasswordError || this.state.passwordError ? <Text style={styles.errorText}>Your Password does not match</Text> : null }
                 </View>
 
                 <View style={styles.links}>
 
                     <TouchableOpacity
                         onPress={this.onSubmit}
-                        style={styles.nextBtn}
+                        style={this.state.confirmPasswordError || this.state.passwordError || this.state.password === '' || this.state.confirmPassword === '' ?  styles.disabledBtn :styles.nextBtn}
+                        disabled ={this.state.confirmPasswordError || this.state.passwordError || this.state.password === '' || this.state.confirmPassword === ''}
                     >
                         <Text style={styles.resetPasswordText}>Reset Password</Text>
                     </TouchableOpacity>

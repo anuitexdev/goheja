@@ -30,6 +30,10 @@ export const changeStep = (payload: any) => {
     return { type: 'CHANGE_STEP', payload}
 }
 
+export const changeCoachStep = (payload: any) => {   
+    return { type: 'CHANGE_COACH_STEP', payload}
+}
+
 export const signIn = (userData: UserSignInData) => {
     return async (dispatch: any) => {
         await AuthService.signIn(userData).then(res => {

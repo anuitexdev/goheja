@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import React from "react";
 import { ScrollView } from "react-native";
 import WelcomeScreen from './welcome/welcome';
-import CoachBasicInfoScreen from './coach/basicInfo/basicInfo.view';
+import CoachScreen from './coach/coach.view';
 import Header from '../../../components/header';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
@@ -29,7 +29,7 @@ class SignUpScreen extends Component<Props> {
                     { 
                         this.props.role === -1 ? <WelcomeScreen navigation={this.props.navigation} /> 
                         : this.props.role === 1 ? <AthleteScreen/> 
-                            : <CoachBasicInfoScreen navigation={this.props.navigation}/>
+                            : <CoachScreen />
                     }
 
                 </ScrollView>

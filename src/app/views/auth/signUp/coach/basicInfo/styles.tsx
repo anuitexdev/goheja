@@ -48,4 +48,18 @@ export default StyleSheet.create({
     nextBtnText: {
         color: 'white'
     },
+    // phoneContainer: {
+    //     flexDirection: 'row'
+    // },
+    phoneSelect: {
+        fontSize: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        borderWidth: 0.5,
+        borderColor: 'purple',
+        borderRadius: 8,
+        color: 'black',
+        paddingRight: 30
+
+    }
 })

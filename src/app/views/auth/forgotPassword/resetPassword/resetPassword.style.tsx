@@ -20,6 +20,12 @@ export default StyleSheet.create({
         borderColor: '#cfd8dc',
         paddingLeft: 15
     },
+    inputError: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15
+    },
     label: {
         fontSize: 14,
         color: '#272e43',
@@ -70,5 +76,17 @@ export default StyleSheet.create({
     },
     form: {
         paddingTop: 20,
+    },
+    disabledBtn: {
+        paddingRight: 20,
+        paddingLeft: 20,
+        paddingBottom: 12,
+        paddingTop: 12,
+        backgroundColor: '#b6c0c6',
+        borderRadius: 2,
+    },
+    errorText: {
+        color: 'red',
+        marginTop: -39
     }
 })
