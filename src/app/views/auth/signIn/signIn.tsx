@@ -24,6 +24,11 @@ interface State {
 
 }
 
+interface ValidationObject{
+    emailError: boolean,
+    passwordError: boolean,
+}
+
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
     signIn: (user: UserSignInData) => void,
@@ -57,6 +62,7 @@ class SignInScreen extends Component<Props, State> {
     public toggleSwitch = () => {
         this.setState({ showPassword: !this.state.showPassword });
     }
+    
     public forgotPasswordRedirect = () => {
         this.props.navigation.navigate('forgotPassword');
     }
@@ -125,7 +131,7 @@ class SignInScreen extends Component<Props, State> {
                                 <Text style={styles.textErrors}>
                                     Email or Password is incorrect
                         </Text>
-                            </View> : null
+                        </View> : null
                     }
                     <View style={styles.links}>
                         <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
