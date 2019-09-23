@@ -2,7 +2,7 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import SignInScreen from '../views/auth/signIn/signIn';
 import SignUpScreen from '../views/auth/signUp/signUp';
-import ForgotPasswordScreen from '../views/auth/forgotPassword/forgotPassword';
+import ForgotPasswordScreen from '../views/auth/forgotPassword/forgotPassword.view';
 import WelcomeScreen from '../views/auth/signUp/welcome/welcome';
 const AppNavigator = createStackNavigator(
   {

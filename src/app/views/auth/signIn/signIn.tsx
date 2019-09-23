@@ -12,11 +12,16 @@ import UserSignInData from "src/app/shared/models/userSignInData.model";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import Header from '../../../components/header';
 import Icon from 'react-native-vector-icons/Ionicons';
+import FbLogin from '../../../components/fbAuth/fbAuth';
+import * as regExp from '../../../shared/validation/regexps';
 
 interface State {
     email: string,
     password: string,
     showPassword: boolean,
+    emailError: boolean,
+    passwordError: boolean,
+
 }
 
 interface Props {
@@ -32,6 +37,8 @@ class SignInScreen extends Component<Props, State> {
             showPassword: true,
             email: '',
             password: '',
+            emailError: false,
+            passwordError: false,
         }
     }
 
@@ -54,14 +61,33 @@ class SignInScreen extends Component<Props, State> {
         this.props.navigation.navigate('forgotPassword');
     }
 
-    private handleChange = (data: any) => {
-
+    private handleChange = (data: any): void => {
+        const errors = this.validateFields(data);
+        const {type, ...signInData} = data;
+        
         this.setState({
-            ...data,
-        });
+            ...signInData,
+            ...errors,
+        });        
     }
 
+    private validateFields = (data: any) => {
+        let emailError = this.state.emailError;
+        let passwordError = this.state.passwordError;
 
+        if (data.type === 'email') {
+            emailError = !regExp.mailReqExp.test(data.email);
+        }
+        if (data.type === 'password') {
+            passwordError = !regExp.mailReqExp.test(data.password);
+        }
+
+        const validationObject = {
+            emailError,
+            passwordError,
+        }
+        return validationObject;
+    }
 
     render() {
         return (
@@ -73,8 +99,8 @@ class SignInScreen extends Component<Props, State> {
                         <Text style={styles.label}>Email</Text>
                         <TextInput
                             placeholder='Type your email address...'
-                            style={styles.input }
-                            onChangeText={(email) => this.handleChange({ email, password: this.state.password })}
+                            style={!this.state.emailError ? styles.input : styles.inputError}
+                            onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
@@ -82,8 +108,8 @@ class SignInScreen extends Component<Props, State> {
                         <TextInput
                             placeholder='Type your password...'
                             secureTextEntry={this.state.showPassword}
-                            onChangeText={(password) => this.handleChange({ password, email: this.state.email })}
-                            style={ styles.input }
+                            onChangeText={(password) => this.handleChange({ password, email: this.state.email, type: 'password' })}
+                            style={!this.state.passwordError ? styles.input : styles.inputError}
                         />
                         <Icon
                             style={styles.showPassword}
@@ -94,7 +120,7 @@ class SignInScreen extends Component<Props, State> {
                     </View>
                     {
                         // TO-DO
-                        false ?
+                        this.state.emailError || this.state.passwordError ?
                             <View style={styles.signInErrors}>
                                 <Text style={styles.textErrors}>
                                     Email or Password is incorrect
@@ -103,9 +129,10 @@ class SignInScreen extends Component<Props, State> {
                     }
                     <View style={styles.links}>
                         <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
-                        <TouchableOpacity 
-                        style={ styles.nextBtn } 
-                         onPress={this.onSubmit}>
+                        <TouchableOpacity
+                            style={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn}
+                            onPress={this.onSubmit}
+                            disabled ={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === ''}>
                             <Text style={styles.signInText}>Login</Text>
                         </TouchableOpacity>
                     </View>
@@ -113,6 +140,7 @@ class SignInScreen extends Component<Props, State> {
                         <Text style={styles.haveAccount}>Don’t have a Go-heja account?</Text>
                         <Text style={styles.signUpLink} onPress={this.signUpRedirect}>Signup for free</Text>
                     </View>
+                    <FbLogin />
                 </View>
             </ScrollView>
         )
