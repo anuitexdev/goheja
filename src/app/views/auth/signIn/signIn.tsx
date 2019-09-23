@@ -79,7 +79,7 @@ class SignInScreen extends Component<Props, State> {
             emailError = !regExp.mailReqExp.test(data.email);
         }
         if (data.type === 'password') {
-            passwordError = !regExp.mailReqExp.test(data.password);
+            passwordError = data.password === '';
         }
 
         const validationObject = {

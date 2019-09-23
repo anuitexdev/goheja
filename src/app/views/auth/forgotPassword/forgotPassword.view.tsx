@@ -28,8 +28,6 @@ class ForgotPasswordScreen extends Component<Props, State> {
         }
     }
 
-    public currentScreen = 1;
-
     public getCurrentScreen = (screenNumber: number) => {
         this.setState({
             screenNumber,
