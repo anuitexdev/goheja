@@ -52,7 +52,6 @@ class SuccessRegisterScreen extends Component<Props, State> {
                         style={connectTeam.input}
                         onChangeText={(value) => this.setGroupCode(value)}
                     >
-
                     </TextInput>
                     <View style={connectTeam.personalNextBtnWrapper}>
                         <TouchableOpacity 

@@ -5,17 +5,23 @@ import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import rock from './rock.style';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ModalReducer from '../../../../redux/reducers/modal.reducer';
 
 interface State {
-    activeInputNumber: number
+    activeInputNumber: number,
+    hundreds: string,
+    dozens: string,
+    units: string,
+    rockValue: number,
 }
 
 interface Props {
     modalVisible: boolean;
     modalNumber: number,
+    state: any,
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (numberStep: number) => void,
+    changeModal: (value: {rock: number}) => void,
 }
 
 class RockView extends Component<Props, State> {
@@ -27,7 +33,13 @@ class RockView extends Component<Props, State> {
         super(props);
         this.state = {
             activeInputNumber: 0,
+            hundreds: '0',
+            dozens: '0',
+            units: '0',
+            rockValue: 0,
         }
+
+        console.log(this.props.state);
     }
 
     public setModalVisible = () => {
@@ -45,12 +57,24 @@ class RockView extends Component<Props, State> {
     }
 
     public changeModal = () => {    
-        this.props.changeModal(6);
+        this.props.changeModal({rock: this.state.rockValue});
     }
 
+    public setValue = async (input: any, value: any) => {
+        await this.setState({
+             ...value,
+         })
+         input.focus();
+ 
+         const summaryValue = Number(this.state.hundreds + this.state.dozens + this.state.units);
+         
+         this.setState({
+            rockValue: summaryValue,
+         });     
+     }
+
     render() {
-        return (
-   
+        return (   
 
                     <View style={rock.backDrop}>
                         <TouchableWithoutFeedback onPress={this.hideModal}>
@@ -67,10 +91,11 @@ class RockView extends Component<Props, State> {
                             </Text>
                             </TouchableWithoutFeedback>
                             <Text style={rock.title}>
-                                Running Lactate Threshold
+                                {this.props.state.runningData.awesome}{"\n"}
+                                You Rock!
                         </Text>
                             <Text style={rock.subtitle}>
-                                What’s your Runing Lactate Threshold
+                                What was your Avg. Heart Rate during that ½ Marathon?
                         </Text>
 
                             <View style={rock.fullComponent}>
@@ -81,7 +106,7 @@ class RockView extends Component<Props, State> {
                                         onFocus={() => this.changeFocus(1)}
                                         maxLength={1}
                                         style={this.state.activeInputNumber === 1 ? rock.focusInput : rock.infoInput}
-                                        onChangeText={() => this.input2.focus()}
+                                        onChangeText={(hundreds) =>this.setValue(this.input2, {hundreds})}
                                         keyboardType={"number-pad"}
                                     >
                                     </TextInput>
@@ -90,7 +115,7 @@ class RockView extends Component<Props, State> {
                                         ref={(ref) => this.input2 = ref }
                                         maxLength={1}
                                         onFocus={() => this.changeFocus(2)}
-                                        onChangeText={() => this.input3.focus()}
+                                        onChangeText={(dozens) =>this.setValue(this.input3, {dozens})}
                                         style={this.state.activeInputNumber === 2 ? rock.focusInput : rock.infoInput}
                                         keyboardType={"number-pad"}
                                     >
@@ -100,6 +125,7 @@ class RockView extends Component<Props, State> {
                                         style={[this.state.activeInputNumber === 3 ? rock.focusInput : rock.infoInput, { marginRight: 0 }]}
                                         placeholder="0"
                                         maxLength={1}
+                                        onChangeText={(units) =>this.setValue(this.input3, {units})}
                                         onFocus={() => this.changeFocus(3)}
                                         keyboardType={"number-pad"}
                                     >
@@ -122,18 +148,21 @@ class RockView extends Component<Props, State> {
                                         Skip >
                                 </Text>
                                 </TouchableOpacity>
-                                {false ? <TouchableOpacity style={rock.nextBtn}>
-                                    <Text style={rock.nextBtnText}>
-                                        I don't remmember
-                                    </Text>
-                                </TouchableOpacity> :
-                                    <TouchableWithoutFeedback onPress={this.hideModal}>
-                                    <View style={rock.nextBtn}>
+                                {
+                                    this.state.rockValue === 0 ? 
+                                    <TouchableOpacity style={rock.nextBtn}>
                                         <Text style={rock.nextBtnText}>
-                                            Next
-                                    </Text>
-                                    </View>
-                                    </TouchableWithoutFeedback>}
+                                            I don't remmember
+                                        </Text>
+                                    </TouchableOpacity> :
+                                    <TouchableWithoutFeedback onPress={this.hideModal}>
+                                        <View style={rock.nextBtn}>
+                                            <Text style={rock.nextBtnText}>
+                                                Next
+                                            </Text>
+                                        </View>
+                                    </TouchableWithoutFeedback>
+                                }
                             </View>
                         </View>
                     </View>
@@ -144,12 +173,13 @@ class RockView extends Component<Props, State> {
 const mapStateToProps = (state: any) => ({
     modalVisible: state.ModalReducer.openModal,
     modalNumber: state.ModalReducer.runningModalNumber,
+    state: state.ModalReducer
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (numberStep: number) => dispatch(actions.changeRunningModal(numberStep)),
+    changeModal: (value: {rock: number}) => dispatch(actions.changeRunningModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RockView);

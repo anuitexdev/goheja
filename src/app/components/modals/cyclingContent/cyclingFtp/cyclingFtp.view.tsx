@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import * as actions from '../../../../redux/actions/modal.actions';
-import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
+import { Text, View, TouchableWithoutFeedback, TextInput, KeyboardAvoidingView } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import cyclingStyles from './cyclingFtp.style';
 import Icon from 'react-native-vector-icons/Ionicons';
