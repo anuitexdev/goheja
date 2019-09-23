@@ -102,7 +102,7 @@ class ThresholdView extends Component<Props, State> {
             <View style={{alignItems: 'center'}}>
               <View style={{flexDirection: 'row'}}>
                 <TextInput
-                  ref={ref => (this.input1 = ref)}
+                  ref={ref => (this.inputDozentsOfMinutes = ref)}
                   placeholder="0"
                   keyboardType={'number-pad'}
                   onFocus={() => this.changeFocus(1)}
@@ -112,16 +112,16 @@ class ThresholdView extends Component<Props, State> {
                       ? threshold.focusInput
                       : threshold.infoInput
                   }
-                  onChangeText={(dozentsOfMinutes) => this.setValue(this.input2, {dozentsOfMinutes})}
+                  onChangeText={(dozentsOfMinutes) => this.setValue(this.inputUnitsOfMinutes, {dozentsOfMinutes})}
                   >
                   </TextInput>
                 <TextInput
                   placeholder="0"
-                  ref={ref => (this.input2 = ref)}
+                  ref={ref => (this.inputUnitsOfMinutes = ref)}
                   maxLength={1}
                   keyboardType={'number-pad'}
                   onFocus={() => this.changeFocus(2)}
-                  onChangeText={(unitsOfMinutes) => this.setValue(this.input3, {unitsOfMinutes})}
+                  onChangeText={(unitsOfMinutes) => this.setValue(this.inputDozentsOfSeconds, {unitsOfMinutes})}
                   style={[
                     this.state.activeInputNumber === 2
                       ? threshold.focusInput
@@ -139,7 +139,7 @@ class ThresholdView extends Component<Props, State> {
             <View style={{alignItems: 'center'}}>
               <View style={{flexDirection: 'row'}}>
                 <TextInput
-                  ref={ref => (this.input3 = ref)}
+                  ref={ref => (this.inputDozentsOfSeconds = ref)}
                   style={[
                     this.state.activeInputNumber === 3
                       ? threshold.focusInput
@@ -148,11 +148,11 @@ class ThresholdView extends Component<Props, State> {
                   ]}
                   placeholder="0"
                   maxLength={1}
-                  onChangeText={(dozentsOfSeconds) => this.setValue(this.input4, {dozentsOfSeconds})}
+                  onChangeText={(dozentsOfSeconds) => this.setValue(this.inputUnitsOfSeconds, {dozentsOfSeconds})}
                   onFocus={() => this.changeFocus(3)}
                   keyboardType={'number-pad'}></TextInput>
                 <TextInput
-                  ref={ref => (this.input4 = ref)}
+                  ref={ref => (this.inputUnitsOfSeconds = ref)}
                   style={[
                     this.state.activeInputNumber === 4
                       ? threshold.focusInput
@@ -161,7 +161,7 @@ class ThresholdView extends Component<Props, State> {
                   ]}
                   placeholder="0"
                   maxLength={1}
-                  onChangeText={(unitsOfSeconds) => this.setValue(this.input4, {unitsOfSeconds})}
+                  onChangeText={(unitsOfSeconds) => this.setValue(this.inputUnitsOfSeconds, {unitsOfSeconds})}
                   onFocus={() => this.changeFocus(4)}
                   keyboardType={'number-pad'}></TextInput>
                 <View

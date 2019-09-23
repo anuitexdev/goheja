@@ -6,7 +6,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import swimtime from './swimTime.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ModalReducer from '../../../../redux/reducers/modal.reducer';
-
+import moment from 'moment';
 interface State {
   activeInputNumber: number;
   swimTimeValue: string;
@@ -103,7 +103,7 @@ class SwimTimeView extends Component<Props, State> {
             <View style={{alignItems: 'center'}}>
               <View style={{flexDirection: 'row'}}>
                 <TextInput
-                  ref={ref => (this.input1 = ref)}
+                  ref={ref => (this.inputDozentsOfMinutes = ref)}
                   placeholder="0"
                   onFocus={() => this.changeFocus(1)}
                   maxLength={1}
@@ -113,15 +113,15 @@ class SwimTimeView extends Component<Props, State> {
                       : swimtime.infoInput
                   }
                   onChangeText={(dozentsOfMinutes) =>
-                    this.setValue(this.input2, {dozentsOfMinutes})
+                    this.setValue(this.inputUnitsOfMinutes, {dozentsOfMinutes})
                   }></TextInput>
                 <TextInput
                   placeholder="0"
-                  ref={ref => (this.input2 = ref)}
+                  ref={ref => (this.inputUnitsOfMinutes = ref)}
                   maxLength={1}
                   onFocus={() => this.changeFocus(2)}
                   onChangeText={(unitsOfMinutes) =>
-                    this.setValue(this.input3, {unitsOfMinutes})
+                    this.setValue(this.inputDozentsOfSeconds, {unitsOfMinutes})
                   }
                   style={[
                     this.state.activeInputNumber === 2
@@ -140,7 +140,7 @@ class SwimTimeView extends Component<Props, State> {
             <View style={{alignItems: 'center'}}>
               <View style={{flexDirection: 'row'}}>
                 <TextInput
-                  ref={ref => (this.input3 = ref)}
+                  ref={ref => (this.inputDozentsOfSeconds = ref)}
                   style={[
                     this.state.activeInputNumber === 3
                       ? swimtime.focusInput
@@ -150,12 +150,12 @@ class SwimTimeView extends Component<Props, State> {
                   placeholder="0"
                   maxLength={1}
                   onChangeText={(dozentsOfSeconds) =>
-                    this.setValue(this.input4, {dozentsOfSeconds})
+                    this.setValue(this.inputUnitsOfSeconds, {dozentsOfSeconds})
                   }
                   keyboardType={'number-pad'}
                   onFocus={() => this.changeFocus(3)}></TextInput>
                 <TextInput
-                  ref={ref => (this.input4 = ref)}
+                  ref={ref => (this.inputUnitsOfSeconds = ref)}
                   style={[
                     this.state.activeInputNumber === 4
                       ? swimtime.focusInput
@@ -165,7 +165,7 @@ class SwimTimeView extends Component<Props, State> {
                   placeholder="0"
                   maxLength={1}
                   onChangeText={(unitsOfSeconds) =>
-                    this.setValue(this.input4, {unitsOfSeconds})
+                    this.setValue(this.inputUnitsOfSeconds, {unitsOfSeconds})
                   }
                   keyboardType={'number-pad'}
                   onFocus={() => this.changeFocus(4)}></TextInput>
@@ -192,7 +192,7 @@ class SwimTimeView extends Component<Props, State> {
             <TouchableOpacity>
               <Text style={swimtime.skipBtn}>Skip ></Text>
             </TouchableOpacity>
-            {false ? (
+            {this.state.swimTimeValue == '' ? (
               <TouchableOpacity style={swimtime.nextBtn}>
                 <Text style={swimtime.nextBtnText}>I don't know</Text>
               </TouchableOpacity>

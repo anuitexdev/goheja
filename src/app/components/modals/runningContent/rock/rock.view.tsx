@@ -25,9 +25,9 @@ interface Props {
 }
 
 class RockView extends Component<Props, State> {
-    private input1: any;
-    private input2: any;
-    private input3: any;
+    private inputHundreds: any;
+    private inputDozens: any;
+    private inputUnits: any;
 
     constructor(props: Props) {
         super(props);
@@ -101,31 +101,31 @@ class RockView extends Component<Props, State> {
                             <View style={rock.fullComponent}>
                               <View style={{flexDirection: 'row'}}>
                                     <TextInput
-                                        ref={(ref) => this.input1 = ref}
+                                        ref={(ref) => this.inputHundreds = ref}
                                         placeholder="0"
                                         onFocus={() => this.changeFocus(1)}
                                         maxLength={1}
                                         style={this.state.activeInputNumber === 1 ? rock.focusInput : rock.infoInput}
-                                        onChangeText={(hundreds) =>this.setValue(this.input2, {hundreds})}
+                                        onChangeText={(hundreds) =>this.setValue(this.inputDozens, {hundreds})}
                                         keyboardType={"number-pad"}
                                     >
                                     </TextInput>
                                     <TextInput
                                         placeholder="0"
-                                        ref={(ref) => this.input2 = ref }
+                                        ref={(ref) => this.inputDozens = ref }
                                         maxLength={1}
                                         onFocus={() => this.changeFocus(2)}
-                                        onChangeText={(dozens) =>this.setValue(this.input3, {dozens})}
+                                        onChangeText={(dozens) =>this.setValue(this.inputUnits, {dozens})}
                                         style={this.state.activeInputNumber === 2 ? rock.focusInput : rock.infoInput}
                                         keyboardType={"number-pad"}
                                     >
                                     </TextInput>
                                     <TextInput
-                                        ref={(ref) => this.input3 = ref }
+                                        ref={(ref) => this.inputUnits = ref }
                                         style={[this.state.activeInputNumber === 3 ? rock.focusInput : rock.infoInput, { marginRight: 0 }]}
                                         placeholder="0"
                                         maxLength={1}
-                                        onChangeText={(units) =>this.setValue(this.input3, {units})}
+                                        onChangeText={(units) =>this.setValue(this.inputUnits, {units})}
                                         onFocus={() => this.changeFocus(3)}
                                         keyboardType={"number-pad"}
                                     >

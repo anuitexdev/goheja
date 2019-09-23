@@ -99,7 +99,7 @@ class LactateView extends Component<Props, State> {
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? sport.focusInput : sport.infoInput}
-                                onChangeText={(hundreds) => this.setValue(this.input2, {hundreds})}
+                                onChangeText={(hundreds) => this.setValue(this.inputDozens, {hundreds})}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>
@@ -108,7 +108,7 @@ class LactateView extends Component<Props, State> {
                                 ref={(ref) => this.inputDozens = ref}
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
-                                onChangeText={(dozens) => this.setValue(this.input3, {dozens})}
+                                onChangeText={(dozens) => this.setValue(this.inputUnits, {dozens})}
                                 style={this.state.activeInputNumber === 2 ? sport.focusInput : sport.infoInput}
                                 keyboardType={"number-pad"}
                             >
@@ -118,7 +118,7 @@ class LactateView extends Component<Props, State> {
                                 style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
                                 placeholder="0"
                                 maxLength={1}
-                                onChangeText={(units) => this.setValue(this.input3, {units})}
+                                onChangeText={(units) => this.setValue(this.inputUnits, {units})}
                                 onFocus={() => this.changeFocus(3)}
                                 keyboardType={"number-pad"}
                             >

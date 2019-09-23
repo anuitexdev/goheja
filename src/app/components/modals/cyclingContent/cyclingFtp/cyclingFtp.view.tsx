@@ -23,7 +23,7 @@ interface Props {
 class CyclingFtpView extends Component<Props, State> {
 
     private inputHundreds: any;
-    private input2: any;
+    private inputDozents: any;
     private inputUnits: any;
 
     constructor(props: Props) {
@@ -108,13 +108,13 @@ class CyclingFtpView extends Component<Props, State> {
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
-                                onChangeText={(hundreds) => this.setValue( this.input2, {hundreds})}
+                                onChangeText={(hundreds) => this.setValue( this.inputDozents, {hundreds})}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>
                             <TextInput
                                 placeholder="0"
-                                ref={(ref) => this.input2 = ref}
+                                ref={(ref) => this.inputDozents = ref}
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
                                 onChangeText={(dozens) => this.setValue(this.inputUnits, {dozens})}

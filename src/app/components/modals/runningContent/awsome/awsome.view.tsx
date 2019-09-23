@@ -6,7 +6,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import awsome from './awsome.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
-import ModalReducer from '../../../../redux/reducers/modal.reducer';
 interface State {
   activeInputNumber: number;
   unitsOfHours: string;
@@ -122,7 +121,7 @@ class AwsomeView extends Component<Props, State> {
                             ? awsome.focusInput
                             : awsome.infoInput
                         }
-                        onChangeText={(dozentsOfHours) => this.setValue(this.input2, {dozentsOfHours})}
+                        onChangeText={(dozentsOfHours) => this.setValue(this.inputUnitsOfHours, {dozentsOfHours})}
                         >
                         </TextInput>
                         <TextInput
@@ -131,7 +130,7 @@ class AwsomeView extends Component<Props, State> {
                         maxLength={1}
                         keyboardType={"number-pad"}
                         onFocus={() => this.changeFocus(2)}
-                        onChangeText={(unitsOfHours) => this.setValue(this.input3, {unitsOfHours})}
+                        onChangeText={(unitsOfHours) => this.setValue(this.inputDozentsOfMinutes, {unitsOfHours})}
                         style={[
                             this.state.activeInputNumber === 2
                             ? awsome.focusInput
@@ -160,7 +159,7 @@ class AwsomeView extends Component<Props, State> {
                         placeholder="0"
                         maxLength={1}
                         keyboardType={"number-pad"}
-                        onChangeText={(dozentsOfMinutes) => this.setValue(this.input4, {dozentsOfMinutes})}
+                        onChangeText={(dozentsOfMinutes) => this.setValue(this.inputUnitsOfMinutes, {dozentsOfMinutes})}
                         onFocus={() => this.changeFocus(3)}>
                         </TextInput>
                         <TextInput
@@ -174,7 +173,7 @@ class AwsomeView extends Component<Props, State> {
                         placeholder="0"
                         maxLength={1}
                         keyboardType={"number-pad"}
-                        onChangeText={(unitsOfMinutes) => this.setValue(this.input5, {unitsOfMinutes})}
+                        onChangeText={(unitsOfMinutes) => this.setValue(this.inputDozentsOfSeconds, {unitsOfMinutes})}
                         onFocus={() => this.changeFocus(4)}>
                         </TextInput>
                         <View
@@ -211,7 +210,7 @@ class AwsomeView extends Component<Props, State> {
                             placeholder="0"
                             maxLength={1}
                             keyboardType={"number-pad"}
-                            onChangeText={(dozentsOfSeconds) => this.setValue(this.input6, {dozentsOfSeconds})}
+                            onChangeText={(dozentsOfSeconds) => this.setValue(this.inputUnitsOfSeconds, {dozentsOfSeconds})}
                             onFocus={() => this.changeFocus(5)}>
                         </TextInput>
                         <TextInput
@@ -223,7 +222,7 @@ class AwsomeView extends Component<Props, State> {
                                 {marginRight: 0},
                             ]}
                             placeholder="0"
-                            onChangeText={(unitsOfSeconds) => this.setValue(this.input6, {unitsOfSeconds})}
+                            onChangeText={(unitsOfSeconds) => this.setValue(this.inputUnitsOfSeconds, {unitsOfSeconds})}
                             maxLength={1}
                             keyboardType={"number-pad"}
                             onFocus={() => this.changeFocus(6)}>

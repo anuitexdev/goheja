@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import * as actions from '../../../../redux/actions/modal.actions';
 import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import achievements from './achievements.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
