@@ -17,6 +17,13 @@ interface State {
     email: string,
     password: string,
     showPassword: boolean,
+    emailError: boolean,
+    passwordError: boolean,
+}
+
+interface ValidationObject{
+    emailError: boolean,
+    passwordError: boolean,
 }
 
 interface Props {
@@ -32,6 +39,8 @@ class SignInScreen extends Component<Props, State> {
             showPassword: true,
             email: '',
             password: '',
+            emailError: true,
+            passwordError: true,
         }
     }
 
@@ -50,18 +59,47 @@ class SignInScreen extends Component<Props, State> {
     public toggleSwitch = () => {
         this.setState({ showPassword: !this.state.showPassword });
     }
+    
     public forgotPasswordRedirect = () => {
         this.props.navigation.navigate('forgotPassword');
     }
 
-    private handleChange = (data: any) => {
-
+    private handleChange = (data: any ) => {
+        const validationErrors = this.signInValidation(data);
         this.setState({
             ...data,
+            emailError: validationErrors.emailError,
+            passwordError: validationErrors.passwordError,
         });
     }
 
+    public signInValidation(data: any): ValidationObject {
+        const mailReqExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        const passwordReqExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
+        if (data.email) {
+            return {
+                emailError: mailReqExp.test(data.email),
+                passwordError: this.state.passwordError,
+            }
+        }
+        if (data.password) {
+            return {
+                emailError: this.state.emailError,
+                passwordError: data.password.length !== 0,
+            }
+        }
+        if (data.email && data.password) {
+            return {
+                emailError: mailReqExp.test(data.email),
+                passwordError: data.password.length !== 0,
+            }
+        }
+        return {
+            emailError: false,
+            passwordError: false
+        }
+    }
 
     render() {
         return (
@@ -73,8 +111,8 @@ class SignInScreen extends Component<Props, State> {
                         <Text style={styles.label}>Email</Text>
                         <TextInput
                             placeholder='Type your email address...'
-                            style={styles.input }
-                            onChangeText={(email) => this.handleChange({ email, password: this.state.password })}
+                            style={this.state.emailError ? styles.input : styles.inputError}
+                            onChangeText={(email) => this.handleChange({ email })}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
@@ -82,8 +120,8 @@ class SignInScreen extends Component<Props, State> {
                         <TextInput
                             placeholder='Type your password...'
                             secureTextEntry={this.state.showPassword}
-                            onChangeText={(password) => this.handleChange({ password, email: this.state.email })}
-                            style={ styles.input }
+                            onChangeText={(password) => this.handleChange({ password })}
+                            style={this.state.passwordError ? styles.input : styles.inputError}
                         />
                         <Icon
                             style={styles.showPassword}
@@ -93,19 +131,16 @@ class SignInScreen extends Component<Props, State> {
                         />
                     </View>
                     {
-                        // TO-DO
-                        false ?
-                            <View style={styles.signInErrors}>
-                                <Text style={styles.textErrors}>
-                                    Email or Password is incorrect
+                        !this.state.emailError || !this.state.passwordError ?
+                        <View style={styles.signInErrors}>
+                            <Text style={styles.textErrors}>
+                                Email or Password is incorrect
                         </Text>
-                            </View> : null
+                        </View> : null
                     }
                     <View style={styles.links}>
                         <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
-                        <TouchableOpacity 
-                        style={ styles.nextBtn } 
-                         onPress={this.onSubmit}>
+                        <TouchableOpacity style={!this.state.emailError || this.state.email === '' || !this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn} disabled={!this.state.emailError || !this.state.passwordError} onPress={this.onSubmit}>
                             <Text style={styles.signInText}>Login</Text>
                         </TouchableOpacity>
                     </View>

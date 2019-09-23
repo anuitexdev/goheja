@@ -28,7 +28,7 @@ class AthleteScreen extends Component<Props> {
         return (
             <Fragment>
                 <ScrollView>
-             {this.props.currentStep <5 && this.props.currentStep !== 0 ? <Wizard/> : null}   
+             {this.props.currentStep <5 && this.props.currentStep !== 0 ? <Wizard title="Hello World"/> : null}   
             <View> 
             {
                 this.props.currentStep === 0 ? <ConnectTeamView/> :
