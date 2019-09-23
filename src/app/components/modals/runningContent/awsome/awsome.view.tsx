@@ -5,9 +5,17 @@ import { Text, View, TouchableWithoutFeedback, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import awsome from './awsome.style';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import moment from 'moment';
+import ModalReducer from '../../../../redux/reducers/modal.reducer';
 interface State {
   activeInputNumber: number;
+  unitsOfHours: string;
+  unitsOfSeconds: string;
+  unitsOfMinutes: string;
+  dozentsOfHours: string;
+  dozentsOfSeconds: string;
+  dozentsOfMinutes: string;
+  awesomeValue: string;
 }
 
 interface Props {
@@ -15,7 +23,8 @@ interface Props {
   modalNumber: number;
   modalClose: () => void;
   modalOpen: () => void;
-  changeModal: (value: number) => void;
+  changeModal: (value: {awesome: string}) => void;
+  state: any
 }
 
 class AwsomeView extends Component<Props, State> {
@@ -30,6 +39,13 @@ class AwsomeView extends Component<Props, State> {
     super(props);
     this.state = {
       activeInputNumber: 0,
+      unitsOfHours: '0',
+      unitsOfSeconds: '0',
+      unitsOfMinutes: '0',
+      dozentsOfHours: '0',
+      dozentsOfSeconds: '0',
+      dozentsOfMinutes: '0',
+      awesomeValue: ''
     };
   }
 
@@ -43,12 +59,35 @@ class AwsomeView extends Component<Props, State> {
     });
   };
 
+  public formatPaceTime(value: string) {
+    const fullTime = moment(value, 'HHmmss');
+    const formatTime = fullTime.format('HH:mm:ss')
+    return formatTime;
+}
+
+
+  public setValue = async (input: any, value: any) => {
+    await this.setState({
+      ...value,
+    });
+    input.focus();
+
+    const summaryValue = String(
+      this.state.dozentsOfHours + this.state.unitsOfHours + this.state.dozentsOfMinutes + this.state.unitsOfMinutes + this.state.dozentsOfSeconds + this.state.unitsOfSeconds,
+    );
+
+
+    this.setState({
+      awesomeValue: this.formatPaceTime(summaryValue),
+    });
+  };
+
   public hideModal = () => {
     this.props.modalClose();
   };
 
   public changeModal = () => {
-    this.props.changeModal(5);
+    this.props.changeModal({awesome: this.state.awesomeValue});
   };
 
   render() {
@@ -66,7 +105,7 @@ class AwsomeView extends Component<Props, State> {
             That’s awsome!
             </Text>
           <Text style={awsome.subtitle}>
-            How long did the ½ Marathon took you?
+            How long did the {this.props.state.runningData.achievements} took you?
             </Text>
 
             <View style={awsome.fullComponent}>
@@ -83,7 +122,8 @@ class AwsomeView extends Component<Props, State> {
                             ? awsome.focusInput
                             : awsome.infoInput
                         }
-                        onChangeText={() => this.input2.focus()}>
+                        onChangeText={(dozentsOfHours) => this.setValue(this.input2, {dozentsOfHours})}
+                        >
                         </TextInput>
                         <TextInput
                         placeholder="0"
@@ -91,7 +131,7 @@ class AwsomeView extends Component<Props, State> {
                         maxLength={1}
                         keyboardType={"number-pad"}
                         onFocus={() => this.changeFocus(2)}
-                        onChangeText={() => this.input3.focus()}
+                        onChangeText={(unitsOfHours) => this.setValue(this.input3, {unitsOfHours})}
                         style={[
                             this.state.activeInputNumber === 2
                             ? awsome.focusInput
@@ -120,7 +160,7 @@ class AwsomeView extends Component<Props, State> {
                         placeholder="0"
                         maxLength={1}
                         keyboardType={"number-pad"}
-                        onChangeText={() => this.input4.focus()}
+                        onChangeText={(dozentsOfMinutes) => this.setValue(this.input4, {dozentsOfMinutes})}
                         onFocus={() => this.changeFocus(3)}>
                         </TextInput>
                         <TextInput
@@ -134,7 +174,7 @@ class AwsomeView extends Component<Props, State> {
                         placeholder="0"
                         maxLength={1}
                         keyboardType={"number-pad"}
-                        onChangeText={() => this.input5.focus()}
+                        onChangeText={(unitsOfMinutes) => this.setValue(this.input5, {unitsOfMinutes})}
                         onFocus={() => this.changeFocus(4)}>
                         </TextInput>
                         <View
@@ -171,7 +211,7 @@ class AwsomeView extends Component<Props, State> {
                             placeholder="0"
                             maxLength={1}
                             keyboardType={"number-pad"}
-                            onChangeText={() => this.input6.focus()}
+                            onChangeText={(dozentsOfSeconds) => this.setValue(this.input6, {dozentsOfSeconds})}
                             onFocus={() => this.changeFocus(5)}>
                         </TextInput>
                         <TextInput
@@ -183,6 +223,7 @@ class AwsomeView extends Component<Props, State> {
                                 {marginRight: 0},
                             ]}
                             placeholder="0"
+                            onChangeText={(unitsOfSeconds) => this.setValue(this.input6, {unitsOfSeconds})}
                             maxLength={1}
                             keyboardType={"number-pad"}
                             onFocus={() => this.changeFocus(6)}>
@@ -204,7 +245,8 @@ class AwsomeView extends Component<Props, State> {
             <TouchableOpacity>
               <Text style={awsome.skipBtn}>Skip ></Text>
             </TouchableOpacity>
-            {false ?
+            {
+              this.state.awesomeValue === '' ?
               (<TouchableOpacity style={awsome.nextBtn}>
                 <Text style={awsome.nextBtnText}>I don't know</Text>
               </TouchableOpacity>)
@@ -224,12 +266,13 @@ class AwsomeView extends Component<Props, State> {
 const mapStateToProps = (state: any) => ({
   modalVisible: state.ModalReducer.openModal,
   modalNumber: state.ModalReducer.runningModalNumber,
+  state: state.ModalReducer
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
   modalClose: () => dispatch(actions.modalClose()),
   modalOpen: () => dispatch(actions.modalOpen()),
-  changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
+  changeModal: (value: {awesome: string}) => dispatch(actions.changeRunningModal(value)),
 });
 
 export default connect(

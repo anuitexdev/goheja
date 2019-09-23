@@ -7,7 +7,8 @@ import achievements from './achievements.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface State {
-    activeInputNumber: number
+    activeInputNumber: number,
+    achievementsValue: string
 }
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
     modalNumber: number,
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: number) => void,
+    changeModal: (value: {achievements: string}) => void,
 }
 
 class AchievementsView extends Component<Props, State> {
@@ -24,6 +25,7 @@ class AchievementsView extends Component<Props, State> {
         super(props);
         this.state = {
             activeInputNumber: 0,
+            achievementsValue: ''
         }
     }
 
@@ -41,8 +43,11 @@ class AchievementsView extends Component<Props, State> {
         this.props.modalClose();
     }
 
-    public changeModal = () => {    
-        this.props.changeModal(4);
+    public changeModal = async (value: string) => {    
+        await this.setState({
+            achievementsValue: value
+        })
+        this.props.changeModal({achievements: this.state.achievementsValue});
     }
 
     render() {
@@ -64,35 +69,35 @@ class AchievementsView extends Component<Props, State> {
                         What was the last race you took part in?
                     </Text>
                     <View>
-                        <TouchableWithoutFeedback onPress={this.changeModal}>
+                        <TouchableWithoutFeedback onPress={() => this.changeModal('5 Km')}>
                             <View style={achievements.achieveBtns}>
                                 <Text style={achievements.achieveTextBtn}>
                                     5 Km
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={this.changeModal}>
+                        <TouchableWithoutFeedback onPress={() => this.changeModal('10 Km')}>
                             <View style={achievements.achieveBtns}>
                                 <Text style={achievements.achieveTextBtn}>
                                     10 Km
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={this.changeModal}>
+                        <TouchableWithoutFeedback onPress={() => this.changeModal('½ Marathon')}>
+                            <View style={achievements.achieveBtns}>
+                                <Text style={achievements.achieveTextBtn}>
+                                    ½ Marathon
+                                </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={() => this.changeModal('Full Marathon')}>
                             <View style={achievements.achieveBtns}>
                                 <Text style={achievements.achieveTextBtn}>
                                     Full Marathon
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={this.changeModal}>
-                            <View style={achievements.achieveBtns}>
-                                <Text style={achievements.achieveTextBtn}>
-                                    Full Marathon
-                                </Text>
-                            </View>
-                        </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={this.changeModal}>
+                        <TouchableWithoutFeedback onPress={() => this.changeModal('None of the above')}>
                             <View style={[achievements.achieveBtns, {marginBottom: 0}]}>
                                 <Text style={achievements.achieveTextBtn}>
                                     None of the above
@@ -114,7 +119,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
+    changeModal: (value: {achievements: string}) => dispatch(actions.changeRunningModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AchievementsView);

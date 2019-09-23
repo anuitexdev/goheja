@@ -7,13 +7,17 @@ import sport from './lactate.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface State {
-    activeInputNumber: number
+    activeInputNumber: number,
+    hundreds: string,
+    dozens: string,
+    units: string,
+    lactateValue: number;
 }
 
 interface Props {
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: number) => void,
+    changeModal: (value: {lactate: number}) => void,
 }
 
 class LactateView extends Component<Props, State> {
@@ -24,6 +28,10 @@ class LactateView extends Component<Props, State> {
         super(props);
         this.state = {
             activeInputNumber: 0,
+            hundreds: '0',
+            dozens: '0',
+            units: '0',
+            lactateValue: 0,
         }
     }
 
@@ -42,8 +50,21 @@ class LactateView extends Component<Props, State> {
     }
 
     public changeModal = () => {
-        this.props.changeModal(2);
+        this.props.changeModal({lactate: this.state.lactateValue});
     }
+
+    public setValue = async (input: any, value: any) => {
+        await this.setState({
+             ...value,
+         })
+         input.focus();
+ 
+         const summaryValue = Number(this.state.hundreds + this.state.dozens + this.state.units);
+         
+         this.setState({
+            lactateValue: summaryValue,
+         });     
+     }
 
     render() {
         return (
@@ -78,7 +99,7 @@ class LactateView extends Component<Props, State> {
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? sport.focusInput : sport.infoInput}
-                                onChangeText={() => this.input2.focus()}
+                                onChangeText={(hundreds) => this.setValue(this.input2, {hundreds})}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>
@@ -87,7 +108,7 @@ class LactateView extends Component<Props, State> {
                                 ref={(ref) => this.input2 = ref}
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
-                                onChangeText={() => this.input3.focus()}
+                                onChangeText={(dozens) => this.setValue(this.input3, {dozens})}
                                 style={this.state.activeInputNumber === 2 ? sport.focusInput : sport.infoInput}
                                 keyboardType={"number-pad"}
                             >
@@ -97,6 +118,7 @@ class LactateView extends Component<Props, State> {
                                 style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
                                 placeholder="0"
                                 maxLength={1}
+                                onChangeText={(units) => this.setValue(this.input3, {units})}
                                 onFocus={() => this.changeFocus(3)}
                                 keyboardType={"number-pad"}
                             >
@@ -119,11 +141,13 @@ class LactateView extends Component<Props, State> {
                                 Skip >
                                 </Text>
                         </TouchableOpacity>
-                        {false ? <TouchableOpacity style={sport.nextBtn}>
-                            <Text style={sport.nextBtnText}>
-                                I don't know
-                                    </Text>
-                        </TouchableOpacity> :
+                        {this.state.lactateValue === 0 ? 
+                            
+                            <TouchableOpacity style={sport.nextBtn}>
+                                <Text style={sport.nextBtnText}>
+                                    I don't know
+                                </Text>
+                            </TouchableOpacity> :
                             <TouchableWithoutFeedback onPress={this.changeModal}>
                                 <View style={sport.nextBtn}>
                                     <Text style={sport.nextBtnText}>
@@ -144,7 +168,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: number) => dispatch(actions.changeRunningModal(value)),
+    changeModal: (value: {lactate: number}) => dispatch(actions.changeRunningModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LactateView);
