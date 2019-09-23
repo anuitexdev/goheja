@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
  
-export default class Login extends Component {
+export default class FbLogin extends Component {
   render() {
     return (
       <View>

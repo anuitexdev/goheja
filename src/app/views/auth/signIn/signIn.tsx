@@ -12,6 +12,8 @@ import UserSignInData from "src/app/shared/models/userSignInData.model";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import Header from '../../../components/header';
 import Icon from 'react-native-vector-icons/Ionicons';
+import FbLogin from '../../../components/fbAuth/fbAuth';
+import * as regExp from '../../../shared/validation/regexps';
 
 interface State {
     email: string,
@@ -19,6 +21,7 @@ interface State {
     showPassword: boolean,
     emailError: boolean,
     passwordError: boolean,
+
 }
 
 interface ValidationObject{
@@ -39,8 +42,8 @@ class SignInScreen extends Component<Props, State> {
             showPassword: true,
             email: '',
             password: '',
-            emailError: true,
-            passwordError: true,
+            emailError: false,
+            passwordError: false,
         }
     }
 
@@ -64,41 +67,32 @@ class SignInScreen extends Component<Props, State> {
         this.props.navigation.navigate('forgotPassword');
     }
 
-    private handleChange = (data: any ) => {
-        const validationErrors = this.signInValidation(data);
+    private handleChange = (data: any): void => {
+        const errors = this.validateFields(data);
+        const {type, ...signInData} = data;
+        
         this.setState({
-            ...data,
-            emailError: validationErrors.emailError,
-            passwordError: validationErrors.passwordError,
-        });
+            ...signInData,
+            ...errors,
+        });        
     }
 
-    public signInValidation(data: any): ValidationObject {
-        const mailReqExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-        const passwordReqExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    private validateFields = (data: any) => {
+        let emailError = this.state.emailError;
+        let passwordError = this.state.passwordError;
 
-        if (data.email) {
-            return {
-                emailError: mailReqExp.test(data.email),
-                passwordError: this.state.passwordError,
-            }
+        if (data.type === 'email') {
+            emailError = !regExp.mailReqExp.test(data.email);
         }
-        if (data.password) {
-            return {
-                emailError: this.state.emailError,
-                passwordError: data.password.length !== 0,
-            }
+        if (data.type === 'password') {
+            passwordError = !regExp.mailReqExp.test(data.password);
         }
-        if (data.email && data.password) {
-            return {
-                emailError: mailReqExp.test(data.email),
-                passwordError: data.password.length !== 0,
-            }
+
+        const validationObject = {
+            emailError,
+            passwordError,
         }
-        return {
-            emailError: false,
-            passwordError: false
-        }
+        return validationObject;
     }
 
     render() {
@@ -111,8 +105,8 @@ class SignInScreen extends Component<Props, State> {
                         <Text style={styles.label}>Email</Text>
                         <TextInput
                             placeholder='Type your email address...'
-                            style={this.state.emailError ? styles.input : styles.inputError}
-                            onChangeText={(email) => this.handleChange({ email })}
+                            style={!this.state.emailError ? styles.input : styles.inputError}
+                            onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
@@ -120,8 +114,8 @@ class SignInScreen extends Component<Props, State> {
                         <TextInput
                             placeholder='Type your password...'
                             secureTextEntry={this.state.showPassword}
-                            onChangeText={(password) => this.handleChange({ password })}
-                            style={this.state.passwordError ? styles.input : styles.inputError}
+                            onChangeText={(password) => this.handleChange({ password, email: this.state.email, type: 'password' })}
+                            style={!this.state.passwordError ? styles.input : styles.inputError}
                         />
                         <Icon
                             style={styles.showPassword}
@@ -131,16 +125,20 @@ class SignInScreen extends Component<Props, State> {
                         />
                     </View>
                     {
-                        !this.state.emailError || !this.state.passwordError ?
-                        <View style={styles.signInErrors}>
-                            <Text style={styles.textErrors}>
-                                Email or Password is incorrect
+                        // TO-DO
+                        this.state.emailError || this.state.passwordError ?
+                            <View style={styles.signInErrors}>
+                                <Text style={styles.textErrors}>
+                                    Email or Password is incorrect
                         </Text>
                         </View> : null
                     }
                     <View style={styles.links}>
                         <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
-                        <TouchableOpacity style={!this.state.emailError || this.state.email === '' || !this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn} disabled={!this.state.emailError || !this.state.passwordError} onPress={this.onSubmit}>
+                        <TouchableOpacity
+                            style={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn}
+                            onPress={this.onSubmit}
+                            disabled ={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === ''}>
                             <Text style={styles.signInText}>Login</Text>
                         </TouchableOpacity>
                     </View>
@@ -148,6 +146,7 @@ class SignInScreen extends Component<Props, State> {
                         <Text style={styles.haveAccount}>Don’t have a Go-heja account?</Text>
                         <Text style={styles.signUpLink} onPress={this.signUpRedirect}>Signup for free</Text>
                     </View>
+                    <FbLogin />
                 </View>
             </ScrollView>
         )
