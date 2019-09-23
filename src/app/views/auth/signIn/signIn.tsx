@@ -24,7 +24,7 @@ interface State {
 
 }
 
-interface ValidationObject{
+interface ValidationObject {
     emailError: boolean,
     passwordError: boolean,
 }
@@ -62,19 +62,19 @@ class SignInScreen extends Component<Props, State> {
     public toggleSwitch = () => {
         this.setState({ showPassword: !this.state.showPassword });
     }
-    
+
     public forgotPasswordRedirect = () => {
         this.props.navigation.navigate('forgotPassword');
     }
 
     private handleChange = (data: any): void => {
         const errors = this.validateFields(data);
-        const {type, ...signInData} = data;
-        
+        const { type, ...signInData } = data;
+
         this.setState({
             ...signInData,
             ...errors,
-        });        
+        });
     }
 
     private validateFields = (data: any) => {
@@ -88,7 +88,7 @@ class SignInScreen extends Component<Props, State> {
             passwordError = data.password === '';
         }
 
-        const validationObject = {
+        const validationObject: ValidationObject = {
             emailError,
             passwordError,
         }
@@ -125,20 +125,19 @@ class SignInScreen extends Component<Props, State> {
                         />
                     </View>
                     {
-                        // TO-DO
                         this.state.emailError || this.state.passwordError ?
                             <View style={styles.signInErrors}>
                                 <Text style={styles.textErrors}>
                                     Email or Password is incorrect
                         </Text>
-                        </View> : null
+                            </View> : null
                     }
                     <View style={styles.links}>
                         <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
                         <TouchableOpacity
                             style={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn}
                             onPress={this.onSubmit}
-                            disabled ={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === ''}>
+                            disabled={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === ''}>
                             <Text style={styles.signInText}>Login</Text>
                         </TouchableOpacity>
                     </View>
@@ -146,7 +145,9 @@ class SignInScreen extends Component<Props, State> {
                         <Text style={styles.haveAccount}>Don’t have a Go-heja account?</Text>
                         <Text style={styles.signUpLink} onPress={this.signUpRedirect}>Signup for free</Text>
                     </View>
+                    <View style={styles.fbContainer}>
                     <FbLogin />
+                    </View>
                 </View>
             </ScrollView>
         )

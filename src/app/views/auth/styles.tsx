@@ -171,5 +171,9 @@ export default StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
+    },
+    fbContainer: {
+        paddingTop: 20,
+        alignItems: 'center',
     }
   })
