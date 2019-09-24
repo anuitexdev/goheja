@@ -31,20 +31,20 @@ class ConfirmationScreen extends Component<Props, State> {
                     <View style={styles.container}>
                         <Text style={styles.pageHeader}>We`we Sent you a {'\n'} confirmation email to </Text>
                         <View>
-                        <Text style={styles.email}>{this.props.email || ''}</Text>
+                            <Text style={styles.email}>{this.props.email || ''}</Text>
                         </View>
 
                         <Text style={styles.check}>Please check your email and approve your {'\n'} password reset</Text>
 
                         <View style={styles.links}>
-                        <Text > Wrong email?</Text>
-                        <TouchableOpacity 
-                        style={styles.nextBtn}
-                        >
-                        <Text style={styles.sendText}>Send again</Text>
-                        </TouchableOpacity>
+                            <Text > Wrong email?</Text>
+                            <TouchableOpacity
+                                style={styles.nextBtn}
+                            >
+                                <Text style={styles.sendText}>Send again</Text>
+                            </TouchableOpacity>
                         </View>
-                     
+
                     </View>
                 </ScrollView>
             </Fragment>

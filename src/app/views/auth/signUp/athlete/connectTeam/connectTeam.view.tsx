@@ -34,7 +34,7 @@ class SuccessRegisterScreen extends Component<Props, State> {
     private sendCode = (value: string) =>{
         this.props.sendCode(value);
         this.props.nextStepNumber({});
-
+ 
     }
 
     render() {

@@ -57,7 +57,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
             mailError: regExps.mailReqExp.test(email),
             passwordError: password !== '',
             fNameError: regExps.firstNameRegExp.test(fname),
-            lNameError:  regExps.lastNameRegExp.test(lname),
+            lNameError: regExps.lastNameRegExp.test(lname),
             confPassError: password === confirmPassword
         }
         return validationObject;
@@ -83,11 +83,11 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                 confirmPasswordError: validationError.confPassError
             }
         });
-        
-        
+
+
     }
 
-    private checkValid(){
+    private checkValid() {
         return Object.values(this.state.errors).filter((el: any) => el == false).length > 0 ? false : true
     }
 
@@ -150,11 +150,11 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                     />
                 </View>
                 <View style={styles.nextBtnWrapper}>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={
                             this.checkValid() ? styles.nextBtn : styles.nextBtnDisabled
-                        } 
-                        disabled={!this.checkValid()} 
+                        }
+                        // disabled={!this.checkValid()} 
                         onPress={this.onSubmit}
                     >
                         <Text style={styles.nextBtnText}>Next</Text>
