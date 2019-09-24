@@ -13,7 +13,10 @@ export default StyleSheet.create({
     },
     formField: {
         paddingBottom: 39,
-        position: 'relative'
+    },
+    phoneInput: {
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     label: {
         fontSize: 14,
@@ -25,7 +28,8 @@ export default StyleSheet.create({
         borderRadius: 2,
         borderWidth: 1,
         borderColor: '#cfd8dc',
-        paddingLeft: 15
+        paddingLeft: 15,
+        color: '#282E44'
     },
     showPassword: {
         position: 'absolute',
@@ -55,11 +59,18 @@ export default StyleSheet.create({
         fontSize: 16,
         paddingHorizontal: 10,
         paddingVertical: 8,
-        borderWidth: 0.5,
-        borderColor: 'purple',
-        borderRadius: 8,
-        color: 'black',
-        paddingRight: 30
-
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: '#cfd8dc',
+        width: 100,
+        height: 50,
+        justifyContent: 'center',
+        // alignItems: 'center',
+        position: 'relative'
+    },
+    arrowDropDown: {
+        position: 'absolute',
+        right: 7,
+        color: '#757575'
     }
 })

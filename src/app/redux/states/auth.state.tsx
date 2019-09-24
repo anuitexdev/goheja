@@ -4,7 +4,8 @@ let AuthDefaultState = {
     isLogged: false,
     currentStep: 0,
     coachCurrentStep: 0,
-    
+    language: 'English',
+    translation: '',
     coachSignUpData:{
         userType: -1,
         firstname: '',

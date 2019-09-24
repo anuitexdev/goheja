@@ -69,6 +69,12 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
                 }
             }
         }
+        case "CHANGE_LANGUAGE": {
+            return {
+                ...state,
+                ...action.language
+            }
+        }
         default: return { ...state };
     }
 }

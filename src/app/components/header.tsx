@@ -1,21 +1,39 @@
 import {Component} from 'react';
-import {Text, View, Picker} from 'react-native';
+import {Text, View, Picker, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import window from '../theme/variables';
+import IconMat from 'react-native-vector-icons/MaterialIcons';
+import header from './header/header.style';
+import { connect } from 'react-redux';
+import * as actions from '../redux/actions/auth.actions';
+import AuthReducer from '../redux/reducers/auth.reducer';
 
-interface Props {}
+interface Props {
+  changeLang: (data: string) => void;
+  language: string;
+}
 
 interface State {
   language: string;
+  dropDownIsVisible: boolean;
 }
 class Header extends Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      language: '',
+      language: 'English',
+      dropDownIsVisible: false
     };
   }
+
+  private changeLanguage = (value: string) => {
+    this.props.changeLang(value);
+  }
+
+  private toggleDropDown = () => {
+    this.setState({dropDownIsVisible: !this.state.dropDownIsVisible})
+  }
+
   render() {
     return (
       <View
@@ -35,22 +53,83 @@ class Header extends Component<Props, State> {
           }}>
           Go Heja
         </Text>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Icon size={25} name={'language'} />
-          <Picker
-            selectedValue={this.state.language}
-            mode="dropdown"
-            style={{height: 50, width: 120}}
-            onValueChange={(itemValue, itemIndex) =>
-              this.setState({language: itemValue})
-            }>
-            <Picker.Item label="English" value="eng" />
-            <Picker.Item label="Русский" value="rus" />
-          </Picker>
+        <View style={{position: 'relative'}}>
+          <TouchableOpacity
+            style={{flexDirection: 'row', alignItems: 'center'}}
+            onPress={() => this.toggleDropDown()}
+            >
+            <Icon
+              size={25}
+              name={'language'}
+              style={{color: '#C5CACE', marginRight: 7}}
+            />
+            <Text style={{color: '#C5CACE', fontWeight: 'bold'}}>{this.props.language}</Text>
+            <IconMat
+              size={30}
+              name={'arrow-drop-down'}
+              style={{color: '#C5CACE'}}
+            />
+          </TouchableOpacity>
+          {
+            this.state.dropDownIsVisible ? 
+          <View style={header.languageDropDown}>
+            <TouchableOpacity style={header.languageItemHeader} onPress={() => this.toggleDropDown()}>
+              <Icon
+                size={25}
+                name={'language'}
+                style={{color: '#C5CACE', marginRight: 7}}
+              />
+              <Text style={{color: '#C5CACE', fontWeight: 'bold'}}>
+                {this.props.language}
+              </Text>
+              <IconMat
+                size={30}
+                name={'arrow-drop-up'}
+                style={{color: '#C5CACE'}}
+              />
+            </TouchableOpacity>
+            <View style={header.languageItemWrapper}>
+              <View style={header.languageItemActive}>
+                <Text>English</Text>
+                <Text style={header.abbreviation}>ENG</Text>
+              </View>
+            </View>
+            <View style={header.languageItemWrapper}>
+              <View style={header.languageItem}>
+                <Text>עִבְרִית</Text>
+                <Text style={header.abbreviation}>HEB</Text>
+              </View>
+            </View>
+            <View style={header.languageItemWrapper}>
+              <TouchableOpacity style={header.languageItem} onPress={() => this.changeLanguage('Русский')}>
+                <Text>Русский</Text>
+                <Text style={header.abbreviation}>RUS</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={header.languageItemWrapper}>
+              <View style={header.languageItem}>
+                <Text>العَرَبِيَّة</Text>
+                <Text style={header.abbreviation}>ARA</Text>
+              </View>
+            </View>
+          </View> : null }
+
         </View>
       </View>
     );
   }
 }
 
-export default Header;
+const mapStateToProps = (state: any) => ({
+  language: state.AuthReducer.language
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  changeLanguage: (data: string) => dispatch(actions.changeLang(data)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Header);
+
