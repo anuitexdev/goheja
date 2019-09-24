@@ -8,15 +8,17 @@ import * as actions from '../../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import RNPickerSelect from 'react-native-picker-select';
+import ValidationService from '../../../../../shared/validation/validation.service';
 
 interface State {
-    firstName: string,
+    firstname: string,
     lastName: string,
-    email: string,
+    auth: string,
     phone: string,
     password: string,
     confirmPassword: string,
     showPassword: boolean,
+    validationObject: any
 }
 
 interface Props {
@@ -26,16 +28,27 @@ interface Props {
 
 class CoachBasicInfoScreen extends Component<Props, State> {
 
+    private validationService = new ValidationService();
+
     constructor(props: Props) {
         super(props);
 
         this.state = {
-            firstName: '',
+            firstname: '',
             lastName: '',
-            email: '',
+            auth: '',
             phone: '',
             password: '',
             confirmPassword: '',
+            validationObject: {
+                firstname: false,
+                lastName: false,
+                auth: false,
+                phone: false,
+                password: false,
+                confirmPassword: false,
+
+            },
             showPassword: true,
         }
     }
@@ -45,7 +58,15 @@ class CoachBasicInfoScreen extends Component<Props, State> {
     }
 
     private onSubmit = async () => {
-        const { showPassword, ...userDto } = this.state;
+        const { showPassword, validationObject, ...userDto } = this.state;
+      const newValidationObject =  this.validationService.validateBasicInfoForm(userDto);
+       await this.setState({
+            validationObject:{
+                ...newValidationObject,
+            }
+        })
+      console.log(this.state.validationObject);
+      
         await this.props.changeCoachStep(userDto);
 
     }
@@ -63,7 +84,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     <TextInput
                         placeholder='Type your first name...'
                         style={styles.input}
-                        onChangeText={(firstName) => this.handleChange({ firstName })}
+                        onChangeText={(firstname) => this.handleChange({ firstname })}
                     ></TextInput>
                 </View>
                 <View style={styles.formField}>
@@ -79,7 +100,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     <TextInput
                         placeholder='Type your email address...'
                         style={styles.input}
-                        onChangeText={(email) => this.handleChange({ email })}
+                        onChangeText={(auth) => this.handleChange({ auth })}
                     ></TextInput>
                 </View>
 

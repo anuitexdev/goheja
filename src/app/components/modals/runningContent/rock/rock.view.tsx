@@ -39,7 +39,6 @@ class RockView extends Component<Props, State> {
             rockValue: 0,
         }
 
-        console.log(this.props.state);
     }
 
     public setModalVisible = () => {
