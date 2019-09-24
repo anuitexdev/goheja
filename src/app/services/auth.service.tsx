@@ -50,5 +50,17 @@ export class AuthService {
                 return error;
             });
     }
+
+    public getLanguage(language: string): Promise<any> {
+        return axiosInstance.get(`${environment.backendUrl}/`)
+            .then((response) => {
+                console.log(response);
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+                return error;
+            })
+    }
 }
 export default new AuthService();

@@ -34,6 +34,10 @@ export const changeCoachStep = (payload: any) => {
     return { type: 'CHANGE_COACH_STEP', payload}
 }
 
+export const changeLanguage = (payload: any) => {
+    return { type: 'CHANGE_LANGUAGE', payload}
+}
+
 export const signIn = (userData: UserSignInData) => {
     return async (dispatch: any) => {
         await AuthService.signIn(userData).then(res => {
@@ -51,6 +55,21 @@ export const signIn = (userData: UserSignInData) => {
             }
             dispatch(successAuth(res, 'login'));
         });
+    }
+}
+
+export const changeLang = (data: string) => {
+    return async (dispatch: any) => {
+        await AuthService.getLanguage(data).then(res => {
+
+            if (res instanceof Error) {
+                Alert.alert('doesnt have language');
+                // dispatch(failedAuth(res));
+                return;
+            }
+            dispatch(changeLanguage({translation: res.data.toString(), language: data}));
+        }
+        );
     }
 }
 
