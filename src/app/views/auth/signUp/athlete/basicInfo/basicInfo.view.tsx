@@ -55,7 +55,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
     public signUpValidation(email: string, password: string, fname: string, lname: string, confirmPassword: string) {
         const validationObject = {
             mailError: regExps.mailReqExp.test(email),
-            passwordError: regExps.mailReqExp.test(password),
+            passwordError: password !== '',
             fNameError: regExps.firstNameRegExp.test(fname),
             lNameError:  regExps.lastNameRegExp.test(lname),
             confPassError: password === confirmPassword

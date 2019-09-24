@@ -42,12 +42,21 @@ export default StyleSheet.create({
         borderColor: '#cfd8dc',
         paddingLeft: 15
     },
+    inputError: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15
+    },
     label: {
         marginBottom: 10,
         fontSize: 14,
         color: '#272e43',
         fontFamily: 'Roboto',
         fontWeight: '500',
+    },
+    errorText: {
+        color: 'red',
     },
     datePicker: {
         position: 'relative'
@@ -118,13 +127,36 @@ export default StyleSheet.create({
         height: 15,
         borderWidth: 1,
         borderColor: '#000',
-        position: 'relative',
-        marginRight: 10
+        marginRight: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingBottom: 3,
+    },
+    genderCheckBoxError: {
+        width: 15,
+        height: 15,
+        borderWidth: 1,
+        borderColor: 'red',
+        marginRight: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingBottom: 3,
     },
     genderCheckBoxField: {
         flexDirection: 'row',
         alignItems: 'center',
 
+    },
+    checkIcon: {
+        height: 10,
+        width: 6,
+        borderBottomWidth: 2.5,
+        borderBottomColor: '#000',
+        borderStyle: 'solid',
+        borderRightColor: '#000',
+        borderRightWidth: 2.5,
+        transform: [{ rotate: '45deg' }],
+        zIndex: 999,
     }
 
 })
