@@ -9,6 +9,8 @@ import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
 import RNPickerSelect from 'react-native-picker-select';
 import window from '../../../../../theme/variables';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
+import ValidationService from '../../../../../shared/validation/validation.service';
+
 interface State {
   firstName: string;
   lastName: string;
@@ -17,7 +19,8 @@ interface State {
   password: string;
   confirmPassword: string;
   showPassword: boolean;
-  updatedPhoneValue: string;
+    updatedPhoneValue: string;
+    validationObject: any
 }
 
 interface Props {
@@ -26,29 +29,48 @@ interface Props {
 }
 
 class CoachBasicInfoScreen extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
 
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      password: '',
-      confirmPassword: '',
-      showPassword: true,
-      updatedPhoneValue: ''
-    };
-  }
+    private validationService = new ValidationService();
+
+    constructor(props: Props) {
+        super(props);
+
+        this.state = {
+            firstname: '',
+            lastName: '',
+            auth: '',
+            phone: '',
+            password: '',
+            confirmPassword: '',
+            updatedPhoneValue: '',
+            validationObject: {
+                firstname: false,
+                lastName: false,
+                auth: false,
+                phone: false,
+                password: false,
+                confirmPassword: false,
+
+            },
+            showPassword: true,
+        }
+    }
 
   private toggleSwitch = () => {
     this.setState({showPassword: !this.state.showPassword});
   };
 
-  private onSubmit = async () => {
-    const {showPassword, ...userDto} = this.state;
-    await this.props.changeCoachStep(userDto);
-  };
+    private onSubmit = async () => {
+        const { showPassword, validationObject, ...userDto } = this.state;
+      const newValidationObject =  this.validationService.validateBasicInfoForm(userDto);
+       await this.setState({
+            validationObject:{
+                ...newValidationObject,
+            }
+        })
+      console.log(this.state.validationObject);
+      
+        await this.props.changeCoachStep(userDto);
 
   private handleChange = (data: any) => {
     this.setState(data);

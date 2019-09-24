@@ -27,9 +27,11 @@ interface State {
 }
 
 class YourSelfCoachScreen extends Component<Props, State> {
-
+    private currentDate = new Date();
     constructor(props: Props) {
         super(props)
+
+        
 
         this.state = {
             gender: 0,
@@ -37,7 +39,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
             formatedBirthDate: '',
             birthDateError: false,
             genderError: false,
-            dob: new Date(),
+            dob: this.currentDate,
             height: 0,
             weight: 0,
             fat: 0,
@@ -65,23 +67,30 @@ class YourSelfCoachScreen extends Component<Props, State> {
         this.hideDateTimePicker();
     };
 
-    private onSubmit = () => {
+    private onSubmit = async () => {
+       await this.setState({
+            birthDateError: this.state.gender === 0,
+            genderError: this.state.dob === this.currentDate,
+        });
+        if(this.state.birthDateError || this.state.genderError) {
+            return;
+        }
         const { isDateTimePickerVisible, birthDateError, genderError,formatedBirthDate, ...basicData } = this.state;
         this.props.changeCoachStep(basicData);
     }
 
     private birthDateValidation(value: string) {
         if (value !== '') {
-            return true;
+            return false;
         };
-        return false;
+        return true;
     }
 
     private genderValidation(value: number) {
         if (value !== 0) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     private setSelectedOption = (value: string) => {
@@ -94,6 +103,9 @@ class YourSelfCoachScreen extends Component<Props, State> {
         }
         if(value === 'Neither') {
             genderValue = 3;
+        }
+        if( value === 'Undefined') {
+            genderValue = 4;
         }
 
         const genderError = this.genderValidation(genderValue);
@@ -130,7 +142,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                 <TouchableOpacity onPress={this.showDateTimePicker} style={styles.datePicker}>
                                     <TextInput
                                         placeholder='Choose birth date…'
-                                        style={styles.input}
+                                        style={this.state.birthDateError ? styles.inputError : styles.input}
                                         editable={false}
                                         onFocus={this.showDateTimePicker}
                                         value={this.state.formatedBirthDate}
@@ -146,12 +158,21 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                     onConfirm={this.handleDatePicked}
                                     onCancel={this.hideDateTimePicker}
                                 />
+                               { this.state.birthDateError ? <Text style={styles.errorText}>This field is Mandatory</Text> : null }
                             </View>
                             <View style={styles.genderField}>
                             <View style={styles.genderTitleContainer}>
                                 <Text style={styles.label}>Gender</Text>
-                                <TouchableOpacity style={styles.genderCheckBoxField}>
-                                <View style={styles.genderCheckBox}></View>                            
+                                <TouchableOpacity 
+                                style={styles.genderCheckBoxField}
+                                onPress={() =>this.setSelectedOption('Undefined')}
+
+
+                                >
+                                <View style={this.state.genderError ? styles.genderCheckBoxError : styles.genderCheckBox}>
+                                { this.state.gender === 4 ? <View style={styles.checkIcon}></View> : null}
+                               
+                                </View>                            
                                 <Text>I prefer not to say</Text>
                                 </TouchableOpacity>
 
@@ -164,9 +185,9 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                         backTint={'#fff'}
                                         selectedBackgroundColor={'#4D5A5F'}
                                         onSelection={this.setSelectedOption}
-                                        containerBorderTint={'#cfd8dc'}
-                                        separatorTint={'#cfd8dc'}
-                                        selectedOption={this.state.gender === 1 ? 'Male' : this.state.gender === 2 ? 'Female' : this.state.gender === 3 ? 'Neither': 'Male'}
+                                        containerBorderTint={this.state.genderError ? 'red' : '#cfd8dc'}
+                                        separatorTint={this.state.genderError ? 'red' : '#cfd8dc'}
+                                        selectedOption={this.state.gender === 1 ? 'Male' : this.state.gender === 2 ? 'Female' : this.state.gender === 3 ? 'Neither': null}
                                         optionStyle={{ 
                                             paddingBottom: 12,
                                             paddingTop: 12,
@@ -174,6 +195,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                             paddingRight: 12,
                                         }}
                                     />
+                                   {this.state.genderError ? <Text style={styles.errorText}>This field is Mandatory</Text> : null }
                                 </View>
                             </View>
                         </View>
