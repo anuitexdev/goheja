@@ -6,7 +6,6 @@ import styles from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
-import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import RNPickerSelect from 'react-native-picker-select';
 import ValidationService from '../../../../../shared/validation/validation.service';
 
@@ -47,6 +46,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                 phone: false,
                 password: false,
                 confirmPassword: false,
+                formError: false,
 
             },
             showPassword: true,
@@ -65,8 +65,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                 ...newValidationObject,
             }
         })
-      console.log(this.state.validationObject);
-      
+        if (!this.state.validationObject.formError){ return }
         await this.props.changeCoachStep(userDto);
 
     }

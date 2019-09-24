@@ -39,8 +39,6 @@ class SwimTimeView extends Component<Props, State> {
       dozentsOfSeconds: '0',
       dozentsOfMinutes: '0',
     };
-
-    console.log(this.props.state);
   }
 
   public setModalVisible = () => {
