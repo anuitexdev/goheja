@@ -9,10 +9,12 @@ import {
 } from 'react-native';
 import datePickerStyle from './datepicker.style';
 import CalendarPicker from 'react-native-calendar-picker';
+import moment from 'moment';
 
 interface Props {
   toggleDatePicker: boolean;
   hideDatePicker: (isShow: boolean) => void;
+  setDatePickerValue: (dateValue: any) => void;
 }
 
 interface State {
@@ -45,6 +47,11 @@ class CustomDatePicker extends Component<Props, State> {
     }
   }
 
+  public setDatePickerData(date: string, closePicker: boolean) {
+    this.props.setDatePickerValue(date);
+    this.props.hideDatePicker(closePicker);
+  }
+
   render() {
     const {selectedStartDate, selectedEndDate} = this.state;
     const minDate =
@@ -61,8 +68,10 @@ class CustomDatePicker extends Component<Props, State> {
       '-' +
       new Date().getDate();
     const startDate = selectedStartDate ? selectedStartDate.toString() : '';
+    const formatDate = moment(startDate).format('DD-MM-YYYY');
     const endDate = selectedEndDate ? selectedEndDate.toString() : '';
     let customDatesStyles: [] = [];
+    
     return (
       <View>
         <Modal
@@ -95,7 +104,7 @@ class CustomDatePicker extends Component<Props, State> {
             </View>
               <View style={datePickerStyle.footer}>
                 <TouchableWithoutFeedback
-                  onPress={() => this.props.hideDatePicker(false)}>
+                  onPress={() => this.setDatePickerData(formatDate, false)}>
                   <View style={datePickerStyle.footerBtn}><Text style={datePickerStyle.footerText}>Done</Text></View>
                 </TouchableWithoutFeedback>
               </View>

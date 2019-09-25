@@ -10,7 +10,9 @@ export default StyleSheet.create({
     title: {
         fontSize: 25,
         letterSpacing: 0,
-        fontWeight: '500'
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 20
     },
     subTitle: {
         fontSize: 16,
@@ -25,30 +27,32 @@ export default StyleSheet.create({
         paddingBottom: 12,
         paddingLeft: 20,
         paddingRight: 20,
-        marginBottom: 10,
-        display: 'flex',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        marginBottom: 30,
         fontWeight: 'bold',
         borderRadius: 2,
-        width: 'auto'
+        width: window.width - 40
     },
     buttonText: {
         color: 'white',
         fontSize: 16,
+        textAlign: 'center'
     },
     buttonVariants: {
        paddingBottom: 30,
-       borderBottomWidth: 1,
-        borderColor: '#eeeff1',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+    },
+    accountContainer: {
+        backgroundColor: '#EBEFF2',
+        width: window.width - 40,
+        padding: 20,
+        borderRadius: 10,
+        marginTop: 50
     },
     haveAccount: {
-        fontSize: 16,
+        fontSize: 20,
         marginBottom:5,
-        marginTop: 30,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: '700',
+        color: '#99A8AF'
     },
     loginButton: {
         color: '#1373fa',
