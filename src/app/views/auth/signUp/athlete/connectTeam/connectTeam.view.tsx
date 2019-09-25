@@ -31,7 +31,7 @@ class SuccessRegisterScreen extends Component<Props, State> {
         await this.setState({ groupCode: code });
     }
 
-    private sendCode = (value: string) =>{
+    private sendCode = (value: string) => {
         this.props.sendCode(value);
         this.props.nextStepNumber({});
  

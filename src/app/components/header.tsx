@@ -9,7 +9,7 @@ import * as actions from '../redux/actions/auth.actions';
 import AuthReducer from '../redux/reducers/auth.reducer';
 
 interface Props {
-  changeLang: (data: string) => void;
+  changeLanguage: (data: string) => void;
   language: string;
 }
 
@@ -27,7 +27,7 @@ class Header extends Component<Props, State> {
   }
 
   private changeLanguage = (value: string) => {
-    this.props.changeLang(value);
+    this.props.changeLanguage(value);
   }
 
   private toggleDropDown = () => {

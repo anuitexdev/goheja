@@ -23,12 +23,12 @@ export default class ValidationService {
         for (let key in data) {
             resultObject[key] = !validationObject[key].test(data[key]);
         }
-
-        resultObject.confirmPassword = data.password !== data.confirmPassword;
+        
+        resultObject.confirmPassword = data.password !== data.confirmPassword || data.password === '' || data.confirmPassword === '';
         resultObject.formError = false;
 
         for (let key in resultObject) {
-            resultObject.formError = resultObject.formError && resultObject[key];
+            resultObject.formError = resultObject.formError || resultObject[key];
         }
 
         return resultObject;

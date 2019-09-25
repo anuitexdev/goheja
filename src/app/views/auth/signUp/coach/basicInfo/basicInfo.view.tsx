@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import React from 'react';
 import { Text, View, TouchableOpacity, TextInput, Picker } from 'react-native';
-import styles from './styles';
+import styles from './basicInfo.style';
 import IconIon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
@@ -64,21 +64,32 @@ class CoachBasicInfoScreen extends Component<Props, State> {
     };
 
     private onSubmit = async () => {
-        const { showPassword, validationObject, updatedPhoneValue, confirmPassword, ...userDto } = this.state;
+        const { showPassword, validationObject, updatedPhoneValue, ...userDto } = this.state;
         const newValidationObject = this.validationService.validateBasicInfoForm(userDto);
+        
         await this.setState({
             validationObject: {
                 ...newValidationObject,
             }
         })
-        // console.log(this.state.validationObject);
         
-        // if (this.state.validationObject.formError) { return }
+        if (this.state.validationObject.formError) { return; }
         await this.props.changeCoachStep(userDto);
     }
 
-    private handleChange = (data: any) => {
-        this.setState(data);
+    private handleChange =  (data: any) => {
+        
+        let key = Object.keys(data)[0];
+        let newValidationObject = this.state.validationObject;
+        newValidationObject[key] = false;
+        
+        this.setState({
+            ...data,
+            validationObject: {
+               ...newValidationObject,
+            }
+        });
+        
     };
 
     render() {
@@ -89,7 +100,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     <Text style={styles.label}>First Name</Text>
                     <TextInput
                         placeholder="Type your first name..."
-                        style={styles.input}
+                        value ={this.state.firstname}
+                        style={ this.state.validationObject.firstname ? styles.inputError : styles.input}
                         onChangeText={firstname =>
                             this.handleChange({ firstname })
                         }></TextInput>
@@ -97,8 +109,9 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                 <View style={styles.formField}>
                     <Text style={styles.label}>Last Name</Text>
                     <TextInput
+                        value ={this.state.lastName}
                         placeholder="Type your last name..."
-                        style={styles.input}
+                        style={this.state.validationObject.lastName ? styles.inputError : styles.input}
                         onChangeText={lastName =>
                             this.handleChange({ lastName })
                         }></TextInput>
@@ -107,7 +120,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     <Text style={styles.label}>Email</Text>
                     <TextInput
                         placeholder="Type your email address..."
-                        style={styles.input}
+                        value ={this.state.auth}
+                        style={this.state.validationObject.auth ? styles.inputError : styles.input }
                         onChangeText={auth => this.handleChange({ auth })}></TextInput>
                 </View>
                 <Text style={styles.label}>Phone No.</Text>
@@ -118,7 +132,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                             items={countries}
                         >
                             <View
-                                style={styles.phoneSelect}>
+                                style={this.state.validationObject.phone ? styles.phoneSelectError:  styles.phoneSelect}>
                                 <Text style={{ color: '#282E44' }}>
                                     {this.state.updatedPhoneValue}
                                 </Text>
@@ -133,7 +147,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         <TextInput
                             placeholder="Type your phone no..."
                             keyboardType={'number-pad'}
-                            style={[styles.input, { width: window.width - 160 }]}
+                            value ={this.state.phone}
+                            style={this.state.validationObject.phone ? [styles.inputError, { width: window.width - 160 }] : [styles.input, { width: window.width - 160 }]}
                             onChangeText={phone => this.handleChange({ phone })}></TextInput>
                     </View>
                 </View>
@@ -143,7 +158,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     <TextInput
                         placeholder="Type your password..."
                         secureTextEntry={this.state.showPassword}
-                        style={styles.input}
+                        value ={this.state.password}
+                        style={this.state.validationObject.password ? styles.inputError : styles.input}
                         onChangeText={password => this.handleChange({ password })}
                     />
                     <IconIon
@@ -158,7 +174,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     <TextInput
                         placeholder="Type your password..."
                         secureTextEntry={this.state.showPassword}
-                        style={styles.input}
+                        value={this.state.confirmPassword}
+                        style={this.state.validationObject.confirmPassword ? styles.inputError : styles.input}
                         onChangeText={confirmPassword =>
                             this.handleChange({ confirmPassword })
                         }
@@ -171,7 +188,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     />
                 </View>
                 <View style={styles.nextBtnWrapper}>
-                    <TouchableOpacity style={styles.nextBtn} onPress={this.onSubmit}>
+                    <TouchableOpacity style={ this.state.validationObject.formError ? styles.nextBtn : styles.nextBtnActive} onPress={this.onSubmit}>
                         <Text style={styles.nextBtnText}>Next</Text>
                     </TouchableOpacity>
                 </View>
