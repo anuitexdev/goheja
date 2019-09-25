@@ -24,8 +24,7 @@ class WelcomeScreen extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Welcome to Go-heja</Text>
-                <Text style={styles.subTitle}>What type of account fits you the best</Text>
+                <Text style={styles.title}>Welcome to{"\n"} Go-heja</Text>
 
                 <View style={styles.buttonVariants}>
                     <TouchableOpacity
@@ -41,7 +40,7 @@ class WelcomeScreen extends Component<Props> {
                         >I’m an Athlete</Text>
                     </TouchableOpacity>
                 </View>
-                <View>
+                <View style={styles.accountContainer}>
                     <Text style={styles.haveAccount}>
                         Already got a Go-heja account?
                 </Text>
