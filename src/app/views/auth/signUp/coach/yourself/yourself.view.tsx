@@ -75,7 +75,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
         if (this.state.birthDateError || this.state.genderError) {
             return;
         }
-        const { isDateTimePickerVisible, birthDateError, genderError, formatedBirthDate, ...basicData } = this.state;
+        const { isDateTimePickerVisible, birthDateError, genderError, formatedBirthDate, toggleDatePicker, ...basicData } = this.state;
         this.props.changeCoachStep(basicData);
     }
 

@@ -6,8 +6,8 @@ let AuthDefaultState = {
     coachCurrentStep: 0,
     language: 'English',
     translation: '',
+    userType: -1,
     coachSignUpData:{
-        userType: -1,
         firstname: '',
         lastName: '',
         auth: '',
@@ -22,7 +22,6 @@ let AuthDefaultState = {
     },
 
     signUpData:{
-        userType: -1,
         firstname: '',
         lastName: '',
         auth: '',

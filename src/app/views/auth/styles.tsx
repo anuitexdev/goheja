@@ -175,5 +175,8 @@ export default StyleSheet.create({
     fbContainer: {
         paddingTop: 20,
         alignItems: 'center',
+    },
+    footer: {
+
     }
   })

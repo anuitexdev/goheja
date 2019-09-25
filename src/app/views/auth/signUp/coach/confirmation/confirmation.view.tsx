@@ -7,7 +7,8 @@ import * as actions from '../../../../../redux/actions/auth.actions';
 
 interface Props {
     changeCoachStep: (data: any) => void,
-    email: string
+    email: string,
+    state: any
 
 }
 
@@ -19,6 +20,8 @@ class ConfirmationScreen extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props)
+        console.log(this.props.state);
+        
 
     }
 
@@ -54,6 +57,7 @@ class ConfirmationScreen extends Component<Props, State> {
 
 const mapStateToProps = (state: any) => ({
     email: state.AuthReducer.coachSignUpData.email,
+    state: state.AuthReducer.coachSignUpData
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

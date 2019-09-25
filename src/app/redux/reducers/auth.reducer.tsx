@@ -10,6 +10,11 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
                 isLogged: true,
             }
         }
+        case "REGISTER_SUCCESS": {
+            return {
+                ...state,
+            }
+        }
         case "AUTH_FAILED": {
             return {
                 ...state,
@@ -37,14 +42,11 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
                 }
             }
         }
-        case "CHANGE_SCREEN": {
+        case "CHANGE_SCREEN": {            
             return {
                 ...state,
                 isWelcomeScreen: false,
-                signUpData: {
-                    ...state.signUpData,
                     userType: action.userType
-                }
             }
         }
         case "CHANGE_STEP": {

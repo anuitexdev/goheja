@@ -148,6 +148,7 @@ class SignInScreen extends Component<Props, State> {
                     <View style={styles.fbContainer}>
                     <FbLogin />
                     </View>
+
                 </View>
             </ScrollView>
         )

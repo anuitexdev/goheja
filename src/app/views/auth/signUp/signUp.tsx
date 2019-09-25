@@ -29,7 +29,7 @@ class SignUpScreen extends Component<Props> {
                     { 
                         this.props.role === -1 ? <WelcomeScreen navigation={this.props.navigation} /> 
                         : this.props.role === 1 ? <AthleteScreen/> 
-                            : <CoachScreen />
+                            : <CoachScreen navigation={this.props.navigation} />
                     }
 
                 </ScrollView>
@@ -39,7 +39,7 @@ class SignUpScreen extends Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-    role: state.AuthReducer.signUpData.userType,
+    role: state.AuthReducer.userType,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
