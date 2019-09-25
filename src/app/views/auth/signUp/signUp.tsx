@@ -4,7 +4,7 @@ import React from "react";
 import { ScrollView } from "react-native";
 import WelcomeScreen from './welcome/welcome';
 import CoachScreen from './coach/coach.view';
-import Header from '../../../components/header';
+import Header from '../../../components/header/header';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
 import AthleteScreen from './athlete/athlete.view';

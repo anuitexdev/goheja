@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import React, { Component } from 'react';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
-import Header from '../../components/header';
+import Header from '../../components/header/header';
 import SportsView from './sports/sports.view';
 
 
