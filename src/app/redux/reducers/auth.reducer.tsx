@@ -57,9 +57,7 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
                 }
             }
         }
-        case "CHANGE_COACH_STEP": {
-            console.log(action.payload);
-            
+        case "CHANGE_COACH_STEP": {     
             return {
                 ...state,
                 coachCurrentStep: ++state.coachCurrentStep,

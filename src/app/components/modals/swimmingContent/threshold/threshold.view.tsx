@@ -40,8 +40,6 @@ class ThresholdView extends Component<Props, State> {
       dozentsOfMinutes: '0',
       dozentsOfSeconds: '0',
     };
-
-    console.log(this.props.state);
   }
 
   public setModalVisible = () => {

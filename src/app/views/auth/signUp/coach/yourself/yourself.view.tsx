@@ -32,7 +32,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
     constructor(props: Props) {
         super(props)
 
-        
+
 
         this.state = {
             gender: 0,
@@ -44,8 +44,12 @@ class YourSelfCoachScreen extends Component<Props, State> {
             height: 0,
             weight: 0,
             fat: 0,
+<<<<<<< HEAD
             toggleDatePicker: false
         }        
+=======
+        }
+>>>>>>> 821b502ef5707913d5894b6a2f52080b223f4bd7
     }
 
     public showDateTimePicker = () => {
@@ -58,61 +62,45 @@ class YourSelfCoachScreen extends Component<Props, State> {
 
     public handleDatePicked = (date: Date) => {
         const formattedDate = moment(date).format('DD-MM-YYYY');
-
-        const birthDateError = this.birthDateValidation(formattedDate);
         let signUpDate = moment(date).format('YYYY-MM-DDTHH:mm:ss:SSZ')
         this.setState({
             dob: signUpDate,
-            birthDateError,
+            birthDateError: false,
             formatedBirthDate: formattedDate,
         })
         this.hideDateTimePicker();
     };
 
     private onSubmit = async () => {
-       await this.setState({
-            birthDateError: this.state.gender === 0,
-            genderError: this.state.dob === this.currentDate,
+        await this.setState({
+            genderError: this.state.gender === 0,
+            birthDateError: this.state.dob === this.currentDate,
         });
-        if(this.state.birthDateError || this.state.genderError) {
+        if (this.state.birthDateError || this.state.genderError) {
             return;
         }
-        const { isDateTimePickerVisible, birthDateError, genderError,formatedBirthDate, ...basicData } = this.state;
+        const { isDateTimePickerVisible, birthDateError, genderError, formatedBirthDate, ...basicData } = this.state;
         this.props.changeCoachStep(basicData);
     }
 
-    private birthDateValidation(value: string) {
-        if (value !== '') {
-            return false;
-        };
-        return true;
-    }
-
-    private genderValidation(value: number) {
-        if (value !== 0) {
-            return false;
-        }
-        return true;
-    }
 
     private setSelectedOption = (value: string) => {
-        let genderValue= 0;
+        let genderValue = 0;
         if (value === 'Male') {
             genderValue = 1;
-        } 
-        if(value === 'Female') {
+        }
+        if (value === 'Female') {
             genderValue = 2;
         }
-        if(value === 'Neither') {
+        if (value === 'Neither') {
             genderValue = 3;
         }
-        if( value === 'Undefined') {
+        if (value === 'Undefined') {
             genderValue = 4;
         }
 
-        const genderError = this.genderValidation(genderValue);
         this.setState({
-            genderError,
+            genderError: false,
             gender: genderValue,
         });
     }
@@ -172,6 +160,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                     onConfirm={this.handleDatePicked}
                                     onCancel={this.hideDateTimePicker}
                                 />
+<<<<<<< HEAD
                                 <TouchableOpacity onPress={this.showDatePicker}>
                                     <Text>
                                         HelloWorld
@@ -179,22 +168,25 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                 </TouchableOpacity>
                                 <CustomDatePicker toggleDatePicker={this.state.toggleDatePicker} hideDatePicker={this.hideDatePicker}/>
                                { this.state.birthDateError ? <Text style={styles.errorText}>This field is Mandatory</Text> : null }
+=======
+                                {this.state.birthDateError ? <Text style={styles.errorText}>This field is Mandatory</Text> : null}
+>>>>>>> 821b502ef5707913d5894b6a2f52080b223f4bd7
                             </View>
                             <View style={styles.genderField}>
-                            <View style={styles.genderTitleContainer}>
-                                <Text style={styles.label}>Gender</Text>
-                                <TouchableOpacity 
-                                style={styles.genderCheckBoxField}
-                                onPress={() =>this.setSelectedOption('Undefined')}
+                                <View style={styles.genderTitleContainer}>
+                                    <Text style={styles.label}>Gender</Text>
+                                    <TouchableOpacity
+                                        style={styles.genderCheckBoxField}
+                                        onPress={() => this.setSelectedOption('Undefined')}
 
 
-                                >
-                                <View style={this.state.genderError ? styles.genderCheckBoxError : styles.genderCheckBox}>
-                                { this.state.gender === 4 ? <View style={styles.checkIcon}></View> : null}
-                               
-                                </View>                            
-                                <Text>I prefer not to say</Text>
-                                </TouchableOpacity>
+                                    >
+                                        <View style={this.state.genderError ? styles.genderCheckBoxError : styles.genderCheckBox}>
+                                            {this.state.gender === 4 ? <View style={styles.checkIcon}></View> : null}
+
+                                        </View>
+                                        <Text>I prefer not to say</Text>
+                                    </TouchableOpacity>
 
                                 </View>
                                 <View >
@@ -207,83 +199,83 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                         onSelection={this.setSelectedOption}
                                         containerBorderTint={this.state.genderError ? 'red' : '#cfd8dc'}
                                         separatorTint={this.state.genderError ? 'red' : '#cfd8dc'}
-                                        selectedOption={this.state.gender === 1 ? 'Male' : this.state.gender === 2 ? 'Female' : this.state.gender === 3 ? 'Neither': null}
-                                        optionStyle={{ 
+                                        selectedOption={this.state.gender === 1 ? 'Male' : this.state.gender === 2 ? 'Female' : this.state.gender === 3 ? 'Neither' : null}
+                                        optionStyle={{
                                             paddingBottom: 12,
                                             paddingTop: 12,
                                             paddingLeft: 12,
                                             paddingRight: 12,
                                         }}
                                     />
-                                   {this.state.genderError ? <Text style={styles.errorText}>This field is Mandatory</Text> : null }
+                                    {this.state.genderError ? <Text style={styles.errorText}>This field is Mandatory</Text> : null}
                                 </View>
                             </View>
                         </View>
 
-                
+
 
                         <View style={styles.optionalContainer}>
 
-                        <Text style={styles.optionalTitle}> Why do we need this info? </Text>
-                        <Text style={styles.optionalSubtitle}> If you want to have an athlete account on Go-Heja and {'\n'} not onle a couch account, fill the fields below. </Text>
+                            <Text style={styles.optionalTitle}> Why do we need this info? </Text>
+                            <Text style={styles.optionalSubtitle}> If you want to have an athlete account on Go-Heja and {'\n'} not onle a couch account, fill the fields below. </Text>
 
 
-                        <View style={styles.personalFormControl}>
-                            <View style={styles.labelContainer}>
-                                <Text style={styles.labelText}>Height</Text>
-                                <Text style={styles.prompt}>(optional)</Text>
+                            <View style={styles.personalFormControl}>
+                                <View style={styles.labelContainer}>
+                                    <Text style={styles.labelText}>Height</Text>
+                                    <Text style={styles.prompt}>(optional)</Text>
+                                </View>
+                                <View style={styles.formControl}>
+                                    <TextInput
+                                        style={styles.input}
+                                        placeholder='Type your height…'
+                                        keyboardType='phone-pad'
+                                        onChangeText={(height) => this.onInputChange({ height })}
+                                    />
+                                    <Text style={styles.formUnit}>CM</Text>
+                                </View>
                             </View>
-                            <View style={styles.formControl}>
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder='Type your height…'
-                                    keyboardType='phone-pad'
-                                    onChangeText={(height) => this.onInputChange({ height })}
-                                />
-                                <Text style={styles.formUnit}>CM</Text>
-                            </View>
-                        </View>
 
-                        <View style={styles.personalFormControl}>
-                            <View style={styles.labelContainer}>
-                                <Text style={styles.labelText}>Weight</Text>
-                                <Text style={styles.prompt}>(optional)</Text>
+                            <View style={styles.personalFormControl}>
+                                <View style={styles.labelContainer}>
+                                    <Text style={styles.labelText}>Weight</Text>
+                                    <Text style={styles.prompt}>(optional)</Text>
+                                </View>
+                                <View style={styles.formControl}>
+                                    <TextInput
+                                        style={styles.input}
+                                        placeholder='Type your weight'
+                                        keyboardType='phone-pad'
+                                        onChangeText={(weight) => this.onInputChange({ weight })}
+                                    />
+                                    <Text style={styles.formUnit}>KG</Text>
+                                </View>
                             </View>
-                            <View style={styles.formControl}>
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder='Type your weight'
-                                    keyboardType='phone-pad'
-                                    onChangeText={(weight) => this.onInputChange({ weight })}
-                                />
-                                <Text style={styles.formUnit}>KG</Text>
-                            </View>
-                        </View>
 
-                        <View style={styles.personalFormControl}>
-                            <View style={styles.labelContainer}>
-                                <Text style={styles.labelText}>Body fat %</Text>
-                                <Text style={styles.prompt}>(optional)</Text>
+                            <View style={styles.personalFormControl}>
+                                <View style={styles.labelContainer}>
+                                    <Text style={styles.labelText}>Body fat %</Text>
+                                    <Text style={styles.prompt}>(optional)</Text>
+                                </View>
+                                <View style={styles.formControl}>
+                                    <TextInput
+                                        style={styles.input}
+                                        placeholder='Type your body fat…'
+                                        keyboardType='phone-pad'
+                                        onChangeText={(fat) => this.onInputChange({ fat })}
+                                    />
+                                    <Text style={styles.formUnit}>%</Text>
+                                </View>
                             </View>
-                            <View style={styles.formControl}>
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder='Type your body fat…'
-                                    keyboardType='phone-pad'
-                                    onChangeText={(fat) => this.onInputChange({ fat })}
-                                />
-                                <Text style={styles.formUnit}>%</Text>
-                            </View>
-                        </View>
 
-                        <View style={styles.personalNextBtnWrapper}>
-                            <TouchableOpacity
-                                style={styles.nextBtn}
-                                onPress={this.onSubmit}
-                            >
-                                <Text style={styles.nextBtnText}>Next</Text>
-                            </TouchableOpacity>
-                        </View>
+                            <View style={styles.personalNextBtnWrapper}>
+                                <TouchableOpacity
+                                    style={styles.nextBtn}
+                                    onPress={this.onSubmit}
+                                >
+                                    <Text style={styles.nextBtnText}>Next</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
 
                     </View>

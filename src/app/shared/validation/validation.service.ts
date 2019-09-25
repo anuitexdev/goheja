@@ -1,14 +1,14 @@
 import * as regExps from './regexps';
 
 
-export default class ValidationService{
+export default class ValidationService {
 
     public coachBasicInfoObject = {
         firstname: false,
         lastName: false,
         auth: false,
         phone: false,
-        password:false,
+        password: false,
         confirmPassword: false,
     }
 
@@ -16,25 +16,21 @@ export default class ValidationService{
         return regExps.mailReqExp.test(email);
     }
 
-    public validateBasicInfoForm(data: any) {    
-        console.log(data);
-        
+    public validateBasicInfoForm(data: any) {
         const validationObject = regExps.coachBasicInfoValidators;
         let resultObject: any = {};
 
-        for (let key in data) {   
+        for (let key in data) {
             resultObject[key] = !validationObject[key].test(data[key]);
         }
+        
+        resultObject.confirmPassword = data.password !== data.confirmPassword || data.password === '' || data.confirmPassword === '';
+        resultObject.formError = false;
 
-        resultObject.confirmPassword = data.password !== data.confirmPassword;        
+        for (let key in resultObject) {
+            resultObject.formError = resultObject.formError || resultObject[key];
+        }
+
         return resultObject;
     }
-
-
-
-
-
-
-
-
 }

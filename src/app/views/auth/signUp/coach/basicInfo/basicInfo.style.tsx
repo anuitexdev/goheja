@@ -31,6 +31,12 @@ export default StyleSheet.create({
         paddingLeft: 15,
         color: '#282E44'
     },
+    inputError: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15
+    },
     showPassword: {
         position: 'absolute',
         top: 42,
@@ -45,6 +51,14 @@ export default StyleSheet.create({
         backgroundColor: '#b6c0c6',
         borderRadius: 2,
     },
+    nextBtnActive: {
+        paddingRight: 20,
+        paddingLeft: 20,
+        paddingBottom: 12,
+        paddingTop: 12,
+        backgroundColor: '#272e43',
+        borderRadius: 2,
+    },
     nextBtnWrapper: {
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
@@ -52,9 +66,6 @@ export default StyleSheet.create({
     nextBtnText: {
         color: 'white'
     },
-    // phoneContainer: {
-    //     flexDirection: 'row'
-    // },
     phoneSelect: {
         fontSize: 16,
         paddingHorizontal: 10,
@@ -65,7 +76,18 @@ export default StyleSheet.create({
         width: 100,
         height: 50,
         justifyContent: 'center',
-        // alignItems: 'center',
+        position: 'relative'
+    },
+    phoneSelectError: {
+        fontSize: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        width: 100,
+        height: 50,
+        justifyContent: 'center',
         position: 'relative'
     },
     arrowDropDown: {
