@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import React from "react";
 import { View, Alert } from 'react-native';
 import { ScrollView } from "react-native-gesture-handler";
-import Header from '../../../components/header';
+import Header from '../../../components/header/header';
 import styles from './forgotPassword.style';
 import { NavigationScreenProp, NavigationState, NavigationParams } from "react-navigation";
 import SendMailScreen from './sendEmail/sendMail.view';

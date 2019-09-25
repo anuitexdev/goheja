@@ -8,7 +8,7 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/Ionicons";
 import * as actions from '../../../../../redux/actions/auth.actions';
 import moment from 'moment';
-
+import CustomDatePicker from '../../../../../components/datepicker/datepicker.component'
 interface Props {
     changeCoachStep: (data: any) => void,
     state: any,
@@ -24,6 +24,7 @@ interface State {
     height: number,
     weight: number,
     fat: number,
+    toggleDatePicker: boolean
 }
 
 class YourSelfCoachScreen extends Component<Props, State> {
@@ -43,6 +44,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
             height: 0,
             weight: 0,
             fat: 0,
+            toggleDatePicker: false
         }        
     }
 
@@ -121,6 +123,18 @@ class YourSelfCoachScreen extends Component<Props, State> {
         });
     }
 
+    public showDatePicker = () => {
+        this.setState({
+            toggleDatePicker: true
+        })
+    }
+
+    public hideDatePicker = (visible: boolean) => {
+        this.setState({
+            toggleDatePicker: visible
+        })
+    }
+
 
     render() {
         const options = [
@@ -158,6 +172,12 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                     onConfirm={this.handleDatePicked}
                                     onCancel={this.hideDateTimePicker}
                                 />
+                                <TouchableOpacity onPress={this.showDatePicker}>
+                                    <Text>
+                                        HelloWorld
+                                    </Text>
+                                </TouchableOpacity>
+                                <CustomDatePicker toggleDatePicker={this.state.toggleDatePicker} hideDatePicker={this.hideDatePicker}/>
                                { this.state.birthDateError ? <Text style={styles.errorText}>This field is Mandatory</Text> : null }
                             </View>
                             <View style={styles.genderField}>

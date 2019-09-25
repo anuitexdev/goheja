@@ -12,9 +12,9 @@ import IconMat from 'react-native-vector-icons/MaterialIcons';
 import ValidationService from '../../../../../shared/validation/validation.service';
 
 interface State {
-  firstName: string;
+  firstname: string;
   lastName: string;
-  email: string;
+  auth: string;
   phone: string;
   password: string;
   confirmPassword: string;
@@ -62,19 +62,20 @@ class CoachBasicInfoScreen extends Component<Props, State> {
 
     private onSubmit = async () => {
         const { showPassword, validationObject, ...userDto } = this.state;
-      const newValidationObject =  this.validationService.validateBasicInfoForm(userDto);
-       await this.setState({
-            validationObject:{
-                ...newValidationObject,
-            }
-        })
-      console.log(this.state.validationObject);
+      // const newValidationObject =  this.validationService.validateBasicInfoForm(userDto);
+      //  await this.setState({
+      //       validationObject:{
+      //           ...newValidationObject,
+      //       }
+      //   })
+      // console.log(this.state.validationObject);
       
         await this.props.changeCoachStep(userDto);
+      }
 
-  private handleChange = (data: any) => {
-    this.setState(data);
-  };
+    private handleChange = (data: any) => {
+      this.setState(data);
+    };
 
   render() {
     return (
@@ -85,8 +86,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
           <TextInput
             placeholder="Type your first name..."
             style={styles.input}
-            onChangeText={firstName =>
-              this.handleChange({firstName})
+            onChangeText={firstname =>
+              this.handleChange({firstname})
             }></TextInput>
         </View>
         <View style={styles.formField}>
@@ -103,7 +104,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
           <TextInput
             placeholder="Type your email address..."
             style={styles.input}
-            onChangeText={email => this.handleChange({email})}></TextInput>
+            onChangeText={auth => this.handleChange({auth})}></TextInput>
         </View>
         <Text style={styles.label}>Phone No.</Text>
         <View style={styles.formField}>

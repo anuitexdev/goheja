@@ -3,10 +3,10 @@ import {Text, View, Picker, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
-import header from './header/header.style';
+import header from './header.style';
 import { connect } from 'react-redux';
-import * as actions from '../redux/actions/auth.actions';
-import AuthReducer from '../redux/reducers/auth.reducer';
+import * as actions from '../../redux/actions/auth.actions';
+import AuthReducer from '../../redux/reducers/auth.reducer';
 
 interface Props {
   changeLang: (data: string) => void;

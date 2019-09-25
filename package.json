@@ -22,6 +22,7 @@
     "moment": "^2.24.0",
     "react": "16.8.6",
     "react-native": "0.60.5",
+    "react-native-calendar-picker": "^6.0.1",
     "react-native-countries": "^1.0.2",
     "react-native-datepicker": "^1.7.2",
     "react-native-fbsdk": "^1.0.4",

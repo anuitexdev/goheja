@@ -10,7 +10,7 @@ import * as actions from '../../../redux/actions/auth.actions';
 import UserSignInData from "src/app/shared/models/userSignInData.model";
 
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
-import Header from '../../../components/header';
+import Header from '../../../components/header/header';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FbLogin from '../../../components/fbAuth/fbAuth';
 import * as regExp from '../../../shared/validation/regexps';
