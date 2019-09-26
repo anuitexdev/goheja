@@ -5,7 +5,6 @@ import {
   Text,
   Modal,
   TouchableWithoutFeedback,
-  Dimensions,
 } from 'react-native';
 import datePickerStyle from './datepicker.style';
 import CalendarPicker from 'react-native-calendar-picker';

@@ -4,11 +4,13 @@ import React from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
+import AuthReducer from '../../../../../redux/reducers/auth.reducer';
 
 interface Props {
     nextStepNumber: (nextStepData: any) => void,
     signUp: (data: any) => void,
     signUpData: any,
+    userType: number,
 }
 
 interface State {
@@ -48,6 +50,7 @@ class PersonalInfoScreen extends Component<Props, State> {
             height: this.state.height,
             weight: this.state.weight,
             fat: this.state.fat,
+            userType: this.props.userType,
            }
         });
         this.props.signUp(this.state.signUpData);
@@ -135,6 +138,7 @@ class PersonalInfoScreen extends Component<Props, State> {
 
 const mapStateToProps = (state: any) => ({
     signUpData: state.AuthReducer.signUpData,
+    userType: state.AuthReducer. userType
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
