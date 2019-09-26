@@ -15,9 +15,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import CustomDatePicker from '../../../../../components/datepicker/datepicker.component';
 import moment from 'moment';
+
 interface Props {
     changeCoachStep: (data: any) => void;
-    state: any;
+    signUp: (data: any) => void,
+    userType: number,
+    coachSignUpData: any
+
 }
 
 interface State {
@@ -62,9 +66,9 @@ class YourSelfCoachScreen extends Component<Props, State> {
         this.setState({ isDateTimePickerVisible: false });
     };
 
-    public handleDatePicked = (date: any) => {
-        // const formattedDate = moment(date).format('DD-MM-YYYY');
-        let signUpDate = moment(date).format('YYYY-MM-DDTHH:mm:ss:SSZ');
+    public handleDatePicked = (date: any) => {       
+        const formattedDate = moment(date, 'DD-MM-YYYY');       
+        let signUpDate = moment(formattedDate).format('YYYY-MM-DDTHH:mm:ss:SSZ');        
         this.setState({
             dob: signUpDate,
             birthDateError: false,
@@ -88,9 +92,19 @@ class YourSelfCoachScreen extends Component<Props, State> {
             genderError,
             formatedBirthDate,
             toggleDatePicker,
+            valueOfDatePicker,
             ...basicData
         } = this.state;
+        const coachSignUpData = {
+            ...this.props.coachSignUpData,
+            ...basicData,
+            userType: this.props.userType,
+            teamcode:"te",
+            specGroup:"TestEnv",
+        }
+        this.props.signUp(coachSignUpData);
         this.props.changeCoachStep(basicData);
+   
     };
 
     private setSelectedOption = (value: string) => {
@@ -131,12 +145,6 @@ class YourSelfCoachScreen extends Component<Props, State> {
             toggleDatePicker: visible,
         });
     };
-
-    // public setDatePickerValue = (value: any) => {
-    //     this.setState({
-    //         valueOfDatePicker: value
-    //     })
-    // }
 
     render() {
         const options = ['Male', 'Female', 'Neither'];
@@ -313,11 +321,13 @@ class YourSelfCoachScreen extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-    state: state.AuthReducer,
+    userType: state.AuthReducer.userType,
+    coachSignUpData: state.AuthReducer.coachSignUpData
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
     changeCoachStep: (data: any) => dispatch(actions.changeCoachStep(data)),
+    signUp: (data: any) => dispatch(actions.signUp(data)),
 });
 
 export default connect(

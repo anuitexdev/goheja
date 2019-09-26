@@ -44,14 +44,14 @@ class PersonalInfoScreen extends Component<Props, State> {
 
     public onSubmit = async () => {
         this.props.nextStepNumber(this.state);
-       await this.setState({
-           signUpData: {
-            ...this.state.signUpData,
-            height: this.state.height,
-            weight: this.state.weight,
-            fat: this.state.fat,
-            userType: this.props.userType,
-           }
+        await this.setState({
+            signUpData: {
+                ...this.state.signUpData,
+                height: this.state.height,
+                weight: this.state.weight,
+                fat: this.state.fat,
+                userType: this.props.userType,
+            }
         });
         this.props.signUp(this.state.signUpData);
     }
@@ -138,7 +138,7 @@ class PersonalInfoScreen extends Component<Props, State> {
 
 const mapStateToProps = (state: any) => ({
     signUpData: state.AuthReducer.signUpData,
-    userType: state.AuthReducer. userType
+    userType: state.AuthReducer.userType
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

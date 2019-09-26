@@ -64,6 +64,9 @@ class CoachBasicInfoScreen extends Component<Props, State> {
     };
 
     private onSubmit = async () => {
+        await this.setState({
+        phone: this.state.updatedPhoneValue + this.state.phone,
+        });
         const { showPassword, validationObject, updatedPhoneValue, ...userDto } = this.state;
         const newValidationObject = this.validationService.validateBasicInfoForm(userDto);
         
@@ -189,7 +192,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     />
                 </View>
                 <View style={styles.nextBtnWrapper}>
-                    <TouchableOpacity style={ this.state.validationObject.formError ? styles.nextBtn : styles.nextBtnActive} onPress={this.onSubmit}>
+                    <TouchableOpacity style={styles.nextBtnActive} onPress={this.onSubmit}>
                         <Text style={styles.nextBtnText}>Next</Text>
                     </TouchableOpacity>
                 </View>

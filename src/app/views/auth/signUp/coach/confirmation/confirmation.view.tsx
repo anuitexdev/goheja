@@ -56,7 +56,7 @@ class ConfirmationScreen extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-    email: state.AuthReducer.coachSignUpData.email,
+    email: state.AuthReducer.coachSignUpData.auth,
     state: state.AuthReducer.coachSignUpData
 });
 

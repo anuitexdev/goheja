@@ -42,6 +42,12 @@ export default StyleSheet.create({
         borderColor: '#cfd8dc',
         paddingLeft: 15
     },
+    inputError: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15
+    },
     label: {
         marginBottom: 10,
         fontSize: 14,

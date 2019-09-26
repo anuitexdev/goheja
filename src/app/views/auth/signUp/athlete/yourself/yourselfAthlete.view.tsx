@@ -2,7 +2,7 @@ import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import styles from './styles';
+import styles from './yourself.styles';
 import { SegmentedControls } from 'react-native-radio-buttons';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -48,34 +48,42 @@ class YourSelfAthleteScreen extends Component<Props, State> {
 
     public handleDatePicked = (date: Date) => {
         const formattedDate = moment(date).format('DD-MM-YYYY');
-
-        const birthDateError = this.birthDateValidation(formattedDate);
+        this.setState({
+            birthDateError: false,
+        })
         let signUpDate = moment(date).format('YYYY-MM-DDTHH:mm:ss:SSZ')
         this.setState({
             dob: signUpDate,
-            birthDateError,
             formatedBirthDate: formattedDate,
         })
         this.hideDateTimePicker();
     };
 
-    private onSubmit = () => {
-        const { isDateTimePickerVisible, birthDateError, genderError,formatedBirthDate, ...basicData } = this.state;
+    private onSubmit = async () => {        
+        const genderErrorValue = this.genderValidation(this.state.gender);
+        const birthDateErrorValue = this.birthDateValidation(this.state.formatedBirthDate);
+
+        await this.setState({
+            birthDateError: birthDateErrorValue,
+            genderError: genderErrorValue,
+        });
+        if(this.state.genderError || this.state.birthDateError) {return}
+        const { isDateTimePickerVisible, birthDateError, genderError ,formatedBirthDate, ...basicData } = this.state;
         this.props.nextStepNumber(basicData);
     }
 
     private birthDateValidation(value: string) {
         if (value !== '') {
-            return true;
+            return false;
         };
-        return false;
+        return true;
     }
 
     private genderValidation(value: number) {
         if (value !== 0) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     private setSelectedOption = (value: string) => {
@@ -89,10 +97,10 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         if(value === 'Neither') {
             genderValue = 3;
         }
-
-        const genderError = this.genderValidation(genderValue);
         this.setState({
-            genderError,
+            genderError: false,
+        })
+        this.setState({
             gender: genderValue,
         });
     }
@@ -117,7 +125,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                 <TouchableOpacity onPress={this.showDateTimePicker} style={styles.datePicker}>
                                     <TextInput
                                         placeholder='Choose birth date…'
-                                        style={styles.input}
+                                        style={this.state.birthDateError ? styles.inputError : styles.input}
                                         editable={false}
                                         onFocus={this.showDateTimePicker}
                                         value={this.state.formatedBirthDate}
@@ -144,7 +152,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         backTint={'#fff'}
                                         selectedBackgroundColor={'#4D5A5F'}
                                         onSelection={this.setSelectedOption}
-                                        containerBorderTint={'#cfd8dc'}
+                                        containerBorderTint={this.state.genderError ? 'red' :  '#cfd8dc'}
                                         separatorTint={'#cfd8dc'}
                                         selectedOption={this.state.gender === 1 ? 'Male' : this.state.gender === 2 ? 'Female' : this.state.gender === 3 ? 'Neither': 'Male'}
                                         optionStyle={{ 
@@ -160,9 +168,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
 
                         <View style={styles.nextBtnWrapper}>
                             <TouchableOpacity
-                                style={this.state.birthDateError && this.state.genderError ? styles.nextBtn : styles.nextBtnDisabled}
-                                disabled={!this.state.birthDateError && !this.state.genderError}
-                                onPress={this.onSubmit}
+                                style={!this.state.birthDateError && !this.state.genderError ? styles.nextBtn : styles.nextBtnDisabled}
+                                onPress={() => this.onSubmit()}
                             >
                                 <Text style={styles.nextBtnText}>Next</Text>
                             </TouchableOpacity>

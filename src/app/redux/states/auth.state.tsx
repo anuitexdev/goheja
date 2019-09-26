@@ -17,7 +17,7 @@ let AuthDefaultState = {
         gender: '',
         height: '',
         weight: '',
-        fat: '',
+        bodyfat: '',
         dob: '',
     },
 
@@ -31,7 +31,7 @@ let AuthDefaultState = {
         units: '',
         height: '',
         weight: '',
-        fat: '',
+        bodyfat: '',
         teamcode: '',
         specGroup: '',
     }
