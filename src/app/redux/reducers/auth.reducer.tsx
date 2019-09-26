@@ -75,6 +75,12 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
                 ...action.language
             }
         }
+        case "GET_LANGUAGES_LIST": {           
+            return {
+                ...state,
+                languagesList: action.payload,
+            }
+        }
         default: return { ...state };
     }
 }

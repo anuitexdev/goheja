@@ -7,6 +7,7 @@ let AuthDefaultState = {
     language: 'English',
     translation: '',
     userType: -1,
+    languagesList: {Eng: 'English'},
     coachSignUpData:{
         firstname: '',
         lastName: '',

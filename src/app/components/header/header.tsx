@@ -1,16 +1,17 @@
-import {Component} from 'react';
-import {Text, View, Picker, TouchableOpacity} from 'react-native';
+import { Component } from 'react';
+import { Text, View, Picker, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import header from './header.style';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/auth.actions';
-import AuthReducer from '../../redux/reducers/auth.reducer';
 
 interface Props {
-  changeLanguage: (data: string) => void;
-  language: string;
+  changeLanguage: (data: string) => void,
+  getAllLanguages: () => void,
+  language: string,
+  languagesList: any
 }
 
 interface State {
@@ -26,16 +27,40 @@ class Header extends Component<Props, State> {
     };
   }
 
+  componentWillMount = () => {
+    this.props.getAllLanguages();
+  }
+
   private changeLanguage = (value: string) => {
-    this.props.changeLanguage(value);
+    this.setState({
+      language: value,
+    })
+    // this.props.changeLanguage(value);
   }
 
   private toggleDropDown = () => {
-    this.setState({dropDownIsVisible: !this.state.dropDownIsVisible})
+    this.setState({ dropDownIsVisible: !this.state.dropDownIsVisible })
   }
 
   render() {
+    const languages = [];
+    for (let key in this.props.languagesList) {
+      languages.push(
+        <TouchableOpacity
+          key={key}
+          onPress={() => this.changeLanguage(this.props.languagesList[key])}>
+          <View style={header.languageItemWrapper}  >
+            <View style={this.state.language === this.props.languagesList[key] ? header.languageItemActive : header.languageItem}>
+              <Text>{this.props.languagesList[key]}</Text>
+              <Text style={header.abbreviation}>{key}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      );
+    }
+
     return (
+
       <View
         style={{
           height: 80,
@@ -53,66 +78,43 @@ class Header extends Component<Props, State> {
           }}>
           Go Heja
         </Text>
-        <View style={{position: 'relative'}}>
+        <View style={{ position: 'relative' }}>
           <TouchableOpacity
-            style={{flexDirection: 'row', alignItems: 'center'}}
+            style={{ flexDirection: 'row', alignItems: 'center' }}
             onPress={() => this.toggleDropDown()}
-            >
+          >
             <Icon
               size={25}
               name={'language'}
-              style={{color: '#C5CACE', marginRight: 7}}
+              style={{ color: '#C5CACE', marginRight: 7 }}
             />
-            <Text style={{color: '#C5CACE', fontWeight: 'bold'}}>{this.props.language}</Text>
+            <Text style={{ color: '#C5CACE', fontWeight: 'bold' }}>{this.props.language}</Text>
             <IconMat
               size={30}
               name={'arrow-drop-down'}
-              style={{color: '#C5CACE'}}
+              style={{ color: '#C5CACE' }}
             />
           </TouchableOpacity>
           {
-            this.state.dropDownIsVisible ? 
-          <View style={header.languageDropDown}>
-            <TouchableOpacity style={header.languageItemHeader} onPress={() => this.toggleDropDown()}>
-              <Icon
-                size={25}
-                name={'language'}
-                style={{color: '#C5CACE', marginRight: 7}}
-              />
-              <Text style={{color: '#C5CACE', fontWeight: 'bold'}}>
-                {this.props.language}
-              </Text>
-              <IconMat
-                size={30}
-                name={'arrow-drop-up'}
-                style={{color: '#C5CACE'}}
-              />
-            </TouchableOpacity>
-            <View style={header.languageItemWrapper}>
-              <View style={header.languageItemActive}>
-                <Text>English</Text>
-                <Text style={header.abbreviation}>ENG</Text>
-              </View>
-            </View>
-            <View style={header.languageItemWrapper}>
-              <View style={header.languageItem}>
-                <Text>עִבְרִית</Text>
-                <Text style={header.abbreviation}>HEB</Text>
-              </View>
-            </View>
-            <View style={header.languageItemWrapper}>
-              <TouchableOpacity style={header.languageItem} onPress={() => this.changeLanguage('Русский')}>
-                <Text>Русский</Text>
-                <Text style={header.abbreviation}>RUS</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={header.languageItemWrapper}>
-              <View style={header.languageItem}>
-                <Text>العَرَبِيَّة</Text>
-                <Text style={header.abbreviation}>ARA</Text>
-              </View>
-            </View>
-          </View> : null }
+            this.state.dropDownIsVisible ?
+              <View style={header.languageDropDown}>
+                <TouchableOpacity style={header.languageItemHeader} onPress={() => this.toggleDropDown()}>
+                  <Icon
+                    size={25}
+                    name={'language'}
+                    style={{ color: '#C5CACE', marginRight: 7 }}
+                  />
+                  <Text style={{ color: '#C5CACE', fontWeight: 'bold' }}>
+                    {this.props.language}
+                  </Text>
+                  <IconMat
+                    size={30}
+                    name={'arrow-drop-up'}
+                    style={{ color: '#C5CACE' }}
+                  />
+                </TouchableOpacity>
+                {languages}
+              </View> : null}
 
         </View>
       </View>
@@ -121,11 +123,13 @@ class Header extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-  language: state.AuthReducer.language
+  language: state.AuthReducer.language,
+  languagesList: state.AuthReducer.languagesList
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
   changeLanguage: (data: string) => dispatch(actions.changeLang(data)),
+  getAllLanguages: () => dispatch(actions.getAllLanguages()),
 });
 
 export default connect(

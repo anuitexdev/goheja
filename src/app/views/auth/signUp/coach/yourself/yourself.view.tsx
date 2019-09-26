@@ -291,7 +291,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
 
                             <View style={styles.personalFormControl}>
                                 <View style={styles.labelContainer}>
-                                    <Text style={styles.labelText}>Body bodyfat %</Text>
+                                    <Text style={styles.labelText}>Body fat %</Text>
                                     <Text style={styles.prompt}>(optional)</Text>
                                 </View>
                                 <View style={styles.formControl}>
