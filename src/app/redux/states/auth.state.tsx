@@ -5,7 +5,6 @@ let AuthDefaultState = {
     currentStep: 0,
     coachCurrentStep: 0,
     language: 'English',
-    translation: '',
     userType: -1,
     languagesList: {Eng: 'English'},
     coachSignUpData:{

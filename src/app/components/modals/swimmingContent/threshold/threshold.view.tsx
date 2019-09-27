@@ -6,7 +6,6 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import threshold from './threshold.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
-import ModalReducer from '../../../../redux/reducers/modal.reducer';
 
 interface State {
   activeInputNumber: number;
@@ -150,6 +149,7 @@ class ThresholdView extends Component<Props, State> {
                   ]}
                   placeholder="0"
                   maxLength={1}
+                  keyboardType={'number-pad'}
                   onChangeText={dozentsOfSeconds =>
                     this.setValue(this.inputUnitsOfSeconds, {dozentsOfSeconds})
                   }
@@ -163,6 +163,7 @@ class ThresholdView extends Component<Props, State> {
                     {marginRight: 0},
                   ]}
                   placeholder="0"
+                  keyboardType={'number-pad'}
                   maxLength={1}
                   onChangeText={unitsOfSeconds =>
                     this.setValue(this.inputUnitsOfSeconds, {unitsOfSeconds})

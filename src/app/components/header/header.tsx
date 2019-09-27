@@ -32,20 +32,22 @@ class Header extends Component<Props, State> {
   }
 
   private changeLanguage = (value: string) => {
+    
     this.setState({
       language: value,
-    })
-    // this.props.changeLanguage(value);
+    });
+ 
+    this.props.changeLanguage(value);
   }
 
   private toggleDropDown = () => {
     this.setState({ dropDownIsVisible: !this.state.dropDownIsVisible })
   }
+  languages() {
 
-  render() {
-    const languages = [];
+    let languages = []
     for (let key in this.props.languagesList) {
-      languages.push(
+        languages.push(
         <TouchableOpacity
           key={key}
           onPress={() => this.changeLanguage(this.props.languagesList[key])}>
@@ -58,7 +60,9 @@ class Header extends Component<Props, State> {
         </TouchableOpacity>
       );
     }
-
+    return languages
+}
+  render() {
     return (
 
       <View
@@ -88,7 +92,7 @@ class Header extends Component<Props, State> {
               name={'language'}
               style={{ color: '#C5CACE', marginRight: 7 }}
             />
-            <Text style={{ color: '#C5CACE', fontWeight: 'bold' }}>{this.props.language}</Text>
+            <Text style={{ color: '#C5CACE', fontWeight: 'bold' }}>{this.state.language}</Text>
             <IconMat
               size={30}
               name={'arrow-drop-down'}
@@ -105,7 +109,7 @@ class Header extends Component<Props, State> {
                     style={{ color: '#C5CACE', marginRight: 7 }}
                   />
                   <Text style={{ color: '#C5CACE', fontWeight: 'bold' }}>
-                    {this.props.language}
+                    {this.state.language}
                   </Text>
                   <IconMat
                     size={30}
@@ -113,7 +117,11 @@ class Header extends Component<Props, State> {
                     style={{ color: '#C5CACE' }}
                   />
                 </TouchableOpacity>
-                {languages}
+                {
+                  this.props.languagesList?
+                  this.languages()
+                  : null
+                }
               </View> : null}
 
         </View>

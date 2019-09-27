@@ -15,7 +15,8 @@ export default StyleSheet.create({
         margin: 10,
         right: -15,
         top: -15,
-        padding: 10
+        padding: 10,
+        zIndex: 5,
     },
     languageItemWrapper: {
         borderBottomColor: '#CFD8DD',
@@ -52,5 +53,5 @@ export default StyleSheet.create({
     abbreviation: {
         color: '#9AA7AF',
         fontWeight: 'bold'
-    }
+    },
 })
