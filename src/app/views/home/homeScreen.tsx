@@ -4,14 +4,29 @@ import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
 import Header from '../../components/header/header';
 import SportsView from './sports/sports.view';
+import CoachFlowAfterRegView from './coachFlowAfterReg/coachFlowAfterReg.view';
 import { connect } from 'react-redux';
+import AuthReducer from '../../redux/reducers/auth.reducer';
 
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
+    userType: number
 }
 
-class HomeScreen extends Component<Props> {
+interface State {
+
+}
+
+class HomeScreen extends Component<Props, State> {
+
+    constructor(props: Props) {
+        super(props)
+        this.state = {
+
+        }
+    }
+
     static navigationOptions = {
         drawerLabel: 'Notifications',
     };
@@ -20,7 +35,14 @@ class HomeScreen extends Component<Props> {
         return (
             <View>
                 <Header />
-                <SportsView />
+                {
+                    // this.props.userType == 1 ? 
+                    // <SportsView /> :
+                    // this.props.userType == 0 ?
+                    // <CoachFlowAfterRegView/> : 
+                    // null
+                    <CoachFlowAfterRegView/>
+                }
             </View>
         );
     }
@@ -28,7 +50,7 @@ class HomeScreen extends Component<Props> {
 
 
 const mapStateToProps = (state: any) => ({
-    
+    userType: state.AuthReducer.userType
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

@@ -71,7 +71,7 @@ class Wizard extends Component<Props, State> {
       <View style={wizard.wizardWrapper}>
         <View style={wizard.fullWrapper}>
           <Text style={wizard.titleNew}>{this.props.title}</Text>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
             <View style={wizard.dotWrapper}>
               <View
                 style={

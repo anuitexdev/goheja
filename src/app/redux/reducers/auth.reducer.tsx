@@ -46,7 +46,7 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
             return {
                 ...state,
                 isWelcomeScreen: false,
-                    userType: action.userType
+                userType: action.userType
             }
         }
         case "CHANGE_STEP": {

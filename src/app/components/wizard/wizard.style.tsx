@@ -90,7 +90,11 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     titleNew: {
-textAlign: 'center'
+        textAlign: 'center',
+        color: "#99A8AF",
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 10
     },
     dotWrapper: {
         marginRight: 5
