@@ -5,16 +5,29 @@ import { Text, View, TouchableOpacity } from "react-native";
 import styles from '../../styles';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import * as actions from '../../../../redux/actions/auth.actions';
+import TranslateService from '../../../../services/translation.service';
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
     changeScreen: (role: number) => void
 }
 class WelcomeScreen extends Component<Props> {
-
-    constructor(props: Props) {
+    private translateMethod: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props);
+        this.translationService = new TranslateService();
+   
     }
+
+    componentWillMount =() => {
+        this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});  
+    }
+
+    // componentWillUnmount =() =>{
+    //     this.translationService.getTranslateMethod().unsubscribe();
+    // }
 
     public redirectToWelcome = (role: number) => {
         this.props.changeScreen(role);

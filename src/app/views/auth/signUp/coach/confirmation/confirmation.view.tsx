@@ -19,9 +19,7 @@ interface State {
 class ConfirmationScreen extends Component<Props, State> {
 
     constructor(props: Props) {
-        super(props)
-        console.log(this.props.state);
-        
+        super(props)      
 
     }
 

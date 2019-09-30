@@ -62,18 +62,10 @@ export const signIn = (userData: UserSignInData) => {
 }
 
 export const changeLang = (language: string) => {
-    return async (dispatch: any) => {
-        await AuthService.getLanguage(language).then(res => {
-
-            if (res instanceof Error) {
-                Alert.alert('doesnt have language');
-                // dispatch(failedAuth(res));
-                return;
-            }
-            dispatch(changeLanguage({language}));
-        }
-        );
-    }
+  
+    return { type: 'CHANGE_LANGUAGE',language}
+ 
+    
 }
 export const getAllLanguages = () => {
     return async (dispatch: any) => {

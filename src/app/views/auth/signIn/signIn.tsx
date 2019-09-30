@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View, TextInput } from "react-native";
+import { Text, View, TextInput, Alert } from 'react-native';
 import React from "react";
 import styles from '../styles';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
@@ -14,6 +14,7 @@ import Header from '../../../components/header/header';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FbLogin from '../../../components/fbAuth/fbAuth';
 import * as regExp from '../../../shared/validation/regexps';
+import TranslateService from '../../../services/translation.service';
 
 interface State {
     email: string,
@@ -33,10 +34,13 @@ interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
     signIn: (user: UserSignInData) => void,
     isLogged: boolean,
+    language: string,
 }
 
 class SignInScreen extends Component<Props, State> {
-    constructor(props: Props) {
+
+private translateMethod: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props);
         this.state = {
             showPassword: true,
@@ -45,7 +49,19 @@ class SignInScreen extends Component<Props, State> {
             emailError: false,
             passwordError: false,
         }
+       
     }
+
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
+    }
+
+    // componentWillUnmount = () => {
+    //     this.translationService.getTranslateMethod().unsubscribe();
+    // }
 
     private onSubmit = async () => {
         await this.props.signIn({ mail: this.state.email, psw: this.state.password, specGroup: 'gohejacode' });
@@ -95,14 +111,14 @@ class SignInScreen extends Component<Props, State> {
         return validationObject;
     }
 
-    render() {
+    render() {      
         return (
             <ScrollView>
                 <Header />
                 <View style={styles.container}>
-                    <Text style={styles.screenTitle}>Login</Text>
+                    <Text style={styles.screenTitle}>{this.translateMethod('Login')}</Text>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>Email</Text>
+                        <Text style={styles.label}>{this.translateMethod('Email')}</Text>
                         <TextInput
                             placeholder='Type your email address...'
                             style={!this.state.emailError ? styles.input : styles.inputError}
@@ -156,6 +172,7 @@ class SignInScreen extends Component<Props, State> {
 }
 const mapStateToProps = (state: any) => ({
     isLogged: state.AuthReducer.isLogged,
+    language: state.AuthReducer.language,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

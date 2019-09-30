@@ -1,11 +1,13 @@
 import { Component } from 'react';
-import { Text, View, Picker, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import header from './header.style';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/auth.actions';
+import BaseTranslateService from '../../shared/helpers/basicTranslate.service';
+import { async } from 'rxjs/internal/scheduler/async';
 
 interface Props {
   changeLanguage: (data: string) => void,
@@ -17,26 +19,30 @@ interface Props {
 interface State {
   language: string;
   dropDownIsVisible: boolean;
+  key: string,
 }
-class Header extends Component<Props, State> {
+
+
+class Header extends Component<Props, State, BaseTranslateService> {
   constructor(props: any) {
     super(props);
     this.state = {
-      language: 'English',
-      dropDownIsVisible: false
+      language: this.props.language,
+      dropDownIsVisible: false,
+      key: 'Eng',
     };
-  }
+  } 
 
   componentWillMount = () => {
     this.props.getAllLanguages();
   }
 
-  private changeLanguage = (value: string) => {
-    
-    this.setState({
+  private changeLanguage = async (value: string, key: string) => {
+    BaseTranslateService.setCurrentLanguage({ language: value });
+      await this.setState({
       language: value,
+      key,
     });
- 
     this.props.changeLanguage(value);
   }
 
@@ -47,10 +53,10 @@ class Header extends Component<Props, State> {
 
     let languages = []
     for (let key in this.props.languagesList) {
-        languages.push(
+      languages.push(
         <TouchableOpacity
           key={key}
-          onPress={() => this.changeLanguage(this.props.languagesList[key])}>
+          onPress={() => this.changeLanguage(this.props.languagesList[key], key)}>
           <View style={header.languageItemWrapper}  >
             <View style={this.state.language === this.props.languagesList[key] ? header.languageItemActive : header.languageItem}>
               <Text>{this.props.languagesList[key]}</Text>
@@ -61,7 +67,7 @@ class Header extends Component<Props, State> {
       );
     }
     return languages
-}
+  }
   render() {
     return (
 
@@ -109,7 +115,7 @@ class Header extends Component<Props, State> {
                     style={{ color: '#C5CACE', marginRight: 7 }}
                   />
                   <Text style={{ color: '#C5CACE', fontWeight: 'bold' }}>
-                    {this.state.language}
+                    {this.props.language}
                   </Text>
                   <IconMat
                     size={30}
@@ -118,9 +124,9 @@ class Header extends Component<Props, State> {
                   />
                 </TouchableOpacity>
                 {
-                  this.props.languagesList?
-                  this.languages()
-                  : null
+                  this.props.languagesList ?
+                    this.languages()
+                    : null
                 }
               </View> : null}
 

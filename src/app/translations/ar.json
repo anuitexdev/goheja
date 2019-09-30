@@ -1,3 +1,191 @@
 {
-    "hello": "أهلاً بالعالم"
+  "_id": "5d812e91780be6075d516681",
+  "languageName": "Hebrew",
+  "translation": {
+      "exposeIDE": {
+          "title": "מערכת גו-הגיה",
+          "views": {
+              "Login": {
+                  "email": "מייל",
+                  "password": "סיסמא",
+                  "buttonCaption": "כניסה",
+                  "Text": "אין לך חשבון גו-הג'ה?",
+                  "ForgotPasswordLink": "שחכת סיסמא?",
+                  "signUpLink": "הרשמה חינם",
+                  "Language": "שפה",
+                  "PrivacyPolicy": "מדיניות פרטיות",
+                  "TermsOfUse": "תנאי שימוש",
+                  "FAQ": "FAQ",
+                  "messages": {
+                      "error": "מייל או סיסמא שגויים",
+                      "success": "ok message here",
+                      "exits": "כתובת מייל כבר קיימת"
+                  }
+              },
+              "regestration": {
+                  "imCoach": "אני מאמן",
+                  "imAthlete": "אני ספורטאי",
+                  "yourBasicInfo": "מידע בסיסי",
+                  "firstNameTitle": "שם פרטי",
+                  "firstNamePlaceholder": "שם פרטי פה",
+                  "lasttNameTitle": "שם משפחה",
+                  "tellUsAboutYourself": "על עצמך..",
+                  "bithDate": "תאריל לידה",
+                  "bithDatePlaceHolder": "נא לבחור תאריך",
+                  "gender": "מין",
+                  "male": "זכר",
+                  "female": "נקבה",
+                  "iUse": "אני משתשמש ב",
+                  "height": "גובה",
+                  "weight": "משקל",
+                  "BofyFatPercentage": "אחוזי שומן",
+                  "messages": {
+                      "error": "כתובת מייל שגויה",
+                      "success": "Template with name {{name}} successfully created!",
+                      "exits": "Template with the name {{name}} already exits!"
+                  }
+              },
+              "userSetSports": {
+                  "hello": "שלום",
+                  "description": "וודאנו את המייל שלך ופתחנו חשבון בהצלחה",
+                  "title": "עדכון נתוני ספורט",
+                  "runningLacatetThreshold": "דופק סופק בריצה",
+                  "runningThresholdPace": "קצב סף ריצה",
+                  "whatsYourRunningLactaTethreshold": "סף  דופק ריצה",
+                  "whatsYourRunningThresholdPace": "סף דופק ריצה",
+                  "whatsYourCyclingFtp": "רכיבה FTP?",
+                  "cyclingLacatetThreshold": "רכיבה Lacatet Threshold",
+                  "oneHoureFlatRideMAxSpeed": "מהירות מירבית ברכיבת שעה אחת מישורית",
+                  "swimmingThresholdPace": "סף קצב שחייה",
+                  "best1000mSwimTime": "תוצאה טובה ביותר 1000 מטר",
+                  "runningAchievments": "מה היה המירוץ האחרון שהשתתפת בו",
+                  "howLongDidtheHalfMarathonTookYou": "מה התוצאה של חצי המרתון",
+                  "whatWastheAvgHeartRateDyringThathalfMarathon": "ומה היה הדופק הממוצע",
+                  "messages": {
+                      "error": "Email or PAssword is incorrect!!",
+                      "success": "ok message here",
+                      "exits": "Email allready exists"
+                  }
+              },
+              "confirmation": {
+                  "text": "אימתנו את הדואל והפעלנו את חשבונך בהצלחה",
+                  "messages": {
+                      "error": "",
+                      "success": "ok message here"
+                  }
+              },
+              "forgot-password": {
+                  "title": "שכחת סיסמא?",
+                  "text": "אל תדאג, ייקח לך כמה רגעים לאפס אותו ולחזור למסלול.",
+                  "caption": "הקלד דואר כאן",
+                  "messages": {
+                      "emailNotFound": "אימייל לא נמצא",
+                      "success": "ok message here"
+                  }
+              },
+              "regestrationNewClub": {
+                  "welcome": "ברוך הבא",
+                  "title": "בואו ניצור את המועדון שלך",
+                  "text": "אנא מלא את הטופס שלהלן למטרת ההתאמה האישית ורוח הצוות",
+                  "actionText": "הקימו את המועדון שלכם",
+                  "clubName": "שם המועדון",
+                  "caption": "שם המועדון ...",
+                  "addLogo": "הוסף <מועדון> לוגו",
+                  "uploadClubLogo": "העלה את <club> לוגו",
+                  "uploadDiffrentLogo": "העלה לוגו שונה",
+                  "WhereusuallyTeamsAreTraninig": "איפה בדכ הקבוצות מתאמנות?",
+                  "useMyCurrentLocationArea": "השתמש באזור המיקום הנוכחי שלי",
+                  "addAddressManually": "הוסף כתובת ידנית",
+                  "country": "מדינה",
+                  "countryCaption": "בחר מדינה",
+                  "address": "שם רחוב",
+                  "addressCaption": "שם רחוב...",
+                  "locateButton": "אתר",
+                  "radiusFromSelectedLocation": "רדיוס מהמיקום הנבחר",
+                  "clubWorkingDays": "<מועדון> ימי עבודה",
+                  "clubWorkingHours": "<מועדון> שעות עבודה",
+                  "days": [
+                      "א",
+                      "ב",
+                      "ג",
+                      "ד",
+                      "ה",
+                      "ו",
+                      "ש"
+                  ],
+                  "messages": {
+                      "clubNotFound": "המועדון לא נמצא",
+                      "success": "ok message here"
+                  }
+              }
+          }
+      },
+      "common": {
+          "hi": "היי",
+          "wow": "ואו",
+          "thatIsAwsome": "מג ניב!!!",
+          "youRock": "סחתיין",
+          "cycling": "רכיבה",
+          "running": "",
+          "swimming": "שחייה",
+          "iDontKnow": "לא יודע",
+          "bpm": "דופק",
+          "min": "דק",
+          "sec": "שנ",
+          "whatsYour": "מהו",
+          "WelcomeToGoHeja": "שלום שלום",
+          "confirmMessage": "שלינו מייל אישור, נא לאשר",
+          "emailTitle": "מייל",
+          "EmailPlaceHolder": "נא להקליד מייל פה",
+          "PasswordTitle": "ססמא",
+          "PasswordPlaceHolder": "ססמא פה",
+          "active": "פעיל",
+          "all": "הכל",
+          "back": "חזטר",
+          "cancel": "בטל",
+          "close": "סגור",
+          "closeWindow": "סגור חלון עכשיו",
+          "confirm": "אשר",
+          "continue": "המשך",
+          "create": "צור",
+          "delete": "מחק",
+          "description": "תאור",
+          "edit": "ערוך",
+          "errorOccurred": "אופס! אירעה שגיאה לא צפויה. אנא הפעל מחדש את התוכנית או צור קשר עם התמיכה שלנו",
+          "finish": "סיים",
+          "from": "מ",
+          "goTo": "ל",
+          "headline": "Caption",
+          "new": "חדש",
+          "next": "הבא",
+          "no": "לא",
+          "noAddress": "אין כתובת",
+          "noEmail": "אין מייל",
+          "noHeadline": "Missing headline",
+          "noInternalDescription": "Missing int. description",
+          "noName": "חסר שם",
+          "noPhone": "חסר מספר טלפון",
+          "ok": "אוקי",
+          "others": "אחרים",
+          "password": "",
+          "reloadPage": "טען דף",
+          "reset": "אתחל",
+          "restart": "אתחל מחדש",
+          "runningSetup": "Running setup. Please wait.",
+          "salutationOptions": "Ms|Miss|Mrs|Mr",
+          "save": "שמור",
+          "search": "חפש",
+          "select": "בחר",
+          "selected": "בחור",
+          "skip": "דלג",
+          "start": "התחלה",
+          "send": "שלח",
+          "stop": "עצור",
+          "to": "ל",
+          "today": "היום",
+          "unknown": "לא ידוע",
+          "yes": "כן",
+          "optional": "אופציונאלי"
+      }
   }
+}
