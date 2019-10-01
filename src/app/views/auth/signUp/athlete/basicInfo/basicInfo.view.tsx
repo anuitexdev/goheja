@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
 import ValidationService from '../../../../../shared/validation/validation.service'
+import TranslateService from '../../../../../services/translation.service';
 
 interface State {
     firstname: string,
@@ -34,8 +35,9 @@ interface Props {
 class BasicInfoAthleteScreen extends Component<Props, State> {
 
     private validationService = new ValidationService();
-
-    constructor(props: Props) {
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props);
 
         this.state = {
@@ -56,6 +58,16 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
         }
     }
 
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
+    }
+
+    componentWillUnmount = () => {
+        this.languageSubscription.unsubscribe();
+    }
 
     private toggleSwitch = () => {
         this.setState({ showPassword: !this.state.showPassword });
@@ -97,35 +109,35 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.screenTitle}>Your basic info</Text>
+                <Text style={styles.screenTitle}>{this.translateMethod('translation.exposeIDE.views.regestration.yourBasicInfo')}</Text>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>First Name</Text>
+                    <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.firstNameTitle')}</Text>
                     <TextInput
-                        placeholder='Type your first name...'
+                        placeholder={this.translateMethod('translation.exposeIDE.views.regestration.firstNamePlaceholder')}
                         style={this.state.errors.firstname ? styles.inputError : styles.input}
                         onChangeText={(firstname) => this.handleChange({ firstname })}
                     ></TextInput>
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Last Name</Text>
+                    <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.lasttNameTitle')}</Text>
                     <TextInput
-                        placeholder='Type your last name...'
+                        placeholder='Type your last name'
                         style={this.state.errors.lastName ? styles.inputError : styles.input}
                         onChangeText={(lastName) => this.handleChange({ lastName })}
                     ></TextInput>
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Email Address</Text>
+                    <Text style={styles.label}>{this.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
                     <TextInput
-                        placeholder='Type your email address...'
+                        placeholder={this.translateMethod('translation.common.EmailPlaceHolder')}
                         style={this.state.errors.auth ? styles.inputError : styles.input}
                         onChangeText={(auth) => this.handleChange({ auth })}
                     ></TextInput>
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Password</Text>
+                    <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                     <TextInput
-                        placeholder='Type your password...'
+                        placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
                         style={this.state.errors.password ? styles.inputError : styles.input}
                         onChangeText={(password) => this.handleChange({ password })}
@@ -140,7 +152,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                 <View style={styles.formField}>
                     <Text style={styles.label}>Confirm Password</Text>
                     <TextInput
-                        placeholder='Type your password...'
+                        placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
                         style={this.state.errors.confirmPassword ? styles.inputError : styles.input}
                         onChangeText={(confirmPassword) => this.handleChange({ confirmPassword })}
@@ -157,7 +169,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                         style={styles.nextBtn}
                         onPress={this.onSubmit}
                     >
-                        <Text style={styles.nextBtnText}>Next</Text>
+                        <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

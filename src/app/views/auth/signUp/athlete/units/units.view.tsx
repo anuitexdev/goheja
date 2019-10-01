@@ -4,6 +4,7 @@ import React from "react";
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
+import TranslateService from '../../../../../services/translation.service';
 
 interface Props {
     nextStepNumber: (nextStepData: any) => void,
@@ -17,14 +18,27 @@ interface State {
 }
 
 class UnitsAthleteScreen extends Component<Props, State> {
-
-    constructor(props: Props) {
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props,  private translationService: TranslateService) {
         super(props)
         this.state = {
             isActive: false,
             unitError: false,
             units: ''
         }
+    }
+
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+          this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
+            
+    }
+
+    componentWillUnmount =() => {
+        this.languageSubscription.unsubscribe();
     }
 
     private unitValidation(value: string) {
@@ -55,24 +69,24 @@ class UnitsAthleteScreen extends Component<Props, State> {
                 <ScrollView>
 
                     <View style={styles.container}>
-                        <Text style={styles.pageHeader}>Tell us about your units</Text>
+                        <Text style={styles.pageHeader}>{this.translateMethod('translation.exposeIDE.views.regestration.tellUsAboutYourself')}</Text>
                         <View>
                         <View style={styles.btnContainer}>
 
                         <TouchableOpacity style={this.state.isActive ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('ml')}>
-                            <Text style={this.state.isActive ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>I use</Text>
+                            <Text style={this.state.isActive ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
                             <Text style={this.state.isActive ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> ml</Text>
                         </TouchableOpacity>
         
                         <TouchableOpacity style={!this.state.isActive ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('km')}>
-                            <Text style={!this.state.isActive ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>I use</Text>
+                            <Text style={!this.state.isActive ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
                             <Text style={!this.state.isActive ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> km</Text>
                         </TouchableOpacity>
                     </View>
                         </View>
                         <View style={styles.nextBtnWrapper}>
                             <TouchableOpacity style={this.state.unitError ? styles.nextBtn : styles.nextBtnDisabled} disabled={!this.state.unitError} onPress={this.onSubmit}>
-                                <Text style={styles.nextBtnText}>Next</Text>
+                                <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

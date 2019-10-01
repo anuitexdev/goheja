@@ -13,6 +13,7 @@ interface Props {
 }
 class WelcomeScreen extends Component<Props> {
     private translateMethod: any;
+    private languageSubscription: any; 
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
         this.translationService = new TranslateService();
@@ -20,14 +21,14 @@ class WelcomeScreen extends Component<Props> {
     }
 
     componentWillMount =() => {
-        this.translationService.getTranslateMethod().subscribe(res => {
+    this.languageSubscription =  this.translationService.getTranslateMethod().subscribe(res => {
             this.forceUpdate();
             this.translateMethod = res});  
     }
 
-    // componentWillUnmount =() =>{
-    //     this.translationService.getTranslateMethod().unsubscribe();
-    // }
+    componentWillUnmount =() =>{
+       this.languageSubscription.unsubscribe();
+    }
 
     public redirectToWelcome = (role: number) => {
         this.props.changeScreen(role);
@@ -37,20 +38,20 @@ class WelcomeScreen extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Welcome to{"\n"} Go-heja</Text>
+                <Text style={styles.title}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.welcome')}</Text>
 
                 <View style={styles.buttonVariants}>
                     <TouchableOpacity
                         style={styles.welcomeButtons}
                         onPress={() => this.redirectToWelcome(0)}>
                         <Text style={styles.buttonText}
-                        >I’m an Coach</Text>
+                        >{this.translateMethod('translation.exposeIDE.views.regestration.imCoach')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.welcomeButtons}
                         onPress={() => this.redirectToWelcome(1)}>
                         <Text style={styles.buttonText}
-                        >I’m an Athlete</Text>
+                        >{this.translateMethod('translation.exposeIDE.views.regestration.imAthlete')}</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.accountContainer}>
@@ -58,7 +59,7 @@ class WelcomeScreen extends Component<Props> {
                         Already got a Go-heja account?
                 </Text>
                     <TouchableOpacity>
-                        <Text style={styles.loginButton} onPress={this.signInRedirect}>Login</Text>
+                        <Text style={styles.loginButton} onPress={this.signInRedirect}>{this.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

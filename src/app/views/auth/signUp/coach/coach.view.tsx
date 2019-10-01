@@ -19,21 +19,19 @@ interface Props {
 class CoachScreen extends Component<Props> {
 
     constructor(props: Props) {
-        super(props)  
-        
+        super(props)
     }
 
     render() {
-
         return (
             <Fragment>
                 <ScrollView>
-                {   this.props.currentStep === 0 ? <CoachBasicInfoScreen/>:
-                    this.props.currentStep === 1 ? <UnitsCoachScreen/> :
-                    this.props.currentStep === 2 ? <YourSelfCoachScreen/> :
-                    this.props.currentStep === 3 ? <ConfirmationScreen/> :
-                    null
-                }
+                    {this.props.currentStep === 0 ? <CoachBasicInfoScreen /> :
+                        this.props.currentStep === 1 ? <UnitsCoachScreen /> :
+                            this.props.currentStep === 2 ? <YourSelfCoachScreen /> :
+                                this.props.currentStep === 3 ? <ConfirmationScreen /> :
+                                    null
+                    }
 
                 </ScrollView>
             </Fragment>

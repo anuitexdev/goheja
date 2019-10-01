@@ -7,7 +7,6 @@ import header from './header.style';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/auth.actions';
 import BaseTranslateService from '../../shared/helpers/basicTranslate.service';
-import { async } from 'rxjs/internal/scheduler/async';
 
 interface Props {
   changeLanguage: (data: string) => void,
@@ -35,15 +34,17 @@ class Header extends Component<Props, State, BaseTranslateService> {
 
   componentWillMount = () => {
     this.props.getAllLanguages();
+  
   }
 
   private changeLanguage = async (value: string, key: string) => {
     BaseTranslateService.setCurrentLanguage({ language: value });
+     await this.props.changeLanguage(value);
       await this.setState({
       language: value,
       key,
     });
-    this.props.changeLanguage(value);
+  
   }
 
   private toggleDropDown = () => {
@@ -98,7 +99,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
               name={'language'}
               style={{ color: '#C5CACE', marginRight: 7 }}
             />
-            <Text style={{ color: '#C5CACE', fontWeight: 'bold' }}>{this.state.language}</Text>
+            <Text style={{ color: '#C5CACE', fontWeight: 'bold' }}>{this.props.language}</Text>
             <IconMat
               size={30}
               name={'arrow-drop-down'}

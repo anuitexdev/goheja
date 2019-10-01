@@ -60,6 +60,8 @@ private translateMethod: any;
     }
 
     // componentWillUnmount = () => {
+    //     console.log('signIn----------------');
+        
     //     this.translationService.getTranslateMethod().unsubscribe();
     // }
 
@@ -112,23 +114,24 @@ private translateMethod: any;
     }
 
     render() {      
+     
         return (
             <ScrollView>
                 <Header />
                 <View style={styles.container}>
-                    <Text style={styles.screenTitle}>{this.translateMethod('Login')}</Text>
+                    <Text style={styles.screenTitle}>{this.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>{this.translateMethod('Email')}</Text>
+                        <Text style={styles.label}>{this.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
                         <TextInput
-                            placeholder='Type your email address...'
+                            placeholder={this.translateMethod('translation.common.EmailPlaceHolder')}
                             style={!this.state.emailError ? styles.input : styles.inputError}
                             onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>Password</Text>
+                        <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                         <TextInput
-                            placeholder='Type your password...'
+                            placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
                             secureTextEntry={this.state.showPassword}
                             onChangeText={(password) => this.handleChange({ password, email: this.state.email, type: 'password' })}
                             style={!this.state.passwordError ? styles.input : styles.inputError}
@@ -144,22 +147,22 @@ private translateMethod: any;
                         this.state.emailError || this.state.passwordError ?
                             <View style={styles.signInErrors}>
                                 <Text style={styles.textErrors}>
-                                    Email or Password is incorrect
+                                  {this.translateMethod('translation.exposeIDE.views.Login.messages.error')}
                         </Text>
                             </View> : null
                     }
                     <View style={styles.links}>
-                        <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
+                        <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>{this.translateMethod('translation.exposeIDE.views.Login.ForgotPasswordLink')}</Text>
                         <TouchableOpacity
                             style={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn}
                             onPress={this.onSubmit}
                             disabled={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === ''}>
-                            <Text style={styles.signInText}>Login</Text>
+                            <Text style={styles.signInText}>{this.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.signUpRedirect}>
-                        <Text style={styles.haveAccount}>Don’t have a Go-heja account?</Text>
-                        <Text style={styles.signUpLink} onPress={this.signUpRedirect}>Signup for free</Text>
+                        <Text style={styles.haveAccount}>{this.translateMethod('translation.exposeIDE.views.Login.Text')}</Text>
+                        <Text style={styles.signUpLink} onPress={this.signUpRedirect}>{this.translateMethod('translation.exposeIDE.views.Login.signUpLink')}</Text>
                     </View>
                     <View style={styles.fbContainer}>
                     <FbLogin />

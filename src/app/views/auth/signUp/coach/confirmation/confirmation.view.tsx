@@ -4,6 +4,7 @@ import React from "react";
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import styles from './confirmation.style';
 import * as actions from '../../../../../redux/actions/auth.actions';
+import TranslateService from '../../../../../services/translation.service';
 
 interface Props {
     changeCoachStep: (data: any) => void,
@@ -18,9 +19,21 @@ interface State {
 
 class ConfirmationScreen extends Component<Props, State> {
 
-    constructor(props: Props) {
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props)      
+    }
 
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
+    }
+
+    componentWillUnmount = () => {
+        this.languageSubscription.unsubscribe();
     }
 
     render() {
@@ -42,7 +55,7 @@ class ConfirmationScreen extends Component<Props, State> {
                             <TouchableOpacity
                                 style={styles.nextBtn}
                             >
-                                <Text style={styles.sendText}>Send again</Text>
+                                <Text style={styles.sendText}>{this.translateMethod('translation.common.send')}</Text>
                             </TouchableOpacity>
                         </View>
 
