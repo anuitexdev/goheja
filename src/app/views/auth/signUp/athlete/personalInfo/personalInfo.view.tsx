@@ -4,7 +4,7 @@ import React from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
-import AuthReducer from '../../../../../redux/reducers/auth.reducer';
+import TranslateService from '../../../../../services/translation.service';
 
 interface Props {
     nextStepNumber: (nextStepData: any) => void,
@@ -23,8 +23,9 @@ interface State {
 
 
 class PersonalInfoScreen extends Component<Props, State> {
-
-    constructor(props: Props) {
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props)
 
         this.state = {
@@ -36,6 +37,17 @@ class PersonalInfoScreen extends Component<Props, State> {
         }
     }
 
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+     this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
+    }
+
+    componentWillUnmount = () => {
+        this.languageSubscription.unsubscribe();
+    }
+
     public onInputChange = async (value: any) => {
         await this.setState({
             ...value,
@@ -44,14 +56,14 @@ class PersonalInfoScreen extends Component<Props, State> {
 
     public onSubmit = async () => {
         this.props.nextStepNumber(this.state);
-       await this.setState({
-           signUpData: {
-            ...this.state.signUpData,
-            height: this.state.height,
-            weight: this.state.weight,
-            fat: this.state.fat,
-            userType: this.props.userType,
-           }
+        await this.setState({
+            signUpData: {
+                ...this.state.signUpData,
+                height: this.state.height,
+                weight: this.state.weight,
+                fat: this.state.fat,
+                userType: this.props.userType,
+            }
         });
         this.props.signUp(this.state.signUpData);
     }
@@ -68,8 +80,8 @@ class PersonalInfoScreen extends Component<Props, State> {
 
                         <View style={styles.personalFormControl}>
                             <View style={styles.labelContainer}>
-                                <Text style={styles.labelText}>Height</Text>
-                                <Text style={styles.prompt}>(optional)</Text>
+                                <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.height')}</Text>
+                                <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
@@ -84,8 +96,8 @@ class PersonalInfoScreen extends Component<Props, State> {
 
                         <View style={styles.personalFormControl}>
                             <View style={styles.labelContainer}>
-                                <Text style={styles.labelText}>Weight</Text>
-                                <Text style={styles.prompt}>(optional)</Text>
+                                <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.weight')}</Text>
+                                <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
@@ -100,8 +112,8 @@ class PersonalInfoScreen extends Component<Props, State> {
 
                         <View style={styles.personalFormControl}>
                             <View style={styles.labelContainer}>
-                                <Text style={styles.labelText}>Body fat %</Text>
-                                <Text style={styles.prompt}>(optional)</Text>
+                                <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.BofyFatPercentage')} %</Text>
+                                <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
@@ -119,13 +131,13 @@ class PersonalInfoScreen extends Component<Props, State> {
                                 style={styles.skipWrapper}
                                 onPress={this.onSubmit}
                             >
-                                <Text>Skip ></Text>
+                                <Text>{this.translateMethod('translation.common.skip')} ></Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.nextBtn}
                                 onPress={this.onSubmit}
                             >
-                                <Text style={styles.nextBtnText}>Next</Text>
+                                <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
                             </TouchableOpacity>
                         </View>
 
@@ -138,7 +150,7 @@ class PersonalInfoScreen extends Component<Props, State> {
 
 const mapStateToProps = (state: any) => ({
     signUpData: state.AuthReducer.signUpData,
-    userType: state.AuthReducer. userType
+    userType: state.AuthReducer.userType
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

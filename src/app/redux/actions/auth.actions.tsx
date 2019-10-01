@@ -37,6 +37,9 @@ export const changeCoachStep = (payload: any) => {
 export const changeLanguage = (payload: any) => {
     return { type: 'CHANGE_LANGUAGE', payload}
 }
+export const getLanguages = (payload: any) => {
+    return { type: 'GET_LANGUAGES_LIST', payload}
+}
 
 export const signIn = (userData: UserSignInData) => {
     return async (dispatch: any) => {
@@ -58,16 +61,22 @@ export const signIn = (userData: UserSignInData) => {
     }
 }
 
-export const changeLang = (data: string) => {
+export const changeLang = (language: string) => {
+  
+    return { type: 'CHANGE_LANGUAGE',language}
+ 
+    
+}
+export const getAllLanguages = () => {
     return async (dispatch: any) => {
-        await AuthService.getLanguage(data).then(res => {
+        await AuthService.getAllLanguages().then(res => {
 
             if (res instanceof Error) {
                 Alert.alert('doesnt have language');
                 // dispatch(failedAuth(res));
                 return;
             }
-            dispatch(changeLanguage({translation: res.data.toString(), language: data}));
+            dispatch(getLanguages( res.data));
         }
         );
     }

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View, TextInput } from "react-native";
+import { Text, View, TextInput, Alert } from 'react-native';
 import React from "react";
 import styles from '../styles';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
@@ -14,6 +14,7 @@ import Header from '../../../components/header/header';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FbLogin from '../../../components/fbAuth/fbAuth';
 import * as regExp from '../../../shared/validation/regexps';
+import TranslateService from '../../../services/translation.service';
 
 interface State {
     email: string,
@@ -33,10 +34,13 @@ interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
     signIn: (user: UserSignInData) => void,
     isLogged: boolean,
+    language: string,
 }
 
 class SignInScreen extends Component<Props, State> {
-    constructor(props: Props) {
+
+private translateMethod: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props);
         this.state = {
             showPassword: true,
@@ -45,7 +49,21 @@ class SignInScreen extends Component<Props, State> {
             emailError: false,
             passwordError: false,
         }
+       
     }
+
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
+    }
+
+    // componentWillUnmount = () => {
+    //     console.log('signIn----------------');
+        
+    //     this.translationService.getTranslateMethod().unsubscribe();
+    // }
 
     private onSubmit = async () => {
         await this.props.signIn({ mail: this.state.email, psw: this.state.password, specGroup: 'gohejacode' });
@@ -95,24 +113,25 @@ class SignInScreen extends Component<Props, State> {
         return validationObject;
     }
 
-    render() {
+    render() {      
+     
         return (
             <ScrollView>
                 <Header />
                 <View style={styles.container}>
-                    <Text style={styles.screenTitle}>Login</Text>
+                    <Text style={styles.screenTitle}>{this.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>Email</Text>
+                        <Text style={styles.label}>{this.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
                         <TextInput
-                            placeholder='Type your email address...'
+                            placeholder={this.translateMethod('translation.common.EmailPlaceHolder')}
                             style={!this.state.emailError ? styles.input : styles.inputError}
                             onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>Password</Text>
+                        <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                         <TextInput
-                            placeholder='Type your password...'
+                            placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
                             secureTextEntry={this.state.showPassword}
                             onChangeText={(password) => this.handleChange({ password, email: this.state.email, type: 'password' })}
                             style={!this.state.passwordError ? styles.input : styles.inputError}
@@ -128,22 +147,22 @@ class SignInScreen extends Component<Props, State> {
                         this.state.emailError || this.state.passwordError ?
                             <View style={styles.signInErrors}>
                                 <Text style={styles.textErrors}>
-                                    Email or Password is incorrect
+                                  {this.translateMethod('translation.exposeIDE.views.Login.messages.error')}
                         </Text>
                             </View> : null
                     }
                     <View style={styles.links}>
-                        <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>Forgot your password?</Text>
+                        <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>{this.translateMethod('translation.exposeIDE.views.Login.ForgotPasswordLink')}</Text>
                         <TouchableOpacity
                             style={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn}
                             onPress={this.onSubmit}
                             disabled={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === ''}>
-                            <Text style={styles.signInText}>Login</Text>
+                            <Text style={styles.signInText}>{this.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.signUpRedirect}>
-                        <Text style={styles.haveAccount}>Don’t have a Go-heja account?</Text>
-                        <Text style={styles.signUpLink} onPress={this.signUpRedirect}>Signup for free</Text>
+                        <Text style={styles.haveAccount}>{this.translateMethod('translation.exposeIDE.views.Login.Text')}</Text>
+                        <Text style={styles.signUpLink} onPress={this.signUpRedirect}>{this.translateMethod('translation.exposeIDE.views.Login.signUpLink')}</Text>
                     </View>
                     <View style={styles.fbContainer}>
                     <FbLogin />
@@ -156,6 +175,7 @@ class SignInScreen extends Component<Props, State> {
 }
 const mapStateToProps = (state: any) => ({
     isLogged: state.AuthReducer.isLogged,
+    language: state.AuthReducer.language,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

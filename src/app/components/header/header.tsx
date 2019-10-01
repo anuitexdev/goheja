@@ -1,41 +1,77 @@
-import {Component} from 'react';
-import {Text, View, Picker, TouchableOpacity} from 'react-native';
+import { Component } from 'react';
+import { Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import header from './header.style';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/auth.actions';
-import AuthReducer from '../../redux/reducers/auth.reducer';
+import BaseTranslateService from '../../shared/helpers/basicTranslate.service';
 
 interface Props {
-  changeLanguage: (data: string) => void;
-  language: string;
+  changeLanguage: (data: string) => void,
+  getAllLanguages: () => void,
+  language: string,
+  languagesList: any
 }
 
 interface State {
   language: string;
   dropDownIsVisible: boolean;
+  key: string,
 }
-class Header extends Component<Props, State> {
+
+
+class Header extends Component<Props, State, BaseTranslateService> {
   constructor(props: any) {
     super(props);
     this.state = {
-      language: 'English',
-      dropDownIsVisible: false
+      language: this.props.language,
+      dropDownIsVisible: false,
+      key: 'Eng',
     };
+  } 
+
+  componentWillMount = () => {
+    this.props.getAllLanguages();
+  
   }
 
-  private changeLanguage = (value: string) => {
-    this.props.changeLanguage(value);
+  private changeLanguage = async (value: string, key: string) => {
+    BaseTranslateService.setCurrentLanguage({ language: value });
+     await this.props.changeLanguage(value);
+      await this.setState({
+      language: value,
+      key,
+    });
+  
   }
 
   private toggleDropDown = () => {
-    this.setState({dropDownIsVisible: !this.state.dropDownIsVisible})
+    this.setState({ dropDownIsVisible: !this.state.dropDownIsVisible })
   }
+  languages() {
 
+    let languages = []
+    for (let key in this.props.languagesList) {
+      languages.push(
+        <TouchableOpacity
+          key={key}
+          onPress={() => this.changeLanguage(this.props.languagesList[key], key)}>
+          <View style={header.languageItemWrapper}  >
+            <View style={this.state.language === this.props.languagesList[key] ? header.languageItemActive : header.languageItem}>
+              <Text>{this.props.languagesList[key]}</Text>
+              <Text style={header.abbreviation}>{key}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      );
+    }
+    return languages
+  }
   render() {
     return (
+
       <View
         style={{
           height: 80,
@@ -53,66 +89,47 @@ class Header extends Component<Props, State> {
           }}>
           Go Heja
         </Text>
-        <View style={{position: 'relative'}}>
+        <View style={{ position: 'relative' }}>
           <TouchableOpacity
-            style={{flexDirection: 'row', alignItems: 'center'}}
+            style={{ flexDirection: 'row', alignItems: 'center' }}
             onPress={() => this.toggleDropDown()}
-            >
+          >
             <Icon
               size={25}
               name={'language'}
-              style={{color: '#C5CACE', marginRight: 7}}
+              style={{ color: '#C5CACE', marginRight: 7 }}
             />
-            <Text style={{color: '#C5CACE', fontWeight: 'bold'}}>{this.props.language}</Text>
+            <Text style={{ color: '#C5CACE', fontWeight: 'bold' }}>{this.props.language}</Text>
             <IconMat
               size={30}
               name={'arrow-drop-down'}
-              style={{color: '#C5CACE'}}
+              style={{ color: '#C5CACE' }}
             />
           </TouchableOpacity>
           {
-            this.state.dropDownIsVisible ? 
-          <View style={header.languageDropDown}>
-            <TouchableOpacity style={header.languageItemHeader} onPress={() => this.toggleDropDown()}>
-              <Icon
-                size={25}
-                name={'language'}
-                style={{color: '#C5CACE', marginRight: 7}}
-              />
-              <Text style={{color: '#C5CACE', fontWeight: 'bold'}}>
-                {this.props.language}
-              </Text>
-              <IconMat
-                size={30}
-                name={'arrow-drop-up'}
-                style={{color: '#C5CACE'}}
-              />
-            </TouchableOpacity>
-            <View style={header.languageItemWrapper}>
-              <View style={header.languageItemActive}>
-                <Text>English</Text>
-                <Text style={header.abbreviation}>ENG</Text>
-              </View>
-            </View>
-            <View style={header.languageItemWrapper}>
-              <View style={header.languageItem}>
-                <Text>עִבְרִית</Text>
-                <Text style={header.abbreviation}>HEB</Text>
-              </View>
-            </View>
-            <View style={header.languageItemWrapper}>
-              <TouchableOpacity style={header.languageItem} onPress={() => this.changeLanguage('Русский')}>
-                <Text>Русский</Text>
-                <Text style={header.abbreviation}>RUS</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={header.languageItemWrapper}>
-              <View style={header.languageItem}>
-                <Text>العَرَبِيَّة</Text>
-                <Text style={header.abbreviation}>ARA</Text>
-              </View>
-            </View>
-          </View> : null }
+            this.state.dropDownIsVisible ?
+              <View style={header.languageDropDown}>
+                <TouchableOpacity style={header.languageItemHeader} onPress={() => this.toggleDropDown()}>
+                  <Icon
+                    size={25}
+                    name={'language'}
+                    style={{ color: '#C5CACE', marginRight: 7 }}
+                  />
+                  <Text style={{ color: '#C5CACE', fontWeight: 'bold' }}>
+                    {this.props.language}
+                  </Text>
+                  <IconMat
+                    size={30}
+                    name={'arrow-drop-up'}
+                    style={{ color: '#C5CACE' }}
+                  />
+                </TouchableOpacity>
+                {
+                  this.props.languagesList ?
+                    this.languages()
+                    : null
+                }
+              </View> : null}
 
         </View>
       </View>
@@ -121,11 +138,13 @@ class Header extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-  language: state.AuthReducer.language
+  language: state.AuthReducer.language,
+  languagesList: state.AuthReducer.languagesList
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
   changeLanguage: (data: string) => dispatch(actions.changeLang(data)),
+  getAllLanguages: () => dispatch(actions.getAllLanguages()),
 });
 
 export default connect(

@@ -11,6 +11,7 @@ import window from '../../../../../theme/variables';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import ValidationService from '../../../../../shared/validation/validation.service';
 import { countries } from '../../../../../shared/helpers/countryWithCodes.list';
+import TranslateService from '../../../../../services/translation.service';
 
 
 interface State {
@@ -33,8 +34,9 @@ interface Props {
 class CoachBasicInfoScreen extends Component<Props, State> {
 
     private validationService = new ValidationService();
-
-    constructor(props: Props) {
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props);
 
         this.state = {
@@ -59,11 +61,26 @@ class CoachBasicInfoScreen extends Component<Props, State> {
         }
     }
 
+
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
+    }
+
+    componentWillUnmount = () => {
+        this.languageSubscription.unsubscribe();
+    }
+
     private toggleSwitch = () => {
         this.setState({ showPassword: !this.state.showPassword });
     };
 
     private onSubmit = async () => {
+        await this.setState({
+        phone: this.state.updatedPhoneValue + this.state.phone,
+        });
         const { showPassword, validationObject, updatedPhoneValue, ...userDto } = this.state;
         const newValidationObject = this.validationService.validateBasicInfoForm(userDto);
         
@@ -96,11 +113,11 @@ class CoachBasicInfoScreen extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.screenTitle}>Your basic info</Text>
+                <Text style={styles.screenTitle}>{this.translateMethod('translation.exposeIDE.views.regestration.yourBasicInfo')}</Text>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>First Name</Text>
+                    <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.firstNameTitle')}</Text>
                     <TextInput
-                        placeholder="Type your first name..."
+                        placeholder={this.translateMethod('translation.exposeIDE.views.regestration.firstNamePlaceholder')}
                         value ={this.state.firstname}
                         style={ this.state.validationObject.firstname ? styles.inputError : styles.input}
                         onChangeText={firstname =>
@@ -108,7 +125,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         }></TextInput>
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Last Name</Text>
+                    <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.lasttNameTitle')}</Text>
                     <TextInput
                         value ={this.state.lastName}
                         placeholder="Type your last name..."
@@ -118,9 +135,9 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         }></TextInput>
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Email</Text>
+                    <Text style={styles.label}>{this.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
                     <TextInput
-                        placeholder="Type your email address..."
+                        placeholder={this.translateMethod('translation.common.EmailPlaceHolder')}
                         value ={this.state.auth}
                         style={this.state.validationObject.auth ? styles.inputError : styles.input }
                         onChangeText={auth => this.handleChange({ auth })}></TextInput>
@@ -155,9 +172,9 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                 </View>
 
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Password</Text>
+                    <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                     <TextInput
-                        placeholder="Type your password..."
+                        placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
                         value ={this.state.password}
                         style={this.state.validationObject.password ? styles.inputError : styles.input}
@@ -173,7 +190,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                 <View style={styles.formField}>
                     <Text style={styles.label}>Password Confirmation</Text>
                     <TextInput
-                        placeholder="Type your password..."
+                        placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
                         value={this.state.confirmPassword}
                         style={this.state.validationObject.confirmPassword ? styles.inputError : styles.input}
@@ -189,8 +206,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     />
                 </View>
                 <View style={styles.nextBtnWrapper}>
-                    <TouchableOpacity style={ this.state.validationObject.formError ? styles.nextBtn : styles.nextBtnActive} onPress={this.onSubmit}>
-                        <Text style={styles.nextBtnText}>Next</Text>
+                    <TouchableOpacity style={styles.nextBtnActive} onPress={this.onSubmit}>
+                        <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -33,4 +33,22 @@ export default class ValidationService {
 
         return resultObject;
     }
+
+    public signUpAthleteValidation(email: string, password: string, fname: string, lname: string, confirmPassword: string) {
+        const validationObject = {
+            mailError: !regExps.mailReqExp.test(email),
+            passwordError: password == '',
+            fNameError: !regExps.firstNameRegExp.test(fname),
+            lNameError: !regExps.lastNameRegExp.test(lname),
+            confPassError: password !== confirmPassword || password === '' || confirmPassword === '',
+            formError: false,
+        }
+
+
+        for (let key in validationObject) {
+            validationObject.formError = validationObject.formError || validationObject[key];
+        }
+
+        return validationObject;
+    }
 }

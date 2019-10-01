@@ -5,6 +5,7 @@ import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 
 import connectTeam from './connectTeam.style';
 import * as actions from '../../../../../redux/actions/auth.actions';
+import TranslateService from '../../../../../services/translation.service';
 
 interface Props {
     nextStepNumber: (data: any) => void,
@@ -18,13 +19,25 @@ interface State {
 
 
 class SuccessRegisterScreen extends Component<Props, State> {
-
-    constructor(props: Props) {
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props)
-
         this.state = {
             groupCode: ''
         }
+
+    }
+
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+       this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
+    }
+
+    componentWillUnmount =() => {
+        this.languageSubscription.unsubscribe();
     }
 
     private setGroupCode = async (code: string) => {
@@ -58,13 +71,13 @@ class SuccessRegisterScreen extends Component<Props, State> {
                         style={connectTeam.skipWrapper}
                         onPress={() =>this.sendCode('')}
                         >
-                            <Text style={{ fontFamily: 'Roboto-Regular' }}>Skip ></Text>
+                            <Text style={{ fontFamily: 'Roboto-Regular' }}>{this.translateMethod('translation.common.skip')} ></Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         style={connectTeam.nextBtn} 
                         onPress={() =>this.sendCode(this.state.groupCode)}
                         >
-                            <Text style={connectTeam.nextBtnText}>Next</Text>
+                            <Text style={connectTeam.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

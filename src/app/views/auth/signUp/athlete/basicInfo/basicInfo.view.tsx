@@ -6,7 +6,8 @@ import styles from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
-import * as regExps from '../../../../../shared/validation/regexps';
+import ValidationService from '../../../../../shared/validation/validation.service'
+import TranslateService from '../../../../../services/translation.service';
 
 interface State {
     firstname: string,
@@ -16,11 +17,12 @@ interface State {
     confirmPassword: string,
     showPassword: boolean,
     errors: {
-        firstNameError: boolean,
-        lastNameError: boolean,
-        emailError: boolean,
-        passwordError: boolean,
-        confirmPasswordError: boolean
+        auth: boolean,
+        firstname: boolean,
+        lastName: boolean,
+        password: boolean,
+        confirmPassword: boolean,
+        formError: boolean,
     }
 }
 
@@ -32,7 +34,10 @@ interface Props {
 
 class BasicInfoAthleteScreen extends Component<Props, State> {
 
-    constructor(props: Props) {
+    private validationService = new ValidationService();
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props);
 
         this.state = {
@@ -43,88 +48,98 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
             password: '',
             showPassword: true,
             errors: {
-                emailError: false,
-                firstNameError: false,
-                lastNameError: false,
-                passwordError: false,
-                confirmPasswordError: false
+                auth: false,
+                firstname: false,
+                lastName: false,
+                password: false,
+                confirmPassword: false,
+                formError: false,
             }
         }
     }
 
-    public signUpValidation(email: string, password: string, fname: string, lname: string, confirmPassword: string) {
-        const validationObject = {
-            mailError: regExps.mailReqExp.test(email),
-            passwordError: password !== '',
-            fNameError: regExps.firstNameRegExp.test(fname),
-            lNameError: regExps.lastNameRegExp.test(lname),
-            confPassError: password === confirmPassword
-        }
-        return validationObject;
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
     }
+
+    componentWillUnmount = () => {
+        this.languageSubscription.unsubscribe();
+    }
+
     private toggleSwitch = () => {
         this.setState({ showPassword: !this.state.showPassword });
     }
 
     private onSubmit = async () => {
+        const validationError = this.validationService.signUpAthleteValidation(this.state.auth, this.state.password, this.state.firstname, this.state.lastName, this.state.confirmPassword);
+
+        await this.setState({
+            errors: {
+                auth: validationError.mailError,
+                password: validationError.passwordError,
+                firstname: validationError.fNameError,
+                lastName: validationError.lNameError,
+                confirmPassword: validationError.confPassError,
+                formError: validationError.formError,
+            }
+        });
+        if (this.state.errors.formError) { return }
         const { showPassword, errors, confirmPassword, ...basicData } = this.state;
         this.props.nextStepNumber(basicData);
     }
 
     private handleChange = async (data: any) => {
-        await this.setState(data);
-        const validationError = this.signUpValidation(this.state.auth, this.state.password, this.state.firstname, this.state.lastName, this.state.confirmPassword);
-        await this.setState({
+
+        let key = Object.keys(data)[0];
+        let newValidationObject = this.state.errors;
+        newValidationObject[key] = false;
+
+        this.setState({
+            ...data,
             errors: {
-                emailError: validationError.mailError,
-                passwordError: validationError.passwordError,
-                firstNameError: validationError.fNameError,
-                lastNameError: validationError.lNameError,
-                confirmPasswordError: validationError.confPassError
+                ...newValidationObject,
             }
         });
 
-
-    }
-
-    private checkValid() {
-        return Object.values(this.state.errors).filter((el: any) => el == false).length > 0 ? false : true
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.screenTitle}>Your basic info</Text>
+                <Text style={styles.screenTitle}>{this.translateMethod('translation.exposeIDE.views.regestration.yourBasicInfo')}</Text>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>First Name</Text>
+                    <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.firstNameTitle')}</Text>
                     <TextInput
-                        placeholder='Type your first name...'
-                        style={styles.input}
+                        placeholder={this.translateMethod('translation.exposeIDE.views.regestration.firstNamePlaceholder')}
+                        style={this.state.errors.firstname ? styles.inputError : styles.input}
                         onChangeText={(firstname) => this.handleChange({ firstname })}
                     ></TextInput>
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Last Name</Text>
+                    <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.lasttNameTitle')}</Text>
                     <TextInput
-                        placeholder='Type your last name...'
-                        style={styles.input}
+                        placeholder='Type your last name'
+                        style={this.state.errors.lastName ? styles.inputError : styles.input}
                         onChangeText={(lastName) => this.handleChange({ lastName })}
                     ></TextInput>
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Email Address</Text>
+                    <Text style={styles.label}>{this.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
                     <TextInput
-                        placeholder='Type your email address...'
-                        style={styles.input}
+                        placeholder={this.translateMethod('translation.common.EmailPlaceHolder')}
+                        style={this.state.errors.auth ? styles.inputError : styles.input}
                         onChangeText={(auth) => this.handleChange({ auth })}
                     ></TextInput>
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Password</Text>
+                    <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                     <TextInput
-                        placeholder='Type your password...'
+                        placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
-                        style={styles.input}
+                        style={this.state.errors.password ? styles.inputError : styles.input}
                         onChangeText={(password) => this.handleChange({ password })}
                     />
                     <Icon
@@ -137,9 +152,9 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                 <View style={styles.formField}>
                     <Text style={styles.label}>Confirm Password</Text>
                     <TextInput
-                        placeholder='Type your password...'
+                        placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
-                        style={styles.input}
+                        style={this.state.errors.confirmPassword ? styles.inputError : styles.input}
                         onChangeText={(confirmPassword) => this.handleChange({ confirmPassword })}
                     />
                     <Icon
@@ -151,13 +166,10 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                 </View>
                 <View style={styles.nextBtnWrapper}>
                     <TouchableOpacity
-                        style={
-                            this.checkValid() ? styles.nextBtn : styles.nextBtnDisabled
-                        }
-                        // disabled={!this.checkValid()} 
+                        style={styles.nextBtn}
                         onPress={this.onSubmit}
                     >
-                        <Text style={styles.nextBtnText}>Next</Text>
+                        <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

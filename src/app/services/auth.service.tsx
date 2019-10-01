@@ -2,6 +2,7 @@ import environment from "../environments/environment";
 import UserSignInData from "../shared/models/userSignInData.model";
 import axiosInstance from '../shared/interceptors/axios.interceptor';
 import { AsyncStorage } from 'react-native';
+// import * as RNFS from 'react-native-fs';
 
 export class AuthService {
 
@@ -52,7 +53,17 @@ export class AuthService {
     }
 
     public getLanguage(language: string): Promise<any> {
-        return axiosInstance.get(`${environment.backendUrl}/`)
+        return axiosInstance.post(`${environment.backendUrl}/languages/${language}`)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+                return error;
+            })
+    }
+    public getAllLanguages(): Promise<any> {
+        return axiosInstance.post(`${environment.backendUrl}/languages/getall`)
             .then((response) => {
                 console.log(response);
                 return response;

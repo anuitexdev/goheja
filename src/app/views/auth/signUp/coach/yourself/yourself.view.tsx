@@ -15,9 +15,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import CustomDatePicker from '../../../../../components/datepicker/datepicker.component';
 import moment from 'moment';
+import TranslateService from '../../../../../services/translation.service';
+
 interface Props {
     changeCoachStep: (data: any) => void;
-    state: any;
+    signUp: (data: any) => void,
+    userType: number,
+    coachSignUpData: any
+
 }
 
 interface State {
@@ -36,7 +41,9 @@ interface State {
 
 class YourSelfCoachScreen extends Component<Props, State> {
     private currentDate = new Date();
-    constructor(props: Props) {
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props);
 
         this.state = {
@@ -54,6 +61,19 @@ class YourSelfCoachScreen extends Component<Props, State> {
         };
     }
 
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res
+        });
+
+    }
+
+    componentWillUnmount = () => {
+        this.languageSubscription.unsubscribe();
+    }
+
     public showDateTimePicker = () => {
         this.setState({ isDateTimePickerVisible: true });
     };
@@ -63,8 +83,8 @@ class YourSelfCoachScreen extends Component<Props, State> {
     };
 
     public handleDatePicked = (date: any) => {
-        // const formattedDate = moment(date).format('DD-MM-YYYY');
-        let signUpDate = moment(date).format('YYYY-MM-DDTHH:mm:ss:SSZ');
+        const formattedDate = moment(date, 'DD-MM-YYYY');
+        let signUpDate = moment(formattedDate).format('YYYY-MM-DDTHH:mm:ss:SSZ');
         this.setState({
             dob: signUpDate,
             birthDateError: false,
@@ -88,17 +108,27 @@ class YourSelfCoachScreen extends Component<Props, State> {
             genderError,
             formatedBirthDate,
             toggleDatePicker,
+            valueOfDatePicker,
             ...basicData
         } = this.state;
+        const coachSignUpData = {
+            ...this.props.coachSignUpData,
+            ...basicData,
+            userType: this.props.userType,
+            teamcode: "te",
+            specGroup: "TestEnv",
+        }
+        this.props.signUp(coachSignUpData);
         this.props.changeCoachStep(basicData);
+
     };
 
     private setSelectedOption = (value: string) => {
         let genderValue = 0;
-        if (value === 'Male') {
+        if (value === this.translateMethod('translation.exposeIDE.views.regestration.male')) {
             genderValue = 1;
         }
-        if (value === 'Female') {
+        if (value === this.translateMethod('translation.exposeIDE.views.regestration.female')) {
             genderValue = 2;
         }
         if (value === 'Neither') {
@@ -132,19 +162,17 @@ class YourSelfCoachScreen extends Component<Props, State> {
         });
     };
 
-    // public setDatePickerValue = (value: any) => {
-    //     this.setState({
-    //         valueOfDatePicker: value
-    //     })
-    // }
-
     render() {
-        const options = ['Male', 'Female', 'Neither'];
+        const options = [
+            this.translateMethod('translation.exposeIDE.views.regestration.male'),
+            this.translateMethod('translation.exposeIDE.views.regestration.female'),
+            'Neither'
+        ];
         return (
             <Fragment>
                 <ScrollView>
                     <View style={styles.container}>
-                        <Text style={styles.pageHeader}>Tell us about {'\n'} yourself</Text>
+                        <Text style={styles.pageHeader}>{this.translateMethod('translation.exposeIDE.views.regestration.tellUsAboutYourself')}</Text>
 
                         <View>
                             <View>
@@ -153,7 +181,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                     onPress={this.showDatePicker}
                                     style={styles.datePicker}>
                                     <TextInput
-                                        placeholder="Choose birth date…"
+                                        placeholder={this.translateMethod('translation.exposeIDE.views.regestration.bithDatePlaceHolder')}
                                         style={
                                             this.state.birthDateError
                                                 ? styles.inputError
@@ -184,7 +212,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                             </View>
                             <View style={styles.genderField}>
                                 <View style={styles.genderTitleContainer}>
-                                    <Text style={styles.label}>Gender</Text>
+                                    <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.gender')}</Text>
                                     <TouchableOpacity
                                         style={styles.genderCheckBoxField}
                                         onPress={() => this.setSelectedOption('Undefined')}>
@@ -215,9 +243,9 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                         separatorTint={this.state.genderError ? 'red' : '#cfd8dc'}
                                         selectedOption={
                                             this.state.gender === 1
-                                                ? 'Male'
+                                                ? this.translateMethod('translation.exposeIDE.views.regestration.male')
                                                 : this.state.gender === 2
-                                                    ? 'Female'
+                                                    ? this.translateMethod('translation.exposeIDE.views.regestration.female')
                                                     : this.state.gender === 3
                                                         ? 'Neither'
                                                         : null
@@ -246,13 +274,13 @@ class YourSelfCoachScreen extends Component<Props, State> {
                             <Text style={styles.optionalSubtitle}>
                                 {' '}
                                 If you want to have an athlete account on Go-Heja and {'\n'} not
-                onle a couch account, fill the fields below.{' '}
+                only a couch account, fill the fields below.{' '}
                             </Text>
 
                             <View style={styles.personalFormControl}>
                                 <View style={styles.labelContainer}>
-                                    <Text style={styles.labelText}>Height</Text>
-                                    <Text style={styles.prompt}>(optional)</Text>
+                                    <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.height')}</Text>
+                                    <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
                                 </View>
                                 <View style={styles.formControl}>
                                     <TextInput
@@ -267,8 +295,8 @@ class YourSelfCoachScreen extends Component<Props, State> {
 
                             <View style={styles.personalFormControl}>
                                 <View style={styles.labelContainer}>
-                                    <Text style={styles.labelText}>Weight</Text>
-                                    <Text style={styles.prompt}>(optional)</Text>
+                                    <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.weight')}</Text>
+                                    <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
                                 </View>
                                 <View style={styles.formControl}>
                                     <TextInput
@@ -283,8 +311,8 @@ class YourSelfCoachScreen extends Component<Props, State> {
 
                             <View style={styles.personalFormControl}>
                                 <View style={styles.labelContainer}>
-                                    <Text style={styles.labelText}>Body bodyfat %</Text>
-                                    <Text style={styles.prompt}>(optional)</Text>
+                                    <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.BofyFatPercentage')} %</Text>
+                                    <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
                                 </View>
                                 <View style={styles.formControl}>
                                     <TextInput
@@ -301,7 +329,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                 <TouchableOpacity
                                     style={styles.nextBtn}
                                     onPress={this.onSubmit}>
-                                    <Text style={styles.nextBtnText}>Next</Text>
+                                    <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -313,11 +341,13 @@ class YourSelfCoachScreen extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-    state: state.AuthReducer,
+    userType: state.AuthReducer.userType,
+    coachSignUpData: state.AuthReducer.coachSignUpData
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
     changeCoachStep: (data: any) => dispatch(actions.changeCoachStep(data)),
+    signUp: (data: any) => dispatch(actions.signUp(data)),
 });
 
 export default connect(

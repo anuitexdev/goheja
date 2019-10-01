@@ -103,6 +103,7 @@ class SwimTimeView extends Component<Props, State> {
                 <TextInput
                   ref={ref => (this.inputDozentsOfMinutes = ref)}
                   placeholder="0"
+                  keyboardType={'number-pad'}
                   onFocus={() => this.changeFocus(1)}
                   maxLength={1}
                   style={
@@ -117,6 +118,7 @@ class SwimTimeView extends Component<Props, State> {
                   placeholder="0"
                   ref={ref => (this.inputUnitsOfMinutes = ref)}
                   maxLength={1}
+                  keyboardType={'number-pad'}
                   onFocus={() => this.changeFocus(2)}
                   onChangeText={(unitsOfMinutes) =>
                     this.setValue(this.inputDozentsOfSeconds, {unitsOfMinutes})

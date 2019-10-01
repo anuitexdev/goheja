@@ -8,22 +8,28 @@
  * @format
  */
 
-import React from 'react';
+import React, { Component } from 'react';
+
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import Navigation from "./navigation/app.routing";
 import reducers from './redux/reducers';
 
+
 let store = createStore(reducers, applyMiddleware(thunk));
 
-const App = () => {
-  console.disableYellowBox = true;
+
+
+export default class App extends Component {
+  constructor(props: any) {
+    super(props);
+  }
+  render() {
   return (
     <Provider store={store}>
       <Navigation />
     </Provider>
-  );
+  )}
 };
 
-export default App;

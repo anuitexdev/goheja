@@ -2,12 +2,13 @@ import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
 import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import styles from './styles';
+import styles from './yourself.styles';
 import { SegmentedControls } from 'react-native-radio-buttons';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/Ionicons";
 import * as actions from '../../../../../redux/actions/auth.actions';
 import moment from 'moment';
+import TranslateService from '../../../../../services/translation.service';
 
 interface Props {
     nextStepNumber: (nextStepData: any) => void,
@@ -24,8 +25,9 @@ interface State {
 }
 
 class YourSelfAthleteScreen extends Component<Props, State> {
-
-    constructor(props: Props) {
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props,  private translationService: TranslateService) {
         super(props)
 
         this.state = {
@@ -38,6 +40,18 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         }        
     }
 
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+          this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
+            
+    }
+
+    componentWillUnmount =() => {
+        this.languageSubscription.unsubscribe();
+    }
+
     public showDateTimePicker = () => {
         this.setState({ isDateTimePickerVisible: true });
     };
@@ -48,59 +62,67 @@ class YourSelfAthleteScreen extends Component<Props, State> {
 
     public handleDatePicked = (date: Date) => {
         const formattedDate = moment(date).format('DD-MM-YYYY');
-
-        const birthDateError = this.birthDateValidation(formattedDate);
+        this.setState({
+            birthDateError: false,
+        })
         let signUpDate = moment(date).format('YYYY-MM-DDTHH:mm:ss:SSZ')
         this.setState({
             dob: signUpDate,
-            birthDateError,
             formatedBirthDate: formattedDate,
         })
         this.hideDateTimePicker();
     };
 
-    private onSubmit = () => {
-        const { isDateTimePickerVisible, birthDateError, genderError,formatedBirthDate, ...basicData } = this.state;
+    private onSubmit = async () => {        
+        const genderErrorValue = this.genderValidation(this.state.gender);
+        const birthDateErrorValue = this.birthDateValidation(this.state.formatedBirthDate);
+
+        await this.setState({
+            birthDateError: birthDateErrorValue,
+            genderError: genderErrorValue,
+        });
+        if(this.state.genderError || this.state.birthDateError) {return}
+        const { isDateTimePickerVisible, birthDateError, genderError ,formatedBirthDate, ...basicData } = this.state;
         this.props.nextStepNumber(basicData);
     }
 
     private birthDateValidation(value: string) {
         if (value !== '') {
-            return true;
+            return false;
         };
-        return false;
+        return true;
     }
 
     private genderValidation(value: number) {
         if (value !== 0) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     private setSelectedOption = (value: string) => {
         let genderValue= 0;
-        if (value === 'Male') {
+        if (value === this.translateMethod('translation.exposeIDE.views.regestration.male')) {
             genderValue = 1;
         } 
-        if(value === 'Female') {
+        if(value === this.translateMethod('translation.exposeIDE.views.regestration.female')) {
             genderValue = 2;
         }
         if(value === 'Neither') {
             genderValue = 3;
         }
-
-        const genderError = this.genderValidation(genderValue);
         this.setState({
-            genderError,
+            genderError: false,
+        })
+        this.setState({
             gender: genderValue,
         });
     }
 
     render() {
         const options = [
-            "Male",
-            "Female",
+        this.translateMethod('translation.exposeIDE.views.regestration.male'),
+        this.translateMethod('translation.exposeIDE.views.regestration.female'),
             "Neither"
         ];
         return (
@@ -108,7 +130,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                 <ScrollView>
 
                     <View style={styles.container}>
-                        <Text style={styles.pageHeader}>Tell us about yourself</Text>
+                        <Text style={styles.pageHeader}>{this.translateMethod('translation.exposeIDE.views.regestration.tellUsAboutYourself')}</Text>
 
 
                         <View>
@@ -116,8 +138,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                 <Text style={styles.label}>Birth Day</Text>
                                 <TouchableOpacity onPress={this.showDateTimePicker} style={styles.datePicker}>
                                     <TextInput
-                                        placeholder='Choose birth date…'
-                                        style={styles.input}
+                                        placeholder={this.translateMethod('translation.exposeIDE.views.regestration.bithDatePlaceHolder')}
+                                        style={this.state.birthDateError ? styles.inputError : styles.input}
                                         editable={false}
                                         onFocus={this.showDateTimePicker}
                                         value={this.state.formatedBirthDate}
@@ -135,7 +157,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                 />
                             </View>
                             <View style={styles.genderField}>
-                                <Text style={styles.label}>Gender</Text>
+                                <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.gender')}</Text>
                                 <View >
                                     <SegmentedControls
                                         options={options}
@@ -144,9 +166,11 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         backTint={'#fff'}
                                         selectedBackgroundColor={'#4D5A5F'}
                                         onSelection={this.setSelectedOption}
-                                        containerBorderTint={'#cfd8dc'}
+                                        containerBorderTint={this.state.genderError ? 'red' :  '#cfd8dc'}
                                         separatorTint={'#cfd8dc'}
-                                        selectedOption={this.state.gender === 1 ? 'Male' : this.state.gender === 2 ? 'Female' : this.state.gender === 3 ? 'Neither': 'Male'}
+                                        selectedOption={this.state.gender === 1 ?  this.translateMethod('translation.exposeIDE.views.regestration.male') :
+                                         this.state.gender === 2 ? this.translateMethod('translation.exposeIDE.views.regestration.female') : this.state.gender === 3 ? 'Neither':
+                                          this.translateMethod('translation.exposeIDE.views.regestration.male')}
                                         optionStyle={{ 
                                             paddingBottom: 12,
                                             paddingTop: 12,
@@ -160,11 +184,10 @@ class YourSelfAthleteScreen extends Component<Props, State> {
 
                         <View style={styles.nextBtnWrapper}>
                             <TouchableOpacity
-                                style={this.state.birthDateError && this.state.genderError ? styles.nextBtn : styles.nextBtnDisabled}
-                                disabled={!this.state.birthDateError && !this.state.genderError}
-                                onPress={this.onSubmit}
+                                style={!this.state.birthDateError && !this.state.genderError ? styles.nextBtn : styles.nextBtnDisabled}
+                                onPress={() => this.onSubmit()}
                             >
-                                <Text style={styles.nextBtnText}>Next</Text>
+                                <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
                             </TouchableOpacity>
                         </View>
 
