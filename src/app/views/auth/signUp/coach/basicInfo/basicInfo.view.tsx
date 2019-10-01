@@ -10,7 +10,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import window from '../../../../../theme/variables';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import ValidationService from '../../../../../shared/validation/validation.service';
-import { countries } from '../../../../../shared/helpers/country.list';
+import { countries } from '../../../../../shared/helpers/countryWithCodes.list';
 
 
 interface State {

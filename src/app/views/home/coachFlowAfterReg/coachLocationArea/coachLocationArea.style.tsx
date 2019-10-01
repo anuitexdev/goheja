@@ -17,12 +17,12 @@ export default StyleSheet.create({
     mapWrapper: {
         position: 'relative',
         width: window.width,
-        height: 400,
+        height: window.height,
     },
     map: {
         position: 'relative',
         width: window.width,
-        height: 400,
+        height: window.height,
         borderRadius: 10,
         zIndex: 1,
     },
@@ -41,6 +41,28 @@ export default StyleSheet.create({
         top:30,
         left: 20,
         zIndex: 9999
+    },
+    finalLocation: {
+        position: 'absolute',
+        width: window.width,
+        padding: 10,
+        backgroundColor: 'white',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderRadius: 2,
+        paddingRight: 10,
+        paddingLeft: 10,
+        paddingBottom: 12,
+        paddingTop: 12,
+        top:0,
+        left: 0,
+        zIndex: 9999
+    },
+    finalLocationText: {
+        color: 'black',
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginLeft: 15
     },
     currentLocationBtnText: {
         color: 'white',
@@ -86,5 +108,57 @@ export default StyleSheet.create({
     skipBtnText: {
         color: '#272E41',
         fontSize: 18
+    },
+    nextBtn: {
+        backgroundColor: '#4d5a5f',
+        borderRadius: 2,
+        paddingRight: 20,
+        paddingLeft: 20,
+        paddingBottom: 12,
+        paddingTop: 12,
+        position: 'absolute',
+        zIndex: 9999,
+        right: 20,
+        bottom: 165
+    },
+    nextBtnText: {
+        color: 'white'
+    },
+    range: {
+        paddingTop: 25,
+        paddingBottom: 25,
+        paddingLeft: 20,
+        paddingRight: 10,
+        backgroundColor: 'white',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        position: 'absolute',
+        bottom: 145,
+        right: 0,
+        zIndex: 9999,
+        width: window.width
+    },
+    rangeSlider: {
+        height:  40,
+        width: window.width - 80
+    },
+    sliderWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    radiusText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10
+    },
+    changeValue: {
+        color: '#99A8AF',
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginLeft: 10
+    },
+    doneBtn: {
+        color: '#1373FB',
+        fontWeight: 'bold'
     }
 })
