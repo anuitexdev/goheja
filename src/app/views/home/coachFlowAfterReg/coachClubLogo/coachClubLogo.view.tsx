@@ -25,7 +25,7 @@ class CoachClubLogoView extends Component<Props, State> {
   }
 
   public onSubmit = () => {
-      this.props.nextStepNumber(3)
+      this.props.nextStepNumber(2)
   }
 
   async requestCameraPermission() {

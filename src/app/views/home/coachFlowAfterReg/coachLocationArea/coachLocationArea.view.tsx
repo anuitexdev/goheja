@@ -83,7 +83,7 @@ class CoachLocationAreaView extends Component<Props, State> {
   };
 
   public onSubmit = () => {
-    this.props.nextStepNumber(4);
+    this.props.nextStepNumber(3);
   };
 
   public getLatLong = async (lat, long) => {

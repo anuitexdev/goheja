@@ -14,7 +14,6 @@ class Wizard extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
   }
-  public elements = ['one', 'two', 'three'];
 
   render() {
     return (
