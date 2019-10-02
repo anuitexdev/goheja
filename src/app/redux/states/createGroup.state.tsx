@@ -1,5 +1,5 @@
 let CreateGroupDefaultState = {
-    currentGroupStep: 3,
+    currentGroupStep: 1,
     location: ''
 }
 

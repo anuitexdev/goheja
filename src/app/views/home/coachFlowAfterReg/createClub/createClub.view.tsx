@@ -38,8 +38,8 @@ class CreateClubView extends Component<Props, State> {
                        style={[this.state.placeholder.length == 0 ? {fontStyle: 'italic'} : {fontStyle: 'normal'}, createClubStyle.inputClub]} 
                        placeholder="Type Club Name..." 
                        onChangeText={(txt) => this.setState({placeholder: txt})}
+                       value={this.state.placeholder}
                        >
-
                        </TextInput>
                        <TouchableOpacity 
                        style={createClubStyle.nextBtn}

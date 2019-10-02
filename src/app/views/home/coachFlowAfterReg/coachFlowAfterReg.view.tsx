@@ -37,7 +37,12 @@ class CoachFlowAfterRegView extends Component<Props, State> {
           null
         }
         <View style={coachFlowAfterReg.clubPage}>
-            <Wizard title="Create your Club"/>
+            <Wizard 
+            title="Create your Club"
+            numberOfSteps={4}
+            currentStep={this.props.currentGroupStep}
+
+            />
             {
                 this.props.currentGroupStep === 1 ? <CreateClubView /> :
                 this.props.currentGroupStep === 2 ? <CoachClubLogoView/> : 

@@ -22,6 +22,7 @@ interface State {
     showPassword: boolean,
     emailError: boolean,
     passwordError: boolean,
+    currentLanguage: string,
 
 }
 
@@ -48,22 +49,23 @@ private translateMethod: any;
             password: '',
             emailError: false,
             passwordError: false,
+            currentLanguage: '',
         }
        
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
+        this.translationService.getCurrentLanguage().subscribe(res=>{
+             this.setState({
+                 currentLanguage: res.language,
+             })
+            });
+        
         this.translationService.getTranslateMethod().subscribe(res => {
             this.forceUpdate();
             this.translateMethod = res});   
     }
-
-    // componentWillUnmount = () => {
-    //     console.log('signIn----------------');
-        
-    //     this.translationService.getTranslateMethod().unsubscribe();
-    // }
 
     private onSubmit = async () => {
         await this.props.signIn({ mail: this.state.email, psw: this.state.password, specGroup: 'gohejacode' });
@@ -124,7 +126,8 @@ private translateMethod: any;
                         <Text style={styles.label}>{this.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
                         <TextInput
                             placeholder={this.translateMethod('translation.common.EmailPlaceHolder')}
-                            style={!this.state.emailError ? styles.input : styles.inputError}
+                            style={!this.state.emailError ?this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
+                            this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                             onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                         ></TextInput>
                     </View>
@@ -134,7 +137,8 @@ private translateMethod: any;
                             placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
                             secureTextEntry={this.state.showPassword}
                             onChangeText={(password) => this.handleChange({ password, email: this.state.email, type: 'password' })}
-                            style={!this.state.passwordError ? styles.input : styles.inputError}
+                            style={!this.state.passwordError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
+                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
                         />
                         <Icon
                             style={styles.showPassword}

@@ -4,6 +4,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import styles from './resetPassword.style';
+import TranslateService from '../../../../services/translation.service';
 
 interface State {
     password: string,
@@ -17,7 +18,10 @@ interface Props {
 }
 
 class ResetPasswordScreen extends Component<Props, State> {
-    constructor(props: Props) {
+
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props)
 
         this.state = {
@@ -28,6 +32,16 @@ class ResetPasswordScreen extends Component<Props, State> {
         }
     }
 
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
+    }
+
+    componentWillUnmount = () => {
+        this.languageSubscription.unsubscribe();
+    }
 
 
     private handleChange = async (data: any) => {
@@ -62,13 +76,13 @@ class ResetPasswordScreen extends Component<Props, State> {
     render() {
         return (
             <Fragment>
-                <Text style={styles.title}>Reset Password</Text>
+                <Text style={styles.title}>{this.translateMethod('translation.common.reset')} {this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
 
 
                 <View style={styles.form}>
 
                     <View style={styles.formField}>
-                        <Text style={styles.label}>New Password</Text>
+                        <Text style={styles.label}>{this.translateMethod('translation.common.new')} {this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                         <TextInput
                             placeholder='Type your new password...'
                             style={this.state.passwordError ? styles.inputError: styles.input}
@@ -76,7 +90,7 @@ class ResetPasswordScreen extends Component<Props, State> {
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>New Password (again)</Text>
+                        <Text style={styles.label}>{this.translateMethod('translation.common.new')} {this.translateMethod('translation.exposeIDE.views.Login.password')} (again)</Text>
                         <TextInput
                             placeholder='Type your new password (again)...'
                             style={this.state.confirmPasswordError ? styles.inputError: styles.input}
@@ -93,7 +107,7 @@ class ResetPasswordScreen extends Component<Props, State> {
                         style={this.state.confirmPasswordError || this.state.passwordError || this.state.password === '' || this.state.confirmPassword === '' ?  styles.disabledBtn :styles.nextBtn}
                         disabled ={this.state.confirmPasswordError || this.state.passwordError || this.state.password === '' || this.state.confirmPassword === ''}
                     >
-                        <Text style={styles.resetPasswordText}>Reset Password</Text>
+                        <Text style={styles.resetPasswordText}>{this.translateMethod('translation.common.reset')} {this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                     </TouchableOpacity>
                 </View>
             </Fragment>

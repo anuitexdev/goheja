@@ -5,6 +5,7 @@ import { Text, View } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import  styles from './sendMail.style';
 import { NavigationScreenProp, NavigationState, NavigationParams } from "react-navigation";
+import TranslateService from '../../../../services/translation.service';
 
 interface State{
     email: string
@@ -16,12 +17,26 @@ interface Props{
 }
 
 class SendMailScreen extends Component<Props,State> {
-    constructor(props: Props){
+
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService){
         super(props)
 
         this.state = {
             email: '',
         }
+    }
+
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res});   
+    }
+
+    componentWillUnmount = () => {
+        this.languageSubscription.unsubscribe();
     }
 
     private redirectToLogin = () => {
@@ -41,9 +56,9 @@ class SendMailScreen extends Component<Props,State> {
     render() {
         return (
             <Fragment>
-                <Text style={styles.title}>Did you forgot your{'\n'} password? </Text>
+                <Text style={styles.title}>  {this.translateMethod('translation.exposeIDE.views.forgot-password.title')}  </Text>
                 <Text style = {styles.subTitle}>
-                    Don`t worry, it will take you a few {'\n'} moments to reset it and get back on {'\n'} track.
+                {this.translateMethod('translation.exposeIDE.views.forgot-password.text')}
             </Text>
 
                 <View>
@@ -65,7 +80,7 @@ class SendMailScreen extends Component<Props,State> {
                         onPress={this.onSubmit}
                         style ={styles.nextBtn}
                     >
-                        <Text style={styles.resetPasswordText}>Reset Password</Text>
+                        <Text style={styles.resetPasswordText}>{this.translateMethod('translation.common.reset')} {this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                     </TouchableOpacity>
                 </View>
                 </Fragment>
