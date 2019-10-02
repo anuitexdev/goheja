@@ -21,12 +21,14 @@ export default StyleSheet.create({
         backgroundColor: '#CFD8DD',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 8
+        borderRadius: 8,
+        marginLeft: 25
     },
     pickedPhoto: {
         height: 260,
         width: window.width - 140,
-        borderRadius: 8
+        borderRadius: 8,
+        marginLeft: 25
     },
     photoBtnTitle: {
         fontSize: 20,

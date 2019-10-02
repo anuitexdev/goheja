@@ -5,6 +5,7 @@ import window from '../../../../theme/variables';
 export default StyleSheet.create({
     clubNameInput: {
         marginTop: 15,
+        marginLeft: 20
     },
     titleName: {
         color: '#272D43',

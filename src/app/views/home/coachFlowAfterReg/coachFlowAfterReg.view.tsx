@@ -6,6 +6,7 @@ import CoachClubLogoView from './coachClubLogo/coachClubLogo.view'
 import coachFlowAfterReg from './coachFlowAfterReg.style';
 import Wizard from "../../../components/wizard/wizard.view";
 import CoachLocationAreaView from './coachLocationArea/coachLocationArea.view';
+import ClubDetailsView from './clubDetails/clubDetails.view';
 interface State {
 
 }
@@ -44,9 +45,10 @@ class CoachFlowAfterRegView extends Component<Props, State> {
 
             />
             {
-                this.props.currentGroupStep === 1 ? <CreateClubView /> :
-                this.props.currentGroupStep === 2 ? <CoachClubLogoView/> : 
-                this.props.currentGroupStep === 3 ? <CoachLocationAreaView/> :
+                this.props.currentGroupStep === 0 ? <CreateClubView /> :
+                this.props.currentGroupStep === 1 ? <CoachClubLogoView/> : 
+                this.props.currentGroupStep === 2 ? <CoachLocationAreaView/> :
+                this.props.currentGroupStep === 3 ? <ClubDetailsView/> :
                 null
             }
         </View>
