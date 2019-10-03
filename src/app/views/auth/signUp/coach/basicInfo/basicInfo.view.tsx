@@ -134,6 +134,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         onChangeText={firstname =>
                             this.handleChange({ firstname })
                         }></TextInput>
+                       {this.state.validationObject.firstname ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
                 <View style={styles.formField}>
                     <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.lasttNameTitle')}</Text>
@@ -145,6 +146,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         onChangeText={lastName =>
                             this.handleChange({ lastName })
                         }></TextInput>
+                        {this.state.validationObject.lastName ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
                 <View style={styles.formField}>
                     <Text style={styles.label}>{this.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
@@ -154,6 +156,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         style={!this.state.validationObject.auth ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                         this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                         onChangeText={auth => this.handleChange({ auth })}></TextInput>
+                        {this.state.validationObject.auth ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
                 <Text style={styles.label}>Phone No.</Text>
                 <View style={styles.formField}>
@@ -182,6 +185,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                             style={this.state.validationObject.phone ? this.state.currentLanguage !== 'Hebrew' ? [styles.inputError, { width: window.width - 160 }] : [styles.inputErrorHeb,{ width: window.width - 160 } ] : this.state.currentLanguage !== 'Hebrew' ? [styles.input, { width: window.width - 160 }] : [styles.inputHeb, { width: window.width - 160 }]}
                             onChangeText={phone => this.handleChange({ phone })}></TextInput>
                     </View>
+                    {this.state.validationObject.phone ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
 
                 <View style={styles.formField}>
@@ -194,6 +198,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
                         onChangeText={password => this.handleChange({ password })}
                     />
+                    {this.state.validationObject.password ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                     <IconIon
                         style={styles.showPassword}
                         size={25}
@@ -213,6 +218,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                             this.handleChange({ confirmPassword })
                         }
                     />
+                    {this.state.validationObject.confirmPassword ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                     <IconIon
                         style={styles.showPassword}
                         size={25}

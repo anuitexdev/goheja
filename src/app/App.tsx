@@ -23,7 +23,8 @@ let store = createStore(reducers, applyMiddleware(thunk));
 export default class App extends Component {
   constructor(props: any) {
     super(props);
-    // store.dispatch(actions.getAllLanguages)
+ 
+    // store.dispatch(actions.getAllLanguages())
   }
 
   render() {

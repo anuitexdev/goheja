@@ -94,4 +94,7 @@ export default StyleSheet.create({
     nextBtnText: {
         color: 'white'
     },
+    errorText: {
+        color: 'red',
+    }
 })

@@ -48,7 +48,7 @@ class ResetPasswordScreen extends Component<Props, State> {
         const errors = this.validatePassword(data);
         await this.setState({
             ...data,
-            ...errors
+            ...errors 
         })
     }
 

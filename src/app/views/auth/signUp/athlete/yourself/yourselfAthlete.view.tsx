@@ -156,6 +156,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         onFocus={this.showDateTimePicker}
                                         value={this.state.formatedBirthDate}
                                     ></TextInput>
+                                    {this.state.birthDateError ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                                     <Icon
                                         style={styles.dateIcon}
                                         size={25}
@@ -190,6 +191,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                             paddingRight: 12,
                                         }}
                                     />
+                                    {this.state.genderError ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                                 </View>
                             </View>
                         </View>

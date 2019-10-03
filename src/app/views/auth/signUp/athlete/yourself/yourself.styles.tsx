@@ -83,5 +83,8 @@ export default StyleSheet.create({
         textAlign: 'right',
         paddingRight: 50,
     },
+    errorText: {
+        color: 'red',
+    }
  
 })

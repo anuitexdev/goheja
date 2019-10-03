@@ -142,4 +142,7 @@ export default StyleSheet.create({
         paddingLeft: 15,
         textAlign: 'right',
     },
+    errorText: {
+        color: 'red',
+    }
 })

@@ -8,7 +8,6 @@ import * as actions from '../../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
 import ValidationService from '../../../../../shared/validation/validation.service'
 import TranslateService from '../../../../../services/translation.service';
-import { Subscription } from "rxjs";
 
 interface State {
     firstname: string,
@@ -131,6 +130,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                         onChangeText={(firstname) => this.handleChange({ firstname })}
                     ></TextInput>
+                    {this.state.errors.firstname ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
                 <View style={styles.formField}>
                     <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.lasttNameTitle')}</Text>
@@ -140,6 +140,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                         onChangeText={(lastName) => this.handleChange({ lastName })}
                     ></TextInput>
+                    {this.state.errors.lastName ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
                 <View style={styles.formField}>
                     <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.Login.email')}</Text>
@@ -149,6 +150,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                         onChangeText={(auth) => this.handleChange({ auth })}
                     ></TextInput>
+                    {this.state.errors.auth ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
                 <View style={styles.formField}>
                     <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
@@ -159,6 +161,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
                         onChangeText={(password) => this.handleChange({ password })}
                     />
+                    {this.state.errors.password ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                     <Icon
                         style={styles.showPassword}
                         size={25}
@@ -175,6 +178,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
                         onChangeText={(confirmPassword) => this.handleChange({ confirmPassword })}
                     />
+                    {this.state.errors.confirmPassword ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                     <Icon
                         style={styles.showPassword}
                         size={25}
