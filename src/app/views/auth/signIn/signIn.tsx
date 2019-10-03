@@ -126,7 +126,7 @@ private translateMethod: any;
                         <Text style={styles.label}>{this.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
                         <TextInput
                             placeholder={this.translateMethod('translation.common.EmailPlaceHolder')}
-                            style={!this.state.emailError ?this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
+                            style={!this.state.emailError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                             onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                         ></TextInput>

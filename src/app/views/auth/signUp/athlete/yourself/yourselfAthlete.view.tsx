@@ -22,12 +22,14 @@ interface State {
     dob: any,
     birthDateError: boolean,
     genderError: boolean,
+    currentLanguage: string,
 }
 
 class YourSelfAthleteScreen extends Component<Props, State> {
     private translateMethod: any;
     private languageSubscription: any;
-    constructor(props: Props,  private translationService: TranslateService) {
+    private getCurrentLanguageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props)
 
         this.state = {
@@ -37,19 +39,28 @@ class YourSelfAthleteScreen extends Component<Props, State> {
             birthDateError: false,
             genderError: false,
             dob: new Date(),
-        }        
+            currentLanguage: '',
+        }
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-          this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
             this.forceUpdate();
-            this.translateMethod = res});   
-            
+            this.translateMethod = res
+        });
+
+        this.getCurrentLanguageSubscription = this.translationService.getCurrentLanguage().subscribe(res => {
+            this.setState({
+                currentLanguage: res.language,
+            })
+        });
+
     }
 
-    componentWillUnmount =() => {
+    componentWillUnmount = () => {
         this.languageSubscription.unsubscribe();
+        this.getCurrentLanguageSubscription.unsubscribe();
     }
 
     public showDateTimePicker = () => {
@@ -73,7 +84,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         this.hideDateTimePicker();
     };
 
-    private onSubmit = async () => {        
+    private onSubmit = async () => {
         const genderErrorValue = this.genderValidation(this.state.gender);
         const birthDateErrorValue = this.birthDateValidation(this.state.formatedBirthDate);
 
@@ -81,8 +92,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
             birthDateError: birthDateErrorValue,
             genderError: genderErrorValue,
         });
-        if(this.state.genderError || this.state.birthDateError) {return}
-        const { isDateTimePickerVisible, birthDateError, genderError ,formatedBirthDate, ...basicData } = this.state;
+        if (this.state.genderError || this.state.birthDateError) { return }
+        const { isDateTimePickerVisible, birthDateError, genderError, formatedBirthDate, currentLanguage, ...basicData } = this.state;
         this.props.nextStepNumber(basicData);
     }
 
@@ -101,14 +112,14 @@ class YourSelfAthleteScreen extends Component<Props, State> {
     }
 
     private setSelectedOption = (value: string) => {
-        let genderValue= 0;
+        let genderValue = 0;
         if (value === this.translateMethod('translation.exposeIDE.views.regestration.male')) {
             genderValue = 1;
-        } 
-        if(value === this.translateMethod('translation.exposeIDE.views.regestration.female')) {
+        }
+        if (value === this.translateMethod('translation.exposeIDE.views.regestration.female')) {
             genderValue = 2;
         }
-        if(value === 'Neither') {
+        if (value === 'Neither') {
             genderValue = 3;
         }
         this.setState({
@@ -121,8 +132,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
 
     render() {
         const options = [
-        this.translateMethod('translation.exposeIDE.views.regestration.male'),
-        this.translateMethod('translation.exposeIDE.views.regestration.female'),
+            this.translateMethod('translation.exposeIDE.views.regestration.male'),
+            this.translateMethod('translation.exposeIDE.views.regestration.female'),
             "Neither"
         ];
         return (
@@ -139,7 +150,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                 <TouchableOpacity onPress={this.showDateTimePicker} style={styles.datePicker}>
                                     <TextInput
                                         placeholder={this.translateMethod('translation.exposeIDE.views.regestration.bithDatePlaceHolder')}
-                                        style={this.state.birthDateError ? styles.inputError : styles.input}
+                                        style={!this.state.birthDateError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
+                                            this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
                                         editable={false}
                                         onFocus={this.showDateTimePicker}
                                         value={this.state.formatedBirthDate}
@@ -166,12 +178,12 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         backTint={'#fff'}
                                         selectedBackgroundColor={'#4D5A5F'}
                                         onSelection={this.setSelectedOption}
-                                        containerBorderTint={this.state.genderError ? 'red' :  '#cfd8dc'}
+                                        containerBorderTint={this.state.genderError ? 'red' : '#cfd8dc'}
                                         separatorTint={'#cfd8dc'}
-                                        selectedOption={this.state.gender === 1 ?  this.translateMethod('translation.exposeIDE.views.regestration.male') :
-                                         this.state.gender === 2 ? this.translateMethod('translation.exposeIDE.views.regestration.female') : this.state.gender === 3 ? 'Neither':
-                                          this.translateMethod('translation.exposeIDE.views.regestration.male')}
-                                        optionStyle={{ 
+                                        selectedOption={this.state.gender === 1 ? this.translateMethod('translation.exposeIDE.views.regestration.male') :
+                                            this.state.gender === 2 ? this.translateMethod('translation.exposeIDE.views.regestration.female') : this.state.gender === 3 ? 'Neither' :
+                                                this.translateMethod('translation.exposeIDE.views.regestration.male')}
+                                        optionStyle={{
                                             paddingBottom: 12,
                                             paddingTop: 12,
                                             paddingLeft: 12,

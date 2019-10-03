@@ -37,12 +37,14 @@ interface State {
     bodyfat: number;
     toggleDatePicker: boolean;
     valueOfDatePicker: string;
+    currentLanguage: string;
 }
 
 class YourSelfCoachScreen extends Component<Props, State> {
     private currentDate = new Date();
     private translateMethod: any;
     private languageSubscription: any;
+    private getCurrentLanguageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
 
@@ -57,7 +59,8 @@ class YourSelfCoachScreen extends Component<Props, State> {
             weight: 0,
             bodyfat: 0,
             toggleDatePicker: false,
-            valueOfDatePicker: ''
+            valueOfDatePicker: '',
+            currentLanguage: '',
         };
     }
 
@@ -68,10 +71,18 @@ class YourSelfCoachScreen extends Component<Props, State> {
             this.translateMethod = res
         });
 
+
+        this.getCurrentLanguageSubscription = this.translationService.getCurrentLanguage().subscribe(res => {
+            this.setState({
+                currentLanguage: res.language,
+            })
+        });
+
     }
 
     componentWillUnmount = () => {
         this.languageSubscription.unsubscribe();
+        this.getCurrentLanguageSubscription.unsubscribe();
     }
 
     public showDateTimePicker = () => {
@@ -183,9 +194,11 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                     <TextInput
                                         placeholder={this.translateMethod('translation.exposeIDE.views.regestration.bithDatePlaceHolder')}
                                         style={
-                                            this.state.birthDateError
-                                                ? styles.inputError
-                                                : styles.input
+                                            !this.state.birthDateError
+                                                ? this.state.currentLanguage !== 'Hebrew' ?
+                                                    styles.input : styles.hebInput :
+                                                this.state.currentLanguage !== 'Hebrew' ?
+                                                    styles.inputError : styles.inputHebError
                                         }
                                         editable={false}
                                         onFocus={this.showDateTimePicker}
@@ -284,7 +297,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                 </View>
                                 <View style={styles.formControl}>
                                     <TextInput
-                                        style={styles.input}
+                                        style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                         placeholder="Type your height…"
                                         keyboardType="phone-pad"
                                         onChangeText={height => this.onInputChange({ height })}
@@ -300,7 +313,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                 </View>
                                 <View style={styles.formControl}>
                                     <TextInput
-                                        style={styles.input}
+                                        style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                         placeholder="Type your weight"
                                         keyboardType="phone-pad"
                                         onChangeText={weight => this.onInputChange({ weight })}
@@ -316,7 +329,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                 </View>
                                 <View style={styles.formControl}>
                                     <TextInput
-                                        style={styles.input}
+                                        style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                         placeholder="Type your body bodyfat…"
                                         keyboardType="phone-pad"
                                         onChangeText={bodyfat => this.onInputChange({ bodyfat })}

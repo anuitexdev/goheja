@@ -23,7 +23,8 @@ interface State {
     confirmPassword: string;
     showPassword: boolean;
     updatedPhoneValue: string;
-    validationObject: any
+    validationObject: any,
+    currentLanguage: string,
 }
 
 interface Props {
@@ -36,6 +37,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
     private validationService = new ValidationService();
     private translateMethod: any;
     private languageSubscription: any;
+    private getCurrentLanguageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
 
@@ -58,6 +60,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
 
             },
             showPassword: true,
+            currentLanguage: '',
         }
     }
 
@@ -67,10 +70,17 @@ class CoachBasicInfoScreen extends Component<Props, State> {
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
             this.forceUpdate();
             this.translateMethod = res});   
+
+            this.getCurrentLanguageSubscription = this.translationService.getCurrentLanguage().subscribe(res => {
+                this.setState({
+                    currentLanguage: res.language,
+                })
+            });
     }
 
     componentWillUnmount = () => {
         this.languageSubscription.unsubscribe();
+        this.getCurrentLanguageSubscription.unsubscribe();
     }
 
     private toggleSwitch = () => {
@@ -81,7 +91,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
         await this.setState({
         phone: this.state.updatedPhoneValue + this.state.phone,
         });
-        const { showPassword, validationObject, updatedPhoneValue, ...userDto } = this.state;
+        const { showPassword, validationObject, updatedPhoneValue,currentLanguage, ...userDto } = this.state;
         const newValidationObject = this.validationService.validateBasicInfoForm(userDto);
         
         await this.setState({
@@ -119,7 +129,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     <TextInput
                         placeholder={this.translateMethod('translation.exposeIDE.views.regestration.firstNamePlaceholder')}
                         value ={this.state.firstname}
-                        style={ this.state.validationObject.firstname ? styles.inputError : styles.input}
+                        style={ !this.state.validationObject.firstname ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
+                        this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                         onChangeText={firstname =>
                             this.handleChange({ firstname })
                         }></TextInput>
@@ -129,7 +140,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     <TextInput
                         value ={this.state.lastName}
                         placeholder="Type your last name..."
-                        style={this.state.validationObject.lastName ? styles.inputError : styles.input}
+                        style={!this.state.validationObject.lastName ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
+                        this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                         onChangeText={lastName =>
                             this.handleChange({ lastName })
                         }></TextInput>
@@ -139,7 +151,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     <TextInput
                         placeholder={this.translateMethod('translation.common.EmailPlaceHolder')}
                         value ={this.state.auth}
-                        style={this.state.validationObject.auth ? styles.inputError : styles.input }
+                        style={!this.state.validationObject.auth ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
+                        this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                         onChangeText={auth => this.handleChange({ auth })}></TextInput>
                 </View>
                 <Text style={styles.label}>Phone No.</Text>
@@ -150,7 +163,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                             items={countries}
                         >
                             <View
-                                style={this.state.validationObject.phone ? styles.phoneSelectError:  styles.phoneSelect}>
+                                style={this.state.validationObject.phone ?  styles.phoneSelectError:  styles.phoneSelect }>
                                 <Text style={{ color: '#282E44' }}>
                                     {this.state.updatedPhoneValue}
                                 </Text>
@@ -166,7 +179,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                             placeholder="Type your phone no..."
                             keyboardType={'number-pad'}
                             value ={this.state.phone}
-                            style={this.state.validationObject.phone ? [styles.inputError, { width: window.width - 160 }] : [styles.input, { width: window.width - 160 }]}
+                            style={this.state.validationObject.phone ? this.state.currentLanguage !== 'Hebrew' ? [styles.inputError, { width: window.width - 160 }] : [styles.inputErrorHeb,{ width: window.width - 160 } ] : this.state.currentLanguage !== 'Hebrew' ? [styles.input, { width: window.width - 160 }] : [styles.inputHeb, { width: window.width - 160 }]}
                             onChangeText={phone => this.handleChange({ phone })}></TextInput>
                     </View>
                 </View>
@@ -177,7 +190,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
                         value ={this.state.password}
-                        style={this.state.validationObject.password ? styles.inputError : styles.input}
+                        style={!this.state.validationObject.password ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
+                        this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
                         onChangeText={password => this.handleChange({ password })}
                     />
                     <IconIon
@@ -193,7 +207,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
                         value={this.state.confirmPassword}
-                        style={this.state.validationObject.confirmPassword ? styles.inputError : styles.input}
+                        style={!this.state.validationObject.confirmPassword ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
+                        this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
                         onChangeText={confirmPassword =>
                             this.handleChange({ confirmPassword })
                         }

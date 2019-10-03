@@ -66,4 +66,22 @@ export default StyleSheet.create({
     genderField: {
         marginTop: 39
     },
+    hebInput: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: '#cfd8dc',
+        paddingLeft: 15,
+        textAlign: 'right',
+        paddingRight: 50,
+
+    },
+    inputHebError: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15,
+        textAlign: 'right',
+        paddingRight: 50,
+    },
+ 
 })

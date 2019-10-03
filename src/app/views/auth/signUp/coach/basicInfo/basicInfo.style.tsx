@@ -31,11 +31,26 @@ export default StyleSheet.create({
         paddingLeft: 15,
         color: '#282E44'
     },
+    inputHeb: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: '#cfd8dc',
+        paddingLeft: 15,
+        color: '#282E44',
+        textAlign: 'right',
+    },
     inputError: {
         borderRadius: 2,
         borderWidth: 1,
         borderColor: 'red',
         paddingLeft: 15
+    },
+    inputErrorHeb: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15,
+        textAlign: 'right',
     },
     showPassword: {
         position: 'absolute',
@@ -94,5 +109,37 @@ export default StyleSheet.create({
         position: 'absolute',
         right: 7,
         color: '#757575'
-    }
+    },
+    hebInput: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: '#cfd8dc',
+        paddingLeft: 15,
+        textAlign: 'right',
+        paddingRight: 50,
+
+    },
+    hebInputDefault: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: '#cfd8dc',
+        paddingLeft: 15,
+        textAlign: 'right',
+
+    },
+    inputHebError: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15,
+        textAlign: 'right',
+        paddingRight: 50,
+    },
+    inputHebErrorDefault: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15,
+        textAlign: 'right',
+    },
 })

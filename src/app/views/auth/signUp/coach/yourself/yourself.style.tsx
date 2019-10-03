@@ -73,7 +73,7 @@ export default StyleSheet.create({
     formControl: {
         position: 'relative',
     },
-    personalFormControl:{
+    personalFormControl: {
         marginBottom: 39
     },
     formUnit: {
@@ -83,8 +83,8 @@ export default StyleSheet.create({
         fontSize: 12,
         color: '#a3b1b8'
     },
-    labelContainer:{
-        justifyContent: 'flex-start',   
+    labelContainer: {
+        justifyContent: 'flex-start',
         flexDirection: 'row',
         marginBottom: 10,
     },
@@ -93,7 +93,7 @@ export default StyleSheet.create({
         color: '#272e43',
         fontWeight: '500',
     },
-    skipWrapper:{
+    skipWrapper: {
         paddingRight: 20,
     },
     personalNextBtnWrapper: {
@@ -157,6 +157,23 @@ export default StyleSheet.create({
         borderRightWidth: 2.5,
         transform: [{ rotate: '45deg' }],
         zIndex: 999,
-    }
+    },
+    hebInput: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: '#cfd8dc',
+        paddingLeft: 15,
+        color: '#282E44',
+        textAlign: 'right',
+        paddingRight: 50,
+    },
+    inputHebError: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15,
+        textAlign: 'right',
+        paddingRight: 50,
+    },
 
 })

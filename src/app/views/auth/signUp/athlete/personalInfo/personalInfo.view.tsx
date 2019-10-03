@@ -18,6 +18,7 @@ interface State {
     weight: number,
     fat: number,
     signUpData: any,
+    currentLanguage: string,
 
 }
 
@@ -25,6 +26,7 @@ interface State {
 class PersonalInfoScreen extends Component<Props, State> {
     private translateMethod: any;
     private languageSubscription: any;
+    private getCurrentLanguageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
 
@@ -33,19 +35,28 @@ class PersonalInfoScreen extends Component<Props, State> {
             weight: 0,
             fat: 0,
             signUpData: this.props.signUpData,
-
+            currentLanguage: '',
         }
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-     this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
             this.forceUpdate();
-            this.translateMethod = res});   
+            this.translateMethod = res
+        });
+
+        this.getCurrentLanguageSubscription = this.translationService.getCurrentLanguage().subscribe(res => {
+            this.setState({
+                currentLanguage: res.language,
+            })
+        });
+
     }
 
     componentWillUnmount = () => {
         this.languageSubscription.unsubscribe();
+        this.getCurrentLanguageSubscription.unsubscribe();
     }
 
     public onInputChange = async (value: any) => {
@@ -85,7 +96,7 @@ class PersonalInfoScreen extends Component<Props, State> {
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
-                                    style={styles.input}
+                                    style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                     placeholder='Type your height…'
                                     keyboardType='phone-pad'
                                     onChangeText={(height) => this.onInputChange({ height })}
@@ -101,7 +112,7 @@ class PersonalInfoScreen extends Component<Props, State> {
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
-                                    style={styles.input}
+                                    style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                     placeholder='Type your weight'
                                     keyboardType='phone-pad'
                                     onChangeText={(weight) => this.onInputChange({ weight })}
@@ -117,7 +128,7 @@ class PersonalInfoScreen extends Component<Props, State> {
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
-                                    style={styles.input}
+                                    style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                     placeholder='Type your body fat…'
                                     keyboardType='phone-pad'
                                     onChangeText={(fat) => this.onInputChange({ fat })}

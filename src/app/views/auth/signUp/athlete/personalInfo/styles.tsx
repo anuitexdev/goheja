@@ -72,4 +72,13 @@ export default StyleSheet.create({
         backgroundColor: '#4d5a5f',
         borderRadius: 2,
     },
+    hebInput: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: '#cfd8dc',
+        paddingLeft: 15,
+        textAlign: 'right',
+        paddingRight: 50,
+
+    },
 })

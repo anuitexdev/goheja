@@ -33,6 +33,38 @@ export default StyleSheet.create({
         borderColor: 'red',
         paddingLeft: 15
     },
+    hebInput: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: '#cfd8dc',
+        paddingLeft: 15,
+        textAlign: 'right',
+        paddingRight: 50,
+
+    },
+    hebInputDefault: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: '#cfd8dc',
+        paddingLeft: 15,
+        textAlign: 'right',
+
+    },
+    inputHebError: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15,
+        textAlign: 'right',
+        paddingRight: 50,
+    },
+    inputHebErrorDefault: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15,
+        textAlign: 'right',
+    },
     showPassword: {
         position: 'absolute',
         top: 42,
