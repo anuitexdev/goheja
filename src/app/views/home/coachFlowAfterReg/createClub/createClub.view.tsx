@@ -24,9 +24,9 @@ class CreateClubView extends Component<Props, State> {
     }
 
     public onSubmit() {
-        this.props.nextStepNumber(1)
+        this.props.nextStepNumber(2)
     }
-    
+
     render() {
         return(
             <View>

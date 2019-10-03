@@ -67,6 +67,14 @@ export default StyleSheet.create({
         paddingBottom: 12,
         paddingTop: 12
     },
+    locateBtnActive: {
+        backgroundColor: '#272e43',
+        borderRadius: 2,
+        paddingRight: 20,
+        paddingLeft: 20,
+        paddingBottom: 12,
+        paddingTop: 12
+    },
     locateBtnText: {
         color: 'white',
         fontSize: 16

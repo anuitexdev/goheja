@@ -18,13 +18,15 @@ interface Props {
 class CoachFlowAfterRegView extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+    console.log(this.props.currentGroupStep);
+    
   }
 
   render() {
     return (
       <View>
         {
-          this.props.currentGroupStep === 0 ? 
+          this.props.currentGroupStep === 1 ? 
           <View style={coachFlowAfterReg.titles}>
             <Text style={coachFlowAfterReg.welcome}>
               Hi Alona & Welcome to Go-Heja
@@ -45,10 +47,10 @@ class CoachFlowAfterRegView extends Component<Props, State> {
 
             />
             {
-                this.props.currentGroupStep === 0 ? <CreateClubView /> :
-                this.props.currentGroupStep === 1 ? <CoachClubLogoView/> : 
-                this.props.currentGroupStep === 2 ? <CoachLocationAreaView/> :
-                this.props.currentGroupStep === 3 ? <ClubDetailsView/> :
+                this.props.currentGroupStep === 1 ? <CreateClubView /> :
+                this.props.currentGroupStep === 2 ? <CoachClubLogoView/> : 
+                this.props.currentGroupStep === 3 ? <CoachLocationAreaView/> :
+                this.props.currentGroupStep === 4 ? <ClubDetailsView/> :
                 null
             }
         </View>

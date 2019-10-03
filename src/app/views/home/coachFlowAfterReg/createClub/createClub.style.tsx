@@ -3,6 +3,11 @@ import window from '../../../../theme/variables';
 
 
 export default StyleSheet.create({
+    welcomeContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        // textAlign: 'center'
+    },
     clubNameInput: {
         marginTop: 15,
         marginLeft: 20

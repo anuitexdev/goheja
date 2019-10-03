@@ -70,9 +70,10 @@ private translateMethod: any;
     private onSubmit = async () => {
         await this.props.signIn({ mail: this.state.email, psw: this.state.password, specGroup: 'gohejacode' });
 
-        if (!this.props.isLogged) {
+
+        // if (!this.props.isLogged) {
             this.props.navigation.navigate('Home');
-        }
+        // }
     }
 
     public signUpRedirect = () => {

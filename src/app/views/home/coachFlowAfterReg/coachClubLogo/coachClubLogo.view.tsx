@@ -25,7 +25,7 @@ class CoachClubLogoView extends Component<Props, State> {
   }
 
   public onSubmit = () => {
-      this.props.nextStepNumber(2)
+      this.props.nextStepNumber(3)
   }
 
   async requestCameraPermission() {
@@ -108,12 +108,21 @@ class CoachClubLogoView extends Component<Props, State> {
             </View>
         }
         <View style={coachClubLogo.wrapperBtn}>
-            <TouchableHighlight 
+         {  
+          this.state.avatarSource !== '' ?
+          <TouchableHighlight 
                 style={coachClubLogo.nextBtn}
                 onPress={this.onSubmit}
                 >
                 <Text style={coachClubLogo.nextBtnText}>Next</Text>
-            </TouchableHighlight>
+            </TouchableHighlight> :
+
+            <TouchableHighlight 
+                style={coachClubLogo.skipBtn}
+                onPress={this.onSubmit}
+                >
+                <Text style={coachClubLogo.skipBtnText}>Skip</Text>
+            </TouchableHighlight> }
         </View>
       </View>
     );

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput, TouchableHighlight} from 'react-native';
 import clubDetails from './clubDetails.style';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import {TextInputMask} from 'react-native-masked-text';
@@ -116,6 +116,16 @@ class ClubDetailsView extends Component<Props, State> {
               />
             </View>
           </View>
+
+          <View style={clubDetails.wrapperBtn}>
+          <TouchableHighlight 
+                style={clubDetails.nextBtn}
+                // onPress={this.onSubmit}
+                >
+                <Text style={clubDetails.nextBtnText}>Next</Text>
+            </TouchableHighlight> 
+
+        </View>
         </View>
       </View>
     );
