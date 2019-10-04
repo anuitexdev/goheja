@@ -52,7 +52,7 @@ export const signIn = (userData: UserSignInData) => {
             }
 
             if (!res.data.token) {
-                Alert.alert('Invalid email or password');
+                Alert.alert('Received empty object from API');
                 dispatch(failedAuth(res));
                 return;
             }

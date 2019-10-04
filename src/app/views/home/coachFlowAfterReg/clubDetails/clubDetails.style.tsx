@@ -31,7 +31,7 @@ export default StyleSheet.create({
   workingDaysWrapper: {
     flexDirection: 'row',
     marginTop: 20,
-    width: window.width - 10,
+    width: window.width - 40,
     paddingBottom: 30,
     borderBottomWidth: 1,
     borderBottomColor: '#CFD8DD',

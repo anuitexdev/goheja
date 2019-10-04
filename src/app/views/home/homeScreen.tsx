@@ -38,11 +38,11 @@ class HomeScreen extends Component<Props, State> {
                 {
                     // this.props.userType == 1 ? 
                     // <SportsView /> :
-                    // <SportsView /> 
+                    <SportsView /> 
                     // this.props.userType == 0 ?
-                    // <CoachFlowAfterRegView/> : 
+                    // <CoachFlowAfterRegView/> : 0
                     // null
-                    <CoachFlowAfterRegView/>
+                    // <CoachFlowAfterRegView/>
                 }
             </View>
         );

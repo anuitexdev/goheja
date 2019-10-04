@@ -17,7 +17,7 @@ interface State {
 interface Props {
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: {maxSpeed: number}) => void,
+    changeModal: (value: { maxSpeed: number }) => void,
 }
 
 class SpeedView extends Component<Props, State> {
@@ -52,22 +52,22 @@ class SpeedView extends Component<Props, State> {
     }
 
     public changeModal = () => {
-        this.props.changeModal({maxSpeed: this.state.speedValue});
+        this.props.changeModal({ maxSpeed: this.state.speedValue });
     }
 
-    
+
     public setValue = async (input: any, value: any) => {
         await this.setState({
-             ...value,
-         })
-         input.focus();
- 
-         const summaryValue = Number(this.state.hundreds + this.state.dozens + '.' + this.state.units);
-         
-         this.setState({
+            ...value,
+        })
+        input.focus();
+
+        const summaryValue = Number(this.state.hundreds + this.state.dozens + '.' + this.state.units);
+
+        this.setState({
             speedValue: summaryValue,
-         });     
-     }
+        });
+    }
 
     render() {
         return (
@@ -101,14 +101,14 @@ class SpeedView extends Component<Props, State> {
                     </Text>
 
                     <View style={cyclingStyles.fullComponent}>
-                        <View style={{flexDirection: 'row'}}>
+                        <View style={{ flexDirection: 'row' }}>
                             <TextInput
                                 ref={(ref) => this.inputHundreds = ref}
                                 placeholder="0"
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
-                                onChangeText={(hundreds) => this.setValue(this.inputDozens, {hundreds})}
+                                onChangeText={(hundreds) => this.setValue(this.inputDozens, { hundreds })}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>
@@ -117,7 +117,7 @@ class SpeedView extends Component<Props, State> {
                                 ref={(ref) => this.inputDozens = ref}
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
-                                onChangeText={(dozens) => this.setValue(this.inputUnits, {dozens})}
+                                onChangeText={(dozens) => this.setValue(this.inputUnits, { dozens })}
                                 style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
                                 keyboardType={"number-pad"}
                             >
@@ -131,41 +131,45 @@ class SpeedView extends Component<Props, State> {
                                 placeholder="0"
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(3)}
-                                onChangeText={(units) => this.setValue(this.inputUnits, {units})}
+                                onChangeText={(units) => this.setValue(this.inputUnits, { units })}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>
                         </View>
                         <Text
-                        style={{
-                            fontSize: 20,
-                            color: '#99a8af',
-                            marginTop: 13
-                        }}>
-                       kph
+                            style={{
+                                fontSize: 20,
+                                color: '#99a8af',
+                                marginTop: 13
+                            }}>
+                            kph
                         </Text>
                     </View>
 
                     <View style={cyclingStyles.footerBtns}>
-                        <TouchableOpacity>
+                        <TouchableWithoutFeedback
+                            onPress={this.changeModal}
+                        >
                             <Text style={cyclingStyles.skipBtn}>
                                 Skip >
                             </Text>
-                        </TouchableOpacity>
+                        </TouchableWithoutFeedback>
 
-                        {this.state.speedValue ===0 ? 
-                        <TouchableOpacity style={cyclingStyles.nextBtn}>
-                            <Text style={cyclingStyles.nextBtnText}>
-                                I don't know
-                            </Text>
-                        </TouchableOpacity> :
-                        <TouchableWithoutFeedback onPress={this.changeModal}>
-                            <View style={cyclingStyles.nextBtn}>
-                                <Text style={cyclingStyles.nextBtnText}>
-                                    Next
+                        {this.state.speedValue === 0 ?
+                            <TouchableWithoutFeedback onPress={this.changeModal}>
+                                <View style={cyclingStyles.nextBtn}>
+                                    <Text style={cyclingStyles.nextBtnText}>
+                                        I don't know
                                 </Text>
-                            </View>
-                        </TouchableWithoutFeedback>}
+                                </View>
+                            </TouchableWithoutFeedback> :
+                            <TouchableWithoutFeedback onPress={this.changeModal}>
+                                <View style={cyclingStyles.nextBtn}>
+                                    <Text style={cyclingStyles.nextBtnText}>
+                                        Next
+                                </Text>
+                                </View>
+                            </TouchableWithoutFeedback>}
                     </View>
                 </View>
             </View>
@@ -179,7 +183,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: {maxSpeed: number}) => dispatch(actions.changeCyclingModal(value)),
+    changeModal: (value: { maxSpeed: number }) => dispatch(actions.changeCyclingModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeedView);

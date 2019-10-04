@@ -142,18 +142,20 @@ class RockView extends Component<Props, State> {
                             </View>
 
                             <View style={rock.footerBtns}>
-                                <TouchableOpacity>
+                                <TouchableWithoutFeedback  onPress={this.changeModal}>
                                     <Text style={rock.skipBtn}>
                                         Skip >
                                 </Text>
-                                </TouchableOpacity>
+                                </TouchableWithoutFeedback>
                                 {
-                                    this.state.rockValue === 0 ? 
-                                    <TouchableOpacity style={rock.nextBtn}>
-                                        <Text style={rock.nextBtnText}>
+                                    this.state.rockValue === 0 ?    
+                                    <TouchableWithoutFeedback onPress={this.hideModal}>
+                                        <View style={rock.nextBtn}>
+                                            <Text style={rock.nextBtnText}>
                                             I don't remmember
-                                        </Text>
-                                    </TouchableOpacity> :
+                                            </Text>
+                                        </View>
+                                    </TouchableWithoutFeedback> :
                                     <TouchableWithoutFeedback onPress={this.hideModal}>
                                         <View style={rock.nextBtn}>
                                             <Text style={rock.nextBtnText}>

@@ -191,13 +191,15 @@ class ThresholdView extends Component<Props, State> {
           </View>
 
           <View style={threshold.footerBtns}>
-            <TouchableOpacity>
+            <TouchableWithoutFeedback onPress={this.changeModal}>
               <Text style={threshold.skipBtn}>Skip ></Text>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
             {this.state.thresholdValue === '' ? (
-              <TouchableOpacity style={threshold.nextBtn}>
+              <TouchableWithoutFeedback onPress={this.changeModal}>
+              <View style={threshold.nextBtn}>
                 <Text style={threshold.nextBtnText}>I don't know</Text>
-              </TouchableOpacity>
+              </View>
+            </TouchableWithoutFeedback>
             ) : (
               <TouchableWithoutFeedback onPress={this.changeModal}>
                 <View style={threshold.nextBtn}>

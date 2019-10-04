@@ -69,6 +69,7 @@ class CyclingFtpView extends Component<Props, State> {
     }
 
     render() {
+        console.log(this.state.ftpValue)
         return (
 
             <View style={{
@@ -144,18 +145,22 @@ class CyclingFtpView extends Component<Props, State> {
                     </View>
 
                     <View style={cyclingStyles.footerBtns}>
-                        <TouchableOpacity>
+                        <TouchableWithoutFeedback onPress={this.changeModal}>
                             <Text style={cyclingStyles.skipBtn}>
                                 Skip >
                             </Text>
-                        </TouchableOpacity>
+                        </TouchableWithoutFeedback>
                         {
+
+                            
                             this.state.ftpValue === 0 ?
-                                <TouchableOpacity style={cyclingStyles.nextBtn}>
+                                <TouchableWithoutFeedback onPress={this.changeModal}>
+                                    <View style={cyclingStyles.nextBtn}>
                                     <Text style={cyclingStyles.nextBtnText}>
                                         I don't know
                                     </Text>
-                                </TouchableOpacity> :
+                                    </View>
+                                </TouchableWithoutFeedback> :
                                 <TouchableWithoutFeedback onPress={this.changeModal}>
                                     <View style={cyclingStyles.nextBtn}>
                                         <Text style={cyclingStyles.nextBtnText}>
