@@ -58,6 +58,7 @@
 		2D02E4901E0B4A5D006451C7 /* goheja-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "goheja-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B84D9A223460AE9002F8BC9 /* libreact-native-maps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-maps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B84D9A423460F02002F8BC9 /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BD46EE22346370A0077D15A /* goheja.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = goheja.entitlements; path = goheja/goheja.entitlements; sourceTree = "<group>"; };
 		863A6515A6C47C5E04E160BC /* Pods-goheja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja.debug.xcconfig"; path = "Target Support Files/Pods-goheja/Pods-goheja.debug.xcconfig"; sourceTree = "<group>"; };
 		8ED3B6B58776B36857C8B0A0 /* Pods-goheja-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-goheja-tvOS/Pods-goheja-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A79081FAD517FD9F7B8162D9 /* Pods-goheja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja.release.xcconfig"; path = "Target Support Files/Pods-goheja/Pods-goheja.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		13B07FAE1A68108700A75B9A /* goheja */ = {
 			isa = PBXGroup;
 			children = (
+				4BD46EE22346370A0077D15A /* goheja.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -301,6 +303,11 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = VXVUCQVY2G;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 0;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
