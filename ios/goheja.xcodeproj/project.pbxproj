@@ -29,6 +29,7 @@
 		5B37B9655123BD63A15BE1B4 /* libPods-goheja.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC2795B8AB97B9B5CFC63FA /* libPods-goheja.a */; };
 		6B8DDCEFADAE4872B0E2A5CB /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A81FF8226094CCE830E7FEE /* AntDesign.ttf */; };
 		770298F28E714802BB2CA62E /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37FD8F6BEFF64B0B855CCB41 /* Zocial.ttf */; };
+		7992D79BF82A427BB513C081 /* libRCTAppleHealthKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CDAC1A56EE4A22BB75E0E1 /* libRCTAppleHealthKit.a */; };
 		811AE3D1EF42CDB37231CE31 /* libPods-goheja-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 229786DBE183683F622CB0E7 /* libPods-goheja-tvOSTests.a */; };
 		99B9DB8A140448058E8A34E8 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B49C517374204DC593FAED09 /* FontAwesome.ttf */; };
 		9A2920F407134702BE4BC8ED /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 154147D9518D44368CF02450 /* FontAwesome5_Solid.ttf */; };
@@ -53,6 +54,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "goheja-tvOS";
+		};
+		4B427905234B30D900744BA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 653150137C544D99B3B6AD33 /* RCTAppleHealthKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3774C88D1D2092F20000B3F3;
+			remoteInfo = RCTAppleHealthKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -86,11 +94,13 @@
 		4DC2795B8AB97B9B5CFC63FA /* libPods-goheja.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-goheja.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53B9F521D1934706A856AF5A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		5BF6ECFEB75FE4CDD487226D /* Pods-goheja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja.debug.xcconfig"; path = "Target Support Files/Pods-goheja/Pods-goheja.debug.xcconfig"; sourceTree = "<group>"; };
+		653150137C544D99B3B6AD33 /* RCTAppleHealthKit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTAppleHealthKit.xcodeproj; path = "../node_modules/rn-apple-healthkit/RCTAppleHealthKit.xcodeproj"; sourceTree = "<group>"; };
 		6FB227150FC21E720B4242EC /* libPods-goheja-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-goheja-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87E04101E716D45348CD31DC /* Pods-gohejaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gohejaTests.debug.xcconfig"; path = "Target Support Files/Pods-gohejaTests/Pods-gohejaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8943768669424CFF8DA38B28 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		894E0DAB2340624D77218EF4 /* Pods-goheja-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-goheja-tvOS/Pods-goheja-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		924EE6BC2A0DFD569FBEB1B3 /* Pods-goheja-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-goheja-tvOSTests/Pods-goheja-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		A1CDAC1A56EE4A22BB75E0E1 /* libRCTAppleHealthKit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTAppleHealthKit.a; sourceTree = "<group>"; };
 		ABF238D5EC47EC2B3442B4FF /* Pods-gohejaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gohejaTests.release.xcconfig"; path = "Target Support Files/Pods-gohejaTests/Pods-gohejaTests.release.xcconfig"; sourceTree = "<group>"; };
 		AC7A8987826E48529088F0D3 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		B426C309F56040B2F1CDD9BA /* Pods-goheja-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-goheja-tvOSTests/Pods-goheja-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,6 +129,7 @@
 			files = (
 				5B37B9655123BD63A15BE1B4 /* libPods-goheja.a in Frameworks */,
 				4B427900234B2D5A00744BA2 /* HealthKit.framework in Frameworks */,
+				7992D79BF82A427BB513C081 /* libRCTAppleHealthKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,9 +198,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4B427901234B30D800744BA2 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				A1CDAC1A56EE4A22BB75E0E1 /* libRCTAppleHealthKit.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		4B427902234B30D900744BA2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4B427906234B30D900744BA2 /* libRCTAppleHealthKit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				653150137C544D99B3B6AD33 /* RCTAppleHealthKit.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -204,6 +232,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				A674A3A92AE70E3BF9E695B7 /* Pods */,
 				9FBBF573A43545EBB961CA1F /* Resources */,
+				4B427901234B30D800744BA2 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -389,6 +418,12 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4B427902234B30D900744BA2 /* Products */;
+					ProjectRef = 653150137C544D99B3B6AD33 /* RCTAppleHealthKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* goheja */,
@@ -398,6 +433,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4B427906234B30D900744BA2 /* libRCTAppleHealthKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTAppleHealthKit.a;
+			remoteRef = 4B427905234B30D900744BA2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -730,9 +775,17 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+				);
 				INFOPLIST_FILE = gohejaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -753,9 +806,17 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = ACS2X6ERDY;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+				);
 				INFOPLIST_FILE = gohejaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -778,6 +839,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = ACS2X6ERDY;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+				);
 				INFOPLIST_FILE = goheja/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -801,6 +866,10 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ACS2X6ERDY;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+				);
 				INFOPLIST_FILE = goheja/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -830,8 +899,16 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+				);
 				INFOPLIST_FILE = "goheja-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -861,8 +938,16 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+				);
 				INFOPLIST_FILE = "goheja-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -891,8 +976,16 @@
 				DEVELOPMENT_TEAM = ACS2X6ERDY;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+				);
 				INFOPLIST_FILE = "goheja-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -921,8 +1014,16 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ACS2X6ERDY;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+				);
 				INFOPLIST_FILE = "goheja-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

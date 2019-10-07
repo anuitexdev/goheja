@@ -9,29 +9,63 @@
  */
 
 import React, { Component } from 'react';
+import AppleHealthKit from 'rn-apple-healthkit'; 
+import { View, Text } from 'react-native';
 
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import { Provider } from "react-redux";
-import Navigation from "./navigation/app.routing";
-import reducers from './redux/reducers';
 
-// import * as actions from './redux/actions/auth.actions';
 
-let store = createStore(reducers, applyMiddleware(thunk));
+let options = {
+  permissions: {
+      read: [
+        "StepCount",
+        "DateOfBirth",
+        "HeartRate",
+        "DateOfBirth"
+      ]
+  }
+};
+
+let heartRateOptions = {
+  unit: 'bpm', // optional; default 'bpm'
+  startDate: (new Date(2016,4,27)).toISOString(), // required
+  endDate: (new Date()).toISOString(), // optional; default now
+  ascending: false, // optional; default false
+  limit:10, // optional; default no limit
+};
+// let d = new Date(2019,10,6);
+// let stepCountOptions = {
+//   date: d.toISOString()
+// };
+
+
+AppleHealthKit.initHealthKit(options , (err: string, results: Object) => {
+  if(err) {
+    console.log("error init HealthKit", err);
+    return;
+  }else{
+    AppleHealthKit.getHeartRateSamples(heartRateOptions , (err: Object, results: Array<Object>) => {
+      if (err) {
+        return;
+      }
+      console.log("HeartRate:", results)
+    });
+  }
+});
 
 export default class App extends Component {
   constructor(props: any) {
     super(props);
  
-    // store.dispatch(actions.getAllLanguages())
+
   }
 
   render() {
   return (
-    <Provider store={store}>
-      <Navigation />
-    </Provider>
+    <View>
+    <Text>
+      Test
+    </Text>
+  </View>
   )}
 };
 

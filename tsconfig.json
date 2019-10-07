@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
