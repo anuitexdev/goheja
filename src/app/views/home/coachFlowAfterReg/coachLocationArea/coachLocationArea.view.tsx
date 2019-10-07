@@ -11,6 +11,8 @@ import axiosInstance from '../../../../shared/interceptors/axios.interceptor';
 import environment from '../../../../environments/environment';
 import Slider from 'react-native-slider';
 import Geolocation from 'react-native-geolocation-service';
+import TranslateService from '../../../../services/translation.service';
+
 
 interface State {
   avatarSource: any;
@@ -48,7 +50,9 @@ export let request_location_runtime_permission = async () => {
 }
 
 class CoachLocationAreaView extends Component<Props, State> {
-  constructor(props: Props) {
+  private languageSubscription: any;
+  private translateMethod: any;
+  constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.state = {
       avatarSource: '',
@@ -68,7 +72,18 @@ class CoachLocationAreaView extends Component<Props, State> {
     };
   }
 
+  componentWillMount() {
+    this.getCurrentLocation();
+    this.translationService = new TranslateService();
+   this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.forceUpdate();
+        this.translateMethod = res
+    });
+}
 
+componentWillUnmount(){
+    this.languageSubscription.unsubscribe();
+}
 
   public showAddressModal = () => {
     this.setState({
@@ -121,15 +136,12 @@ class CoachLocationAreaView extends Component<Props, State> {
     this.getLatLong(this.state.region.latitude, this.state.region.longitude);
   }
 
-  componentWillMount = async () => {
-    this.getCurrentLocation();
-  }
 
   render() {
     return (
       <View style={coachLocationArea.mapPageWrapper}>
         <Text style={coachLocationArea.title}>
-          Where usually Zen's teams{'\n'} are training ?
+        {this.translateMethod('translation.exposeIDE.views.regestrationNewClub.WhereusuallyTeamsAreTraninig')} 
         </Text>
         <View style={coachLocationArea.mapWrapper}>
           <MapView
@@ -154,7 +166,7 @@ class CoachLocationAreaView extends Component<Props, State> {
                 name={'location-arrow'}
               />
               <Text style={coachLocationArea.currentLocationBtnText}>
-                Use my current location area
+              {this.translateMethod('translation.exposeIDE.views.regestrationNewClub.useMyCurrentLocationArea')}   
               </Text>
             </TouchableOpacity>
           ) : null}
@@ -198,11 +210,11 @@ class CoachLocationAreaView extends Component<Props, State> {
               style={coachLocationArea.addressBtn}
               onPress={this.showAddressModal}>
               <Text style={coachLocationArea.addressBtnText}>
-                Add Address Manually
+              {this.translateMethod('translation.exposeIDE.views.regestrationNewClub.addAddressManually')}    
               </Text>
             </TouchableOpacity>
             <TouchableOpacity style={coachLocationArea.skipBtn}>
-              <Text style={coachLocationArea.skipBtnText}>Skip</Text>
+              <Text style={coachLocationArea.skipBtnText}>{this.translateMethod('translation.common.skip')}</Text>
             </TouchableOpacity>
           </View>
         ) : null}
@@ -212,15 +224,15 @@ class CoachLocationAreaView extends Component<Props, State> {
             <TouchableOpacity
               style={coachLocationArea.nextBtn}
               onPress={this.onSubmit}>
-              <Text style={coachLocationArea.nextBtnText}>Next</Text>
+              <Text style={coachLocationArea.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
             </TouchableOpacity>
           ) : null
         }
 
         {this.state.editLocation == true ? (
           <View style={coachLocationArea.range}>
-            <Text style={coachLocationArea.radiusText}>
-              Radius from selected location
+            <Text style={coachLocationArea.radiusText}> 
+            {this.translateMethod('translation.exposeIDE.views.regestrationNewClub.radiusFromSelectedLocation')}   
             </Text>
             <View style={coachLocationArea.sliderWrapper}>
               <Slider

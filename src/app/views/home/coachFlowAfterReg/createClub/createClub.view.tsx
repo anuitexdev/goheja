@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import createClubStyle from "./createClub.style";
 import { TextInput, ScrollView } from "react-native-gesture-handler";
 import * as actions from '../../../../redux/actions/createGroup.actions';
-import { Scope } from "@babel/traverse";
+import TranslateService from '../../../../services/translation.service';
 interface State {
     placeholder: string;
 }
@@ -15,12 +15,25 @@ interface Props {
 
 class CreateClubView extends Component<Props, State> {
 
-    constructor(props: Props) {
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props)
-
         this.state = {
             placeholder: ''
         }
+    }
+
+    componentWillMount() {
+        this.translationService = new TranslateService();
+       this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res
+        });
+    }
+
+    componentWillUnmount(){
+        this.languageSubscription.unsubscribe();
     }
 
     public onSubmit() {
@@ -28,32 +41,32 @@ class CreateClubView extends Component<Props, State> {
     }
 
     render() {
-        return(
+        return (
             <View>
-               <ScrollView>
-               <View>
-               <View style={createClubStyle.clubNameInput}>
-                   <Text style={createClubStyle.titleName}>Club Name</Text>
-                   <View style={createClubStyle.inputWrapper}>
-                       <TextInput 
-                       style={[this.state.placeholder.length == 0 ? {fontStyle: 'italic'} : {fontStyle: 'normal'}, createClubStyle.inputClub]} 
-                       placeholder="Type Club Name..." 
-                       onChangeText={(txt) => this.setState({placeholder: txt})}
-                       value={this.state.placeholder}
-                       >
-                       </TextInput>
-                       <TouchableOpacity 
-                       style={createClubStyle.nextBtn}
-                       onPress={() => this.onSubmit()}
-                       >
-                           <Text style={createClubStyle.nextBtnText}>
-                               Next
+                <ScrollView>
+                    <View>
+                        <View style={createClubStyle.clubNameInput}>
+                            <Text style={createClubStyle.titleName}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubName')}</Text>
+                            <View style={createClubStyle.inputWrapper}>
+                                <TextInput
+                                    style={[this.state.placeholder.length == 0 ? { fontStyle: 'italic' } : { fontStyle: 'normal' }, createClubStyle.inputClub]}
+                                    placeholder={this.translateMethod('translation.exposeIDE.views.regestrationNewClub.caption')}
+                                    onChangeText={(txt) => this.setState({ placeholder: txt })}
+                                    value={this.state.placeholder}
+                                >
+                                </TextInput>
+                                <TouchableOpacity
+                                    style={createClubStyle.nextBtn}
+                                    onPress={() => this.onSubmit()}
+                                >
+                                    <Text style={createClubStyle.nextBtnText}>
+                                    {this.translateMethod('translation.common.next')}
                            </Text>
-                       </TouchableOpacity>
-                   </View>
-               </View>
-           </View>
-               </ScrollView>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                </ScrollView>
             </View>
         )
     }

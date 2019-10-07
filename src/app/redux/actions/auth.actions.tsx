@@ -3,11 +3,11 @@ import UserSignInData from 'src/app/shared/models/userSignInData.model';
 
 import { Alert } from 'react-native';
 
-export const successAuth = (userToken: string, type: string) => {
+export const successAuth = (userData: any, type: string) => {
     if (type === 'login') {
-        return { type: 'LOGIN_SUCCESS', userToken }
+        return { type: 'LOGIN_SUCCESS', userData }
     } else {
-        return { type: 'REGISTER_SUCCESS', userToken }
+        return { type: 'REGISTER_SUCCESS', userData }
     }
 }
 
@@ -56,7 +56,7 @@ export const signIn = (userData: UserSignInData) => {
                 dispatch(failedAuth(res));
                 return;
             }
-            dispatch(successAuth(res, 'login'));
+            dispatch(successAuth(res.data, 'login'));
         });
     }
 }
@@ -82,7 +82,7 @@ export const getAllLanguages = () => {
     }
 }
 
-export const signUp = (userData: any) => {
+export const signUp = (userData: any) => {    
     return async (dispatch: any) => {
         await AuthService.signUp(userData).then(res => {
 
