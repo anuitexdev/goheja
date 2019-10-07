@@ -12,6 +12,7 @@ import environment from '../../../../environments/environment';
 import Slider from 'react-native-slider';
 import Geolocation from 'react-native-geolocation-service';
 import TranslateService from '../../../../services/translation.service';
+import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
 
 
 interface State {
@@ -26,6 +27,7 @@ interface State {
 interface Props {
   location: string;
   nextStepNumber: (data: any) => void;
+  clubName: string;
 }
 
 
@@ -141,7 +143,7 @@ componentWillUnmount(){
     return (
       <View style={coachLocationArea.mapPageWrapper}>
         <Text style={coachLocationArea.title}>
-        {this.translateMethod('translation.exposeIDE.views.regestrationNewClub.WhereusuallyTeamsAreTraninig')} 
+        {translationReplaceHelper.translationReplace(this.translateMethod('translation.exposeIDE.views.regestrationNewClub.WhereusuallyTeamsAreTraninig'), this.props.clubName)} 
         </Text>
         <View style={coachLocationArea.mapWrapper}>
           <MapView
@@ -280,6 +282,7 @@ componentWillUnmount(){
 
 const mapStateToProps = (state: any) => ({
   location: state.CreateGroupReducer.location,
+  clubName: state.CreateGroupReducer.clubData.clubName
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

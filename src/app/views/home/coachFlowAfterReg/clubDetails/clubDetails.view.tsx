@@ -5,6 +5,7 @@ import clubDetails from './clubDetails.style';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import { TextInputMask } from 'react-native-masked-text';
 import TranslateService from '../../../../services/translation.service';
+import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
 
 interface State {
   arrayOfDays: any[];
@@ -16,6 +17,7 @@ interface State {
 
 interface Props {
   nextStepNumber: (clubData: any) => void;
+  clubName: string;
 }
 
 class ClubDetailsView extends Component<Props, State> {
@@ -50,7 +52,7 @@ class ClubDetailsView extends Component<Props, State> {
   }
 
   public onSubmit = () => {
-Alert.alert('end of the flow');
+    Alert.alert('end of the flow');
     const clubTime = {
       startOfDay: this.state.openTime,
       endOfDay: this.state.closeTime,
@@ -81,7 +83,7 @@ Alert.alert('end of the flow');
       <View style={{ position: 'relative' }}>
         <Text style={clubDetails.title}>Club Details</Text>
         <View style={clubDetails.clubDetailsWrapper}>
-          <Text style={clubDetails.titleTime}>  {this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays')} </Text>
+          <Text style={clubDetails.titleTime}>  {translationReplaceHelper.translationReplace(this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays'), this.props.clubName)} </Text>
           <View style={clubDetails.workingDaysWrapper}>
             {this.state.arrayOfDays.map((item, index) => (
               <TouchableOpacity
@@ -103,7 +105,7 @@ Alert.alert('end of the flow');
               </TouchableOpacity>
             ))}
           </View>
-          <Text style={clubDetails.titleTime}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingHours')}</Text>
+          <Text style={clubDetails.titleTime}>{translationReplaceHelper.translationReplace(this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingHours'), this.props.clubName)}</Text>
           <View style={clubDetails.inputsWrapper}>
             <View style={clubDetails.inputWidth}>
               <Text style={clubDetails.inputLabel}>Opening time</Text>
@@ -149,7 +151,9 @@ Alert.alert('end of the flow');
   }
 }
 
-const mapStateToProps = (state: any) => ({});
+const mapStateToProps = (state: any) => ({
+  clubName: state.CreateGroupReducer.clubData.clubName,
+});
 
 const mapDispatchToProps = (dispatch: any) => ({
   nextStepNumber: (clubData: any) => dispatch(actions.changeStep(clubData)),
