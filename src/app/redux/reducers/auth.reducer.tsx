@@ -6,7 +6,7 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
         case "LOGIN_SUCCESS": {
             return {
                 ...state,
-                userToken: action.userToken,
+                userData: action.userData,
                 isLogged: true,
             }
         }

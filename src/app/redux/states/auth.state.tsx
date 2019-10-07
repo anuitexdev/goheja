@@ -1,5 +1,5 @@
 let AuthDefaultState = {
-    userToken: '',
+    userData: {},
     isWelcomeScreen: true,
     isLogged: false,
     currentStep: 0,

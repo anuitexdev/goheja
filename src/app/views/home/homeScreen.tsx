@@ -6,12 +6,11 @@ import Header from '../../components/header/header';
 import SportsView from './sports/sports.view';
 import CoachFlowAfterRegView from './coachFlowAfterReg/coachFlowAfterReg.view';
 import { connect } from 'react-redux';
-import AuthReducer from '../../redux/reducers/auth.reducer';
 
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
-    userType: number
+    userType: number,
 }
 
 interface State {
@@ -23,8 +22,7 @@ class HomeScreen extends Component<Props, State> {
     constructor(props: Props) {
         super(props)
         this.state = {
-
-        }
+        }        
     }
 
     static navigationOptions = {
@@ -36,12 +34,11 @@ class HomeScreen extends Component<Props, State> {
             <View>
                 <Header />
                 {
-                    // this.props.userType == 1 ? 
-                    // <SportsView /> :
-                    // this.props.userType == 0 ?
-                    // <CoachFlowAfterRegView/> : 
-                    // null
-                    <CoachFlowAfterRegView/>
+                    this.props.userType == 1 ? 
+                    <SportsView /> :
+                    this.props.userType == 0 ?
+                    <CoachFlowAfterRegView/> : 
+                    null
                 }
             </View>
         );
@@ -50,7 +47,7 @@ class HomeScreen extends Component<Props, State> {
 
 
 const mapStateToProps = (state: any) => ({
-    userType: state.AuthReducer.userType
+    userType: state.AuthReducer.userData.userType,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

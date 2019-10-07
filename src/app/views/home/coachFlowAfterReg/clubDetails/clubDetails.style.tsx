@@ -31,7 +31,7 @@ export default StyleSheet.create({
   workingDaysWrapper: {
     flexDirection: 'row',
     marginTop: 20,
-    width: window.width - 10,
+    width: window.width - 40,
     paddingBottom: 30,
     borderBottomWidth: 1,
     borderBottomColor: '#CFD8DD',
@@ -92,5 +92,24 @@ export default StyleSheet.create({
       fontSize: 18,
       fontWeight: 'bold',
       marginBottom: 10
-  }
+  },
+  wrapperBtn: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    marginTop: 50
+},
+nextBtnText: {
+  color: 'white',
+  fontSize: 16
+},
+nextBtn: {
+  backgroundColor: '#4d5a5f',
+  borderRadius: 2,
+  paddingRight: 20,
+  paddingLeft: 20,
+  paddingBottom: 12,
+  paddingTop: 12,
+  marginLeft: 15,
+  
+},
 });

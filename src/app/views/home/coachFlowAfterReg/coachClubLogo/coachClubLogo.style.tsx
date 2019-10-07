@@ -50,8 +50,22 @@ export default StyleSheet.create({
         marginLeft: 15,
         
     },
+    skipBtn: {
+        backgroundColor: '#fff',
+        borderRadius: 2,
+        paddingRight: 20,
+        paddingLeft: 20,
+        paddingBottom: 12,
+        paddingTop: 12,
+        marginLeft: 15,
+        
+    },
     nextBtnText: {
         color: 'white',
+        fontSize: 16
+    },
+    skipBtnText: {
+        color: 'black',
         fontSize: 16
     },
     wrapperBtn: {

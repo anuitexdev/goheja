@@ -6,6 +6,7 @@ import {Image} from 'react-native';
 import {PermissionsAndroid} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import * as actions from '../../../../redux/actions/createGroup.actions';
+import TranslateService from '../../../../services/translation.service';
 interface State {
     avatarSource: any
 }
@@ -16,16 +17,28 @@ interface Props {
 
 
 class CoachClubLogoView extends Component<Props, State> {
-    
-  constructor(props: Props) {
+  private languageSubscription: any;
+  private translateMethod: any;
+  constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.state = {
         avatarSource: ''
     }
   }
 
+  componentWillMount() {
+    this.translationService = new TranslateService();
+   this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.forceUpdate();
+        this.translateMethod = res
+    });
+}
+
+componentWillUnmount(){
+    this.languageSubscription.unsubscribe();
+}
   public onSubmit = () => {
-      this.props.nextStepNumber(2)
+      this.props.nextStepNumber(3)
   }
 
   async requestCameraPermission() {
@@ -89,31 +102,40 @@ class CoachClubLogoView extends Component<Props, State> {
 
     return (
       <View style={coachClubLogo.photoWrapper}>
-        <Text style={coachClubLogo.titleLogo}>Add Zen Club Logo</Text>
+        <Text style={coachClubLogo.titleLogo}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.addLogo')}</Text>
         {
             this.state.avatarSource == '' ?
             <TouchableHighlight 
             onPress={() => this.test(options)}
             style={coachClubLogo.photoPicker}
             >
-                <Text style={coachClubLogo.photoBtnTitle}>Upload Zen's Logo</Text>
+                <Text style={coachClubLogo.photoBtnTitle}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadClubLogo')}</Text>
             </TouchableHighlight> :
             <View style={coachClubLogo.newPhoto}>
                 <Image source={this.state.avatarSource} style={coachClubLogo.pickedPhoto}/>
                 <TouchableHighlight 
                     onPress={() => this.test(options)}
                     >
-                    <Text style={coachClubLogo.photoBtnTitle}>Upload a diferent logo</Text>
+                    <Text style={coachClubLogo.photoBtnTitle}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadDiffrentLogo')}</Text>
                 </TouchableHighlight>
             </View>
         }
         <View style={coachClubLogo.wrapperBtn}>
-            <TouchableHighlight 
+         {  
+          this.state.avatarSource !== '' ?
+          <TouchableHighlight 
                 style={coachClubLogo.nextBtn}
                 onPress={this.onSubmit}
                 >
-                <Text style={coachClubLogo.nextBtnText}>Next</Text>
-            </TouchableHighlight>
+                <Text style={coachClubLogo.nextBtnText}> {this.translateMethod('translation.common.next')}</Text>
+            </TouchableHighlight> :
+
+            <TouchableHighlight 
+                style={coachClubLogo.skipBtn}
+                onPress={this.onSubmit}
+                >
+                <Text style={coachClubLogo.skipBtnText}> {this.translateMethod('translation.common.skip')}</Text>
+            </TouchableHighlight> }
         </View>
       </View>
     );

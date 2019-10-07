@@ -17,7 +17,7 @@ interface State {
 interface Props {
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: {lactate: number}) => void,
+    changeModal: (value: { lactate: number }) => void,
 }
 
 class LactateView extends Component<Props, State> {
@@ -50,21 +50,21 @@ class LactateView extends Component<Props, State> {
     }
 
     public changeModal = () => {
-        this.props.changeModal({lactate: this.state.lactateValue});
+        this.props.changeModal({ lactate: this.state.lactateValue });
     }
 
     public setValue = async (input: any, value: any) => {
         await this.setState({
-             ...value,
-         })
-         input.focus();
- 
-         const summaryValue = Number(this.state.hundreds + this.state.dozens + this.state.units);
-         
-         this.setState({
+            ...value,
+        })
+        input.focus();
+
+        const summaryValue = Number(this.state.hundreds + this.state.dozens + this.state.units);
+
+        this.setState({
             lactateValue: summaryValue,
-         });     
-     }
+        });
+    }
 
     render() {
         return (
@@ -99,7 +99,7 @@ class LactateView extends Component<Props, State> {
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? sport.focusInput : sport.infoInput}
-                                onChangeText={(hundreds) => this.setValue(this.inputDozens, {hundreds})}
+                                onChangeText={(hundreds) => this.setValue(this.inputDozens, { hundreds })}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>
@@ -108,7 +108,7 @@ class LactateView extends Component<Props, State> {
                                 ref={(ref) => this.inputDozens = ref}
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
-                                onChangeText={(dozens) => this.setValue(this.inputUnits, {dozens})}
+                                onChangeText={(dozens) => this.setValue(this.inputUnits, { dozens })}
                                 style={this.state.activeInputNumber === 2 ? sport.focusInput : sport.infoInput}
                                 keyboardType={"number-pad"}
                             >
@@ -118,7 +118,7 @@ class LactateView extends Component<Props, State> {
                                 style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
                                 placeholder="0"
                                 maxLength={1}
-                                onChangeText={(units) => this.setValue(this.inputUnits, {units})}
+                                onChangeText={(units) => this.setValue(this.inputUnits, { units })}
                                 onFocus={() => this.changeFocus(3)}
                                 keyboardType={"number-pad"}
                             >
@@ -136,18 +136,20 @@ class LactateView extends Component<Props, State> {
 
 
                     <View style={sport.footerBtns}>
-                        <TouchableOpacity>
+                        <TouchableWithoutFeedback onPress={this.changeModal}>
                             <Text style={sport.skipBtn}>
                                 Skip >
                                 </Text>
-                        </TouchableOpacity>
-                        {this.state.lactateValue === 0 ? 
-                            
-                            <TouchableOpacity style={sport.nextBtn}>
-                                <Text style={sport.nextBtnText}>
-                                    I don't know
-                                </Text>
-                            </TouchableOpacity> :
+                        </TouchableWithoutFeedback >
+                        {this.state.lactateValue === 0 ?
+
+                            <TouchableWithoutFeedback onPress={this.changeModal}>
+                                <View style={sport.nextBtn}>
+                                    <Text style={sport.nextBtnText}>
+                                        I don't know
+                            </Text>
+                                </View>
+                            </TouchableWithoutFeedback> :
                             <TouchableWithoutFeedback onPress={this.changeModal}>
                                 <View style={sport.nextBtn}>
                                     <Text style={sport.nextBtnText}>
@@ -168,7 +170,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: {lactate: number}) => dispatch(actions.changeRunningModal(value)),
+    changeModal: (value: { lactate: number }) => dispatch(actions.changeRunningModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LactateView);

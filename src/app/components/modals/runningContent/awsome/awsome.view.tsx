@@ -241,14 +241,16 @@ class AwsomeView extends Component<Props, State> {
           </View>
 
           <View style={awsome.footerBtns}>
-            <TouchableOpacity>
+            <TouchableWithoutFeedback  onPress={this.changeModal}>
               <Text style={awsome.skipBtn}>Skip ></Text>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
             {
               this.state.awesomeValue === '' ?
-              (<TouchableOpacity style={awsome.nextBtn}>
-                <Text style={awsome.nextBtnText}>I don't know</Text>
-              </TouchableOpacity>)
+              (<TouchableWithoutFeedback onPress={this.changeModal}>
+                <View style={awsome.nextBtn}>
+                  <Text style={awsome.nextBtnText}>I don't know</Text>
+                </View>
+              </TouchableWithoutFeedback>)
               :
               (<TouchableWithoutFeedback onPress={this.changeModal}>
                 <View style={awsome.nextBtn}>

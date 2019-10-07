@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, Alert } from "react-native";
 import sports from './sports.styles';
 import * as actions from '../../../redux/actions/modal.actions';
 import SportModal from '../../../components/modals/sport.modal';
+import TranslateService from '../../../services/translation.service';
 
 interface State {
 }
@@ -14,8 +15,20 @@ interface Props {
 }
 
 class SportsView extends Component<Props, State> {
-    constructor(props: Props) {
+    private translateMethod: any;
+    private languageSubscription: any;
+    constructor(props: Props, private translationService: TranslateService) {
         super(props)
+
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+          this.forceUpdate();
+          this.translateMethod = res
+        });
+    }
+
+    componentWillUnmount(){
+        this.languageSubscription.unsubscribe();
     }
 
     public selectSport = (sportType: string) => {
@@ -30,23 +43,23 @@ class SportsView extends Component<Props, State> {
                     Hi Dafni : &#x2769;
                 </Text>
                 <Text style={sports.subtitle}>
-                    We’ve verified your email and lunched your account successfully
+                {this.translateMethod('translation.exposeIDE.views.confirmation.text')}
                 </Text>
                 <Text style={sports.chooseCategory}>
-                    Configure Your sports
+                {this.translateMethod('translation.exposeIDE.views.userSetSports.title')}
                 </Text>
                 <View style={sports.categories}>
                     <TouchableOpacity onPress={() =>this.selectSport('Cycling')}>
                         <View style={sports.category}>
                             <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
-                                Cycling
+                            {this.translateMethod('translation.common.cycling')}
                         </Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.selectSport('Swimming')}>
                         <View style={[sports.category, {marginLeft: 20}]}>
                             <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
-                                Swimming
+                            {this.translateMethod('translation.common.swimming')}
                         </Text>
                         </View>
                     </TouchableOpacity>
@@ -54,7 +67,7 @@ class SportsView extends Component<Props, State> {
                 <TouchableOpacity onPress={() => this.selectSport('Running')}>
                     <View style={sports.category}>
                         <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
-                            Running
+                        {this.translateMethod('translation.common.running')}
                     </Text>
                     </View>
                 </TouchableOpacity>
@@ -62,7 +75,7 @@ class SportsView extends Component<Props, State> {
                     <TouchableOpacity
                         onPress={() => Alert.alert('Will be soon')}>
                         <Text style={sports.skipButton}>
-                            Skip >
+                        {this.translateMethod('translation.common.running')} >
                         </Text>
                     </TouchableOpacity>
                 </View>
