@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { View, Text, TouchableOpacity } from 'react-native';
-import createClubStyle from "./createClub.style";
-import { TextInput, ScrollView } from "react-native-gesture-handler";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import createClubStyle from './createClub.style';
+import {TextInput, ScrollView} from 'react-native-gesture-handler';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import TranslateService from '../../../../services/translation.service';
+
 interface State {
     clubName: string;
 }
@@ -72,13 +73,14 @@ class CreateClubView extends Component<Props, State> {
     }
 }
 
-
-const mapStateToProps = (state: any) => ({
-});
+const mapStateToProps = (state: any) => ({});
 
 const mapDispatchToProps = (dispatch: any) => ({
 
     nextStepNumber: (step: { clubName: string }) => dispatch(actions.changeStep(step))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateClubView);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CreateClubView);

@@ -31,6 +31,14 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    footerBtnActive: {
+        backgroundColor: '#B7C0C7',
+        height: 50,
+        width: 130,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     footerText: {
         color: 'white',
         fontWeight: 'bold'

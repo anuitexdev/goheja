@@ -23,9 +23,9 @@ class UnitsAthleteScreen extends Component<Props, State> {
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
         this.state = {
-            isActive: 'ml',
+            isActive: 'km',
             unitError: true,
-            units: 'ml'
+            units: 'km'
         }
     }
 

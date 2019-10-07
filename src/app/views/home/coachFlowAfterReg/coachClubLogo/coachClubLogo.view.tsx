@@ -8,6 +8,8 @@ import ImagePicker from 'react-native-image-picker';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import TranslateService from '../../../../services/translation.service';
 import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
+import IconFeather from 'react-native-vector-icons/Feather';
+
 interface State {
     avatarSource: any
 }
@@ -67,7 +69,7 @@ componentWillUnmount(){
     }
   }
 
-  private test = (options: any) => {
+  private chooseImage = (options: any) => {
     ImagePicker.showImagePicker(options, (response) => {
         console.log('Response = ', response);
       
@@ -108,16 +110,21 @@ componentWillUnmount(){
         {
             this.state.avatarSource == '' ?
             <TouchableHighlight 
-            onPress={() => this.test(options)}
-            style={coachClubLogo.photoPicker}
+              onPress={() => this.chooseImage(options)}
+              style={coachClubLogo.photoPicker}
             >
                 <Text style={coachClubLogo.photoBtnTitle}>{translationReplaceHelper.translationReplace(this.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadClubLogo'), this.props.clubName)}</Text>
             </TouchableHighlight> :
             <View style={coachClubLogo.newPhoto}>
                 <Image source={this.state.avatarSource} style={coachClubLogo.pickedPhoto}/>
                 <TouchableHighlight 
-                    onPress={() => this.test(options)}
+                    onPress={() => this.chooseImage(options)}
                     >
+                    <IconFeather
+                      name={'upload'}
+                      size={20}
+                      color={'red'}
+                    />
                     <Text style={coachClubLogo.photoBtnTitle}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadDiffrentLogo')}</Text>
                 </TouchableHighlight>
             </View>

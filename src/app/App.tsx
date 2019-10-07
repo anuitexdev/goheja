@@ -15,7 +15,6 @@ import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import Navigation from "./navigation/app.routing";
 import reducers from './redux/reducers';
-
 // import * as actions from './redux/actions/auth.actions';
 
 let store = createStore(reducers, applyMiddleware(thunk));
