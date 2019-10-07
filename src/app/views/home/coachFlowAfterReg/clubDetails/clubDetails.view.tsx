@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {View, Text, TouchableOpacity, TextInput, TouchableHighlight} from 'react-native';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { View, Text, TouchableOpacity, TextInput, TouchableHighlight } from 'react-native';
 import clubDetails from './clubDetails.style';
 import * as actions from '../../../../redux/actions/createGroup.actions';
-import {TextInputMask} from 'react-native-masked-text';
+import { TextInputMask } from 'react-native-masked-text';
+import TranslateService from '../../../../services/translation.service';
 
 interface State {
   arrayOfDays: any[];
@@ -18,24 +19,34 @@ interface Props {
 }
 
 class ClubDetailsView extends Component<Props, State> {
- 
-  constructor(props: Props) {
+  private translateMethod: any;
+  private languageSubscription: any;
+  constructor(props: Props, private translationService: TranslateService) {
     super(props);
+    this.translationService = new TranslateService();
+    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+      this.forceUpdate();
+      this.translateMethod = res
+    });
     this.state = {
       arrayOfDays: [
-        {key: 'S', value: 'Sunday'},
-        {key: 'M', value: 'Monday'},
-        {key: 'T', value: 'Tuesday'},
-        {key: 'W', value: 'Wednesday'},
-        {key: 'T', value: 'Thursday'},
-        {key: 'F', value: 'Friday'},
-        {key: 'S', value: 'Saturday'},
+        { key: 'S', value: 'Sunday' },
+        { key: 'M', value: 'Monday' },
+        { key: 'T', value: 'Tuesday' },
+        { key: 'W', value: 'Wednesday' },
+        { key: 'T', value: 'Thursday' },
+        { key: 'F', value: 'Friday' },
+        { key: 'S', value: 'Saturday' },
       ],
       newArr: [],
       openTime: '',
       closeTime: '',
       isFocused: false
     };
+  }
+
+  componentWillUnmount() {
+    this.languageSubscription.unsubscribe();
   }
 
   public onSubmit = () => {
@@ -52,7 +63,7 @@ class ClubDetailsView extends Component<Props, State> {
     if (this.state.newArr.indexOf(item) !== -1) {
       return;
     } else {
-      await this.setState(({newArr}) => {
+      await this.setState(({ newArr }) => {
         newArr: newArr.push(item);
       });
     }
@@ -61,10 +72,10 @@ class ClubDetailsView extends Component<Props, State> {
 
   render() {
     return (
-      <View style={{position: 'relative'}}>
+      <View style={{ position: 'relative' }}>
         <Text style={clubDetails.title}>Club Details</Text>
         <View style={clubDetails.clubDetailsWrapper}>
-          <Text style={clubDetails.titleTime}>Zen's Club Working days ?</Text>
+          <Text style={clubDetails.titleTime}>  {this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays')} </Text>
           <View style={clubDetails.workingDaysWrapper}>
             {this.state.arrayOfDays.map((item, index) => (
               <TouchableOpacity
@@ -86,25 +97,25 @@ class ClubDetailsView extends Component<Props, State> {
               </TouchableOpacity>
             ))}
           </View>
-          <Text style={clubDetails.titleTime}>Zen's Club Working hours ?</Text>
+          <Text style={clubDetails.titleTime}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingHours')}</Text>
           <View style={clubDetails.inputsWrapper}>
             <View style={clubDetails.inputWidth}>
               <Text style={clubDetails.inputLabel}>Opening time</Text>
               <TextInputMask
-              
-              type={'datetime'}
-              style={this.state.isFocused ? clubDetails.inputTimeFocused : clubDetails.inputTime}
-              options={{
-                format: 'HH:mm'
-              }}
-              onFocus={this.changeFocus}
-              value={this.state.openTime}
-              onChangeText={(time) => this.setState({openTime: time})}
-            />
+
+                type={'datetime'}
+                style={this.state.isFocused ? clubDetails.inputTimeFocused : clubDetails.inputTime}
+                options={{
+                  format: 'HH:mm'
+                }}
+                onFocus={this.changeFocus}
+                value={this.state.openTime}
+                onChangeText={(time) => this.setState({ openTime: time })}
+              />
             </View>
-            <View style={[clubDetails.inputWidth, {marginRight: 0}]}>
+            <View style={[clubDetails.inputWidth, { marginRight: 0 }]}>
               <Text style={clubDetails.inputLabel}>Closing time</Text>
-                <TextInputMask
+              <TextInputMask
                 type={'datetime'}
                 style={this.state.isFocused ? clubDetails.inputTimeFocused : clubDetails.inputTime}
                 onFocus={this.changeFocus}
@@ -112,20 +123,20 @@ class ClubDetailsView extends Component<Props, State> {
                   format: 'HH:mm'
                 }}
                 value={this.state.closeTime}
-                onChangeText={(time) => this.setState({closeTime: time})}
+                onChangeText={(time) => this.setState({ closeTime: time })}
               />
             </View>
           </View>
 
           <View style={clubDetails.wrapperBtn}>
-          <TouchableHighlight 
-                style={clubDetails.nextBtn}
-                // onPress={this.onSubmit}
-                >
-                <Text style={clubDetails.nextBtnText}>Next</Text>
-            </TouchableHighlight> 
+            <TouchableHighlight
+              style={clubDetails.nextBtn}
+            // onPress={this.onSubmit}
+            >
+              <Text style={clubDetails.nextBtnText}>Next</Text>
+            </TouchableHighlight>
 
-        </View>
+          </View>
         </View>
       </View>
     );

@@ -7,20 +7,35 @@ import coachFlowAfterReg from './coachFlowAfterReg.style';
 import Wizard from "../../../components/wizard/wizard.view";
 import CoachLocationAreaView from './coachLocationArea/coachLocationArea.view';
 import ClubDetailsView from './clubDetails/clubDetails.view';
+import TranslateService from '../../../services/translation.service';
 interface State {
 
 }
 
 interface Props {
-    currentGroupStep: any
+    currentGroupStep: any,
+    userName: string,
 }
 
 class CoachFlowAfterRegView extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    console.log(this.props.currentGroupStep);
-    
+
+  private languageSubscription: any;
+  private translateMethod: any;
+  constructor(props: Props, private translationService: TranslateService) {
+    super(props);    
   }
+
+  componentWillMount() {
+    this.translationService = new TranslateService();
+   this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.forceUpdate();
+        this.translateMethod = res
+    });
+}
+
+componentWillUnmount(){
+    this.languageSubscription.unsubscribe();
+}
 
   render() {
     return (
@@ -29,19 +44,18 @@ class CoachFlowAfterRegView extends Component<Props, State> {
           this.props.currentGroupStep === 1 ? 
           <View style={coachFlowAfterReg.titles}>
             <Text style={coachFlowAfterReg.welcome}>
-              Hi Alona & Welcome to Go-Heja
+            {this.translateMethod('translation.common.hi')} {this.props.userName} & {this.translateMethod('translation.exposeIDE.views.regestrationNewClub.welcome')}
             </Text>
-            <Text style={coachFlowAfterReg.createClub}>Let's create your Club</Text>
+            <Text style={coachFlowAfterReg.createClub}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.title')}</Text>
             <Text style={coachFlowAfterReg.pleaseFill}>
-              Please fill the form below for the{'\n'}
-              best Personalisation and team spirit
+            {this.translateMethod('translation.exposeIDE.views.regestrationNewClub.text')}
             </Text>
           </View> :
           null
         }
         <View style={coachFlowAfterReg.clubPage}>
             <Wizard 
-            title="Create your Club"
+            title={this.translateMethod('translation.exposeIDE.views.regestrationNewClub.actionText')}
             numberOfSteps={4}
             currentStep={this.props.currentGroupStep}
 
@@ -60,7 +74,8 @@ class CoachFlowAfterRegView extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-    currentGroupStep: state.CreateGroupReducer.currentGroupStep
+    currentGroupStep: state.CreateGroupReducer.currentGroupStep,
+    userName: state.AuthReducer.userData.userName,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
