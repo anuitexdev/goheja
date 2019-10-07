@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TouchableOpacity, TextInput, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableOpacity, TouchableHighlight, Keyboard } from 'react-native';
 import clubDetails from './clubDetails.style';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import { TextInputMask } from 'react-native-masked-text';
@@ -12,6 +12,8 @@ interface State {
   openTime: string;
   closeTime: string;
   isFocused: boolean;
+  error: any,
+  keyboardIsOpen: boolean
 }
 
 interface Props {
@@ -21,6 +23,8 @@ interface Props {
 class ClubDetailsView extends Component<Props, State> {
   private translateMethod: any;
   private languageSubscription: any;
+  public keyboardDidShowListener: any;
+  public keyboardDidHideListener: any;
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.translationService = new TranslateService();
@@ -41,16 +45,52 @@ class ClubDetailsView extends Component<Props, State> {
       newArr: [],
       openTime: '',
       closeTime: '',
-      isFocused: false
+      isFocused: false,
+      keyboardIsOpen: false,
+      error: {
+        openTimeError: '',
+      }
     };
   }
 
-  componentWillUnmount() {
-    this.languageSubscription.unsubscribe();
-  }
+  componentWillMount() {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+    }
 
-  public onSubmit = () => {
-    this.props.nextStepNumber(4);
+
+
+
+componentWillUnmount () {
+  this.keyboardDidShowListener.remove();
+  this.keyboardDidHideListener.remove();
+  this.languageSubscription.unsubscribe();
+}
+
+_keyboardDidShow = () => {
+  this.setState({
+    keyboardIsOpen: true
+  })
+}
+
+_keyboardDidHide = () => {
+  this.setState({
+    keyboardIsOpen: false
+  })
+}
+
+
+  public onSubmit = (value: any) => {
+    const re=/^0[0-9]|1[0-9]|2[0-3]:[0-5][0-9]$/;
+    if(re.test(value)) {
+      this.props.nextStepNumber(4);
+    } else {
+      this.setState({
+        error: {
+          openTimeError: 'Has error'
+        }
+      })
+    }
   };
 
   changeFocus = () => {
@@ -72,9 +112,9 @@ class ClubDetailsView extends Component<Props, State> {
 
   render() {
     return (
-      <View style={{ position: 'relative' }}>
+      <View style={ {position: 'relative' }}>
         <Text style={clubDetails.title}>Club Details</Text>
-        <View style={clubDetails.clubDetailsWrapper}>
+        <View style={this.state.keyboardIsOpen == true ? clubDetails.keyboard : clubDetails.clubDetailsWrapper}>
           <Text style={clubDetails.titleTime}>  {this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays')} </Text>
           <View style={clubDetails.workingDaysWrapper}>
             {this.state.arrayOfDays.map((item, index) => (
@@ -102,7 +142,7 @@ class ClubDetailsView extends Component<Props, State> {
             <View style={clubDetails.inputWidth}>
               <Text style={clubDetails.inputLabel}>Opening time</Text>
               <TextInputMask
-
+                onSubmitEditing={Keyboard.dismiss}
                 type={'datetime'}
                 style={this.state.isFocused ? clubDetails.inputTimeFocused : clubDetails.inputTime}
                 options={{
@@ -112,6 +152,9 @@ class ClubDetailsView extends Component<Props, State> {
                 value={this.state.openTime}
                 onChangeText={(time) => this.setState({ openTime: time })}
               />
+              <Text style={{color: 'red'}}>
+                {this.state.error.openTimeError}
+              </Text>
             </View>
             <View style={[clubDetails.inputWidth, { marginRight: 0 }]}>
               <Text style={clubDetails.inputLabel}>Closing time</Text>
@@ -131,7 +174,7 @@ class ClubDetailsView extends Component<Props, State> {
           <View style={clubDetails.wrapperBtn}>
             <TouchableHighlight
               style={clubDetails.nextBtn}
-            // onPress={this.onSubmit}
+              onPress={() => this.onSubmit(this.state.openTime)}
             >
               <Text style={clubDetails.nextBtnText}>Next</Text>
             </TouchableHighlight>

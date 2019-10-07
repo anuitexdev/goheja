@@ -11,7 +11,7 @@ interface Props {
 }
 
 interface State {
-    isActive: boolean,
+    isActive: string,
     unitError: boolean,
     units: string
 }
@@ -23,9 +23,9 @@ class UnitsCoachScreen extends Component<Props, State> {
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
         this.state = {
-            isActive: false,
+            isActive: 'km',
             unitError: false,
-            units: ''
+            units: 'km'
         }
     }
 
@@ -51,7 +51,7 @@ class UnitsCoachScreen extends Component<Props, State> {
     public changeBtn = async (value: string) => {
         const unitError = this.unitValidation(value);
        await this.setState({
-            isActive: !this.state.isActive,
+            isActive: value,
             unitError: unitError,
             units: value
         });        
@@ -73,14 +73,14 @@ class UnitsCoachScreen extends Component<Props, State> {
                         <View>
                         <View style={styles.btnContainer}>
 
-                        <TouchableOpacity style={!this.state.isActive ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('mi')}>
-                            <Text style={!this.state.isActive ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
-                            <Text style={!this.state.isActive ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> mi</Text>
+                        <TouchableOpacity style={this.state.isActive != 'ml' ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('ml')}>
+                            <Text style={this.state.isActive != 'ml' ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
+                            <Text style={this.state.isActive != 'ml' ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> ml</Text>
                         </TouchableOpacity>
         
-                        <TouchableOpacity style={this.state.isActive ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('km')}>
-                            <Text style={this.state.isActive ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
-                            <Text style={this.state.isActive ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> km</Text>
+                        <TouchableOpacity style={this.state.isActive != 'km' ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('km')}>
+                            <Text style={this.state.isActive != 'km' ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
+                            <Text style={this.state.isActive != 'km' ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> km</Text>
                         </TouchableOpacity>
                     </View>
                         </View>

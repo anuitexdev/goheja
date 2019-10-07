@@ -4,7 +4,7 @@ import window from '../../../../theme/variables';
 
 export default StyleSheet.create({
     photoWrapper: {
-        padding: 25
+        paddingRight: 20
     },
     titleLogo: {
         color: '#272D43',
@@ -17,7 +17,7 @@ export default StyleSheet.create({
     },
     photoPicker: {
         height: 340,
-        width: window.width - 90,
+        width: window.width - 50,
         backgroundColor: '#CFD8DD',
         justifyContent: 'center',
         alignItems: 'center',
@@ -26,19 +26,20 @@ export default StyleSheet.create({
     },
     pickedPhoto: {
         height: 260,
-        width: window.width - 140,
+        width: window.width - 90,
         borderRadius: 8,
-        marginLeft: 25
     },
     photoBtnTitle: {
         fontSize: 20,
-        color: '#272D43'
+        color: '#272D43',
+        marginTop: 10
     },
     newPhoto: {
         height: 340,
-        width: window.width - 90,
+        width: window.width - 50,
         backgroundColor: 'white',
-        padding: 20
+        padding: 20,
+        marginLeft: 25
     },
     nextBtn: {
         backgroundColor: '#4d5a5f',
@@ -48,7 +49,6 @@ export default StyleSheet.create({
         paddingBottom: 12,
         paddingTop: 12,
         marginLeft: 15,
-        
     },
     skipBtn: {
         backgroundColor: '#fff',
@@ -58,7 +58,6 @@ export default StyleSheet.create({
         paddingBottom: 12,
         paddingTop: 12,
         marginLeft: 15,
-        
     },
     nextBtnText: {
         color: 'white',
