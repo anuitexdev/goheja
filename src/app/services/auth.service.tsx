@@ -2,6 +2,7 @@ import environment from "../environments/environment";
 import UserSignInData from "../shared/models/userSignInData.model";
 import axiosInstance from '../shared/interceptors/axios.interceptor';
 import { AsyncStorage } from 'react-native';
+import ResetPasswordData from "../shared/models/resetPasswordData.model";
 // import * as RNFS from 'react-native-fs';
 
 export class AuthService {
@@ -72,6 +73,29 @@ export class AuthService {
                 console.log(error);
                 return error;
             })
+    }
+
+    public resetPassword(resetData: ResetPasswordData): Promise<any> {
+        return axiosInstance.put(`${environment.backendUrl}/Users`, resetData)
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            console.log(error);
+            return error;
+        })
+    }
+
+    public confirmMail(email: string): Promise<any>{
+        return axiosInstance.post(`${environment.backendUrl}/General/confirmation/${email}`)
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            console.log(error);
+            return error;
+        })
+
     }
 }
 export default new AuthService();

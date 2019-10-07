@@ -34,6 +34,15 @@ let AuthDefaultState = {
         bodyfat: '',
         teamcode: '',
         specGroup: '',
+    },
+    resetPasswordData:{
+        email: '',
+        newPassword: '',
+        status: false,
+        startOfDay: '',
+        endOfDay: '',
+        weekWorkDays: []
+
     }
 }
 

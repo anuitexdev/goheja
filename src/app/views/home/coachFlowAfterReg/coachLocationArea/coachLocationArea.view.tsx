@@ -25,7 +25,7 @@ interface State {
 
 interface Props {
   location: string;
-  nextStepNumber: (step: number) => void;
+  nextStepNumber: (data: any) => void;
 }
 
 
@@ -98,7 +98,7 @@ componentWillUnmount(){
   };
 
   public onSubmit = () => {
-    this.props.nextStepNumber(4);
+    this.props.nextStepNumber({});
   };
 
   public getLatLong = async (lat, long) => {
@@ -283,7 +283,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  nextStepNumber: (step: number) => dispatch(actions.changeStep(step)),
+  nextStepNumber: (data: any) => dispatch(actions.changeStep(data)),
 });
 
 export default connect(

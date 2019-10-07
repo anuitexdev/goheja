@@ -69,7 +69,6 @@ class CyclingFtpView extends Component<Props, State> {
     }
 
     render() {
-        console.log(this.state.ftpValue)
         return (
 
             <View style={{

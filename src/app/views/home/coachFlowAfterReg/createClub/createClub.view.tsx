@@ -6,11 +6,11 @@ import { TextInput, ScrollView } from "react-native-gesture-handler";
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import TranslateService from '../../../../services/translation.service';
 interface State {
-    placeholder: string;
+    clubName: string;
 }
 
 interface Props {
-    nextStepNumber: (step: number) => void
+    nextStepNumber: (step: { clubName: string }) => void
 }
 
 class CreateClubView extends Component<Props, State> {
@@ -20,24 +20,24 @@ class CreateClubView extends Component<Props, State> {
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
         this.state = {
-            placeholder: ''
+            clubName: ''
         }
     }
 
     componentWillMount() {
         this.translationService = new TranslateService();
-       this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
             this.forceUpdate();
             this.translateMethod = res
         });
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.languageSubscription.unsubscribe();
     }
 
     public onSubmit() {
-        this.props.nextStepNumber(2)
+        this.props.nextStepNumber(this.state)
     }
 
     render() {
@@ -49,10 +49,10 @@ class CreateClubView extends Component<Props, State> {
                             <Text style={createClubStyle.titleName}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubName')}</Text>
                             <View style={createClubStyle.inputWrapper}>
                                 <TextInput
-                                    style={[this.state.placeholder.length == 0 ? { fontStyle: 'italic' } : { fontStyle: 'normal' }, createClubStyle.inputClub]}
+                                    style={[this.state.clubName.length == 0 ? { fontStyle: 'italic' } : { fontStyle: 'normal' }, createClubStyle.inputClub]}
                                     placeholder={this.translateMethod('translation.exposeIDE.views.regestrationNewClub.caption')}
-                                    onChangeText={(txt) => this.setState({ placeholder: txt })}
-                                    value={this.state.placeholder}
+                                    onChangeText={(txt) => this.setState({ clubName: txt })}
+                                    value={this.state.clubName}
                                 >
                                 </TextInput>
                                 <TouchableOpacity
@@ -60,8 +60,8 @@ class CreateClubView extends Component<Props, State> {
                                     onPress={() => this.onSubmit()}
                                 >
                                     <Text style={createClubStyle.nextBtnText}>
-                                    {this.translateMethod('translation.common.next')}
-                           </Text>
+                                        {this.translateMethod('translation.common.next')}
+                                    </Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -77,7 +77,8 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    nextStepNumber: (step: number) => dispatch(actions.changeStep(step))
+
+    nextStepNumber: (step: { clubName: string }) => dispatch(actions.changeStep(step))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateClubView);

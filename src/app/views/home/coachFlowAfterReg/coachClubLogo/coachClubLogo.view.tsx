@@ -12,7 +12,7 @@ interface State {
 }
 
 interface Props {
-    nextStepNumber: (step: number) => void
+    nextStepNumber: (stepData: {avatarSource: string}) => void
 }
 
 
@@ -38,7 +38,7 @@ componentWillUnmount(){
     this.languageSubscription.unsubscribe();
 }
   public onSubmit = () => {
-      this.props.nextStepNumber(3)
+      this.props.nextStepNumber(this.state)
   }
 
   async requestCameraPermission() {
@@ -145,7 +145,7 @@ componentWillUnmount(){
 const mapStateToProps = (state: any) => ({});
 
 const mapDispatchToProps = (dispatch: any) => ({
-    nextStepNumber: (step: number) => dispatch(actions.changeStep(step))
+    nextStepNumber: (stepData: {avatarSource: string}) => dispatch(actions.changeStep(stepData))
 });
 
 export default connect(

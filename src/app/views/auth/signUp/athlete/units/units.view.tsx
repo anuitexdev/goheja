@@ -51,7 +51,6 @@ class UnitsAthleteScreen extends Component<Props, State> {
 
     public changeBtn = async (value: string) => {
         const unitError = this.unitValidation(value);
-        console.log(value);
 
         await this.setState({
             isActive: value,

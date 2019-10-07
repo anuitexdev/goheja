@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TouchableOpacity, TextInput, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, TouchableHighlight, TouchableOpacityBase, Alert } from 'react-native';
 import clubDetails from './clubDetails.style';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import { TextInputMask } from 'react-native-masked-text';
@@ -8,14 +8,14 @@ import TranslateService from '../../../../services/translation.service';
 
 interface State {
   arrayOfDays: any[];
-  newArr: any[];
+  weekWorkDays: any[];
   openTime: string;
   closeTime: string;
   isFocused: boolean;
 }
 
 interface Props {
-  nextStepNumber: (step: number) => void;
+  nextStepNumber: (clubData: any) => void;
 }
 
 class ClubDetailsView extends Component<Props, State> {
@@ -38,7 +38,7 @@ class ClubDetailsView extends Component<Props, State> {
         { key: 'F', value: 'Friday' },
         { key: 'S', value: 'Saturday' },
       ],
-      newArr: [],
+      weekWorkDays: [],
       openTime: '',
       closeTime: '',
       isFocused: false
@@ -50,7 +50,13 @@ class ClubDetailsView extends Component<Props, State> {
   }
 
   public onSubmit = () => {
-    this.props.nextStepNumber(4);
+Alert.alert('end of the flow');
+    const clubTime = {
+      startOfDay: this.state.openTime,
+      endOfDay: this.state.closeTime,
+      weekWorkDays: this.state.weekWorkDays,
+    }
+    this.props.nextStepNumber(clubTime);
   };
 
   changeFocus = () => {
@@ -60,11 +66,11 @@ class ClubDetailsView extends Component<Props, State> {
   }
 
   public selectWorkingDays = async (item: any) => {
-    if (this.state.newArr.indexOf(item) !== -1) {
+    if (this.state.weekWorkDays.indexOf(item) !== -1) {
       return;
     } else {
-      await this.setState(({ newArr }) => {
-        newArr: newArr.push(item);
+      await this.setState(({ weekWorkDays }) => {
+        weekWorkDays: weekWorkDays.push(item);
       });
     }
     this.forceUpdate();
@@ -80,7 +86,7 @@ class ClubDetailsView extends Component<Props, State> {
             {this.state.arrayOfDays.map((item, index) => (
               <TouchableOpacity
                 style={
-                  this.state.newArr.indexOf(item.value) == -1
+                  this.state.weekWorkDays.indexOf(item.value) == -1
                     ? clubDetails.daysBtnDefault
                     : clubDetails.daysBtnSelected
                 }
@@ -88,7 +94,7 @@ class ClubDetailsView extends Component<Props, State> {
                 key={index}>
                 <Text
                   style={
-                    this.state.newArr.indexOf(item.value) == -1
+                    this.state.weekWorkDays.indexOf(item.value) == -1
                       ? clubDetails.daysBtnTextDefault
                       : clubDetails.daysBtnTextSelected
                   }>
@@ -129,12 +135,12 @@ class ClubDetailsView extends Component<Props, State> {
           </View>
 
           <View style={clubDetails.wrapperBtn}>
-            <TouchableHighlight
+            <TouchableOpacity
               style={clubDetails.nextBtn}
-            // onPress={this.onSubmit}
+              onPress={this.onSubmit}
             >
               <Text style={clubDetails.nextBtnText}>Next</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
           </View>
         </View>
@@ -146,7 +152,7 @@ class ClubDetailsView extends Component<Props, State> {
 const mapStateToProps = (state: any) => ({});
 
 const mapDispatchToProps = (dispatch: any) => ({
-  nextStepNumber: (step: number) => dispatch(actions.changeStep(step)),
+  nextStepNumber: (clubData: any) => dispatch(actions.changeStep(clubData)),
 });
 
 export default connect(

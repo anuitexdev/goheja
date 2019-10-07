@@ -6,18 +6,23 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import  styles from './sendMail.style';
 import { NavigationScreenProp, NavigationState, NavigationParams } from "react-navigation";
 import TranslateService from '../../../../services/translation.service';
+import * as actions from '../../../../redux/actions/auth.actions';
+import ValidationService from '../../../../shared/validation/validation.service';
+import { async } from "rxjs/internal/scheduler/async";
 
 interface State{
-    email: string
+    email: string,
+    emailError: boolean,
 }
 
 interface Props{
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
     changeScreen: (screenNumber: number) => void,
+    addEmail: (email:string) => void,
 }
 
 class SendMailScreen extends Component<Props,State> {
-
+    private validationService = new ValidationService();
     private translateMethod: any;
     private languageSubscription: any;
     constructor(props: Props, private translationService: TranslateService){
@@ -25,6 +30,7 @@ class SendMailScreen extends Component<Props,State> {
 
         this.state = {
             email: '',
+            emailError: true,
         }
     }
 
@@ -44,12 +50,24 @@ class SendMailScreen extends Component<Props,State> {
     }
 
     private handleChange = async (email: string) => {
+       
        await this.setState({
             email,
+            emailError: true
         })
+        console.log(this.state);
+        
     }
 
-    private onSubmit = () => {
+    private onSubmit = async() => {
+        const emailError = this.validationService.validateEmail(this.state.email);
+        await this.setState({
+            emailError,
+        })        
+
+        if(!this.state.emailError){ return;}
+
+        this.props.addEmail(this.state.email);
         this.props.changeScreen(2);
     }
 
@@ -65,9 +83,10 @@ class SendMailScreen extends Component<Props,State> {
                     <Text style= {styles.label}> Your Email Address</Text>
                     <TextInput
                         placeholder='Alona@morning.agency'
-                        style={styles.input}
+                        style={!this.state.emailError ? styles.inputError : styles.input}
                         onChangeText = {(email: string) => this.handleChange(email)}
                     />
+                    {!this.state.emailError? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
 
                 <View style= {styles.links}>
@@ -92,6 +111,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
+    addEmail: (email: string) => dispatch(actions.addEmailToResetData(email))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SendMailScreen);

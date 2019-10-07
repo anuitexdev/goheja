@@ -2,6 +2,8 @@ import AuthService from '../../services/auth.service'
 import UserSignInData from 'src/app/shared/models/userSignInData.model';
 
 import { Alert } from 'react-native';
+import ResetPasswordData from '../../shared/models/resetPasswordData.model';
+
 
 export const successAuth = (userData: any, type: string) => {
     if (type === 'login') {
@@ -40,7 +42,12 @@ export const changeLanguage = (payload: any) => {
 export const getLanguages = (payload: any) => {
     return { type: 'GET_LANGUAGES_LIST', payload}
 }
-
+export const addEmailToResetData = (email: string) => {
+    return  { type: 'ADD_EMAIL_RESET_DATA', email}
+}
+export const successResetPassword = (status: boolean) => {
+    return  { type: 'RESET_PASSWORD', status}
+}
 export const signIn = (userData: UserSignInData) => {
     return async (dispatch: any) => {
         await AuthService.signIn(userData).then(res => {
@@ -94,6 +101,20 @@ export const signUp = (userData: any) => {
             dispatch(successAuth('', 'register'));
         }
         );
+
+        await AuthService.confirmMail(userData.auth).then(res => {
+            
+            if (res instanceof Error) {
+                Alert.alert(res.message);
+                dispatch(failedAuth(res));
+                return;
+            }
+            
+            console.log(res);
+            
+            // dispatch(successAuth('', 'register'));
+        }
+        );
     }
 }
 export const sendCode = (code: string) => {
@@ -111,4 +132,22 @@ export const sendCode = (code: string) => {
         ).catch( err =>   dispatch(failedTeamCode({specGroup: '',teamcode: code})));
     }
 }
+
+
+export const resetPassword = (resetData: ResetPasswordData) => {
+    return async (dispatch: any) => {
+        await AuthService.resetPassword(resetData).then(res => {
+
+            if (res instanceof Error) {
+                Alert.alert(res.message);
+                return;
+            }
+            console.log(res);
+            dispatch(successResetPassword(true));
+        }
+        ).catch( err => Alert.alert(err));
+    }
+}
+
+
 

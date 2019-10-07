@@ -1,5 +1,4 @@
 import { StyleSheet, Dimensions } from "react-native";
-import window from '../../../../theme/variables';
 
 
 export default StyleSheet.create({
@@ -19,6 +18,15 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: '#cfd8dc',
         paddingLeft: 15
+    },
+    inputError: {
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: 'red',
+        paddingLeft: 15
+    },
+    errorText:{
+        color: 'red'
     },
     label: {
         fontSize: 14,
