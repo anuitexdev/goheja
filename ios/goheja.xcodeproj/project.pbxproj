@@ -25,6 +25,7 @@
 		31A9D1EAAC6F4B3496E246EC /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 102A16A1A966445C8AE74A60 /* FontAwesome5_Regular.ttf */; };
 		329B555EFA7B4156B8CF9263 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAE191677F1149978E3FFE97 /* Entypo.ttf */; };
 		38E9FE064B704009846E7F22 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07F915729FEC4F45A897DE04 /* Foundation.ttf */; };
+		4B427900234B2D5A00744BA2 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4278FF234B2D5A00744BA2 /* HealthKit.framework */; };
 		5B37B9655123BD63A15BE1B4 /* libPods-goheja.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC2795B8AB97B9B5CFC63FA /* libPods-goheja.a */; };
 		6B8DDCEFADAE4872B0E2A5CB /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A81FF8226094CCE830E7FEE /* AntDesign.ttf */; };
 		770298F28E714802BB2CA62E /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37FD8F6BEFF64B0B855CCB41 /* Zocial.ttf */; };
@@ -80,6 +81,7 @@
 		3365A6F77C7B48EE9C4820C1 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		37FD8F6BEFF64B0B855CCB41 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		40ED687963364083A83A5267 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		4B4278FF234B2D5A00744BA2 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		4BD46EE7234729FA0077D15A /* goheja.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = goheja.entitlements; path = goheja/goheja.entitlements; sourceTree = "<group>"; };
 		4DC2795B8AB97B9B5CFC63FA /* libPods-goheja.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-goheja.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53B9F521D1934706A856AF5A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B37B9655123BD63A15BE1B4 /* libPods-goheja.a in Frameworks */,
+				4B427900234B2D5A00744BA2 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +176,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4B4278FF234B2D5A00744BA2 /* HealthKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				4DC2795B8AB97B9B5CFC63FA /* libPods-goheja.a */,
@@ -348,7 +352,7 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = VXVUCQVY2G;
+						DevelopmentTeam = ACS2X6ERDY;
 						ProvisioningStyle = Manual;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
@@ -357,17 +361,17 @@
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = VXVUCQVY2G;
+						DevelopmentTeam = ACS2X6ERDY;
 						ProvisioningStyle = Manual;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
@@ -721,7 +725,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = VXVUCQVY2G;
+				DEVELOPMENT_TEAM = ACS2X6ERDY;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -748,7 +752,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = VXVUCQVY2G;
+				DEVELOPMENT_TEAM = ACS2X6ERDY;
 				INFOPLIST_FILE = gohejaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -769,6 +773,7 @@
 			baseConfigurationReference = 5BF6ECFEB75FE4CDD487226D /* Pods-goheja.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = goheja/goheja.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -792,9 +797,10 @@
 			baseConfigurationReference = C50D9F0D26670C6B25ADD6A9 /* Pods-goheja.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = goheja/goheja.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VXVUCQVY2G;
+				DEVELOPMENT_TEAM = ACS2X6ERDY;
 				INFOPLIST_FILE = goheja/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -804,7 +810,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.go-heja.react";
 				PRODUCT_NAME = goheja;
-				PROVISIONING_PROFILE_SPECIFIER = "VS: WildCard Development";
+				PROVISIONING_PROFILE_SPECIFIER = dev_goheja_provision;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -819,7 +825,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "goheja-tvOS/Info.plist";
@@ -831,6 +839,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.goheja-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
@@ -847,8 +856,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "goheja-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -859,6 +870,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.goheja-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
@@ -876,7 +888,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = VXVUCQVY2G;
+				DEVELOPMENT_TEAM = ACS2X6ERDY;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "goheja-tvOSTests/Info.plist";
@@ -907,7 +919,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VXVUCQVY2G;
+				DEVELOPMENT_TEAM = ACS2X6ERDY;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "goheja-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
