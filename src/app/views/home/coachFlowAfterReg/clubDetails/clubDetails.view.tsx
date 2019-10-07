@@ -112,6 +112,11 @@ _keyboardDidHide = () => {
 
   public selectWorkingDays = async (item: any) => {
     if (this.state.weekWorkDays.indexOf(item) !== -1) {
+      let newWeekForDays = this.state.weekWorkDays;
+      newWeekForDays.splice(this.state.weekWorkDays.indexOf(item),1);
+      this.setState({
+        weekWorkDays: newWeekForDays,
+      })
       return;
     } else {
       await this.setState(({ weekWorkDays }) => {
@@ -123,7 +128,7 @@ _keyboardDidHide = () => {
 
   render() {
     return (
-      <View style={ {position: 'relative' }}>
+      <View style={{position: 'relative' }}>
         <Text style={clubDetails.title}>Club Details</Text>
         <View style={clubDetails.clubDetailsWrapper}>
           <Text style={clubDetails.titleTime}>  {translationReplaceHelper.translationReplace(this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays'), this.props.clubName)} </Text>

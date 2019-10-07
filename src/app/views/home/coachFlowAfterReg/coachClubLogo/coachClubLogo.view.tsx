@@ -120,11 +120,7 @@ componentWillUnmount(){
                 <TouchableHighlight 
                     onPress={() => this.chooseImage(options)}
                     >
-                    <IconFeather
-                      name={'upload'}
-                      size={20}
-                      color={'red'}
-                    />
+            
                     <Text style={coachClubLogo.photoBtnTitle}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadDiffrentLogo')}</Text>
                 </TouchableHighlight>
             </View>
