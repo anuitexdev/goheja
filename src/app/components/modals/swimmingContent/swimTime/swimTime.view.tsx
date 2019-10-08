@@ -7,6 +7,8 @@ import swimtime from './swimTime.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ModalReducer from '../../../../redux/reducers/modal.reducer';
 import moment from 'moment';
+import TranslateService from '../../../../services/translation.service';
+import { tsThisType } from '@babel/types';
 interface State {
   activeInputNumber: number;
   swimTimeValue: string;
@@ -28,8 +30,10 @@ class SwimTimeView extends Component<Props, State> {
     private inputUnitsOfMinutes: any;
     private inputDozentsOfSeconds: any;
     private inputUnitsOfSeconds: any;
+    private translateMethod: any;
+    private languageSubscription: any;
 
-  constructor(props: Props) {
+  constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.state = {
       activeInputNumber: 0,
@@ -39,6 +43,16 @@ class SwimTimeView extends Component<Props, State> {
       dozentsOfSeconds: '0',
       dozentsOfMinutes: '0',
     };
+
+    this.translationService = new TranslateService();
+    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+      this.forceUpdate();
+      this.translateMethod = res
+    });
+  }
+
+  componentWillUnmount(){
+    this.languageSubscription.unsubscribe();
   }
 
   public setModalVisible = () => {
@@ -90,11 +104,13 @@ class SwimTimeView extends Component<Props, State> {
         </TouchableWithoutFeedback>
         <View style={swimtime.modalPage}>
           <TouchableWithoutFeedback onPress={this.hideModal}>
-            <Text style={swimtime.backBtn}>Back</Text>
+            <Text style={swimtime.backBtn}>
+              {this.translateMethod('translation.common.back')}
+            </Text>
           </TouchableWithoutFeedback>
           <Text style={swimtime.title}>
-            What’s your best{'\n'}
-            1000m Swim time?
+            What’s your{'\n'}
+            {this.translateMethod('translation.exposeIDE.views.userSetSports.best1000mSwimTime')}
           </Text>
 
           <View style={swimtime.fullComponent}>
@@ -131,7 +147,7 @@ class SwimTimeView extends Component<Props, State> {
                   ]}></TextInput>
               </View>
               <Text style={{fontSize: 20, color: '#99a8af', marginTop: 13}}>
-                Min
+                {this.translateMethod('translation.common.min')}
               </Text>
             </View>
             <View style={swimtime.colonWrapper}>
@@ -183,25 +199,27 @@ class SwimTimeView extends Component<Props, State> {
                   marginTop: 13,
                   marginRight: 24,
                 }}>
-                Sec
+                {this.translateMethod('translation.common.sec')}
               </Text>
             </View>
           </View>
 
           <View style={swimtime.footerBtns}>
             <TouchableWithoutFeedback onPress={this.hideModal}>
-              <Text style={swimtime.skipBtn}>Skip ></Text>
+              <Text style={swimtime.skipBtn}>
+               {this.translateMethod('translation.common.skip')}>
+               </Text>
             </TouchableWithoutFeedback>
             {this.state.swimTimeValue == '' ? (
               <TouchableWithoutFeedback onPress={this.hideModal}>
                 <View style={swimtime.nextBtn}>
-                  <Text style={swimtime.nextBtnText}>I don't know</Text>
+                  <Text style={swimtime.nextBtnText}>{this.translateMethod('translation.common.iDontKnow')}</Text>
                 </View>
               </TouchableWithoutFeedback>
             ) : (
               <TouchableWithoutFeedback onPress={this.hideModal}>
                 <View style={swimtime.nextBtn}>
-                  <Text style={swimtime.nextBtnText}>Next</Text>
+                  <Text style={swimtime.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
                 </View>
               </TouchableWithoutFeedback>
             )}

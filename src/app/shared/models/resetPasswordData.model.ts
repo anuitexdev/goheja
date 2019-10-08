@@ -6,3 +6,4 @@ export default class ResetPasswordData {
     email: string;
     newPassword: string;
   }
+  

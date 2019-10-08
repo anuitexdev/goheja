@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../../redux/actions/modal.actions';
-import {Text, View, TouchableWithoutFeedback, TextInput} from 'react-native';
+import {Text, View, TouchableWithoutFeedback, TextInput, TouchableHighlightBase} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import threshold from './threshold.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
+import TranslateService from '../../../../services/translation.service';
 
 interface State {
   activeInputNumber: number;
@@ -28,8 +29,9 @@ class ThresholdView extends Component<Props, State> {
     private inputUnitsOfMinutes: any;
     private inputDozentsOfSeconds: any;
     private inputUnitsOfSeconds: any;
-
-  constructor(props: Props) {
+    private translateMethod: any;
+    private languageSubscription: any;
+  constructor(props: Props, public translationService: TranslateService) {
     super(props);
     this.state = {
       activeInputNumber: 0,
@@ -39,6 +41,16 @@ class ThresholdView extends Component<Props, State> {
       dozentsOfMinutes: '0',
       dozentsOfSeconds: '0',
     };
+
+    this.translationService = new TranslateService();
+    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+      this.forceUpdate();
+      this.translateMethod = res
+    });
+  }
+
+  componentWillUnmount() {
+    this.languageSubscription.unsubscribe();
   }
 
   public setModalVisible = () => {
@@ -91,11 +103,11 @@ class ThresholdView extends Component<Props, State> {
         </TouchableWithoutFeedback>
         <View style={threshold.modalPage}>
           <TouchableWithoutFeedback onPress={this.hideModal}>
-            <Text style={threshold.backBtn}>Back</Text>
+            <Text style={threshold.backBtn}>{this.translateMethod('translation.common.back')}</Text>
           </TouchableWithoutFeedback>
           <Text style={threshold.title}>
             What’s your{'\n'}
-            Swimming Threshold Pace
+            {this.translateMethod('translation.exposeIDE.views.userSetSports.swimmingThresholdPace')}
           </Text>
           <View style={threshold.fullComponent}>
             <View style={{alignItems: 'center'}}>
@@ -131,7 +143,7 @@ class ThresholdView extends Component<Props, State> {
                   ]}></TextInput>
               </View>
               <Text style={{fontSize: 20, color: '#99a8af', marginTop: 13}}>
-                Min
+                {this.translateMethod('translation.common.min')}
               </Text>
             </View>
             <View style={threshold.colonWrapper}>
@@ -185,25 +197,25 @@ class ThresholdView extends Component<Props, State> {
                   marginTop: 13,
                   marginRight: 24,
                 }}>
-                Sec
+                {this.translateMethod('translation.common.sec')}
               </Text>
             </View>
           </View>
 
           <View style={threshold.footerBtns}>
             <TouchableWithoutFeedback onPress={this.changeModal}>
-              <Text style={threshold.skipBtn}>Skip ></Text>
+              <Text style={threshold.skipBtn}>{this.translateMethod('translation.common.skip')} ></Text>
             </TouchableWithoutFeedback>
             {this.state.thresholdValue === '' ? (
               <TouchableWithoutFeedback onPress={this.changeModal}>
               <View style={threshold.nextBtn}>
-                <Text style={threshold.nextBtnText}>I don't know</Text>
+                <Text style={threshold.nextBtnText}>{this.translateMethod('translation.common.iDontKnow')}</Text>
               </View>
             </TouchableWithoutFeedback>
             ) : (
               <TouchableWithoutFeedback onPress={this.changeModal}>
                 <View style={threshold.nextBtn}>
-                  <Text style={threshold.nextBtnText}>Next</Text>
+                  <Text style={threshold.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
                 </View>
               </TouchableWithoutFeedback>
             )}

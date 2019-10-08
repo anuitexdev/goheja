@@ -54,6 +54,12 @@ const ModalReducer = (state = ModalDefaultState, action: any) => {
                 selectedSport: action.payload,
             }
         }
+        case "SUCCESS_SPORT_CONFIG": {
+            return {
+                ...state,
+                sportConfigDone: action.payload,
+            }
+        }
 
         default: return { ...state };
     }

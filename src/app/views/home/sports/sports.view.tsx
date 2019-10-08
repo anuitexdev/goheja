@@ -5,6 +5,8 @@ import sports from './sports.styles';
 import * as actions from '../../../redux/actions/modal.actions';
 import SportModal from '../../../components/modals/sport.modal';
 import TranslateService from '../../../services/translation.service';
+import SportConfigData from '../../../shared/models/sportConfigData.model';
+
 
 interface State {
     translateMethod: (str: string) => string;
@@ -13,6 +15,11 @@ interface State {
 interface Props {
     modalOpen: () => void,
     setSportType: (type: string) => void,
+    setSportConfig: (sportConfigData: SportConfigData) => void,
+    runningConfig: any,
+    swimmingConfig: any,
+    cyclingConfig: any,
+    userData: any
 }
 
 class SportsView extends Component<Props, State> {
@@ -35,6 +42,37 @@ class SportsView extends Component<Props, State> {
     public selectSport = (sportType: string) => {
         this.props.setSportType(sportType);
         this.props.modalOpen();
+    }
+
+    public onSubmit = async () => {
+        await this.props.setSportConfig({
+            userId: this.props.userData.userId,
+            runningConf: [
+                {
+                    thresholdpace: this.props.runningConfig.pace,
+                    lactateThreshold: this.props.runningConfig.lactate,
+                    powerThreshold: this.props.runningConfig.pace,
+                    fiveK: this.props.runningConfig.pace,
+                    tenK: this.props.runningConfig.pace,
+                    halfMarathon: this.props.runningConfig.pace,
+                    fullMarathon: this.props.runningConfig.pace,
+                }
+            ],
+            swimmingConf: [
+                {
+                    thresholdpace: this.props.runningConfig.pace,
+                    is1000m: this.props.runningConfig.pace,
+                    powerThreshold: this.props.runningConfig.pace,
+                }
+            ],
+            cyclingConf: [
+                {
+                    cyclingFtp: this.props.runningConfig.pace,
+                    lactateThreshold: this.props.runningConfig.pace,
+                    powerThreshold: this.props.runningConfig.pace, 
+                }
+            ]
+        })
     }
 
     render() {
@@ -79,6 +117,12 @@ class SportsView extends Component<Props, State> {
                             {this.state.translateMethod('translation.common.running')} >
                         </Text>
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={this.onSubmit}>
+                        <Text style={sports.skipButton}>
+                            Next
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 <SportModal />
             </View>
@@ -88,11 +132,16 @@ class SportsView extends Component<Props, State> {
 
 
 const mapStateToProps = (state: any) => ({
+    runningConfig: state.ModalReducer.runningData,
+    swimmingConfig: state.ModalReducer.swimmingData,
+    cyclingConfig: state.ModalReducer.cyclingData,
+    userData: state.AuthReducer.userData
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
     modalOpen: () => dispatch(actions.modalOpen()),
     setSportType: (type: string) => dispatch(actions.setSportType(type)),
+    setSportConfig: (sportConfigData: SportConfigData) => dispatch(actions.setSportConfig(sportConfigData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SportsView);
