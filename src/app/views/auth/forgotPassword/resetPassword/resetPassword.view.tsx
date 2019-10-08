@@ -13,6 +13,8 @@ interface State {
     confirmPassword: string,
     passwordError: boolean;
     confirmPasswordError: boolean;
+    translateMethod: (str: string) => string;
+
 }
 
 interface Props {
@@ -23,7 +25,6 @@ interface Props {
 
 class ResetPasswordScreen extends Component<Props, State> {
 
-    private translateMethod: any;
     private languageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
@@ -33,14 +34,16 @@ class ResetPasswordScreen extends Component<Props, State> {
             confirmPassword: '',
             passwordError: false,
             confirmPasswordError: false,
+            translateMethod: (str: string) => '',
         }
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res
+            this.setState({
+                translateMethod: res,
+            })
         });
     }
 
@@ -86,13 +89,13 @@ class ResetPasswordScreen extends Component<Props, State> {
     render() {
         return (
             <Fragment>
-                <Text style={styles.title}>{this.translateMethod('translation.common.reset')} {this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
+                <Text style={styles.title}>{this.state.translateMethod('translation.common.reset')} {this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
 
 
                 <View style={styles.form}>
 
                     <View style={styles.formField}>
-                        <Text style={styles.label}>{this.translateMethod('translation.common.new')} {this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
+                        <Text style={styles.label}>{this.state.translateMethod('translation.common.new')} {this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                         <TextInput
                             placeholder='Type your new password...'
                             style={this.state.passwordError ? styles.inputError : styles.input}
@@ -100,7 +103,7 @@ class ResetPasswordScreen extends Component<Props, State> {
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>{this.translateMethod('translation.common.new')} {this.translateMethod('translation.exposeIDE.views.Login.password')} (again)</Text>
+                        <Text style={styles.label}>{this.state.translateMethod('translation.common.new')} {this.state.translateMethod('translation.exposeIDE.views.Login.password')} (again)</Text>
                         <TextInput
                             placeholder='Type your new password (again)...'
                             style={this.state.confirmPasswordError ? styles.inputError : styles.input}
@@ -117,7 +120,7 @@ class ResetPasswordScreen extends Component<Props, State> {
                         style={this.state.confirmPasswordError || this.state.passwordError || this.state.password === '' || this.state.confirmPassword === '' ? styles.disabledBtn : styles.nextBtn}
                         disabled={this.state.confirmPasswordError || this.state.passwordError || this.state.password === '' || this.state.confirmPassword === ''}
                     >
-                        <Text style={styles.resetPasswordText}>{this.translateMethod('translation.common.reset')} {this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
+                        <Text style={styles.resetPasswordText}>{this.state.translateMethod('translation.common.reset')} {this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                     </TouchableOpacity>
                 </View>
             </Fragment>

@@ -9,27 +9,32 @@ import TranslateService from '../../../../../services/translation.service';
 interface Props {
     changeCoachStep: (data: any) => void,
     email: string,
-    state: any
 
 }
 
 interface State {
+    translateMethod: (str: string) => string,
 
 }
 
 class ConfirmationScreen extends Component<Props, State> {
 
-    private translateMethod: any;
+
     private languageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
-        super(props)      
+        super(props)     
+        this.state ={
+            translateMethod: (str: string) => '',
+        } 
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res});   
+        this.setState({
+            translateMethod: res,
+        })
+        });   
     }
 
     componentWillUnmount = () => {
@@ -55,7 +60,7 @@ class ConfirmationScreen extends Component<Props, State> {
                             <TouchableOpacity
                                 style={styles.nextBtn}
                             >
-                                <Text style={styles.sendText}>{this.translateMethod('translation.common.send')}</Text>
+                                <Text style={styles.sendText}>{this.state.translateMethod('translation.common.send')}</Text>
                             </TouchableOpacity>
                         </View>
 
@@ -68,7 +73,6 @@ class ConfirmationScreen extends Component<Props, State> {
 
 const mapStateToProps = (state: any) => ({
     email: state.AuthReducer.coachSignUpData.auth,
-    state: state.AuthReducer.coachSignUpData
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

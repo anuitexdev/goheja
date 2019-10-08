@@ -13,7 +13,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import RNPickerSelect from 'react-native-picker-select';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import * as actions from '../../../redux/actions/createGroup.actions';
-import CreateGroupReducer from '../../../redux/reducers/createGroup.reducer';
 import {countriesList} from '../../../shared/helpers/countries.list';
 import axiosInstance from '../../../shared/interceptors/axios.interceptor';
 import environment from '../../../environments/environment';

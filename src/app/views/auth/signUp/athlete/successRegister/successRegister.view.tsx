@@ -11,36 +11,41 @@ interface Props {
 }
 
 interface State {
-
+    translateMethod: (str: string) => string;
 }
 
 class SuccessRegisterScreen extends Component<Props, State> {
 
-    private translateMethod: any;
+
     private languageSubscription: any;
-    constructor(props: Props,  private translationService: TranslateService) {
+    constructor(props: Props, private translationService: TranslateService) {
         super(props)
+        this.state = {
+            translateMethod: (str: string) => '',
+        }
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-          this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res});   
-            
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.setState({
+                translateMethod: res,
+            })
+        });
+
     }
 
-    componentWillUnmount =() => {
+    componentWillUnmount = () => {
         this.languageSubscription.unsubscribe();
     }
 
     render() {
 
         return (
-            <View style ={styles.pageWrapper}>
+            <View style={styles.pageWrapper}>
                 <View style={styles.backgroundCheck}><View style={styles.check}></View></View>
-                <Text style={styles.welcome}>{this.translateMethod('translation.common.WelcomeToGoHeja')}</Text>
-                <Text style={styles.approve}>{this.translateMethod('translation.common.confirmMessage')}</Text>
+                <Text style={styles.welcome}>{this.state.translateMethod('translation.common.WelcomeToGoHeja')}</Text>
+                <Text style={styles.approve}>{this.state.translateMethod('translation.common.confirmMessage')}</Text>
             </View>
         )
     }

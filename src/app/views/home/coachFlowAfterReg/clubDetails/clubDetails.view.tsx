@@ -14,7 +14,8 @@ interface State {
   closeTime: string;
   isFocused: boolean;
   error: any,
-  keyboardIsOpen: boolean
+  keyboardIsOpen: boolean,
+  translateMethod: (str: string) => string,
 }
 
 interface Props {
@@ -23,17 +24,14 @@ interface Props {
 }
 
 class ClubDetailsView extends Component<Props, State> {
-  private translateMethod: any;
+
   private languageSubscription: any;
   public keyboardDidShowListener: any;
   public keyboardDidHideListener: any;
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.translationService = new TranslateService();
-    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-      this.forceUpdate();
-      this.translateMethod = res
-    });
+  
     this.state = {
       arrayOfDays: [
         { key: 'S', value: 'Sunday' },
@@ -49,6 +47,7 @@ class ClubDetailsView extends Component<Props, State> {
       closeTime: '',
       isFocused: false,
       keyboardIsOpen: false,
+      translateMethod: (str: string) => '',
       error: {
         openTimeError: '',
       }
@@ -56,6 +55,11 @@ class ClubDetailsView extends Component<Props, State> {
   }
 
   componentWillMount() {
+    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+     this.setState({
+      translateMethod: res,
+     })
+    });
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
     }
@@ -131,7 +135,7 @@ _keyboardDidHide = () => {
       <View style={{position: 'relative' }}>
         <Text style={clubDetails.title}>Club Details</Text>
         <View style={clubDetails.clubDetailsWrapper}>
-          <Text style={clubDetails.titleTime}>  {translationReplaceHelper.translationReplace(this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays'), this.props.clubName)} </Text>
+          <Text style={clubDetails.titleTime}>  {translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays'), this.props.clubName)} </Text>
           <View style={clubDetails.workingDaysWrapper}>
             {this.state.arrayOfDays.map((item, index) => (
               <TouchableOpacity
@@ -153,7 +157,7 @@ _keyboardDidHide = () => {
               </TouchableOpacity>
             ))}
           </View>
-          <Text style={clubDetails.titleTime}>{translationReplaceHelper.translationReplace(this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingHours'), this.props.clubName)}</Text>
+          <Text style={clubDetails.titleTime}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingHours'), this.props.clubName)}</Text>
           <View style={clubDetails.inputsWrapper}>
             <View style={clubDetails.inputWidth}>
               <Text style={clubDetails.inputLabel}>Opening time</Text>

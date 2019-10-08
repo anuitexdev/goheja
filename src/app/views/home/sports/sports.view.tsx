@@ -7,6 +7,7 @@ import SportModal from '../../../components/modals/sport.modal';
 import TranslateService from '../../../services/translation.service';
 
 interface State {
+    translateMethod: (str: string) => string;
 }
 
 interface Props {
@@ -15,19 +16,19 @@ interface Props {
 }
 
 class SportsView extends Component<Props, State> {
-    private translateMethod: any;
     private languageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
 
         this.translationService = new TranslateService();
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-          this.forceUpdate();
-          this.translateMethod = res
+            this.state = {
+                translateMethod: res,
+            }
         });
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.languageSubscription.unsubscribe();
     }
 
@@ -43,39 +44,39 @@ class SportsView extends Component<Props, State> {
                     Hi Dafni : &#x2769;
                 </Text>
                 <Text style={sports.subtitle}>
-                {this.translateMethod('translation.exposeIDE.views.confirmation.text')}
+                    {this.state.translateMethod('translation.exposeIDE.views.confirmation.text')}
                 </Text>
                 <Text style={sports.chooseCategory}>
-                {this.translateMethod('translation.exposeIDE.views.userSetSports.title')}
+                    {this.state.translateMethod('translation.exposeIDE.views.userSetSports.title')}
                 </Text>
                 <View style={sports.categories}>
-                    <TouchableOpacity onPress={() =>this.selectSport('Cycling')}>
+                    <TouchableOpacity onPress={() => this.selectSport('Cycling')}>
                         <View style={sports.category}>
                             <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
-                            {this.translateMethod('translation.common.cycling')}
-                        </Text>
+                                {this.state.translateMethod('translation.common.cycling')}
+                            </Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.selectSport('Swimming')}>
-                        <View style={[sports.category, {marginLeft: 20}]}>
+                        <View style={[sports.category, { marginLeft: 20 }]}>
                             <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
-                            {this.translateMethod('translation.common.swimming')}
-                        </Text>
+                                {this.state.translateMethod('translation.common.swimming')}
+                            </Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity onPress={() => this.selectSport('Running')}>
                     <View style={sports.category}>
                         <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
-                        {this.translateMethod('translation.common.running')}
-                    </Text>
+                            {this.state.translateMethod('translation.common.running')}
+                        </Text>
                     </View>
                 </TouchableOpacity>
                 <View style={sports.footer}>
                     <TouchableOpacity
                         onPress={() => Alert.alert('Will be soon')}>
                         <Text style={sports.skipButton}>
-                        {this.translateMethod('translation.common.running')} >
+                            {this.state.translateMethod('translation.common.running')} >
                         </Text>
                     </TouchableOpacity>
                 </View>

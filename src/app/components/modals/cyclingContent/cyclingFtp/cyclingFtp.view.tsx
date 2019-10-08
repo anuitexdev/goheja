@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import * as actions from '../../../../redux/actions/modal.actions';
-import { Text, View, TouchableWithoutFeedback, TextInput, KeyboardAvoidingView } from "react-native";
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
 import cyclingStyles from './cyclingFtp.style';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TranslateService from '../../../../services/translation.service';
 
 interface State {
     activeInputNumber: number,
@@ -12,12 +12,13 @@ interface State {
     dozens: string,
     units: string,
     ftpValue: number;
+    translateMethod: (str: string) => string;
 }
 
 interface Props {
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: {ftp: number}) => void,
+    changeModal: (value: { ftp: number }) => void,
 }
 
 class CyclingFtpView extends Component<Props, State> {
@@ -25,16 +26,40 @@ class CyclingFtpView extends Component<Props, State> {
     private inputHundreds: any;
     private inputDozents: any;
     private inputUnits: any;
-
-    constructor(props: Props) {
+    private languageSubscription: any
+    constructor(props: Props, private translationService: TranslateService) {
         super(props);
+
+
         this.state = {
             activeInputNumber: 0,
             hundreds: '0',
             dozens: '0',
             units: '0',
             ftpValue: 0,
+            translateMethod: (str: string) => '',
         }
+    }
+
+
+
+
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.setState({
+                translateMethod: res,
+            })
+
+        });
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+
+        });
+
+    }
+
+    componentWillUnmount = () => {
+        this.languageSubscription.unsubscribe();
     }
 
     public setModalVisible = () => {
@@ -52,11 +77,11 @@ class CyclingFtpView extends Component<Props, State> {
     }
 
     public changeModal = () => {
-        this.props.changeModal({ftp: this.state.ftpValue});
+        this.props.changeModal({ ftp: this.state.ftpValue });
     }
 
     public setValue = async (input: any, value: any) => {
-       await this.setState({
+        await this.setState({
             ...value,
         })
         input.focus();
@@ -88,27 +113,27 @@ class CyclingFtpView extends Component<Props, State> {
                 <View style={cyclingStyles.modalPage}>
                     <TouchableWithoutFeedback onPress={this.hideModal}>
                         <Text style={cyclingStyles.backBtn}>
-                            Back
-                            </Text>
+                            {this.state.translateMethod('translation.common.back')}
+                        </Text>
                     </TouchableWithoutFeedback>
 
                     <Text style={cyclingStyles.subtitle}>
-                        What’s your
+                        {this.state.translateMethod('translation.common.whatsYour')}
                     </Text>
 
                     <Text style={cyclingStyles.title}>
-                        Cycling FTP
+                        {this.state.translateMethod('translation.exposeIDE.views.userSetSports.whatsYourCyclingFtp')}
                     </Text>
 
                     <View style={cyclingStyles.fullComponent}>
-                        <View style={{flexDirection: 'row'}}>
+                        <View style={{ flexDirection: 'row' }}>
                             <TextInput
                                 ref={(ref) => this.inputHundreds = ref}
                                 placeholder="0"
                                 onFocus={() => this.changeFocus(1)}
                                 maxLength={1}
                                 style={this.state.activeInputNumber === 1 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
-                                onChangeText={(hundreds) => this.setValue( this.inputDozents, {hundreds})}
+                                onChangeText={(hundreds) => this.setValue(this.inputDozents, { hundreds })}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>
@@ -117,7 +142,7 @@ class CyclingFtpView extends Component<Props, State> {
                                 ref={(ref) => this.inputDozents = ref}
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(2)}
-                                onChangeText={(dozens) => this.setValue(this.inputUnits, {dozens})}
+                                onChangeText={(dozens) => this.setValue(this.inputUnits, { dozens })}
                                 style={this.state.activeInputNumber === 2 ? cyclingStyles.focusInput : cyclingStyles.infoInput}
                                 keyboardType={"number-pad"}
                             >
@@ -128,42 +153,42 @@ class CyclingFtpView extends Component<Props, State> {
                                 placeholder="0"
                                 maxLength={1}
                                 onFocus={() => this.changeFocus(3)}
-                                onChangeText={(units) => this.setValue(this.inputUnits, {units})}
+                                onChangeText={(units) => this.setValue(this.inputUnits, { units })}
                                 keyboardType={"number-pad"}
                             >
                             </TextInput>
                         </View>
                         <Text
                             style={{
-                            fontSize: 20,
-                            color: '#99a8af',
-                            marginTop: 13
+                                fontSize: 20,
+                                color: '#99a8af',
+                                marginTop: 13
                             }}>
-                        watts
+                            watts
                         </Text>
                     </View>
 
                     <View style={cyclingStyles.footerBtns}>
                         <TouchableWithoutFeedback onPress={this.changeModal}>
                             <Text style={cyclingStyles.skipBtn}>
-                                Skip >
+                            {this.state.translateMethod('translation.common.skip')}  >
                             </Text>
                         </TouchableWithoutFeedback>
                         {
 
-                            
+
                             this.state.ftpValue === 0 ?
                                 <TouchableWithoutFeedback onPress={this.changeModal}>
                                     <View style={cyclingStyles.nextBtn}>
-                                    <Text style={cyclingStyles.nextBtnText}>
-                                        I don't know
+                                        <Text style={cyclingStyles.nextBtnText}>
+                                        {this.state.translateMethod('translation.common.iDontKnow')} 
                                     </Text>
                                     </View>
                                 </TouchableWithoutFeedback> :
                                 <TouchableWithoutFeedback onPress={this.changeModal}>
                                     <View style={cyclingStyles.nextBtn}>
                                         <Text style={cyclingStyles.nextBtnText}>
-                                            Next
+                                        {this.state.translateMethod('translation.common.next')}
                                     </Text>
                                     </View>
                                 </TouchableWithoutFeedback>
@@ -181,7 +206,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value:  {ftp: number}) => dispatch(actions.changeCyclingModal(value)),
+    changeModal: (value: { ftp: number }) => dispatch(actions.changeCyclingModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CyclingFtpView);

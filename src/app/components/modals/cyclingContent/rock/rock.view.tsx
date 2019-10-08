@@ -5,6 +5,7 @@ import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import cyclingStyles from './rock.style';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TranslateService from '../../../../services/translation.service';
 
 interface State {
     activeInputNumber: number,
@@ -12,6 +13,7 @@ interface State {
     dozens: string,
     units: string,
     rockValue: number;
+    translateMethod: (str: string) => string;
 }
 
 interface Props {
@@ -26,8 +28,8 @@ class RockView extends Component<Props, State> {
     private inputHundreds: any;
     private inputDozens: any;
     private inputUnits: any;
-
-    constructor(props: Props) {
+    private languageSubscription: any
+    constructor(props: Props, private translationService: TranslateService) {
         super(props);
         this.state = {
             activeInputNumber: 0,
@@ -35,8 +37,22 @@ class RockView extends Component<Props, State> {
             dozens: '0',
             units: '0',
             rockValue: 0,
+            translateMethod: (str: string) => '',
         }
         
+    }
+
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.setState({
+                translateMethod: res,
+            })
+        });
+    }
+
+    componentWillUnmount = () => {
+        this.languageSubscription.unsubscribe();
     }
 
     public setModalVisible = () => {
@@ -92,12 +108,12 @@ class RockView extends Component<Props, State> {
                 <View style={cyclingStyles.modalPage}>
                     <TouchableWithoutFeedback onPress={this.hideModal}>
                         <Text style={cyclingStyles.backBtn}>
-                            Back
+                        {this.state.translateMethod('translation.common.back')}
                         </Text>
                     </TouchableWithoutFeedback>
                     <Text style={cyclingStyles.title}>
                         {this.props.maxSpeed} kph {'\n'}
-                        You Rock!
+                        {this.state.translateMethod('translation.common.youRock')} 
                     </Text>
                     <Text style={cyclingStyles.subtitle}>
                         What was your Avg. Heart Rate
@@ -160,7 +176,7 @@ class RockView extends Component<Props, State> {
                                 <Text
                                     style={cyclingStyles.nextBtnText}
                                 >
-                                I don't remember
+                                {this.state.translateMethod('translation.common.iDontKnow')} 
                             </Text>
                             </View>
                         </TouchableWithoutFeedback> :
@@ -173,7 +189,7 @@ class RockView extends Component<Props, State> {
                                         <Text
                                             style={cyclingStyles.nextBtnText}
                                         >
-                                            Next
+                                        {this.state.translateMethod('translation.common.next')}
                                     </Text>
                                     </View>
                                 </TouchableWithoutFeedback>

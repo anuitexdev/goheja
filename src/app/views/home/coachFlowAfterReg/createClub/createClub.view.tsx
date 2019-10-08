@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import createClubStyle from './createClub.style';
-import {TextInput, ScrollView} from 'react-native-gesture-handler';
+import { TextInput, ScrollView } from 'react-native-gesture-handler';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import TranslateService from '../../../../services/translation.service';
 
 interface State {
     clubName: string;
+    translateMethod: (str: string) => string;
 }
 
 interface Props {
@@ -16,20 +17,21 @@ interface Props {
 
 class CreateClubView extends Component<Props, State> {
 
-    private translateMethod: any;
     private languageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
         this.state = {
-            clubName: ''
+            clubName: '',
+            translateMethod: (str: string) => '',
         }
     }
 
     componentWillMount() {
         this.translationService = new TranslateService();
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res
+            this.setState({
+                translateMethod: res,
+            })
         });
     }
 
@@ -47,11 +49,11 @@ class CreateClubView extends Component<Props, State> {
                 <ScrollView>
                     <View>
                         <View style={createClubStyle.clubNameInput}>
-                            <Text style={createClubStyle.titleName}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubName')}</Text>
+                            <Text style={createClubStyle.titleName}>{this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubName')}</Text>
                             <View style={createClubStyle.inputWrapper}>
                                 <TextInput
                                     style={[this.state.clubName.length == 0 ? { fontStyle: 'italic' } : { fontStyle: 'normal' }, createClubStyle.inputClub]}
-                                    placeholder={this.translateMethod('translation.exposeIDE.views.regestrationNewClub.caption')}
+                                    placeholder={this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.caption')}
                                     onChangeText={(txt) => this.setState({ clubName: txt })}
                                     value={this.state.clubName}
                                 >
@@ -61,7 +63,7 @@ class CreateClubView extends Component<Props, State> {
                                     onPress={() => this.onSubmit()}
                                 >
                                     <Text style={createClubStyle.nextBtnText}>
-                                        {this.translateMethod('translation.common.next')}
+                                        {this.state.translateMethod('translation.common.next')}
                                     </Text>
                                 </TouchableOpacity>
                             </View>
@@ -81,6 +83,6 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+    mapStateToProps,
+    mapDispatchToProps,
 )(CreateClubView);

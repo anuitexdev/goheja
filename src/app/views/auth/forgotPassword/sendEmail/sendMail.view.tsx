@@ -8,11 +8,11 @@ import { NavigationScreenProp, NavigationState, NavigationParams } from "react-n
 import TranslateService from '../../../../services/translation.service';
 import * as actions from '../../../../redux/actions/auth.actions';
 import ValidationService from '../../../../shared/validation/validation.service';
-import { async } from "rxjs/internal/scheduler/async";
 
 interface State{
     email: string,
     emailError: boolean,
+    translateMethod: (str: string) => string
 }
 
 interface Props{
@@ -23,7 +23,6 @@ interface Props{
 
 class SendMailScreen extends Component<Props,State> {
     private validationService = new ValidationService();
-    private translateMethod: any;
     private languageSubscription: any;
     constructor(props: Props, private translationService: TranslateService){
         super(props)
@@ -31,14 +30,17 @@ class SendMailScreen extends Component<Props,State> {
         this.state = {
             email: '',
             emailError: true,
+            translateMethod: (str: string) => '',
         }
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res});   
+            this.setState({
+                translateMethod: res,
+            })
+        });   
     }
 
     componentWillUnmount = () => {
@@ -74,9 +76,9 @@ class SendMailScreen extends Component<Props,State> {
     render() {
         return (
             <Fragment>
-                <Text style={styles.title}>  {this.translateMethod('translation.exposeIDE.views.forgot-password.title')}  </Text>
+                <Text style={styles.title}>  {this.state.translateMethod('translation.exposeIDE.views.forgot-password.title')}  </Text>
                 <Text style = {styles.subTitle}>
-                {this.translateMethod('translation.exposeIDE.views.forgot-password.text')}
+                {this.state.translateMethod('translation.exposeIDE.views.forgot-password.text')}
             </Text>
 
                 <View>
@@ -99,7 +101,7 @@ class SendMailScreen extends Component<Props,State> {
                         onPress={this.onSubmit}
                         style ={styles.nextBtn}
                     >
-                        <Text style={styles.resetPasswordText}>{this.translateMethod('translation.common.reset')} {this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
+                        <Text style={styles.resetPasswordText}>{this.state.translateMethod('translation.common.reset')} {this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                     </TouchableOpacity>
                 </View>
                 </Fragment>

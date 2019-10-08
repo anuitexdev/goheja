@@ -8,10 +8,10 @@ import ImagePicker from 'react-native-image-picker';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import TranslateService from '../../../../services/translation.service';
 import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
-import IconFeather from 'react-native-vector-icons/Feather';
 
 interface State {
-    avatarSource: any
+    avatarSource: any,
+    translateMethod: (str: string) => string,
 }
 
 interface Props {
@@ -22,19 +22,20 @@ interface Props {
 
 class CoachClubLogoView extends Component<Props, State> {
   private languageSubscription: any;
-  private translateMethod: any;
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.state = {
-        avatarSource: ''
+        avatarSource: '',
+        translateMethod: (str: string) => '',
     }
   }
 
   componentWillMount() {
     this.translationService = new TranslateService();
    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-        this.forceUpdate();
-        this.translateMethod = res
+        this.setState({
+          translateMethod: res,
+        })
     });
 }
 
@@ -106,14 +107,14 @@ componentWillUnmount(){
 
     return (
       <View style={coachClubLogo.photoWrapper}>
-        <Text style={coachClubLogo.titleLogo}>{translationReplaceHelper.translationReplace(this.translateMethod('translation.exposeIDE.views.regestrationNewClub.addLogo'),this.props.clubName)}</Text>
+        <Text style={coachClubLogo.titleLogo}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.addLogo'),this.props.clubName)}</Text>
         {
             this.state.avatarSource == '' ?
             <TouchableHighlight 
               onPress={() => this.chooseImage(options)}
               style={coachClubLogo.photoPicker}
             >
-                <Text style={coachClubLogo.photoBtnTitle}>{translationReplaceHelper.translationReplace(this.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadClubLogo'), this.props.clubName)}</Text>
+                <Text style={coachClubLogo.photoBtnTitle}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadClubLogo'), this.props.clubName)}</Text>
             </TouchableHighlight> :
             <View style={coachClubLogo.newPhoto}>
                 <Image source={this.state.avatarSource} style={coachClubLogo.pickedPhoto}/>
@@ -121,7 +122,7 @@ componentWillUnmount(){
                     onPress={() => this.chooseImage(options)}
                     >
             
-                    <Text style={coachClubLogo.photoBtnTitle}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadDiffrentLogo')}</Text>
+                    <Text style={coachClubLogo.photoBtnTitle}>{this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadDiffrentLogo')}</Text>
                 </TouchableHighlight>
             </View>
         }
@@ -132,14 +133,14 @@ componentWillUnmount(){
                 style={coachClubLogo.nextBtn}
                 onPress={this.onSubmit}
                 >
-                <Text style={coachClubLogo.nextBtnText}> {this.translateMethod('translation.common.next')}</Text>
+                <Text style={coachClubLogo.nextBtnText}> {this.state.translateMethod('translation.common.next')}</Text>
             </TouchableHighlight> :
 
             <TouchableHighlight 
                 style={coachClubLogo.skipBtn}
                 onPress={this.onSubmit}
                 >
-                <Text style={coachClubLogo.skipBtnText}> {this.translateMethod('translation.common.skip')}</Text>
+                <Text style={coachClubLogo.skipBtnText}> {this.state.translateMethod('translation.common.skip')}</Text>
             </TouchableHighlight> }
         </View>
       </View>
