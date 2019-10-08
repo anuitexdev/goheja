@@ -79,9 +79,9 @@ class UnitsCoachScreen extends Component<Props, State> {
                                     <Text style={this.state.activeUnit !== 'mi' ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> mi</Text>
                                 </TouchableOpacity>
 
-                                <TouchableOpacity style={this.state.activeUnit === 'mi' ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('km')}>
-                                    <Text style={this.state.activeUnit === 'mi' ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
-                                    <Text style={this.state.activeUnit === 'mi' ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> km</Text>
+                                <TouchableOpacity style={this.state.activeUnit === 'km' ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('km')}>
+                                    <Text style={this.state.activeUnit === 'km' ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
+                                    <Text style={this.state.activeUnit === 'km' ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> km</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
