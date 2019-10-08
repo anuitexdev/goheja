@@ -8,35 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* gohejaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gohejaTests.m */; };
-		0F16A1925F5F491EAB865737 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E168BD59CB42480BABBAE12F /* Feather.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
-		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1A90AA4EABB7459D883DE188 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E110901D2E042D58FD70339 /* Octicons.ttf */; };
-		1CDE811F2C1E4248B692F95A /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53B9F521D1934706A856AF5A /* MaterialCommunityIcons.ttf */; };
 		2B0719B45F74E51C966A91F3 /* libPods-goheja-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FB227150FC21E720B4242EC /* libPods-goheja-tvOS.a */; };
-		2CFCFA8DB3E14D5CAAF70F8F /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2BAD5918394436382AC646D /* Fontisto.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* gohejaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gohejaTests.m */; };
-		3036911DF1ED4A1FB1CE956B /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC7A8987826E48529088F0D3 /* Ionicons.ttf */; };
-		31A9D1EAAC6F4B3496E246EC /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 102A16A1A966445C8AE74A60 /* FontAwesome5_Regular.ttf */; };
-		329B555EFA7B4156B8CF9263 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAE191677F1149978E3FFE97 /* Entypo.ttf */; };
-		38E9FE064B704009846E7F22 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07F915729FEC4F45A897DE04 /* Foundation.ttf */; };
 		4B427900234B2D5A00744BA2 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4278FF234B2D5A00744BA2 /* HealthKit.framework */; };
-		5B37B9655123BD63A15BE1B4 /* libPods-goheja.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC2795B8AB97B9B5CFC63FA /* libPods-goheja.a */; };
-		6B8DDCEFADAE4872B0E2A5CB /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A81FF8226094CCE830E7FEE /* AntDesign.ttf */; };
-		770298F28E714802BB2CA62E /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37FD8F6BEFF64B0B855CCB41 /* Zocial.ttf */; };
+		5B37B9655123BD63A15BE1B4 /* libPods-goheja.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC2795B8AB97B9B5CFC63FA /* libPods-goheja.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		811AE3D1EF42CDB37231CE31 /* libPods-goheja-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 229786DBE183683F622CB0E7 /* libPods-goheja-tvOSTests.a */; };
-		99B9DB8A140448058E8A34E8 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B49C517374204DC593FAED09 /* FontAwesome.ttf */; };
-		9A2920F407134702BE4BC8ED /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 154147D9518D44368CF02450 /* FontAwesome5_Solid.ttf */; };
-		9F8DCB5123374B72BC06BF50 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3365A6F77C7B48EE9C4820C1 /* EvilIcons.ttf */; };
 		DD0CCDD92F69CEFE4A701B00 /* libPods-gohejaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F177ED55F6A43D149382D429 /* libPods-gohejaTests.a */; };
-		E6C2C8C066AF422184432B6B /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15A53138CD0B47ED81B844F4 /* MaterialIcons.ttf */; };
-		F6515D7F4E284ED68CEAC174 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40ED687963364083A83A5267 /* SimpleLineIcons.ttf */; };
-		F68FC358F1604273A59432C0 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8943768669424CFF8DA38B28 /* FontAwesome5_Brands.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -411,24 +393,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				6B8DDCEFADAE4872B0E2A5CB /* AntDesign.ttf in Resources */,
-				329B555EFA7B4156B8CF9263 /* Entypo.ttf in Resources */,
-				9F8DCB5123374B72BC06BF50 /* EvilIcons.ttf in Resources */,
-				0F16A1925F5F491EAB865737 /* Feather.ttf in Resources */,
-				99B9DB8A140448058E8A34E8 /* FontAwesome.ttf in Resources */,
-				F68FC358F1604273A59432C0 /* FontAwesome5_Brands.ttf in Resources */,
-				31A9D1EAAC6F4B3496E246EC /* FontAwesome5_Regular.ttf in Resources */,
-				9A2920F407134702BE4BC8ED /* FontAwesome5_Solid.ttf in Resources */,
-				2CFCFA8DB3E14D5CAAF70F8F /* Fontisto.ttf in Resources */,
-				38E9FE064B704009846E7F22 /* Foundation.ttf in Resources */,
-				3036911DF1ED4A1FB1CE956B /* Ionicons.ttf in Resources */,
-				1CDE811F2C1E4248B692F95A /* MaterialCommunityIcons.ttf in Resources */,
-				E6C2C8C066AF422184432B6B /* MaterialIcons.ttf in Resources */,
-				1A90AA4EABB7459D883DE188 /* Octicons.ttf in Resources */,
-				F6515D7F4E284ED68CEAC174 /* SimpleLineIcons.ttf in Resources */,
-				770298F28E714802BB2CA62E /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,7 +426,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -787,7 +751,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.go-heja.react";
 				PRODUCT_NAME = goheja;
-				PROVISIONING_PROFILE_SPECIFIER = dev_goheja;
+				PROVISIONING_PROFILE_SPECIFIER = goheja_development_provision;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -798,6 +762,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = goheja/goheja.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ACS2X6ERDY;
@@ -810,7 +775,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.go-heja.react";
 				PRODUCT_NAME = goheja;
-				PROVISIONING_PROFILE_SPECIFIER = dev_goheja_provision;
+				PROVISIONING_PROFILE_SPECIFIER = goheja_distribution_provision;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
