@@ -132,7 +132,7 @@ class AddAddressModal extends Component<Props, State> {
               <View style={addAddress.locateBtnWrapper}>
                 <TouchableOpacity
                   onPress={this.getLocation}
-                  style={addAddress.locateBtn}>
+                  style={this.state.selectedAddress!== '' && this.state.selectedCountry!== '' ? addAddress.locateBtnActive : addAddress.locateBtn}>
                   <Text style={addAddress.locateBtnText}>Locate</Text>
                 </TouchableOpacity>
               </View>

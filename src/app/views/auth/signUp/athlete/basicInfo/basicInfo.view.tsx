@@ -178,7 +178,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
                         onChangeText={(confirmPassword) => this.handleChange({ confirmPassword })}
                     />
-                    {this.state.errors.confirmPassword ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
+                    {this.state.errors.confirmPassword ? <Text style={styles.errorText}>Your Password does not match</Text> : null}
                     <Icon
                         style={styles.showPassword}
                         size={25}

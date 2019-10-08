@@ -189,13 +189,15 @@ class SwimTimeView extends Component<Props, State> {
           </View>
 
           <View style={swimtime.footerBtns}>
-            <TouchableOpacity>
+            <TouchableWithoutFeedback onPress={this.hideModal}>
               <Text style={swimtime.skipBtn}>Skip ></Text>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
             {this.state.swimTimeValue == '' ? (
-              <TouchableOpacity style={swimtime.nextBtn}>
-                <Text style={swimtime.nextBtnText}>I don't know</Text>
-              </TouchableOpacity>
+              <TouchableWithoutFeedback onPress={this.hideModal}>
+                <View style={swimtime.nextBtn}>
+                  <Text style={swimtime.nextBtnText}>I don't know</Text>
+                </View>
+              </TouchableWithoutFeedback>
             ) : (
               <TouchableWithoutFeedback onPress={this.hideModal}>
                 <View style={swimtime.nextBtn}>

@@ -151,15 +151,19 @@ class RockView extends Component<Props, State> {
                     <View style={cyclingStyles.footerBtns}>
                         {
                             this.state.rockValue === 0 ?
-                                <TouchableOpacity
-                                    style={cyclingStyles.nextBtn}
+                            <TouchableWithoutFeedback
+                            onPress={this.changeModal}
+                        >
+                            <View
+                                style={cyclingStyles.nextBtn}
+                            >
+                                <Text
+                                    style={cyclingStyles.nextBtnText}
                                 >
-                                    <Text
-                                        style={cyclingStyles.nextBtnText}
-                                    >
-                                        I don't remember
-                                    </Text>
-                                </TouchableOpacity> :
+                                I don't remember
+                            </Text>
+                            </View>
+                        </TouchableWithoutFeedback> :
                                 <TouchableWithoutFeedback
                                     onPress={this.changeModal}
                                 >
@@ -173,7 +177,7 @@ class RockView extends Component<Props, State> {
                                     </Text>
                                     </View>
                                 </TouchableWithoutFeedback>
-                        }
+                        } 
                     </View>
                 </View>
             </View>

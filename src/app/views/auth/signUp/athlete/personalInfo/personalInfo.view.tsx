@@ -67,6 +67,7 @@ class PersonalInfoScreen extends Component<Props, State> {
 
     public onSubmit = async () => {
         this.props.nextStepNumber(this.state);
+        
         await this.setState({
             signUpData: {
                 ...this.state.signUpData,
@@ -75,8 +76,8 @@ class PersonalInfoScreen extends Component<Props, State> {
                 fat: this.state.fat,
                 userType: this.props.userType,
             }
-        });
-        this.props.signUp(this.state.signUpData);
+        });        
+        this.props.signUp({...this.state.signUpData,userType: this.props.userType });
     }
 
     render() {

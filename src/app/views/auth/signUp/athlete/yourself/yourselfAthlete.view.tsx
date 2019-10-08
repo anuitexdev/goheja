@@ -33,7 +33,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         super(props)
 
         this.state = {
-            gender: 0,
+            gender: 1,
             isDateTimePickerVisible: false,
             formatedBirthDate: '',
             birthDateError: false,
