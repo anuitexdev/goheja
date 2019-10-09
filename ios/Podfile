@@ -34,6 +34,18 @@ target 'goheja' do
     # Pods for testing
   end
 
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.name == "React"
+        target.remove_from_project
+      end
+  
+      if target.name == "yoga"
+        target.remove_from_project
+      end
+    end
+  end
+
   use_native_modules!
 end
 
