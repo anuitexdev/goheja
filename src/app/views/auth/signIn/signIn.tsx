@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View, TextInput, Alert } from 'react-native';
+import { Text, View, TextInput, Alert, SafeAreaView } from 'react-native';
 import React from "react";
 import styles from '../styles';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
@@ -129,6 +129,7 @@ private translationSubscription: any;
      
         return (
             <ScrollView>
+                <SafeAreaView style={{flex:1}}>
                 <Header />
                 <View style={styles.container}>
                     <Text style={styles.screenTitle}>{this.state.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
@@ -183,6 +184,7 @@ private translationSubscription: any;
                     </View>
 
                 </View>
+                </SafeAreaView>
             </ScrollView>
         )
     }

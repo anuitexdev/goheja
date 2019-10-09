@@ -16,13 +16,14 @@ export default StyleSheet.create({
         right: -15,
         top: -15,
         padding: 10,
-        zIndex: 5,
+        zIndex: 9999,
     },
     languageItemWrapper: {
         borderBottomColor: '#CFD8DD',
         borderBottomWidth: 1,
         paddingBottom: 6,
-        paddingTop: 6
+        paddingTop: 6,
+        zIndex: 8888
     },
     languageItemHeader: {
         flexDirection: 'row',
@@ -30,7 +31,7 @@ export default StyleSheet.create({
         justifyContent:'flex-end',
         borderBottomColor: '#CFD8DD',
         borderBottomWidth: 1,
-        paddingBottom: 10
+        paddingBottom: 10,
     },
     languageItem: {
         flexDirection: 'row',
