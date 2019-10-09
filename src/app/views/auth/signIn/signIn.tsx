@@ -41,6 +41,7 @@ interface Props {
 class SignInScreen extends Component<Props, State> {
 
 private languageSubscription: any;
+private translationSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
         this.state = {
@@ -63,7 +64,7 @@ private languageSubscription: any;
              })
             });
         
-        this.translationService.getTranslateMethod().subscribe(res => {
+       this.translationSubscription = this.translationService.getTranslateMethod().subscribe(res => {
             this.setState({
                 translateMethod: res,
             })
@@ -72,6 +73,7 @@ private languageSubscription: any;
 
     componentWillUnmount(){
         this.languageSubscription.unsubscribe();
+        this.translationSubscription.unsubscribe();
     }
 
     private onSubmit = async () => {

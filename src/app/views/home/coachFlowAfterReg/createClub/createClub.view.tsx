@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import createClubStyle from './createClub.style';
 import { TextInput, ScrollView } from 'react-native-gesture-handler';
 import * as actions from '../../../../redux/actions/createGroup.actions';

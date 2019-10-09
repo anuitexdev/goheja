@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, ScrollView, Keyboard } from 'react-native';
+import { View, Text } from 'react-native';
 import CreateClubView from './createClub/createClub.view';
 import CoachClubLogoView from './coachClubLogo/coachClubLogo.view'
 import coachFlowAfterReg from './coachFlowAfterReg.style';
@@ -13,7 +13,7 @@ interface State {
 }
 
 interface Props {
-  currentGroupStep: any,
+  currentGroupStep: number,
   userName: string,
 }
 
