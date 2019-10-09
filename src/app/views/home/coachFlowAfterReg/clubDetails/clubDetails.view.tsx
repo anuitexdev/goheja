@@ -6,6 +6,7 @@ import * as actions from '../../../../redux/actions/createGroup.actions';
 import { TextInputMask } from 'react-native-masked-text';
 import TranslateService from '../../../../services/translation.service';
 import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
+import ClubDataModel from '../../../../shared/models/clubData.model';
 
 interface State {
   arrayOfDays: any[];
@@ -13,14 +14,17 @@ interface State {
   openTime: string;
   closeTime: string;
   isFocused: boolean;
-  error: any,
-  keyboardIsOpen: boolean,
-  translateMethod: (str: string) => string,
+  error: any;
+  keyboardIsOpen: boolean;
+  translateMethod: (str: string) => string;
+  clubData: any;
 }
 
 interface Props {
   nextStepNumber: (clubData: any) => void;
+  registerGroup: (clubRegisterData: ClubDataModel) => void;
   clubName: string;
+  clubData: any;
 }
 
 class ClubDetailsView extends Component<Props, State> {
@@ -47,6 +51,7 @@ class ClubDetailsView extends Component<Props, State> {
       closeTime: '',
       isFocused: false,
       keyboardIsOpen: false,
+      clubData: this.props.clubData,
       translateMethod: (str: string) => '',
       error: {
         openTimeError: '',
@@ -94,11 +99,25 @@ _keyboardDidHide = () => {
             endOfDay: this.state.closeTime,
             weekWorkDays: this.state.weekWorkDays,
         }
-        this.props.nextStepNumber(clubTime);
+       
 
     const re=/^0[0-9]|1[0-9]|2[0-3]:[0-5][0-9]$/;
     if(re.test(value)) {
-      this.props.nextStepNumber(4);
+    const clubData={
+       name:  this.state.clubData.clubName,
+       code: "st",
+       lat: 42.00987,
+       lng: 42.1234,
+       radius: 30,
+       imgPath:  this.state.clubData.avatarSource.uri,
+       weekWorkDays: this.state.weekWorkDays,
+       startOfDay: 360,
+	     endOfDay: 1360,
+       firstDayInWeek: 1
+
+     } 
+     this.props.registerGroup(clubData);
+      this.props.nextStepNumber(clubTime);
     } else {
       this.setState({
         error: {
@@ -208,10 +227,12 @@ _keyboardDidHide = () => {
 
 const mapStateToProps = (state: any) => ({
   clubName: state.CreateGroupReducer.clubData.clubName,
+  clubData: state.CreateGroupReducer.clubData,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
   nextStepNumber: (clubData: any) => dispatch(actions.changeStep(clubData)),
+  registerGroup: (clubRegisterData: ClubDataModel) => dispatch(actions.registerGroup(clubRegisterData)),
 });
 
 export default connect(

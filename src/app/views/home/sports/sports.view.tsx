@@ -26,13 +26,21 @@ class SportsView extends Component<Props, State> {
     private languageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
+        this.state = {
+            translateMethod: (str: string) => '',
+        }
+     
+   
+    }
 
+    componentWillMount =() => {
         this.translationService = new TranslateService();
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.state = {
-                translateMethod: res,
-            }
+         this.setState({
+            translateMethod: res, 
+         })
         });
+        
     }
 
     componentWillUnmount() {
@@ -120,7 +128,7 @@ class SportsView extends Component<Props, State> {
                     <TouchableOpacity
                         onPress={this.onSubmit}>
                         <Text style={sports.skipButton}>
-                            Next
+                        {this.state.translateMethod('translation.common.next')}
                         </Text>
                     </TouchableOpacity>
                 </View>
