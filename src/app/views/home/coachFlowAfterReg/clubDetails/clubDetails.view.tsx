@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TouchableOpacity, TextInput, TouchableHighlight, TouchableOpacityBase, Alert, Keyboard } from 'react-native';
+import { View, Text, TouchableOpacity,  Alert, Keyboard } from 'react-native';
 import clubDetails from './clubDetails.style';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import { TextInputMask } from 'react-native-masked-text';
@@ -142,11 +142,13 @@ _keyboardDidHide = () => {
       })
       return;
     } else {
-      await this.setState(({ weekWorkDays }) => {
-        weekWorkDays: weekWorkDays.push(item);
+      let newWeekForDays = this.state.weekWorkDays;
+      newWeekForDays.push(item);
+      await this.setState({
+        weekWorkDays: newWeekForDays
       });
     }
-    this.forceUpdate();
+    
   };
 
   render() {
