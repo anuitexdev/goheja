@@ -2,16 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Info about health for sport trainings statistics</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>Info about health for sport trainings statistics</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>goheja</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>GoHejaIcon120.png</string>
+	</array>
+	<key>CFBundleIconName</key>
+	<string>GoHejaIcon-1024.png</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -41,6 +45,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Info about health for sport trainings statistics</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Info about health for sport trainings statistics</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UIAppFonts</key>
