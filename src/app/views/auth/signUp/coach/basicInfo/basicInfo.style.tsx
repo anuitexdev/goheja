@@ -29,7 +29,9 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: '#cfd8dc',
         paddingLeft: 15,
-        color: '#282E44'
+        color: '#282E44',
+        paddingVertical: 0,
+        height: 50,
     },
     inputHeb: {
         borderRadius: 2,
@@ -38,12 +40,16 @@ export default StyleSheet.create({
         paddingLeft: 15,
         color: '#282E44',
         textAlign: 'right',
+        paddingVertical: 0,
+        height: 50,
     },
     inputError: {
         borderRadius: 2,
         borderWidth: 1,
         borderColor: 'red',
-        paddingLeft: 15
+        paddingLeft: 15,
+        paddingVertical: 0,
+        height: 50,
     },
     inputErrorHeb: {
         borderRadius: 2,
@@ -51,6 +57,8 @@ export default StyleSheet.create({
         borderColor: 'red',
         paddingLeft: 15,
         textAlign: 'right',
+        paddingVertical: 0,
+        height: 50,
     },
     showPassword: {
         position: 'absolute',
@@ -125,6 +133,8 @@ export default StyleSheet.create({
         borderColor: '#cfd8dc',
         paddingLeft: 15,
         textAlign: 'right',
+        paddingVertical: 0,
+        height: 50,
 
     },
     inputHebError: {
@@ -141,6 +151,8 @@ export default StyleSheet.create({
         borderColor: 'red',
         paddingLeft: 15,
         textAlign: 'right',
+        paddingVertical: 0,
+        height: 50,
     },
     errorText: {
         color: 'red',

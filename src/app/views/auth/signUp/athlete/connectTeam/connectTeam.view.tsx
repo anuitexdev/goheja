@@ -75,7 +75,7 @@ class SuccessRegisterScreen extends Component<Props, State> {
                             style={connectTeam.skipWrapper}
                             onPress={() => this.sendCode('')}
                         >
-                            <Text style={{ fontFamily: 'Roboto-Regular' }}>{this.state.translateMethod('translation.common.skip')} ></Text>
+                            <Text>{this.state.translateMethod('translation.common.skip')} ></Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={connectTeam.nextBtn}

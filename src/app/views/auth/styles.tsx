@@ -5,7 +5,8 @@ import window from '../../theme/variables';
 export default StyleSheet.create({
     container: {
         width: window.width,
-        padding: 20
+        padding: 20, 
+        zIndex: -1,
     },
     title: {
         fontSize: 25,
@@ -69,7 +70,10 @@ export default StyleSheet.create({
         borderRadius: 2,
         borderWidth: 1,
         borderColor: '#cfd8dc',
-        paddingLeft: 15
+        paddingLeft: 15,
+        paddingVertical: 0,
+        height: 50,
+        zIndex: 7777
     },
     hebInput: {
         borderRadius: 2,
@@ -78,6 +82,8 @@ export default StyleSheet.create({
         paddingLeft: 15,
         textAlign: 'right',
         paddingRight: 50,
+        paddingVertical: 0,
+        height: 50,
 
     },
     hebInputDefault: {
@@ -86,6 +92,8 @@ export default StyleSheet.create({
         borderColor: '#cfd8dc',
         paddingLeft: 15,
         textAlign: 'right',
+        paddingVertical: 0,
+        height: 50,
 
     },
     label: {
@@ -185,7 +193,9 @@ export default StyleSheet.create({
         borderRadius: 2,
         borderWidth: 1,
         borderColor: 'red',
-        paddingLeft: 15
+        paddingLeft: 15,
+        paddingVertical: 0,
+        height: 50,
     },
     inputHebError: {
         borderRadius: 2,

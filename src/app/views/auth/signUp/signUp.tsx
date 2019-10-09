@@ -1,7 +1,7 @@
 import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, SafeAreaView } from "react-native";
 import WelcomeScreen from './welcome/welcome';
 import CoachScreen from './coach/coach.view';
 import Header from '../../../components/header/header';
@@ -23,17 +23,17 @@ class SignUpScreen extends Component<Props> {
 
     render() {
         return (
-            <Fragment>
+           
                 <ScrollView>
+                      <SafeAreaView style={{flex:1}}>
                     <Header />
                     { 
                         this.props.role === -1 ? <WelcomeScreen navigation={this.props.navigation} /> 
                         : this.props.role === 1 ? <AthleteScreen/> 
                             : <CoachScreen navigation={this.props.navigation} />
                     }
-
+                    </SafeAreaView>
                 </ScrollView>
-            </Fragment>
         )
     }
 }
