@@ -14,6 +14,7 @@ interface Props {
 
 interface State {
     groupCode: string,
+    translateMethod: (str: string) => string;
 }
 
 
@@ -24,19 +25,22 @@ class SuccessRegisterScreen extends Component<Props, State> {
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
         this.state = {
-            groupCode: ''
+            groupCode: '',
+            translateMethod: (str: string) => '',
         }
 
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-       this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res});   
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.setState({
+                translateMethod: res,
+            })
+        });
     }
 
-    componentWillUnmount =() => {
+    componentWillUnmount = () => {
         this.languageSubscription.unsubscribe();
     }
 
@@ -47,7 +51,7 @@ class SuccessRegisterScreen extends Component<Props, State> {
     private sendCode = (value: string) => {
         this.props.sendCode(value);
         this.props.nextStepNumber({});
- 
+
     }
 
     render() {
@@ -67,17 +71,17 @@ class SuccessRegisterScreen extends Component<Props, State> {
                     >
                     </TextInput>
                     <View style={connectTeam.personalNextBtnWrapper}>
-                        <TouchableOpacity 
-                        style={connectTeam.skipWrapper}
-                        onPress={() =>this.sendCode('')}
+                        <TouchableOpacity
+                            style={connectTeam.skipWrapper}
+                            onPress={() => this.sendCode('')}
                         >
-                            <Text style={{ fontFamily: 'Roboto-Regular' }}>{this.translateMethod('translation.common.skip')} ></Text>
+                            <Text style={{ fontFamily: 'Roboto-Regular' }}>{this.state.translateMethod('translation.common.skip')} ></Text>
                         </TouchableOpacity>
-                        <TouchableOpacity 
-                        style={connectTeam.nextBtn} 
-                        onPress={() =>this.sendCode(this.state.groupCode)}
+                        <TouchableOpacity
+                            style={connectTeam.nextBtn}
+                            onPress={() => this.sendCode(this.state.groupCode)}
                         >
-                            <Text style={connectTeam.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
+                            <Text style={connectTeam.nextBtnText}>{this.state.translateMethod('translation.common.next')}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

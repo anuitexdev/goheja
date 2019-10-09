@@ -103,8 +103,9 @@ class CustomDatePicker extends Component<Props, State> {
             </View>
               <View style={datePickerStyle.footer}>
                 <TouchableWithoutFeedback
-                  onPress={() => this.setDatePickerData(formatDate, false)}>
-                  <View style={datePickerStyle.footerBtn}><Text style={datePickerStyle.footerText}>Done</Text></View>
+                  onPress={() => this.setDatePickerData(formatDate, false)}
+                  disabled={this.state.selectedStartDate == null}>
+                  <View style={this.state.selectedStartDate == null ? datePickerStyle.footerBtnActive : datePickerStyle.footerBtn}><Text style={datePickerStyle.footerText}>Done</Text></View>
                 </TouchableWithoutFeedback>
               </View>
             </View>

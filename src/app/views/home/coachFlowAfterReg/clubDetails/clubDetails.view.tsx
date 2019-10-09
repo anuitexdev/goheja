@@ -1,33 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TouchableOpacity, TextInput, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, TouchableHighlight, TouchableOpacityBase, Alert, Keyboard } from 'react-native';
 import clubDetails from './clubDetails.style';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import { TextInputMask } from 'react-native-masked-text';
 import TranslateService from '../../../../services/translation.service';
+import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
+import ClubDataModel from '../../../../shared/models/clubData.model';
 
 interface State {
   arrayOfDays: any[];
-  newArr: any[];
+  weekWorkDays: any[];
   openTime: string;
   closeTime: string;
   isFocused: boolean;
+  error: any;
+  keyboardIsOpen: boolean;
+  translateMethod: (str: string) => string;
+  clubData: any;
 }
 
 interface Props {
-  nextStepNumber: (step: number) => void;
+  nextStepNumber: (clubData: any) => void;
+  registerGroup: (clubRegisterData: ClubDataModel) => void;
+  clubName: string;
+  clubData: any;
 }
 
 class ClubDetailsView extends Component<Props, State> {
-  private translateMethod: any;
+
   private languageSubscription: any;
+  public keyboardDidShowListener: any;
+  public keyboardDidHideListener: any;
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.translationService = new TranslateService();
-    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-      this.forceUpdate();
-      this.translateMethod = res
-    });
+  
     this.state = {
       arrayOfDays: [
         { key: 'S', value: 'Sunday' },
@@ -38,19 +46,85 @@ class ClubDetailsView extends Component<Props, State> {
         { key: 'F', value: 'Friday' },
         { key: 'S', value: 'Saturday' },
       ],
-      newArr: [],
+      weekWorkDays: [],
       openTime: '',
       closeTime: '',
-      isFocused: false
+      isFocused: false,
+      keyboardIsOpen: false,
+      clubData: this.props.clubData,
+      translateMethod: (str: string) => '',
+      error: {
+        openTimeError: '',
+      }
     };
   }
 
-  componentWillUnmount() {
-    this.languageSubscription.unsubscribe();
-  }
+  componentWillMount() {
+    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+     this.setState({
+      translateMethod: res,
+     })
+    });
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+    }
 
-  public onSubmit = () => {
-    this.props.nextStepNumber(4);
+
+
+
+componentWillUnmount () {
+  this.keyboardDidShowListener.remove();
+  this.keyboardDidHideListener.remove();
+  this.languageSubscription.unsubscribe();
+}
+
+_keyboardDidShow = () => {
+  this.setState({
+    keyboardIsOpen: true
+  })
+}
+
+_keyboardDidHide = () => {
+  this.setState({
+    keyboardIsOpen: false
+  })
+}
+
+
+    public onSubmit = (value: any) => {
+
+        Alert.alert('end of the flow');
+        const clubTime = {
+            startOfDay: this.state.openTime,
+            endOfDay: this.state.closeTime,
+            weekWorkDays: this.state.weekWorkDays,
+        }
+       
+
+    const re=/^0[0-9]|1[0-9]|2[0-3]:[0-5][0-9]$/;
+    if(re.test(value)) {
+    const clubData={
+       name:  this.state.clubData.clubName,
+       code: "st",
+       lat: 42.00987,
+       lng: 42.1234,
+       radius: 30,
+       imgPath:  this.state.clubData.avatarSource.uri,
+       weekWorkDays: this.state.weekWorkDays,
+       startOfDay: 360,
+	     endOfDay: 1360,
+       firstDayInWeek: 1
+
+     } 
+     this.props.registerGroup(clubData);
+      this.props.nextStepNumber(clubTime);
+    } else {
+      this.setState({
+        error: {
+          openTimeError: 'Has error'
+        }
+      })
+    }
   };
 
   changeFocus = () => {
@@ -60,11 +134,16 @@ class ClubDetailsView extends Component<Props, State> {
   }
 
   public selectWorkingDays = async (item: any) => {
-    if (this.state.newArr.indexOf(item) !== -1) {
+    if (this.state.weekWorkDays.indexOf(item) !== -1) {
+      let newWeekForDays = this.state.weekWorkDays;
+      newWeekForDays.splice(this.state.weekWorkDays.indexOf(item),1);
+      this.setState({
+        weekWorkDays: newWeekForDays,
+      })
       return;
     } else {
-      await this.setState(({ newArr }) => {
-        newArr: newArr.push(item);
+      await this.setState(({ weekWorkDays }) => {
+        weekWorkDays: weekWorkDays.push(item);
       });
     }
     this.forceUpdate();
@@ -72,15 +151,15 @@ class ClubDetailsView extends Component<Props, State> {
 
   render() {
     return (
-      <View style={{ position: 'relative' }}>
+      <View style={{position: 'relative' }}>
         <Text style={clubDetails.title}>Club Details</Text>
         <View style={clubDetails.clubDetailsWrapper}>
-          <Text style={clubDetails.titleTime}>  {this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays')} </Text>
+          <Text style={clubDetails.titleTime}>  {translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays'), this.props.clubName)} </Text>
           <View style={clubDetails.workingDaysWrapper}>
             {this.state.arrayOfDays.map((item, index) => (
               <TouchableOpacity
                 style={
-                  this.state.newArr.indexOf(item.value) == -1
+                  this.state.weekWorkDays.indexOf(item.value) == -1
                     ? clubDetails.daysBtnDefault
                     : clubDetails.daysBtnSelected
                 }
@@ -88,7 +167,7 @@ class ClubDetailsView extends Component<Props, State> {
                 key={index}>
                 <Text
                   style={
-                    this.state.newArr.indexOf(item.value) == -1
+                    this.state.weekWorkDays.indexOf(item.value) == -1
                       ? clubDetails.daysBtnTextDefault
                       : clubDetails.daysBtnTextSelected
                   }>
@@ -97,12 +176,12 @@ class ClubDetailsView extends Component<Props, State> {
               </TouchableOpacity>
             ))}
           </View>
-          <Text style={clubDetails.titleTime}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingHours')}</Text>
+          <Text style={clubDetails.titleTime}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingHours'), this.props.clubName)}</Text>
           <View style={clubDetails.inputsWrapper}>
             <View style={clubDetails.inputWidth}>
               <Text style={clubDetails.inputLabel}>Opening time</Text>
               <TextInputMask
-
+                onSubmitEditing={Keyboard.dismiss}
                 type={'datetime'}
                 style={this.state.isFocused ? clubDetails.inputTimeFocused : clubDetails.inputTime}
                 options={{
@@ -112,6 +191,9 @@ class ClubDetailsView extends Component<Props, State> {
                 value={this.state.openTime}
                 onChangeText={(time) => this.setState({ openTime: time })}
               />
+              <Text style={{color: 'red'}}>
+                {this.state.error.openTimeError}
+              </Text>
             </View>
             <View style={[clubDetails.inputWidth, { marginRight: 0 }]}>
               <Text style={clubDetails.inputLabel}>Closing time</Text>
@@ -129,12 +211,12 @@ class ClubDetailsView extends Component<Props, State> {
           </View>
 
           <View style={clubDetails.wrapperBtn}>
-            <TouchableHighlight
+            <TouchableOpacity
               style={clubDetails.nextBtn}
-            // onPress={this.onSubmit}
+              onPress={() => this.onSubmit(this.state.openTime)}
             >
               <Text style={clubDetails.nextBtnText}>Next</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
           </View>
         </View>
@@ -143,10 +225,14 @@ class ClubDetailsView extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: any) => ({});
+const mapStateToProps = (state: any) => ({
+  clubName: state.CreateGroupReducer.clubData.clubName,
+  clubData: state.CreateGroupReducer.clubData,
+});
 
 const mapDispatchToProps = (dispatch: any) => ({
-  nextStepNumber: (step: number) => dispatch(actions.changeStep(step)),
+  nextStepNumber: (clubData: any) => dispatch(actions.changeStep(clubData)),
+  registerGroup: (clubRegisterData: ClubDataModel) => dispatch(actions.registerGroup(clubRegisterData)),
 });
 
 export default connect(

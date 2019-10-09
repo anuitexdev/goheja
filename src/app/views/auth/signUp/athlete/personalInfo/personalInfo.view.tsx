@@ -19,12 +19,12 @@ interface State {
     fat: number,
     signUpData: any,
     currentLanguage: string,
+    translateMethod: (str: string) => string;
 
 }
 
 
 class PersonalInfoScreen extends Component<Props, State> {
-    private translateMethod: any;
     private languageSubscription: any;
     private getCurrentLanguageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
@@ -36,14 +36,16 @@ class PersonalInfoScreen extends Component<Props, State> {
             fat: 0,
             signUpData: this.props.signUpData,
             currentLanguage: '',
+            translateMethod: (str: string) => '',
         }
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res
+        this.setState({
+            translateMethod: res,
+        })
         });
 
         this.getCurrentLanguageSubscription = this.translationService.getCurrentLanguage().subscribe(res => {
@@ -92,8 +94,8 @@ class PersonalInfoScreen extends Component<Props, State> {
 
                         <View style={styles.personalFormControl}>
                             <View style={styles.labelContainer}>
-                                <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.height')}</Text>
-                                <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
+                                <Text style={styles.labelText}>{this.state.translateMethod('translation.exposeIDE.views.regestration.height')}</Text>
+                                <Text style={styles.prompt}>({this.state.translateMethod('translation.common.optional')})</Text>
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
@@ -108,8 +110,8 @@ class PersonalInfoScreen extends Component<Props, State> {
 
                         <View style={styles.personalFormControl}>
                             <View style={styles.labelContainer}>
-                                <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.weight')}</Text>
-                                <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
+                                <Text style={styles.labelText}>{this.state.translateMethod('translation.exposeIDE.views.regestration.weight')}</Text>
+                                <Text style={styles.prompt}>({this.state.translateMethod('translation.common.optional')})</Text>
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
@@ -124,8 +126,8 @@ class PersonalInfoScreen extends Component<Props, State> {
 
                         <View style={styles.personalFormControl}>
                             <View style={styles.labelContainer}>
-                                <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.BofyFatPercentage')} %</Text>
-                                <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
+                                <Text style={styles.labelText}>{this.state.translateMethod('translation.exposeIDE.views.regestration.BofyFatPercentage')} %</Text>
+                                <Text style={styles.prompt}>({this.state.translateMethod('translation.common.optional')})</Text>
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
@@ -143,13 +145,13 @@ class PersonalInfoScreen extends Component<Props, State> {
                                 style={styles.skipWrapper}
                                 onPress={this.onSubmit}
                             >
-                                <Text>{this.translateMethod('translation.common.skip')} ></Text>
+                                <Text>{this.state.translateMethod('translation.common.skip')} ></Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.nextBtn}
                                 onPress={this.onSubmit}
                             >
-                                <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
+                                <Text style={styles.nextBtnText}>{this.state.translateMethod('translation.common.next')}</Text>
                             </TouchableOpacity>
                         </View>
 

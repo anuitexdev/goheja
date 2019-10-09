@@ -14,26 +14,29 @@ interface Props {
 interface State {
     isActive: string,
     unitError: boolean,
-    units: string
+    units: string,
+    translateMethod: (str: string) => string;
 }
 
 class UnitsAthleteScreen extends Component<Props, State> {
-    private translateMethod: any;
+
     private languageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
         this.state = {
-            isActive: 'ml',
+            isActive: 'km',
             unitError: true,
-            units: 'ml'
+            units: 'km',
+            translateMethod: (str: string) => '',
         }
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res
+            this.setState({
+                translateMethod: res,
+            })
         });
 
     }
@@ -51,7 +54,6 @@ class UnitsAthleteScreen extends Component<Props, State> {
 
     public changeBtn = async (value: string) => {
         const unitError = this.unitValidation(value);
-        console.log(value);
 
         await this.setState({
             isActive: value,
@@ -72,24 +74,24 @@ class UnitsAthleteScreen extends Component<Props, State> {
                 <ScrollView>
 
                     <View style={styles.container}>
-                        <Text style={styles.pageHeader}>{this.translateMethod('translation.exposeIDE.views.regestration.tellUsAboutYourself')}</Text>
+                        <Text style={styles.pageHeader}>{this.state.translateMethod('translation.exposeIDE.views.regestration.tellUsAboutYourself')}</Text>
                         <View>
                             <View style={styles.btnContainer}>
 
                                 <TouchableOpacity style={this.state.isActive !== 'ml' ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('ml')}>
-                                    <Text style={this.state.isActive !== 'ml' ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
+                                    <Text style={this.state.isActive !== 'ml' ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.state.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
                                     <Text style={this.state.isActive !== 'ml' ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> ml</Text>
                                 </TouchableOpacity>
 
                                 <TouchableOpacity style={this.state.isActive !== 'km' ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('km')}>
-                                    <Text style={this.state.isActive !== 'km' ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
+                                    <Text style={this.state.isActive !== 'km' ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.state.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
                                     <Text style={this.state.isActive !== 'km' ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> km</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
                         <View style={styles.nextBtnWrapper}>
                             <TouchableOpacity style={this.state.unitError ? styles.nextBtn : styles.nextBtnDisabled} disabled={!this.state.unitError} onPress={this.onSubmit}>
-                                <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
+                                <Text style={styles.nextBtnText}>{this.state.translateMethod('translation.common.next')}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

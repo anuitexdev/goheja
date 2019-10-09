@@ -1,12 +1,18 @@
 import CreateGroupDefaultState from '../states/createGroup.state';
 
 const CreateGroupReducer = (state = CreateGroupDefaultState, action: any) => {
-    switch(action.type) {
+    switch (action.type) {
         case "CHANGE_STEP": {
             return {
                 ...state,
-                currentGroupStep: ++state.currentGroupStep
+                currentGroupStep: ++state.currentGroupStep,
+                clubData: {
+                    ...state.clubData,
+                    ...action.payload,
+                }
             }
+
+
         }
         case "GET_LOCATION": {
             return {
@@ -14,7 +20,7 @@ const CreateGroupReducer = (state = CreateGroupDefaultState, action: any) => {
                 location: action.payload
             }
         }
-        default: return {...state}
+        default: return { ...state }
     }
 }
 

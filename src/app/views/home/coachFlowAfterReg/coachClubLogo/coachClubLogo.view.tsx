@@ -7,30 +7,35 @@ import {PermissionsAndroid} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import TranslateService from '../../../../services/translation.service';
+import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
+
 interface State {
-    avatarSource: any
+    avatarSource: any,
+    translateMethod: (str: string) => string,
 }
 
 interface Props {
-    nextStepNumber: (step: number) => void
+    nextStepNumber: (stepData: {avatarSource: string}) => void,
+    clubName: string,
 }
 
 
 class CoachClubLogoView extends Component<Props, State> {
   private languageSubscription: any;
-  private translateMethod: any;
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.state = {
-        avatarSource: ''
+        avatarSource: '',
+        translateMethod: (str: string) => '',
     }
   }
 
   componentWillMount() {
     this.translationService = new TranslateService();
    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-        this.forceUpdate();
-        this.translateMethod = res
+        this.setState({
+          translateMethod: res,
+        })
     });
 }
 
@@ -38,7 +43,7 @@ componentWillUnmount(){
     this.languageSubscription.unsubscribe();
 }
   public onSubmit = () => {
-      this.props.nextStepNumber(3)
+      this.props.nextStepNumber(this.state)
   }
 
   async requestCameraPermission() {
@@ -65,7 +70,7 @@ componentWillUnmount(){
     }
   }
 
-  private test = (options: any) => {
+  private chooseImage = (options: any) => {
     ImagePicker.showImagePicker(options, (response) => {
         console.log('Response = ', response);
       
@@ -102,21 +107,22 @@ componentWillUnmount(){
 
     return (
       <View style={coachClubLogo.photoWrapper}>
-        <Text style={coachClubLogo.titleLogo}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.addLogo')}</Text>
+        <Text style={coachClubLogo.titleLogo}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.addLogo'),this.props.clubName)}</Text>
         {
             this.state.avatarSource == '' ?
             <TouchableHighlight 
-            onPress={() => this.test(options)}
-            style={coachClubLogo.photoPicker}
+              onPress={() => this.chooseImage(options)}
+              style={coachClubLogo.photoPicker}
             >
-                <Text style={coachClubLogo.photoBtnTitle}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadClubLogo')}</Text>
+                <Text style={coachClubLogo.photoBtnTitle}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadClubLogo'), this.props.clubName)}</Text>
             </TouchableHighlight> :
             <View style={coachClubLogo.newPhoto}>
                 <Image source={this.state.avatarSource} style={coachClubLogo.pickedPhoto}/>
                 <TouchableHighlight 
-                    onPress={() => this.test(options)}
+                    onPress={() => this.chooseImage(options)}
                     >
-                    <Text style={coachClubLogo.photoBtnTitle}>{this.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadDiffrentLogo')}</Text>
+            
+                    <Text style={coachClubLogo.photoBtnTitle}>{this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadDiffrentLogo')}</Text>
                 </TouchableHighlight>
             </View>
         }
@@ -127,14 +133,14 @@ componentWillUnmount(){
                 style={coachClubLogo.nextBtn}
                 onPress={this.onSubmit}
                 >
-                <Text style={coachClubLogo.nextBtnText}> {this.translateMethod('translation.common.next')}</Text>
+                <Text style={coachClubLogo.nextBtnText}> {this.state.translateMethod('translation.common.next')}</Text>
             </TouchableHighlight> :
 
             <TouchableHighlight 
                 style={coachClubLogo.skipBtn}
                 onPress={this.onSubmit}
                 >
-                <Text style={coachClubLogo.skipBtnText}> {this.translateMethod('translation.common.skip')}</Text>
+                <Text style={coachClubLogo.skipBtnText}> {this.state.translateMethod('translation.common.skip')}</Text>
             </TouchableHighlight> }
         </View>
       </View>
@@ -142,10 +148,12 @@ componentWillUnmount(){
   }
 }
 
-const mapStateToProps = (state: any) => ({});
+const mapStateToProps = (state: any) => ({
+  clubName: state.CreateGroupReducer.clubData.clubName
+});
 
 const mapDispatchToProps = (dispatch: any) => ({
-    nextStepNumber: (step: number) => dispatch(actions.changeStep(step))
+    nextStepNumber: (stepData: {avatarSource: string}) => dispatch(actions.changeStep(stepData))
 });
 
 export default connect(

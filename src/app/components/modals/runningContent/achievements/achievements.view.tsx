@@ -4,6 +4,7 @@ import * as actions from '../../../../redux/actions/modal.actions';
 import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
 import achievements from './achievements.style';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TranslateService from '../../../../services/translation.service';
 
 interface State {
     activeInputNumber: number,
@@ -19,13 +20,24 @@ interface Props {
 }
 
 class AchievementsView extends Component<Props, State> {
-
-    constructor(props: Props) {
+    public languageSubscription: any;
+    public translateMethod: any;
+    constructor(props: Props, public translationService: TranslateService) {
         super(props);
         this.state = {
             activeInputNumber: 0,
             achievementsValue: ''
         }
+
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+          this.forceUpdate();
+          this.translateMethod = res
+        });
+    }
+
+    componentWillUnmount() {
+        this.languageSubscription.unsubscribe();
     }
 
     public setModalVisible = () => {
@@ -65,7 +77,7 @@ class AchievementsView extends Component<Props, State> {
                         achievements
                     </Text>
                     <Text style={achievements.subtitle}>
-                        What was the last race you took part in?
+                        {this.translateMethod('translation.exposeIDE.views.userSetSports.runningAchievments')}
                     </Text>
                     <View>
                         <TouchableWithoutFeedback onPress={() => this.changeModal('5 Km')}>

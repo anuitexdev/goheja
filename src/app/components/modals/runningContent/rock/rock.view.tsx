@@ -6,6 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import rock from './rock.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ModalReducer from '../../../../redux/reducers/modal.reducer';
+import TranslateService from '../../../../services/translation.service';
 
 interface State {
     activeInputNumber: number,
@@ -28,8 +29,10 @@ class RockView extends Component<Props, State> {
     private inputHundreds: any;
     private inputDozens: any;
     private inputUnits: any;
+    public languageSubscription: any;
+    public translateMethod: any;
 
-    constructor(props: Props) {
+    constructor(props: Props, public translationService: TranslateService) {
         super(props);
         this.state = {
             activeInputNumber: 0,
@@ -38,8 +41,16 @@ class RockView extends Component<Props, State> {
             units: '0',
             rockValue: 0,
         }
-
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+          this.forceUpdate();
+          this.translateMethod = res
+        });
     }
+    
+      componentWillUnmount() {
+          this.languageSubscription.unsubscribe();
+      }
 
     public setModalVisible = () => {
         this.props.modalOpen();
@@ -86,15 +97,15 @@ class RockView extends Component<Props, State> {
                         <View style={rock.modalPage}>
                             <TouchableWithoutFeedback onPress={this.hideModal}>
                                 <Text style={rock.backBtn}>
-                                    Back
+                                {this.translateMethod('translation.common.back')}
                             </Text>
                             </TouchableWithoutFeedback>
                             <Text style={rock.title}>
                                 {this.props.state.runningData.awesome}{"\n"}
-                                You Rock!
+                                {this.translateMethod('translation.common.youRock')}
                         </Text>
                             <Text style={rock.subtitle}>
-                                What was your Avg. Heart Rate during that ½ Marathon?
+                            {this.translateMethod('translation.exposeIDE.views.userSetSports.whatWastheAvgHeartRateDyringThathalfMarathon')}
                         </Text>
 
                             <View style={rock.fullComponent}>
@@ -137,14 +148,14 @@ class RockView extends Component<Props, State> {
                                     marginTop: 13,
                                 }}
                             >
-                              bpm
+                            {this.translateMethod('translation.common.bpm')}
                             </Text>
                             </View>
 
                             <View style={rock.footerBtns}>
                                 <TouchableWithoutFeedback  onPress={this.changeModal}>
                                     <Text style={rock.skipBtn}>
-                                        Skip >
+                                    {this.translateMethod('translation.common.skip')} >
                                 </Text>
                                 </TouchableWithoutFeedback>
                                 {
@@ -159,7 +170,7 @@ class RockView extends Component<Props, State> {
                                     <TouchableWithoutFeedback onPress={this.hideModal}>
                                         <View style={rock.nextBtn}>
                                             <Text style={rock.nextBtnText}>
-                                                Next
+                                            {this.translateMethod('translation.common.next')}
                                             </Text>
                                         </View>
                                     </TouchableWithoutFeedback>

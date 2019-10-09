@@ -6,6 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import awsome from './awsome.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
+import TranslateService from '../../../../services/translation.service';
 interface State {
   activeInputNumber: number;
   unitsOfHours: string;
@@ -33,8 +34,10 @@ class AwsomeView extends Component<Props, State> {
   private inputUnitsOfMinutes: any;
   private inputDozentsOfSeconds: any;
   private inputUnitsOfSeconds: any;
+  public languageSubscription: any;
+  public translateMethod: any;
 
-  constructor(props: Props) {
+  constructor(props: Props, public translationService: TranslateService) {
     super(props);
     this.state = {
       activeInputNumber: 0,
@@ -46,8 +49,16 @@ class AwsomeView extends Component<Props, State> {
       dozentsOfMinutes: '0',
       awesomeValue: ''
     };
-  }
+    this.translationService = new TranslateService();
+    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+      this.forceUpdate();
+      this.translateMethod = res
+    });
+}
 
+  componentWillUnmount() {
+      this.languageSubscription.unsubscribe();
+  }
   public setModalVisible = () => {
     this.props.modalOpen();
   };
@@ -97,14 +108,15 @@ class AwsomeView extends Component<Props, State> {
         </TouchableWithoutFeedback>
         <View style={awsome.modalPage}>
           <TouchableWithoutFeedback onPress={this.hideModal}>
-            <Text style={awsome.backBtn}>Back</Text>
+            <Text style={awsome.backBtn}> {this.translateMethod('translation.common.back')}</Text>
           </TouchableWithoutFeedback>
           <Text style={awsome.title}>
-            WOW!{'\n'}
-            That’s awsome!
+            {this.translateMethod('translation.common.wow')}!{'\n'}
+            {this.translateMethod('translation.common.thatIsAwsome')}
           </Text>
           <Text style={awsome.subtitle}>
-            How long did the {this.props.state.runningData.achievements} took you?
+           
+            {this.translateMethod('translation.exposeIDE.views.userSetSports.howLongDidtheHalfMarathonTookYou')}
             </Text>
 
             <View style={awsome.fullComponent}>
@@ -191,7 +203,7 @@ class AwsomeView extends Component<Props, State> {
                         marginTop: 13,
                         marginRight: 24,
                         }}>
-                        Min
+                        {this.translateMethod('translation.common.min')}
                     </Text>
                 </View>
                 <View style={awsome.colonWrapper}>
@@ -235,26 +247,26 @@ class AwsomeView extends Component<Props, State> {
                         marginTop: 13,
                         marginRight: 24,
                         }}>
-                        Sec
+                        {this.translateMethod('translation.common.sec')}
                     </Text>
             </View>
           </View>
 
           <View style={awsome.footerBtns}>
             <TouchableWithoutFeedback  onPress={this.changeModal}>
-              <Text style={awsome.skipBtn}>Skip ></Text>
+              <Text style={awsome.skipBtn}> {this.translateMethod('translation.common.skip')} ></Text>
             </TouchableWithoutFeedback>
             {
               this.state.awesomeValue === '' ?
               (<TouchableWithoutFeedback onPress={this.changeModal}>
                 <View style={awsome.nextBtn}>
-                  <Text style={awsome.nextBtnText}>I don't know</Text>
+                  <Text style={awsome.nextBtnText}>{this.translateMethod('translation.common.iDontKnow')}</Text>
                 </View>
               </TouchableWithoutFeedback>)
               :
               (<TouchableWithoutFeedback onPress={this.changeModal}>
                 <View style={awsome.nextBtn}>
-                  <Text style={awsome.nextBtnText}>Next</Text>
+                  <Text style={awsome.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
                 </View>
               </TouchableWithoutFeedback>)}
           </View>

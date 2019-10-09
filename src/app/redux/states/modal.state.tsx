@@ -5,6 +5,7 @@ let ModalDefaultState = {
     cyclingModalNumber: 1,
     swimmingModalNumber: 1,
     selectedSport: '',
+    sportConfigDone: false,
     cyclingData: {
         ftp: 0,
         threshold: 0,

@@ -16,15 +16,11 @@ import { Provider } from "react-redux";
 import Navigation from "./navigation/app.routing";
 import reducers from './redux/reducers';
 
-// import * as actions from './redux/actions/auth.actions';
-
 let store = createStore(reducers, applyMiddleware(thunk));
 
 export default class App extends Component {
   constructor(props: any) {
     super(props);
- 
-    // store.dispatch(actions.getAllLanguages())
   }
 
   render() {

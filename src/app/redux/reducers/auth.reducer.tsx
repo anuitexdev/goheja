@@ -82,6 +82,24 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
                 languagesList: action.payload,
             }
         }
+        case "ADD_EMAIL_RESET_DATA": {           
+            return {
+                ...state,
+                resetPasswordData:{
+                    ...state.resetPasswordData,
+                    email: action.email,
+                }
+            }
+        }
+        case "RESET_PASSWORD": {           
+            return {
+                ...state,
+                resetPasswordData:{
+                    ...state.resetPasswordData,
+                    status: action.status,
+                }
+            }
+        }
         default: return { ...state };
     }
 }

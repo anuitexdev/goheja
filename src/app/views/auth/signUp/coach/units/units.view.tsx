@@ -11,29 +11,32 @@ interface Props {
 }
 
 interface State {
-    isActive: boolean,
     unitError: boolean,
-    units: string
+    units: string,
+    activeUnit: string,
+    translateMethod: (str: string) => string,
 }
 
 class UnitsCoachScreen extends Component<Props, State> {
 
-    private translateMethod: any;
     private languageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
         this.state = {
-            isActive: false,
             unitError: false,
-            units: ''
+            units: '',
+            activeUnit: 'mi',
+            translateMethod: (str: string) => '',
         }
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res});   
+            this.setState({
+                translateMethod: res,
+            })
+        });
     }
 
     componentWillUnmount = () => {
@@ -50,16 +53,16 @@ class UnitsCoachScreen extends Component<Props, State> {
 
     public changeBtn = async (value: string) => {
         const unitError = this.unitValidation(value);
-       await this.setState({
-            isActive: !this.state.isActive,
+        await this.setState({
+            activeUnit: value,
             unitError: unitError,
             units: value
-        });        
+        });
         return value;
     }
 
     private onSubmit = () => {
-        this.props.changeCoachStep({units: this.state.units});
+        this.props.changeCoachStep({ units: this.state.units });
     }
 
     render() {
@@ -71,22 +74,22 @@ class UnitsCoachScreen extends Component<Props, State> {
                     <View style={styles.container}>
                         <Text style={styles.pageHeader}>Tell us about your units</Text>
                         <View>
-                        <View style={styles.btnContainer}>
+                            <View style={styles.btnContainer}>
 
-                        <TouchableOpacity style={!this.state.isActive ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('mi')}>
-                            <Text style={!this.state.isActive ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
-                            <Text style={!this.state.isActive ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> mi</Text>
-                        </TouchableOpacity>
-        
-                        <TouchableOpacity style={this.state.isActive ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('km')}>
-                            <Text style={this.state.isActive ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
-                            <Text style={this.state.isActive ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> km</Text>
-                        </TouchableOpacity>
-                    </View>
+                                <TouchableOpacity style={this.state.activeUnit !== 'mi' ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('mi')}>
+                                    <Text style={this.state.activeUnit !== 'mi' ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.state.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
+                                    <Text style={this.state.activeUnit !== 'mi' ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> mi</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity style={this.state.activeUnit === 'mi' ? styles.unitBtn : styles.activeUnitBtn} onPress={() => this.changeBtn('km')}>
+                                    <Text style={this.state.activeUnit === 'mi' ? styles.unitBtnTopText : styles.activeUnitBtnTopText}>{this.state.translateMethod('translation.exposeIDE.views.regestration.iUse')}</Text>
+                                    <Text style={this.state.activeUnit === 'mi' ? styles.unitBtnBottomText : styles.activeUnitBtnBottomText}> km</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <View style={styles.nextBtnWrapper}>
                             <TouchableOpacity style={this.state.unitError ? styles.nextBtn : styles.nextBtnDisabled} disabled={!this.state.unitError} onPress={this.onSubmit}>
-                                <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
+                                <Text style={styles.nextBtnText}>{this.state.translateMethod('translation.common.next')}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

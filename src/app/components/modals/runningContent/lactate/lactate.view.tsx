@@ -5,6 +5,7 @@ import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import sport from './lactate.style';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TranslateService from '../../../../services/translation.service';
 
 interface State {
     activeInputNumber: number,
@@ -24,7 +25,10 @@ class LactateView extends Component<Props, State> {
     private inputHundreds: any;
     private inputDozens: any;
     private inputUnits: any;
-    constructor(props: Props) {
+    public languageSubscription: any;
+    public translateMethod: any;
+
+    constructor(props: Props, public translationService: TranslateService) {
         super(props);
         this.state = {
             activeInputNumber: 0,
@@ -33,7 +37,16 @@ class LactateView extends Component<Props, State> {
             units: '0',
             lactateValue: 0,
         }
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+          this.forceUpdate();
+          this.translateMethod = res
+        });
     }
+    
+      componentWillUnmount() {
+          this.languageSubscription.unsubscribe();
+      }
 
     public setModalVisible = () => {
         this.props.modalOpen();
@@ -81,14 +94,14 @@ class LactateView extends Component<Props, State> {
                 <View style={sport.modalPage}>
                     <TouchableWithoutFeedback onPress={this.hideModal}>
                         <Text style={sport.backBtn}>
-                            Back
+                            {this.translateMethod('translation.common.back')}
                             </Text>
                     </TouchableWithoutFeedback>
                     <Text style={sport.title}>
-                        Running Lactate Threshold
+                    {this.translateMethod('translation.exposeIDE.views.userSetSports.runningLacatetThreshold')}
                         </Text>
                     <Text style={sport.subtitle}>
-                        What’s your Runing Lactate Threshold
+                    {this.translateMethod('translation.exposeIDE.views.userSetSports.whatsYourRunningThresholdPace')}
                         </Text>
 
                     <View style={sport.fullComponent}>
@@ -130,7 +143,7 @@ class LactateView extends Component<Props, State> {
                                 color: '#99a8af',
                                 marginTop: 13
                             }}>
-                            bpm
+                            {this.translateMethod('translation.common.bpm')}
                         </Text>
                     </View>
 
@@ -138,7 +151,7 @@ class LactateView extends Component<Props, State> {
                     <View style={sport.footerBtns}>
                         <TouchableWithoutFeedback onPress={this.changeModal}>
                             <Text style={sport.skipBtn}>
-                                Skip >
+                            {this.translateMethod('translation.common.skip')} >
                                 </Text>
                         </TouchableWithoutFeedback >
                         {this.state.lactateValue === 0 ?
@@ -146,14 +159,14 @@ class LactateView extends Component<Props, State> {
                             <TouchableWithoutFeedback onPress={this.changeModal}>
                                 <View style={sport.nextBtn}>
                                     <Text style={sport.nextBtnText}>
-                                        I don't know
+                                    {this.translateMethod('translation.common.iDontKnow')}
                             </Text>
                                 </View>
                             </TouchableWithoutFeedback> :
                             <TouchableWithoutFeedback onPress={this.changeModal}>
                                 <View style={sport.nextBtn}>
                                     <Text style={sport.nextBtnText}>
-                                        Next
+                                    {this.translateMethod('translation.common.next')}
                                     </Text>
                                 </View>
                             </TouchableWithoutFeedback>}

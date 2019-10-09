@@ -38,11 +38,11 @@ interface State {
     toggleDatePicker: boolean;
     valueOfDatePicker: string;
     currentLanguage: string;
+    translateMethod: (str: string) => string,
 }
 
 class YourSelfCoachScreen extends Component<Props, State> {
     private currentDate = new Date();
-    private translateMethod: any;
     private languageSubscription: any;
     private getCurrentLanguageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
@@ -61,14 +61,16 @@ class YourSelfCoachScreen extends Component<Props, State> {
             toggleDatePicker: false,
             valueOfDatePicker: '',
             currentLanguage: '',
+            translateMethod: (str: string) => '',
         };
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res
+            this.setState({
+                translateMethod: res,
+            })
         });
 
 
@@ -136,10 +138,10 @@ class YourSelfCoachScreen extends Component<Props, State> {
 
     private setSelectedOption = (value: string) => {
         let genderValue = 0;
-        if (value === this.translateMethod('translation.exposeIDE.views.regestration.male')) {
+        if (value === this.state.translateMethod('translation.exposeIDE.views.regestration.male')) {
             genderValue = 1;
         }
-        if (value === this.translateMethod('translation.exposeIDE.views.regestration.female')) {
+        if (value === this.state.translateMethod('translation.exposeIDE.views.regestration.female')) {
             genderValue = 2;
         }
         if (value === 'Neither') {
@@ -175,15 +177,15 @@ class YourSelfCoachScreen extends Component<Props, State> {
 
     render() {
         const options = [
-            this.translateMethod('translation.exposeIDE.views.regestration.male'),
-            this.translateMethod('translation.exposeIDE.views.regestration.female'),
+            this.state.translateMethod('translation.exposeIDE.views.regestration.male'),
+            this.state.translateMethod('translation.exposeIDE.views.regestration.female'),
             'Neither'
         ];
         return (
             <Fragment>
                 <ScrollView>
                     <View style={styles.container}>
-                        <Text style={styles.pageHeader}>{this.translateMethod('translation.exposeIDE.views.regestration.tellUsAboutYourself')}</Text>
+                        <Text style={styles.pageHeader}>{this.state.translateMethod('translation.exposeIDE.views.regestration.tellUsAboutYourself')}</Text>
 
                         <View>
                             <View>
@@ -192,7 +194,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                     onPress={this.showDatePicker}
                                     style={styles.datePicker}>
                                     <TextInput
-                                        placeholder={this.translateMethod('translation.exposeIDE.views.regestration.bithDatePlaceHolder')}
+                                        placeholder={this.state.translateMethod('translation.exposeIDE.views.regestration.bithDatePlaceHolder')}
                                         style={
                                             !this.state.birthDateError
                                                 ? this.state.currentLanguage !== 'Hebrew' ?
@@ -225,7 +227,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                             </View>
                             <View style={styles.genderField}>
                                 <View style={styles.genderTitleContainer}>
-                                    <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.gender')}</Text>
+                                    <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.regestration.gender')}</Text>
                                     <TouchableOpacity
                                         style={styles.genderCheckBoxField}
                                         onPress={() => this.setSelectedOption('Undefined')}>
@@ -256,9 +258,9 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                         separatorTint={this.state.genderError ? 'red' : '#cfd8dc'}
                                         selectedOption={
                                             this.state.gender === 1
-                                                ? this.translateMethod('translation.exposeIDE.views.regestration.male')
+                                                ? this.state.translateMethod('translation.exposeIDE.views.regestration.male')
                                                 : this.state.gender === 2
-                                                    ? this.translateMethod('translation.exposeIDE.views.regestration.female')
+                                                    ? this.state.translateMethod('translation.exposeIDE.views.regestration.female')
                                                     : this.state.gender === 3
                                                         ? 'Neither'
                                                         : null
@@ -292,8 +294,8 @@ class YourSelfCoachScreen extends Component<Props, State> {
 
                             <View style={styles.personalFormControl}>
                                 <View style={styles.labelContainer}>
-                                    <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.height')}</Text>
-                                    <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
+                                    <Text style={styles.labelText}>{this.state.translateMethod('translation.exposeIDE.views.regestration.height')}</Text>
+                                    <Text style={styles.prompt}>({this.state.translateMethod('translation.common.optional')})</Text>
                                 </View>
                                 <View style={styles.formControl}>
                                     <TextInput
@@ -308,8 +310,8 @@ class YourSelfCoachScreen extends Component<Props, State> {
 
                             <View style={styles.personalFormControl}>
                                 <View style={styles.labelContainer}>
-                                    <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.weight')}</Text>
-                                    <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
+                                    <Text style={styles.labelText}>{this.state.translateMethod('translation.exposeIDE.views.regestration.weight')}</Text>
+                                    <Text style={styles.prompt}>({this.state.translateMethod('translation.common.optional')})</Text>
                                 </View>
                                 <View style={styles.formControl}>
                                     <TextInput
@@ -324,8 +326,8 @@ class YourSelfCoachScreen extends Component<Props, State> {
 
                             <View style={styles.personalFormControl}>
                                 <View style={styles.labelContainer}>
-                                    <Text style={styles.labelText}>{this.translateMethod('translation.exposeIDE.views.regestration.BofyFatPercentage')} %</Text>
-                                    <Text style={styles.prompt}>({this.translateMethod('translation.common.optional')})</Text>
+                                    <Text style={styles.labelText}>{this.state.translateMethod('translation.exposeIDE.views.regestration.BofyFatPercentage')} %</Text>
+                                    <Text style={styles.prompt}>({this.state.translateMethod('translation.common.optional')})</Text>
                                 </View>
                                 <View style={styles.formControl}>
                                     <TextInput
@@ -342,7 +344,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                 <TouchableOpacity
                                     style={styles.nextBtn}
                                     onPress={this.onSubmit}>
-                                    <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
+                                    <Text style={styles.nextBtnText}>{this.state.translateMethod('translation.common.next')}</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

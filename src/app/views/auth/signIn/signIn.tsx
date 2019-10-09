@@ -23,7 +23,7 @@ interface State {
     emailError: boolean,
     passwordError: boolean,
     currentLanguage: string,
-
+    translateMethod: (str: string) => string;
 }
 
 interface ValidationObject {
@@ -40,7 +40,6 @@ interface Props {
 
 class SignInScreen extends Component<Props, State> {
 
-private translateMethod: any;
 private languageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
@@ -51,6 +50,7 @@ private languageSubscription: any;
             emailError: false,
             passwordError: false,
             currentLanguage: '',
+            translateMethod: (str: string) => '',
         }
        
     }
@@ -64,8 +64,10 @@ private languageSubscription: any;
             });
         
         this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res});   
+            this.setState({
+                translateMethod: res,
+            })
+        });   
     }
 
     componentWillUnmount(){
@@ -127,20 +129,20 @@ private languageSubscription: any;
             <ScrollView>
                 <Header />
                 <View style={styles.container}>
-                    <Text style={styles.screenTitle}>{this.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
+                    <Text style={styles.screenTitle}>{this.state.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>{this.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
+                        <Text style={styles.label}>{this.state.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
                         <TextInput
-                            placeholder={this.translateMethod('translation.common.EmailPlaceHolder')}
+                            placeholder={this.state.translateMethod('translation.common.EmailPlaceHolder')}
                             style={!this.state.emailError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                             onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
+                        <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                         <TextInput
-                            placeholder={this.translateMethod('translation.common.PasswordPlaceHolder')}
+                            placeholder={this.state.translateMethod('translation.common.PasswordPlaceHolder')}
                             secureTextEntry={this.state.showPassword}
                             onChangeText={(password) => this.handleChange({ password, email: this.state.email, type: 'password' })}
                             style={!this.state.passwordError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
@@ -157,22 +159,22 @@ private languageSubscription: any;
                         this.state.emailError || this.state.passwordError ?
                             <View style={styles.signInErrors}>
                                 <Text style={styles.textErrors}>
-                                  {this.translateMethod('translation.exposeIDE.views.Login.messages.error')}
+                                  {this.state.translateMethod('translation.exposeIDE.views.Login.messages.error')}
                         </Text>
                             </View> : null
                     }
                     <View style={styles.links}>
-                        <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>{this.translateMethod('translation.exposeIDE.views.Login.ForgotPasswordLink')}</Text>
+                        <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>{this.state.translateMethod('translation.exposeIDE.views.Login.ForgotPasswordLink')}</Text>
                         <TouchableOpacity
                             style={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn}
                             onPress={this.onSubmit}
                             disabled={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === ''}>
-                            <Text style={styles.signInText}>{this.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
+                            <Text style={styles.signInText}>{this.state.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.signUpRedirect}>
-                        <Text style={styles.haveAccount}>{this.translateMethod('translation.exposeIDE.views.Login.Text')}</Text>
-                        <Text style={styles.signUpLink} onPress={this.signUpRedirect}>{this.translateMethod('translation.exposeIDE.views.Login.signUpLink')}</Text>
+                        <Text style={styles.haveAccount}>{this.state.translateMethod('translation.exposeIDE.views.Login.Text')}</Text>
+                        <Text style={styles.signUpLink} onPress={this.signUpRedirect}>{this.state.translateMethod('translation.exposeIDE.views.Login.signUpLink')}</Text>
                     </View>
                     <View style={styles.fbContainer}>
                     <FbLogin />

@@ -23,10 +23,10 @@ interface State {
     birthDateError: boolean,
     genderError: boolean,
     currentLanguage: string,
+    translateMethod: (str: string) => string,
 }
 
 class YourSelfAthleteScreen extends Component<Props, State> {
-    private translateMethod: any;
     private languageSubscription: any;
     private getCurrentLanguageSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
@@ -40,14 +40,16 @@ class YourSelfAthleteScreen extends Component<Props, State> {
             genderError: false,
             dob: new Date(),
             currentLanguage: '',
+            translateMethod: (str: string) => '',
         }
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
         this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-            this.forceUpdate();
-            this.translateMethod = res
+            this.setState({
+                translateMethod: res,
+            })
         });
 
         this.getCurrentLanguageSubscription = this.translationService.getCurrentLanguage().subscribe(res => {
@@ -113,10 +115,10 @@ class YourSelfAthleteScreen extends Component<Props, State> {
 
     private setSelectedOption = (value: string) => {
         let genderValue = 0;
-        if (value === this.translateMethod('translation.exposeIDE.views.regestration.male')) {
+        if (value === this.state.translateMethod('translation.exposeIDE.views.regestration.male')) {
             genderValue = 1;
         }
-        if (value === this.translateMethod('translation.exposeIDE.views.regestration.female')) {
+        if (value === this.state.translateMethod('translation.exposeIDE.views.regestration.female')) {
             genderValue = 2;
         }
         if (value === 'Neither') {
@@ -132,8 +134,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
 
     render() {
         const options = [
-            this.translateMethod('translation.exposeIDE.views.regestration.male'),
-            this.translateMethod('translation.exposeIDE.views.regestration.female'),
+            this.state.translateMethod('translation.exposeIDE.views.regestration.male'),
+            this.state.translateMethod('translation.exposeIDE.views.regestration.female'),
             "Neither"
         ];
         return (
@@ -141,7 +143,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                 <ScrollView>
 
                     <View style={styles.container}>
-                        <Text style={styles.pageHeader}>{this.translateMethod('translation.exposeIDE.views.regestration.tellUsAboutYourself')}</Text>
+                        <Text style={styles.pageHeader}>{this.state.translateMethod('translation.exposeIDE.views.regestration.tellUsAboutYourself')}</Text>
 
 
                         <View>
@@ -149,7 +151,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                 <Text style={styles.label}>Birth Day</Text>
                                 <TouchableOpacity onPress={this.showDateTimePicker} style={styles.datePicker}>
                                     <TextInput
-                                        placeholder={this.translateMethod('translation.exposeIDE.views.regestration.bithDatePlaceHolder')}
+                                        placeholder={this.state.translateMethod('translation.exposeIDE.views.regestration.bithDatePlaceHolder')}
                                         style={!this.state.birthDateError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
                                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
                                         editable={false}
@@ -170,7 +172,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                 />
                             </View>
                             <View style={styles.genderField}>
-                                <Text style={styles.label}>{this.translateMethod('translation.exposeIDE.views.regestration.gender')}</Text>
+                                <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.regestration.gender')}</Text>
                                 <View >
                                     <SegmentedControls
                                         options={options}
@@ -181,9 +183,9 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         onSelection={this.setSelectedOption}
                                         containerBorderTint={this.state.genderError ? 'red' : '#cfd8dc'}
                                         separatorTint={'#cfd8dc'}
-                                        selectedOption={this.state.gender === 1 ? this.translateMethod('translation.exposeIDE.views.regestration.male') :
-                                            this.state.gender === 2 ? this.translateMethod('translation.exposeIDE.views.regestration.female') : this.state.gender === 3 ? 'Neither' :
-                                                this.translateMethod('translation.exposeIDE.views.regestration.male')}
+                                        selectedOption={this.state.gender === 1 ? this.state.translateMethod('translation.exposeIDE.views.regestration.male') :
+                                            this.state.gender === 2 ? this.state.translateMethod('translation.exposeIDE.views.regestration.female') : this.state.gender === 3 ? 'Neither' :
+                                                this.state.translateMethod('translation.exposeIDE.views.regestration.male')}
                                         optionStyle={{
                                             paddingBottom: 12,
                                             paddingTop: 12,
@@ -201,7 +203,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                 style={!this.state.birthDateError && !this.state.genderError ? styles.nextBtn : styles.nextBtnDisabled}
                                 onPress={() => this.onSubmit()}
                             >
-                                <Text style={styles.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
+                                <Text style={styles.nextBtnText}>{this.state.translateMethod('translation.common.next')}</Text>
                             </TouchableOpacity>
                         </View>
 

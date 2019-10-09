@@ -12,7 +12,6 @@ import Wizard from '../../../../components/wizard/wizard.view';
 import ConnectTeamView from "./connectTeam/connectTeam.view";
 
 interface Props {
-    // navigation: NavigationScreenProp<NavigationState, NavigationParams>,
     currentStep: number,
 }
 

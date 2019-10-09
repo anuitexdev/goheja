@@ -5,6 +5,7 @@ import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import cyclingStyles from './speed.style';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TranslateService from '../../../../services/translation.service';
 
 interface State {
     activeInputNumber: number,
@@ -12,6 +13,7 @@ interface State {
     dozens: string,
     units: string,
     speedValue: number;
+    translateMethod: (str: string) => string;
 }
 
 interface Props {
@@ -25,8 +27,8 @@ class SpeedView extends Component<Props, State> {
     private inputHundreds: any;
     private inputDozens: any;
     private inputUnits: any;
-
-    constructor(props: Props) {
+    private languageSubscription: any
+    constructor(props: Props, private translationService: TranslateService) {
         super(props);
         this.state = {
             activeInputNumber: 0,
@@ -34,9 +36,21 @@ class SpeedView extends Component<Props, State> {
             dozens: '0',
             units: '0',
             speedValue: 0,
+            translateMethod: (str: string) => '',
         }
     }
+    componentWillMount = () => {
+        this.translationService = new TranslateService();
+        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+            this.setState({
+                translateMethod: res,
+            })
+        });
+    }
 
+    componentWillUnmount = () => {
+        this.languageSubscription.unsubscribe();
+    }
     public setModalVisible = () => {
         this.props.modalOpen();
     }
@@ -90,15 +104,13 @@ class SpeedView extends Component<Props, State> {
                 <View style={cyclingStyles.modalPage}>
                     <TouchableWithoutFeedback onPress={this.hideModal}>
                         <Text style={cyclingStyles.backBtn}>
-                            Back
+                        {this.state.translateMethod('translation.common.back')}
                         </Text>
                     </TouchableWithoutFeedback>
                     <Text style={cyclingStyles.title}>
-                        What’s your 1h Flat
+                    {this.state.translateMethod('translation.exposeIDE.views.userSetSports.whatWastheAvgHeartRateDyringThathalfMarathon')}
                     </Text>
-                    <Text style={cyclingStyles.subtitle}>
-                        Ride Max Speed?
-                    </Text>
+                  
 
                     <View style={cyclingStyles.fullComponent}>
                         <View style={{ flexDirection: 'row' }}>
@@ -151,7 +163,7 @@ class SpeedView extends Component<Props, State> {
                             onPress={this.changeModal}
                         >
                             <Text style={cyclingStyles.skipBtn}>
-                                Skip >
+                            {this.state.translateMethod('translation.common.skip')}  >
                             </Text>
                         </TouchableWithoutFeedback>
 
@@ -159,14 +171,14 @@ class SpeedView extends Component<Props, State> {
                             <TouchableWithoutFeedback onPress={this.changeModal}>
                                 <View style={cyclingStyles.nextBtn}>
                                     <Text style={cyclingStyles.nextBtnText}>
-                                        I don't know
+                                    {this.state.translateMethod('translation.common.iDontKnow')} 
                                 </Text>
                                 </View>
                             </TouchableWithoutFeedback> :
                             <TouchableWithoutFeedback onPress={this.changeModal}>
                                 <View style={cyclingStyles.nextBtn}>
                                     <Text style={cyclingStyles.nextBtnText}>
-                                        Next
+                                    {this.state.translateMethod('translation.common.next')}
                                 </Text>
                                 </View>
                             </TouchableWithoutFeedback>}
