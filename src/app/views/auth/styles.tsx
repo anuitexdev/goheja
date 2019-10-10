@@ -73,7 +73,7 @@ export default StyleSheet.create({
         paddingLeft: 15,
         paddingVertical: 0,
         height: 50,
-        zIndex: 7777
+        // zIndex: 7777
     },
     hebInput: {
         borderRadius: 2,

@@ -57,7 +57,8 @@ class Header extends Component<Props, State, BaseTranslateService> {
       languages.push(
         <TouchableOpacity
           key={key}
-          onPress={() => this.changeLanguage(this.props.languagesList[key], key)}>
+          onPress={() => this.changeLanguage(this.props.languagesList[key], key)}
+          style={{zIndex: 9999}}>
           <View style={header.languageItemWrapper}  >
             <View style={this.state.language === this.props.languagesList[key] ? header.languageItemActive : header.languageItem}>
               <Text>{this.props.languagesList[key]}</Text>
@@ -89,7 +90,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
           }}>
           Go Heja
         </Text>
-        <View style={{ position: 'relative', zIndex: 9998 }}>
+        <View style={{ position: 'relative'}}>
           <TouchableOpacity
             style={{ flexDirection: 'row', alignItems: 'center' }}
             onPress={() => this.toggleDropDown()}

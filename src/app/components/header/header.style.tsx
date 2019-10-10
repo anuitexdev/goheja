@@ -40,6 +40,7 @@ export default StyleSheet.create({
         paddingRight: 15,
         paddingTop: 10,
         paddingBottom: 10,
+        zIndex: 9999
     },
     languageItemActive: {
         backgroundColor: '#EBEFF2',
