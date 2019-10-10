@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View, TextInput, Alert } from 'react-native';
+import { Text, View, TextInput, Alert, SafeAreaView } from 'react-native';
 import React from "react";
 import styles from '../styles';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
@@ -41,6 +41,7 @@ interface Props {
 class SignInScreen extends Component<Props, State> {
 
 private languageSubscription: any;
+private translationSubscription: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
         this.state = {
@@ -63,7 +64,7 @@ private languageSubscription: any;
              })
             });
         
-        this.translationService.getTranslateMethod().subscribe(res => {
+       this.translationSubscription = this.translationService.getTranslateMethod().subscribe(res => {
             this.setState({
                 translateMethod: res,
             })
@@ -72,6 +73,7 @@ private languageSubscription: any;
 
     componentWillUnmount(){
         this.languageSubscription.unsubscribe();
+        this.translationSubscription.unsubscribe();
     }
 
     private onSubmit = async () => {
@@ -127,6 +129,7 @@ private languageSubscription: any;
      
         return (
             <ScrollView>
+                <SafeAreaView style={{flex:1}}>
                 <Header />
                 <View style={styles.container}>
                     <Text style={styles.screenTitle}>{this.state.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
@@ -181,6 +184,7 @@ private languageSubscription: any;
                     </View>
 
                 </View>
+                </SafeAreaView>
             </ScrollView>
         )
     }

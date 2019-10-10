@@ -1,7 +1,7 @@
 import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, SafeAreaView } from 'react-native';
 
 import BasicInfoAthleteScreen from './basicInfo/basicInfo.view';
 import YourSelfAthleteScreen from './yourself/yourselfAthlete.view';
@@ -27,12 +27,13 @@ class AthleteScreen extends Component<Props> {
         return (
             <Fragment>
                 <ScrollView>
+             
              {this.props.currentStep <5 && this.props.currentStep !== 0 ? 
                 <Wizard 
                 title="Hello World" 
                 numberOfSteps={5} 
                 currentStep={this.props.currentStep}
-                /> : null}   
+                /> : null}
             <View> 
             {
                 this.props.currentStep === 0 ? <ConnectTeamView/> :
@@ -44,6 +45,7 @@ class AthleteScreen extends Component<Props> {
                 <BasicInfoAthleteScreen/>
             }
             </View>
+             
                 </ScrollView>
             </Fragment>
         )

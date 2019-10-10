@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import * as actions from '../../../../redux/actions/modal.actions';
-import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
+import { Text, View, TouchableWithoutFeedback } from "react-native";
 import achievements from './achievements.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TranslateService from '../../../../services/translation.service';

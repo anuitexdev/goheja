@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
 import Header from '../../components/header/header';
-import SportsView from './sports/sports.view';
 import CoachFlowAfterRegView from './coachFlowAfterReg/coachFlowAfterReg.view';
+import SportsView from './sports/sports.view'
 import { connect } from 'react-redux';
 
 
@@ -34,13 +34,13 @@ class HomeScreen extends Component<Props, State> {
             <View>
                 <Header />
                 {
-                    // this.props.userType == 1 ? 
-                    // <SportsView /> 
-                    // :
-                    // this.props.userType == 0 ?
+                    this.props.userType == 1 ? 
+                    <SportsView /> 
+                    :
+                    this.props.userType == 0 ?
                     <CoachFlowAfterRegView/> 
-                    // : 
-                    // null
+                    : 
+                    null
                 }
             </View>
         );

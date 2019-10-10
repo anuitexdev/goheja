@@ -26,7 +26,7 @@ export default StyleSheet.create({
         paddingTop: 12,
         backgroundColor: '#4d5a5f',
         borderRadius: 2,
-        fontFamily: 'Roboto-Regular'
+        //fontFamily: 'Roboto-Regular'
     },
     title: {
         fontSize: 25,
@@ -39,7 +39,7 @@ export default StyleSheet.create({
         textAlign: 'center',
         marginTop: 20,
         marginBottom: 30,
-        fontFamily: 'Roboto-Regular'
+        //fontFamily: 'Roboto-Regular'
     },
     input: {
         borderRadius: 2,
@@ -51,6 +51,8 @@ export default StyleSheet.create({
         backgroundColor: 'white',
         marginBottom: 20,
         fontSize: 30,
-        fontFamily: 'Roboto-Regular'
+        // fontFamily: 'Roboto-Regular'
+        paddingVertical: 0,
+        height: 50,
     },
 })

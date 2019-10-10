@@ -23,7 +23,9 @@ export default StyleSheet.create({
         borderRadius: 2,
         borderWidth: 1,
         borderColor: '#cfd8dc',
-        paddingLeft: 15
+        paddingLeft: 15,     
+        paddingVertical: 0,
+        height: 50,
     },
     formControl: {
         position: 'relative',
@@ -79,6 +81,8 @@ export default StyleSheet.create({
         paddingLeft: 15,
         textAlign: 'right',
         paddingRight: 50,
+        paddingVertical: 0,
+        height: 50,
 
     },
 })

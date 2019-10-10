@@ -40,13 +40,17 @@ export default StyleSheet.create({
         borderRadius: 2,
         borderWidth: 1,
         borderColor: '#cfd8dc',
-        paddingLeft: 15
+        paddingLeft: 15,
+        paddingVertical: 0,
+        height: 50,
     },
     inputError: {
         borderRadius: 2,
         borderWidth: 1,
         borderColor: 'red',
-        paddingLeft: 15
+        paddingLeft: 15,
+        paddingVertical: 0,
+        height: 50,
     },
     label: {
         marginBottom: 10,
