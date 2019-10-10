@@ -79,6 +79,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
           flexDirection: 'row',
           alignItems: 'center',
           padding: 20,
+          zIndex: 9999,
         }}>
         <Text
           style={{
@@ -89,7 +90,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
           }}>
           Go Heja
         </Text>
-        <View style={{ position: 'relative', zIndex: 9998 }}>
+        <View style={{ position: 'relative' }}>
           <TouchableOpacity
             style={{ flexDirection: 'row', alignItems: 'center' }}
             onPress={() => this.toggleDropDown()}

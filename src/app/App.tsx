@@ -15,6 +15,8 @@ import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import Navigation from "./navigation/app.routing";
 import reducers from './redux/reducers';
+import SafeAreaView from 'react-native-safe-area-view';
+import Header from './components/header/header';
 
 let store = createStore(reducers, applyMiddleware(thunk));
 
@@ -27,6 +29,8 @@ export default class App extends Component {
     console.disableYellowBox = true;
   return (
     <Provider store={store}>
+      <SafeAreaView style={{backgroundColor: 'red'}}/>
+      <Header/>
       <Navigation />
     </Provider>
   )}

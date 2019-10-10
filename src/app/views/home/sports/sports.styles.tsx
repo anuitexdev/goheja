@@ -8,7 +8,8 @@ export default StyleSheet.create({
         padding: 20,
         alignItems: 'center',
         width: window.width,
-        height: window.height - 100,
+        height: window.height,
+        zIndex: -1
     },
     title: {
         color: '#272e43',

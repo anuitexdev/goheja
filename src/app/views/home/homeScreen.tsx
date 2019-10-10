@@ -1,12 +1,11 @@
 import { View } from 'react-native';
-import React, { Component } from 'react';
-import { NavigationParams, NavigationScreenProp } from 'react-navigation';
+import React, { Component, Fragment } from 'react';
+import { NavigationParams, NavigationScreenProp, SafeAreaView } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
 import Header from '../../components/header/header';
 import CoachFlowAfterRegView from './coachFlowAfterReg/coachFlowAfterReg.view';
 import SportsView from './sports/sports.view'
 import { connect } from 'react-redux';
-
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
@@ -31,18 +30,21 @@ class HomeScreen extends Component<Props, State> {
 
     render() {
         return (
-            <View>
-                <Header />
-                {
-                    this.props.userType == 1 ? 
-                    <SportsView /> 
-                    :
-                    this.props.userType == 0 ?
-                    <CoachFlowAfterRegView/> 
-                    : 
-                    null
-                }
-            </View>
+            <Fragment>
+                <View>
+                    {/* <Header/> */}
+                    {
+                        this.props.userType == 1 ? 
+                        <SportsView /> 
+                        :
+                        this.props.userType == 0 ?
+                        <CoachFlowAfterRegView/> 
+                        : 
+                        null
+                    }
+                </View>
+            </Fragment>
+            
         );
     }
 };

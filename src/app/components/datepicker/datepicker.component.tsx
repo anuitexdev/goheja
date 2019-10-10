@@ -9,6 +9,7 @@ import {
 import datePickerStyle from './datepicker.style';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
+import SafeAreaView from 'react-native-safe-area-view';
 
 interface Props {
   toggleDatePicker: boolean;
@@ -72,6 +73,7 @@ class CustomDatePicker extends Component<Props, State> {
     let customDatesStyles: [] = [];
     
     return (
+      <SafeAreaView forceInset={{top: 'always'}} style={{flex: 1}}>
       <View>
         <Modal
           animationType="fade"
@@ -112,6 +114,7 @@ class CustomDatePicker extends Component<Props, State> {
           </View>
         </Modal>
       </View>
+      </SafeAreaView>
     );
   }
 }
