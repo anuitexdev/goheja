@@ -1,12 +1,13 @@
 import { connect } from "react-redux";
 import React, { Component, Fragment } from "react";
-import { View, Text, TouchableOpacity, Alert, SafeAreaView } from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import sports from './sports.styles';
 import * as actions from '../../../redux/actions/modal.actions';
 import SportModal from '../../../components/modals/sport.modal';
 import TranslateService from '../../../services/translation.service';
 import SportConfigData from '../../../shared/models/sportConfigData.model';
 import Header from '../../../components/header/header';
+import SafeAreaView from 'react-native-safe-area-view';
 
 interface State {
     translateMethod: (str: string) => string;
@@ -85,60 +86,60 @@ class SportsView extends Component<Props, State> {
 
     render() {
         return (
-            <Fragment>
-                
-                <View style={sports.container}>
-                <Text style={sports.title}>
-                    Hi Dafni : &#x2769;
-                </Text>
-                <Text style={sports.subtitle}>
-                    {this.state.translateMethod('translation.exposeIDE.views.confirmation.text')}
-                </Text>
-                <Text style={sports.chooseCategory}>
-                    {this.state.translateMethod('translation.exposeIDE.views.userSetSports.title')}
-                </Text>
-                <View style={sports.categories}>
-                    <TouchableOpacity onPress={() => this.selectSport('Cycling')}>
+            <SafeAreaView forceInset={{bottom: 'always'}} style={{backgroundColor: 'red'}}>
+                <View>
+                    <View style={sports.container}>
+                    <Text style={sports.title}>
+                        Hi Dafni : &#x2769;
+                    </Text>
+                    <Text style={sports.subtitle}>
+                        {this.state.translateMethod('translation.exposeIDE.views.confirmation.text')}
+                    </Text>
+                    <Text style={sports.chooseCategory}>
+                        {this.state.translateMethod('translation.exposeIDE.views.userSetSports.title')}
+                    </Text>
+                    <View style={sports.categories}>
+                        <TouchableOpacity onPress={() => this.selectSport('Cycling')}>
+                            <View style={sports.category}>
+                                <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
+                                    {this.state.translateMethod('translation.common.cycling')}
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.selectSport('Swimming')}>
+                            <View style={[sports.category, { marginLeft: 20 }]}>
+                                <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
+                                    {this.state.translateMethod('translation.common.swimming')}
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity onPress={() => this.selectSport('Running')}>
                         <View style={sports.category}>
                             <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
-                                {this.state.translateMethod('translation.common.cycling')}
+                                {this.state.translateMethod('translation.common.running')}
                             </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.selectSport('Swimming')}>
-                        <View style={[sports.category, { marginLeft: 20 }]}>
-                            <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
-                                {this.state.translateMethod('translation.common.swimming')}
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
+                
+                    <SportModal />
                 </View>
-                <TouchableOpacity onPress={() => this.selectSport('Running')}>
-                    <View style={sports.category}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#272e43' }}>
-                            {this.state.translateMethod('translation.common.running')}
-                        </Text>
+                    <View style={sports.footer}>
+                        <TouchableOpacity
+                            onPress={() => Alert.alert('Will be soon')}>
+                            <Text style={sports.skipButton}>
+                                {this.state.translateMethod('translation.common.running')} >
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={this.onSubmit}>
+                            <Text style={sports.skipButton}>
+                            {this.state.translateMethod('translation.common.next')}
+                            </Text>
+                        </TouchableOpacity>
                     </View>
-                </TouchableOpacity>
-                <View style={sports.footer}>
-                    <TouchableOpacity
-                        onPress={() => Alert.alert('Will be soon')}>
-                        <Text style={sports.skipButton}>
-                            {this.state.translateMethod('translation.common.running')} >
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={this.onSubmit}>
-                        <Text style={sports.skipButton}>
-                        {this.state.translateMethod('translation.common.next')}
-                        </Text>
-                    </TouchableOpacity>
                 </View>
-                <SportModal />
-            </View>
-            </Fragment>
-            
-            
+            </SafeAreaView>
         )
     }
 }

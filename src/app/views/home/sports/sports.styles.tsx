@@ -8,8 +8,8 @@ export default StyleSheet.create({
         padding: 20,
         alignItems: 'center',
         width: window.width,
-        height: window.height,
-        zIndex: -1
+        height: window.height - 150,
+        zIndex: -1,
     },
     title: {
         color: '#272e43',
@@ -49,9 +49,9 @@ export default StyleSheet.create({
         margin: 10
     },
     footer: {
-       position: 'absolute',
-       right: 28,
-       bottom: 32
+      position: 'absolute',
+      bottom: 10,
+      right: 40
     },
     skipButton: {
         fontSize: 14,

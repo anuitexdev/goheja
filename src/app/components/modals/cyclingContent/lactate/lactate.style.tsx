@@ -5,7 +5,7 @@ export default StyleSheet.create({
     showBtn: {
         zIndex: 9999,
         position: 'absolute',
-        top:0,
+        top:30,
         left: 10,
         color: 'white'
     },
