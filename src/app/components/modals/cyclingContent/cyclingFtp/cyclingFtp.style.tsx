@@ -5,7 +5,7 @@ export default StyleSheet.create({
     showBtn: {
         zIndex: 9999,
         position: 'absolute',
-        top:0,
+        top:30,
         left: 10,
         color: 'white'
     },
@@ -59,6 +59,7 @@ export default StyleSheet.create({
     modalPage: {
         backgroundColor: 'white',
         alignItems: 'center',
+        justifyContent: 'center',
         width: window.width + 250,
         height: window.height - 60,
         zIndex: 1,
