@@ -28,23 +28,23 @@ class AthleteScreen extends Component<Props> {
             <Fragment>
                 <ScrollView>
              
-             {this.props.currentStep <5 && this.props.currentStep !== 0 ? 
-                <Wizard 
-                title="Hello World" 
-                numberOfSteps={5} 
-                currentStep={this.props.currentStep}
-                /> : null}
-            <View> 
-            {
-                this.props.currentStep === 0 ? <ConnectTeamView/> :
-                this.props.currentStep === 1 ? <BasicInfoAthleteScreen/> :
-                this.props.currentStep === 2 ? <YourSelfAthleteScreen/> :
-                this.props.currentStep === 3 ? <UnitsAthleteScreen/> :
-                this.props.currentStep === 4 ? <PersonalInfoScreen/> :
-                this.props.currentStep === 5 ? <SuccessRegisterScreen/> :
-                <BasicInfoAthleteScreen/>
-            }
-            </View>
+                    {this.props.currentStep <5 && this.props.currentStep !== 0 ? 
+                    <Wizard 
+                    title="Hello World" 
+                    numberOfSteps={5} 
+                    currentStep={this.props.currentStep}
+                    /> : null}
+                    <View> 
+                    {
+                        this.props.currentStep === 0 ? <ConnectTeamView/> :
+                        this.props.currentStep === 1 ? <BasicInfoAthleteScreen/> :
+                        this.props.currentStep === 2 ? <YourSelfAthleteScreen/> :
+                        this.props.currentStep === 3 ? <UnitsAthleteScreen/> :
+                        this.props.currentStep === 4 ? <PersonalInfoScreen/> :
+                        this.props.currentStep === 5 ? <SuccessRegisterScreen/> :
+                        <BasicInfoAthleteScreen/>
+                    }
+                    </View>
              
                 </ScrollView>
             </Fragment>

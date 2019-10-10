@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
-import React, { Component } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import React, { Component, Fragment } from "react";
+import { View, Text, TouchableOpacity, Alert, SafeAreaView } from "react-native";
 import sports from './sports.styles';
 import * as actions from '../../../redux/actions/modal.actions';
 import SportModal from '../../../components/modals/sport.modal';
 import TranslateService from '../../../services/translation.service';
 import SportConfigData from '../../../shared/models/sportConfigData.model';
-
+import Header from '../../../components/header/header';
 
 interface State {
     translateMethod: (str: string) => string;
@@ -85,7 +85,9 @@ class SportsView extends Component<Props, State> {
 
     render() {
         return (
-            <View style={sports.container}>
+            <Fragment>
+                
+                <View style={sports.container}>
                 <Text style={sports.title}>
                     Hi Dafni : &#x2769;
                 </Text>
@@ -134,6 +136,9 @@ class SportsView extends Component<Props, State> {
                 </View>
                 <SportModal />
             </View>
+            </Fragment>
+            
+            
         )
     }
 }

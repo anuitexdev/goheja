@@ -8,6 +8,7 @@ import * as actions from '../../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
 import ValidationService from '../../../../../shared/validation/validation.service'
 import TranslateService from '../../../../../services/translation.service';
+import { ScrollView } from "react-native-gesture-handler";
 
 interface State {
     firstname: string,
@@ -123,6 +124,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
+                <ScrollView>
                 <Text style={styles.screenTitle}>{this.state.translateMethod('translation.exposeIDE.views.regestration.yourBasicInfo')}</Text>
                 <View style={styles.formField}>
                     <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.regestration.firstNameTitle')}</Text>
@@ -196,6 +198,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                         <Text style={styles.nextBtnText}>{this.state.translateMethod('translation.common.next')}</Text>
                     </TouchableOpacity>
                 </View>
+                </ScrollView>
             </View>
         )
     }

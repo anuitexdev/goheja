@@ -23,16 +23,14 @@ class SignUpScreen extends Component<Props> {
 
     render() {
         return (
-           
-                <ScrollView>
-                    <SafeAreaView style={{flex:1}}>
-                    <Header />
+                <ScrollView> 
+                    <SafeAreaView style={{flex: 1}}/>
+                    {/* <Header /> */}
                     { 
                         this.props.role === -1 ? <WelcomeScreen navigation={this.props.navigation} /> 
                         : this.props.role === 1 ? <AthleteScreen/> 
-                            : <CoachScreen navigation={this.props.navigation} />
+                        : <CoachScreen navigation={this.props.navigation} />
                     }
-                    </SafeAreaView>
                 </ScrollView>
         )
     }

@@ -57,8 +57,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
       languages.push(
         <TouchableOpacity
           key={key}
-          onPress={() => this.changeLanguage(this.props.languagesList[key], key)}
-          style={{zIndex: 9999}}>
+          onPress={() => this.changeLanguage(this.props.languagesList[key], key)}>
           <View style={header.languageItemWrapper}  >
             <View style={this.state.language === this.props.languagesList[key] ? header.languageItemActive : header.languageItem}>
               <Text>{this.props.languagesList[key]}</Text>
@@ -80,6 +79,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
           flexDirection: 'row',
           alignItems: 'center',
           padding: 20,
+          zIndex: 9999,
         }}>
         <Text
           style={{

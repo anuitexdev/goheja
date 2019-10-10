@@ -1,7 +1,7 @@
 import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { ScrollView } from 'react-native';
+import { ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
 import CoachBasicInfoScreen from './basicInfo/basicInfo.view';
@@ -25,15 +25,17 @@ class CoachScreen extends Component<Props> {
     render() {
         return (
             <Fragment>
-                <ScrollView>
+                <KeyboardAvoidingView enabled behavior="padding"
+                style={{ flex: 1 }} keyboardVerticalOffset={44}>
+                    <ScrollView>
                     {this.props.currentStep === 0 ? <CoachBasicInfoScreen /> :
                         this.props.currentStep === 1 ? <UnitsCoachScreen /> :
                             this.props.currentStep === 2 ? <YourSelfCoachScreen /> :
                                 this.props.currentStep === 3 ? <ConfirmationScreen /> :
                                     null
                     }
-
-                </ScrollView>
+                    </ScrollView>
+                </KeyboardAvoidingView>
             </Fragment>
         )
     }

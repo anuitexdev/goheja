@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View, TextInput, Alert, SafeAreaView } from 'react-native';
+import { Text, View, TextInput, Alert } from 'react-native';
 import React from "react";
 import styles from '../styles';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import FbLogin from '../../../components/fbAuth/fbAuth';
 import * as regExp from '../../../shared/validation/regexps';
 import TranslateService from '../../../services/translation.service';
+import SafeAreaView from 'react-native-safe-area-view';
 
 interface State {
     email: string,
@@ -129,8 +130,10 @@ private translationSubscription: any;
      
         return (
             <ScrollView>
-                <SafeAreaView style={{flex:1}}>
-                <Header />
+                <SafeAreaView 
+                forceInset={{ top: 'always' }}
+                style={{ flex: 0}}>
+                {/* <Header /> */}
                 <View style={styles.container}>
                     <Text style={styles.screenTitle}>{this.state.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
                     <View style={styles.formField}>

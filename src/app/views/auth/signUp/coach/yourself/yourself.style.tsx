@@ -56,7 +56,7 @@ export default StyleSheet.create({
         marginBottom: 10,
         fontSize: 14,
         color: '#272e43',
-        fontFamily: 'Roboto',
+        //fontFamily: 'Roboto',
         fontWeight: '500',
     },
     errorText: {
