@@ -5,6 +5,8 @@ import { Text, View, TouchableWithoutFeedback } from "react-native";
 import achievements from './achievements.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TranslateService from '../../../../services/translation.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 interface State {
     activeInputNumber: number,
@@ -16,12 +18,13 @@ interface Props {
     modalNumber: number,
     modalClose: () => void,
     modalOpen: () => void,
-    changeModal: (value: {achievements: string}) => void,
+    changeModal: (value: { achievements: string }) => void,
 }
 
 class AchievementsView extends Component<Props, State> {
-    public languageSubscription: any;
+
     public translateMethod: any;
+    private destroyed: any;
     constructor(props: Props, public translationService: TranslateService) {
         super(props);
         this.state = {
@@ -30,14 +33,16 @@ class AchievementsView extends Component<Props, State> {
         }
 
         this.translationService = new TranslateService();
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-          this.forceUpdate();
-          this.translateMethod = res
+        this.destroyed = new Subject();
+        this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
+            this.forceUpdate();
+            this.translateMethod = res
         });
     }
 
     componentWillUnmount() {
-        this.languageSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     public setModalVisible = () => {
@@ -54,11 +59,11 @@ class AchievementsView extends Component<Props, State> {
         this.props.modalClose();
     }
 
-    public changeModal = async (value: string) => {    
+    public changeModal = async (value: string) => {
         await this.setState({
             achievementsValue: value
         })
-        this.props.changeModal({achievements: this.state.achievementsValue});
+        this.props.changeModal({ achievements: this.state.achievementsValue });
     }
 
     render() {
@@ -109,7 +114,7 @@ class AchievementsView extends Component<Props, State> {
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback onPress={() => this.changeModal('None of the above')}>
-                            <View style={[achievements.achieveBtns, {marginBottom: 0}]}>
+                            <View style={[achievements.achieveBtns, { marginBottom: 0 }]}>
                                 <Text style={achievements.achieveTextBtn}>
                                     None of the above
                                 </Text>
@@ -130,7 +135,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     modalClose: () => dispatch(actions.modalClose()),
     modalOpen: () => dispatch(actions.modalOpen()),
-    changeModal: (value: {achievements: string}) => dispatch(actions.changeRunningModal(value)),
+    changeModal: (value: { achievements: string }) => dispatch(actions.changeRunningModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AchievementsView);

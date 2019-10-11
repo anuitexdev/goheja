@@ -1,14 +1,16 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as actions from '../../../../redux/actions/modal.actions';
-import {Text, View, TouchableWithoutFeedback, TextInput} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { Text, View, TouchableWithoutFeedback, TextInput } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import swimtime from './swimTime.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ModalReducer from '../../../../redux/reducers/modal.reducer';
 import moment from 'moment';
 import TranslateService from '../../../../services/translation.service';
 import { tsThisType } from '@babel/types';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 interface State {
   activeInputNumber: number;
   swimTimeValue: string;
@@ -21,17 +23,17 @@ interface State {
 interface Props {
   modalClose: () => void;
   modalOpen: () => void;
-  changeModal: (value: {swimTime: string}) => void;
+  changeModal: (value: { swimTime: string }) => void;
   state: any;
 }
 
 class SwimTimeView extends Component<Props, State> {
-    private inputDozentsOfMinutes: any;
-    private inputUnitsOfMinutes: any;
-    private inputDozentsOfSeconds: any;
-    private inputUnitsOfSeconds: any;
-    private translateMethod: any;
-    private languageSubscription: any;
+  private inputDozentsOfMinutes: any;
+  private inputUnitsOfMinutes: any;
+  private inputDozentsOfSeconds: any;
+  private inputUnitsOfSeconds: any;
+  private translateMethod: any;
+  private destroyed: any;
 
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
@@ -45,14 +47,16 @@ class SwimTimeView extends Component<Props, State> {
     };
 
     this.translationService = new TranslateService();
-    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+    this.destroyed = new Subject();
+    this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
       this.forceUpdate();
       this.translateMethod = res
     });
   }
 
-  componentWillUnmount(){
-    this.languageSubscription.unsubscribe();
+  componentWillUnmount() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   public setModalVisible = () => {
@@ -82,9 +86,9 @@ class SwimTimeView extends Component<Props, State> {
 
     const summaryValue = String(
       this.state.dozentsOfMinutes +
-        this.state.unitsOfMinutes +
-        this.state.dozentsOfSeconds +
-        this.state.unitsOfSeconds,
+      this.state.unitsOfMinutes +
+      this.state.dozentsOfSeconds +
+      this.state.unitsOfSeconds,
     );
 
     this.setState({
@@ -93,7 +97,7 @@ class SwimTimeView extends Component<Props, State> {
   };
 
   public changeModal = () => {
-    this.props.changeModal({swimTime: this.state.swimTimeValue});
+    this.props.changeModal({ swimTime: this.state.swimTimeValue });
   };
 
   render() {
@@ -114,8 +118,8 @@ class SwimTimeView extends Component<Props, State> {
           </Text>
 
           <View style={swimtime.fullComponent}>
-            <View style={{alignItems: 'center'}}>
-              <View style={{flexDirection: 'row'}}>
+            <View style={{ alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row' }}>
                 <TextInput
                   ref={ref => (this.inputDozentsOfMinutes = ref)}
                   placeholder="0"
@@ -128,7 +132,7 @@ class SwimTimeView extends Component<Props, State> {
                       : swimtime.infoInput
                   }
                   onChangeText={(dozentsOfMinutes) =>
-                    this.setValue(this.inputUnitsOfMinutes, {dozentsOfMinutes})
+                    this.setValue(this.inputUnitsOfMinutes, { dozentsOfMinutes })
                   }></TextInput>
                 <TextInput
                   placeholder="0"
@@ -137,36 +141,36 @@ class SwimTimeView extends Component<Props, State> {
                   keyboardType={'number-pad'}
                   onFocus={() => this.changeFocus(2)}
                   onChangeText={(unitsOfMinutes) =>
-                    this.setValue(this.inputDozentsOfSeconds, {unitsOfMinutes})
+                    this.setValue(this.inputDozentsOfSeconds, { unitsOfMinutes })
                   }
                   style={[
                     this.state.activeInputNumber === 2
                       ? swimtime.focusInput
                       : swimtime.infoInput,
-                    {marginRight: 8},
+                    { marginRight: 8 },
                   ]}></TextInput>
               </View>
-              <Text style={{fontSize: 20, color: '#99a8af', marginTop: 13}}>
+              <Text style={{ fontSize: 20, color: '#99a8af', marginTop: 13 }}>
                 {this.translateMethod('translation.common.min')}
               </Text>
             </View>
             <View style={swimtime.colonWrapper}>
               <Text style={swimtime.colon}>:</Text>
             </View>
-            <View style={{alignItems: 'center'}}>
-              <View style={{flexDirection: 'row'}}>
+            <View style={{ alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row' }}>
                 <TextInput
                   ref={ref => (this.inputDozentsOfSeconds = ref)}
                   style={[
                     this.state.activeInputNumber === 3
                       ? swimtime.focusInput
                       : swimtime.infoInput,
-                    {marginLeft: 8},
+                    { marginLeft: 8 },
                   ]}
                   placeholder="0"
                   maxLength={1}
                   onChangeText={(dozentsOfSeconds) =>
-                    this.setValue(this.inputUnitsOfSeconds, {dozentsOfSeconds})
+                    this.setValue(this.inputUnitsOfSeconds, { dozentsOfSeconds })
                   }
                   keyboardType={'number-pad'}
                   onFocus={() => this.changeFocus(3)}></TextInput>
@@ -176,12 +180,12 @@ class SwimTimeView extends Component<Props, State> {
                     this.state.activeInputNumber === 4
                       ? swimtime.focusInput
                       : swimtime.infoInput,
-                    {marginRight: 0},
+                    { marginRight: 0 },
                   ]}
                   placeholder="0"
                   maxLength={1}
                   onChangeText={(unitsOfSeconds) =>
-                    this.setValue(this.inputUnitsOfSeconds, {unitsOfSeconds})
+                    this.setValue(this.inputUnitsOfSeconds, { unitsOfSeconds })
                   }
                   keyboardType={'number-pad'}
                   onFocus={() => this.changeFocus(4)}></TextInput>
@@ -207,7 +211,7 @@ class SwimTimeView extends Component<Props, State> {
           <View style={swimtime.footerBtns}>
             <TouchableWithoutFeedback onPress={this.hideModal}>
               <Text style={swimtime.skipBtn}>
-               {this.translateMethod('translation.common.skip')}>
+                {this.translateMethod('translation.common.skip')}>
                </Text>
             </TouchableWithoutFeedback>
             {this.state.swimTimeValue == '' ? (
@@ -217,12 +221,12 @@ class SwimTimeView extends Component<Props, State> {
                 </View>
               </TouchableWithoutFeedback>
             ) : (
-              <TouchableWithoutFeedback onPress={this.hideModal}>
-                <View style={swimtime.nextBtn}>
-                  <Text style={swimtime.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
-                </View>
-              </TouchableWithoutFeedback>
-            )}
+                <TouchableWithoutFeedback onPress={this.hideModal}>
+                  <View style={swimtime.nextBtn}>
+                    <Text style={swimtime.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
+                  </View>
+                </TouchableWithoutFeedback>
+              )}
           </View>
         </View>
       </View>
@@ -237,7 +241,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
   modalClose: () => dispatch(actions.modalClose()),
   modalOpen: () => dispatch(actions.modalOpen()),
-  changeModal: (value: {swimTime: string}) =>
+  changeModal: (value: { swimTime: string }) =>
     dispatch(actions.changeSwimmingModal(value)),
 });
 

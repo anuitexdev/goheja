@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TouchableOpacity,  Alert, Keyboard } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, Keyboard } from 'react-native';
 import clubDetails from './clubDetails.style';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import { TextInputMask } from 'react-native-masked-text';
 import TranslateService from '../../../../services/translation.service';
 import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
 import ClubDataModel from '../../../../shared/models/clubData.model';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 interface State {
   arrayOfDays: any[];
@@ -29,13 +31,13 @@ interface Props {
 
 class ClubDetailsView extends Component<Props, State> {
 
-  private languageSubscription: any;
+  private destroyed: any;
   public keyboardDidShowListener: any;
   public keyboardDidHideListener: any;
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.translationService = new TranslateService();
-  
+
     this.state = {
       arrayOfDays: [
         { key: 'S', value: 'Sunday' },
@@ -60,63 +62,65 @@ class ClubDetailsView extends Component<Props, State> {
   }
 
   componentWillMount() {
-    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-     this.setState({
-      translateMethod: res,
-     })
+    this.destroyed = new Subject();
+    this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
+      this.setState({
+        translateMethod: res,
+      })
     });
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+  }
+
+
+
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+    this.destroyed.next();
+    this.destroyed.complete();
+  }
+
+  _keyboardDidShow = () => {
+    this.setState({
+      keyboardIsOpen: true
+    })
+  }
+
+  _keyboardDidHide = () => {
+    this.setState({
+      keyboardIsOpen: false
+    })
+  }
+
+
+  public onSubmit = (value: any) => {
+
+    Alert.alert('end of the flow');
+    const clubTime = {
+      startOfDay: this.state.openTime,
+      endOfDay: this.state.closeTime,
+      weekWorkDays: this.state.weekWorkDays,
     }
 
 
+    const re = /^0[0-9]|1[0-9]|2[0-3]:[0-5][0-9]$/;
+    if (re.test(value)) {
+      const clubData = {
+        name: this.state.clubData.clubName,
+        code: "st",
+        lat: 42.00987,
+        lng: 42.1234,
+        radius: 30,
+        imgPath: this.state.clubData.avatarSource.uri,
+        weekWorkDays: this.state.weekWorkDays,
+        startOfDay: 360,
+        endOfDay: 1360,
+        firstDayInWeek: 1
 
-
-componentWillUnmount () {
-  this.keyboardDidShowListener.remove();
-  this.keyboardDidHideListener.remove();
-  this.languageSubscription.unsubscribe();
-}
-
-_keyboardDidShow = () => {
-  this.setState({
-    keyboardIsOpen: true
-  })
-}
-
-_keyboardDidHide = () => {
-  this.setState({
-    keyboardIsOpen: false
-  })
-}
-
-
-    public onSubmit = (value: any) => {
-
-        Alert.alert('end of the flow');
-        const clubTime = {
-            startOfDay: this.state.openTime,
-            endOfDay: this.state.closeTime,
-            weekWorkDays: this.state.weekWorkDays,
-        }
-       
-
-    const re=/^0[0-9]|1[0-9]|2[0-3]:[0-5][0-9]$/;
-    if(re.test(value)) {
-    const clubData={
-       name:  this.state.clubData.clubName,
-       code: "st",
-       lat: 42.00987,
-       lng: 42.1234,
-       radius: 30,
-       imgPath:  this.state.clubData.avatarSource.uri,
-       weekWorkDays: this.state.weekWorkDays,
-       startOfDay: 360,
-	     endOfDay: 1360,
-       firstDayInWeek: 1
-
-     } 
-     this.props.registerGroup(clubData);
+      }
+      this.props.registerGroup(clubData);
       this.props.nextStepNumber(clubTime);
     } else {
       this.setState({
@@ -136,7 +140,7 @@ _keyboardDidHide = () => {
   public selectWorkingDays = async (item: any) => {
     if (this.state.weekWorkDays.indexOf(item) !== -1) {
       let newWeekForDays = this.state.weekWorkDays;
-      newWeekForDays.splice(this.state.weekWorkDays.indexOf(item),1);
+      newWeekForDays.splice(this.state.weekWorkDays.indexOf(item), 1);
       this.setState({
         weekWorkDays: newWeekForDays,
       })
@@ -148,12 +152,12 @@ _keyboardDidHide = () => {
         weekWorkDays: newWeekForDays
       });
     }
-    
+
   };
 
   render() {
     return (
-      <View style={{position: 'relative' }}>
+      <View style={{ position: 'relative' }}>
         <Text style={clubDetails.title}>Club Details</Text>
         <View style={clubDetails.clubDetailsWrapper}>
           <Text style={clubDetails.titleTime}>  {translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays'), this.props.clubName)} </Text>
@@ -193,7 +197,7 @@ _keyboardDidHide = () => {
                 value={this.state.openTime}
                 onChangeText={(time) => this.setState({ openTime: time })}
               />
-              <Text style={{color: 'red'}}>
+              <Text style={{ color: 'red' }}>
                 {this.state.error.openTimeError}
               </Text>
             </View>

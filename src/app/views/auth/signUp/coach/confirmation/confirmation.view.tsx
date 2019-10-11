@@ -5,6 +5,8 @@ import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import styles from './confirmation.style';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import TranslateService from '../../../../../services/translation.service';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 interface Props {
     changeCoachStep: (data: any) => void,
@@ -19,26 +21,27 @@ interface State {
 
 class ConfirmationScreen extends Component<Props, State> {
 
-
-    private languageSubscription: any;
+    private destroyed: any;
     constructor(props: Props, private translationService: TranslateService) {
-        super(props)     
-        this.state ={
+        super(props)
+        this.state = {
             translateMethod: (str: string) => '',
-        } 
+        }
     }
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
-        this.setState({
-            translateMethod: res,
-        })
-        });   
+        this.destroyed = new Subject();
+        this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
+            this.setState({
+                translateMethod: res,
+            })
+        });
     }
 
     componentWillUnmount = () => {
-        this.languageSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     render() {

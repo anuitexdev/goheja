@@ -13,11 +13,7 @@ export const registerGroup = (groupData: any) => {
         await CoachGroupService.createGroup(groupData).then(res => {
             console.log(res);
 
-            if (res instanceof Error) {
-                Alert.alert(res.message);
-                // dispatch(failedAuth(res));
-                return;
-            }
+  
             // dispatch(successAuth('', 'register'));
         }
         )

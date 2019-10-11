@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as actions from '../../../../redux/actions/modal.actions';
-import {Text, View, TouchableWithoutFeedback, TextInput, TouchableHighlightBase} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { Text, View, TouchableWithoutFeedback, TextInput, TouchableHighlightBase } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import threshold from './threshold.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 import TranslateService from '../../../../services/translation.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 interface State {
   activeInputNumber: number;
@@ -20,17 +22,17 @@ interface State {
 interface Props {
   modalClose: () => void;
   modalOpen: () => void;
-  changeModal: (value: {threshold: string}) => void;
+  changeModal: (value: { threshold: string }) => void;
   state: any;
 }
 
 class ThresholdView extends Component<Props, State> {
-    private inputDozentsOfMinutes: any;
-    private inputUnitsOfMinutes: any;
-    private inputDozentsOfSeconds: any;
-    private inputUnitsOfSeconds: any;
-    private translateMethod: any;
-    private languageSubscription: any;
+  private inputDozentsOfMinutes: any;
+  private inputUnitsOfMinutes: any;
+  private inputDozentsOfSeconds: any;
+  private inputUnitsOfSeconds: any;
+  private translateMethod: any;
+  private destroyed: any;
   constructor(props: Props, public translationService: TranslateService) {
     super(props);
     this.state = {
@@ -43,14 +45,16 @@ class ThresholdView extends Component<Props, State> {
     };
 
     this.translationService = new TranslateService();
-    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+    this.destroyed = new Subject();
+    this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
       this.forceUpdate();
       this.translateMethod = res
     });
   }
 
   componentWillUnmount() {
-    this.languageSubscription.unsubscribe();
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   public setModalVisible = () => {
@@ -76,10 +80,10 @@ class ThresholdView extends Component<Props, State> {
     input.focus();
 
     const summaryValue = String(
-        this.state.dozentsOfMinutes +
-        this.state.unitsOfMinutes +
-        this.state.dozentsOfSeconds +
-        this.state.unitsOfSeconds,
+      this.state.dozentsOfMinutes +
+      this.state.unitsOfMinutes +
+      this.state.dozentsOfSeconds +
+      this.state.unitsOfSeconds,
     );
 
     this.setState({
@@ -92,7 +96,7 @@ class ThresholdView extends Component<Props, State> {
   };
 
   public changeModal = () => {
-    this.props.changeModal({threshold: this.state.thresholdValue});
+    this.props.changeModal({ threshold: this.state.thresholdValue });
   };
 
   render() {
@@ -110,8 +114,8 @@ class ThresholdView extends Component<Props, State> {
             {this.translateMethod('translation.exposeIDE.views.userSetSports.swimmingThresholdPace')}
           </Text>
           <View style={threshold.fullComponent}>
-            <View style={{alignItems: 'center'}}>
-              <View style={{flexDirection: 'row'}}>
+            <View style={{ alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row' }}>
                 <TextInput
                   ref={ref => (this.inputDozentsOfMinutes = ref)}
                   placeholder="0"
@@ -124,7 +128,7 @@ class ThresholdView extends Component<Props, State> {
                       : threshold.infoInput
                   }
                   onChangeText={dozentsOfMinutes =>
-                    this.setValue(this.inputUnitsOfMinutes, {dozentsOfMinutes})
+                    this.setValue(this.inputUnitsOfMinutes, { dozentsOfMinutes })
                   }></TextInput>
                 <TextInput
                   placeholder="0"
@@ -133,37 +137,37 @@ class ThresholdView extends Component<Props, State> {
                   keyboardType={'number-pad'}
                   onFocus={() => this.changeFocus(2)}
                   onChangeText={unitsOfMinutes =>
-                    this.setValue(this.inputDozentsOfSeconds, {unitsOfMinutes})
+                    this.setValue(this.inputDozentsOfSeconds, { unitsOfMinutes })
                   }
                   style={[
                     this.state.activeInputNumber === 2
                       ? threshold.focusInput
                       : threshold.infoInput,
-                    {marginRight: 8},
+                    { marginRight: 8 },
                   ]}></TextInput>
               </View>
-              <Text style={{fontSize: 20, color: '#99a8af', marginTop: 13}}>
+              <Text style={{ fontSize: 20, color: '#99a8af', marginTop: 13 }}>
                 {this.translateMethod('translation.common.min')}
               </Text>
             </View>
             <View style={threshold.colonWrapper}>
               <Text style={threshold.colon}>:</Text>
             </View>
-            <View style={{alignItems: 'center'}}>
-              <View style={{flexDirection: 'row'}}>
+            <View style={{ alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row' }}>
                 <TextInput
                   ref={ref => (this.inputDozentsOfSeconds = ref)}
                   style={[
                     this.state.activeInputNumber === 3
                       ? threshold.focusInput
                       : threshold.infoInput,
-                    {marginLeft: 8},
+                    { marginLeft: 8 },
                   ]}
                   placeholder="0"
                   maxLength={1}
                   keyboardType={'number-pad'}
                   onChangeText={dozentsOfSeconds =>
-                    this.setValue(this.inputUnitsOfSeconds, {dozentsOfSeconds})
+                    this.setValue(this.inputUnitsOfSeconds, { dozentsOfSeconds })
                   }
                   onFocus={() => this.changeFocus(3)}></TextInput>
                 <TextInput
@@ -172,13 +176,13 @@ class ThresholdView extends Component<Props, State> {
                     this.state.activeInputNumber === 4
                       ? threshold.focusInput
                       : threshold.infoInput,
-                    {marginRight: 0},
+                    { marginRight: 0 },
                   ]}
                   placeholder="0"
                   keyboardType={'number-pad'}
                   maxLength={1}
                   onChangeText={unitsOfSeconds =>
-                    this.setValue(this.inputUnitsOfSeconds, {unitsOfSeconds})
+                    this.setValue(this.inputUnitsOfSeconds, { unitsOfSeconds })
                   }
                   onFocus={() => this.changeFocus(4)}></TextInput>
                 <View
@@ -187,7 +191,7 @@ class ThresholdView extends Component<Props, State> {
                     alignItems: 'center',
                     marginLeft: 10,
                   }}>
-                  <Text style={{fontWeight: 'bold'}}>/100m</Text>
+                  <Text style={{ fontWeight: 'bold' }}>/100m</Text>
                 </View>
               </View>
               <Text
@@ -208,17 +212,17 @@ class ThresholdView extends Component<Props, State> {
             </TouchableWithoutFeedback>
             {this.state.thresholdValue === '' ? (
               <TouchableWithoutFeedback onPress={this.changeModal}>
-              <View style={threshold.nextBtn}>
-                <Text style={threshold.nextBtnText}>{this.translateMethod('translation.common.iDontKnow')}</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            ) : (
-              <TouchableWithoutFeedback onPress={this.changeModal}>
                 <View style={threshold.nextBtn}>
-                  <Text style={threshold.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
+                  <Text style={threshold.nextBtnText}>{this.translateMethod('translation.common.iDontKnow')}</Text>
                 </View>
               </TouchableWithoutFeedback>
-            )}
+            ) : (
+                <TouchableWithoutFeedback onPress={this.changeModal}>
+                  <View style={threshold.nextBtn}>
+                    <Text style={threshold.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
+                  </View>
+                </TouchableWithoutFeedback>
+              )}
           </View>
         </View>
       </View>
@@ -233,7 +237,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
   modalClose: () => dispatch(actions.modalClose()),
   modalOpen: () => dispatch(actions.modalOpen()),
-  changeModal: (value: {threshold: string}) =>
+  changeModal: (value: { threshold: string }) =>
     dispatch(actions.changeSwimmingModal(value)),
 });
 

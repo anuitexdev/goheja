@@ -6,6 +6,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import cyclingStyles from './rock.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TranslateService from '../../../../services/translation.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 interface State {
     activeInputNumber: number,
@@ -28,7 +30,7 @@ class RockView extends Component<Props, State> {
     private inputHundreds: any;
     private inputDozens: any;
     private inputUnits: any;
-    private languageSubscription: any
+    private destroyed: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
         this.state = {
@@ -44,7 +46,8 @@ class RockView extends Component<Props, State> {
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.destroyed = new Subject();
+        this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
             this.setState({
                 translateMethod: res,
             })
@@ -52,7 +55,8 @@ class RockView extends Component<Props, State> {
     }
 
     componentWillUnmount = () => {
-        this.languageSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     public setModalVisible = () => {

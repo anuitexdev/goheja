@@ -6,6 +6,8 @@ import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import connectTeam from './connectTeam.style';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import TranslateService from '../../../../../services/translation.service';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 interface Props {
     nextStepNumber: (data: any) => void,
@@ -20,8 +22,8 @@ interface State {
 
 
 class SuccessRegisterScreen extends Component<Props, State> {
-    private translateMethod: any;
-    private languageSubscription: any;
+
+    private destroyed:any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
         this.state = {
@@ -33,7 +35,8 @@ class SuccessRegisterScreen extends Component<Props, State> {
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.destroyed = new Subject();
+         this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
             this.setState({
                 translateMethod: res,
             })
@@ -41,7 +44,8 @@ class SuccessRegisterScreen extends Component<Props, State> {
     }
 
     componentWillUnmount = () => {
-        this.languageSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     private setGroupCode = async (code: string) => {
