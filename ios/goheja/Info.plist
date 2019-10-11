@@ -8,12 +8,8 @@
 	<string>goheja</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>GoHejaIcon120.png</string>
-	</array>
 	<key>CFBundleIconName</key>
-	<string>GoHejaIcon-1024.png</string>
+	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -29,7 +25,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string>public.app-category.sports</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -50,7 +46,11 @@
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Info about health for sport trainings statistics</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Training location of user</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Images for profile avatar and team avatar</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Images for profile avatar and team avatar</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
