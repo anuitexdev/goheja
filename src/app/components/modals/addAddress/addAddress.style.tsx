@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import window from '../../../theme/variables';
-import { whileStatement } from "@babel/types";
 
 export default StyleSheet.create({
     modalWrapper: {
@@ -44,7 +43,9 @@ export default StyleSheet.create({
         borderRadius: 2,
         borderWidth: 1,
         borderColor: '#cfd8dc',
-        paddingLeft: 15
+        paddingLeft: 15,
+        paddingVertical: 0,
+        height: 50,
     },
     arrowDropDown: {
         position: 'absolute',

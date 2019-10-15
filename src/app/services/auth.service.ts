@@ -86,7 +86,7 @@ export class AuthService {
     }
 
     public confirmMail(email: string): Promise<any> {
-        return axiosInstance.post(`${environment.backendUrl}General/confirmation/${email}`)
+        return axiosInstance.post(`${environment.backendUrl}General/confirmation?mail=${email}`)
             .then((response) => {
                 return response;
             })

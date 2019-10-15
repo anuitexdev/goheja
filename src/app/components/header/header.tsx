@@ -79,7 +79,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
           flexDirection: 'row',
           alignItems: 'center',
           padding: 20,
-          zIndex: 9999,
+          zIndex: 9,
         }}>
         <Text
           style={{

@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 target 'goheja' do
   # Pods for goheja
-  pod 'React', :path => '../node_modules/react-native/'
+  pod 'React', :path => '../node_modules/react-native'
   pod 'React-Core', :path => '../node_modules/react-native/React'
   pod 'React-DevSupport', :path => '../node_modules/react-native/React'
   pod 'React-RCTActionSheet', :path => '../node_modules/react-native/Libraries/ActionSheetIOS'
@@ -28,6 +28,13 @@ target 'goheja' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
+  pod 'GoogleMaps', '3.1.0'
+  pod 'Google-Maps-iOS-Utils', '2.1.0'
+  pod 'GoogleUtilities', '5.3.7'
+  pod 'GoogleAppMeasurement', '5.4'
+
+  pod 'react-native-maps', :podspec => '../node_modules/react-native-maps/react-native-maps.podspec'
+  pod 'react-native-google-maps', :podspec =>  '../node_modules/react-native-maps/react-native-google-maps.podspec' # <~~ if you need GoogleMaps support on iOS
 
   target 'gohejaTests' do
     inherit! :search_paths
@@ -36,6 +43,11 @@ target 'goheja' do
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
+      if target.name == "react-native-google-maps"
+        target.build_configurations.each do |config|
+            config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+        end
+      end
       if target.name == "React"
         target.remove_from_project
       end

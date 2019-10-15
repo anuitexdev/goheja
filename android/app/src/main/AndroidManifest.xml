@@ -27,6 +27,6 @@
           android:value="@string/facebook_app_id"/>
           <meta-data
      android:name="com.google.android.geo.API_KEY"
-     android:value="AIzaSyAiBwRUm_KZDv_sp3eI7F8hxkePqDTvY20"/>
+     android:value="AIzaSyByL9R3b8I6UT2Gc2oyOJj9rdA8bhNc4jU"/>
     </application>
 </manifest>

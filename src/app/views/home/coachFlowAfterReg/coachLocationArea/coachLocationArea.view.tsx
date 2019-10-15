@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TouchableOpacity, PermissionsAndroid, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, PermissionsAndroid, Alert, Platform } from 'react-native';
 import coachLocationArea from './coachLocationArea.style';
 import MapView, { PROVIDER_GOOGLE, Circle } from 'react-native-maps';
 import * as actions from '../../../../redux/actions/createGroup.actions';
@@ -10,9 +10,10 @@ import AddAddressModal from '../../../../components/modals/addAddress/addAddress
 import axiosInstance from '../../../../shared/interceptors/axios.interceptor';
 import environment from '../../../../environments/environment';
 import Slider from 'react-native-slider';
-import Geolocation from 'react-native-geolocation-service';
+import Geolocation from '@react-native-community/geolocation';
 import TranslateService from '../../../../services/translation.service';
 import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
+import SafeAreaView from 'react-native-safe-area-view';
 
 
 interface State {
@@ -121,6 +122,17 @@ class CoachLocationAreaView extends Component<Props, State> {
   };
 
   getCurrentLocation = async () => {
+    if(Platform.OS == 'ios') {
+      Geolocation.getCurrentPosition(
+        position => {
+          console.log(position)
+        },
+        error => {
+          Alert.alert(error.message)
+        },
+        {enableHighAccuracy: false, timeout: 50000}
+      );
+    }
     await request_location_runtime_permission();
     Geolocation.getCurrentPosition(
       async (position) => {
@@ -143,6 +155,7 @@ class CoachLocationAreaView extends Component<Props, State> {
 
   render() {
     return (
+
       <View style={coachLocationArea.mapPageWrapper}>
         <Text style={coachLocationArea.title}>
           {translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.WhereusuallyTeamsAreTraninig'), this.props.clubName)}
@@ -207,8 +220,8 @@ class CoachLocationAreaView extends Component<Props, State> {
               ) : null
           }
         </View>
-
         {this.props.location == '' ? (
+          
           <View style={coachLocationArea.addAddress}>
             <TouchableOpacity
               style={coachLocationArea.addressBtn}
@@ -221,8 +234,8 @@ class CoachLocationAreaView extends Component<Props, State> {
               <Text style={coachLocationArea.skipBtnText}>{this.state.translateMethod('translation.common.skip')}</Text>
             </TouchableOpacity>
           </View>
-        ) : null}
 
+        ) : null}
         {
           this.props.location != '' ? (
             <TouchableOpacity

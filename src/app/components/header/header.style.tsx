@@ -16,14 +16,12 @@ export default StyleSheet.create({
         right: -15,
         top: -15,
         padding: 10,
-        
     },
     languageItemWrapper: {
         borderBottomColor: '#CFD8DD',
         borderBottomWidth: 1,
         paddingBottom: 6,
         paddingTop: 6,
-        zIndex: 8888
     },
     languageItemHeader: {
         flexDirection: 'row',

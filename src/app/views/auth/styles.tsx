@@ -6,7 +6,7 @@ export default StyleSheet.create({
     container: {
         width: window.width,
         padding: 20, 
-        zIndex: -1,
+        // zIndex: -1,
     },
     title: {
         fontSize: 25,
@@ -73,7 +73,6 @@ export default StyleSheet.create({
         paddingLeft: 15,
         paddingVertical: 0,
         height: 50,
-        zIndex: 7777
     },
     hebInput: {
         borderRadius: 2,
