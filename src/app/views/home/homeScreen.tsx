@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import React, { Component, Fragment } from 'react';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from 'react-navigation';
@@ -31,7 +31,7 @@ class HomeScreen extends Component<Props, State> {
     render() {
         return (
             <Fragment>
-            <Header/>
+            {Platform.OS === 'android' ?  <Header/>: null} 
                 <View>
                     {/* <Header/> */}
                     {

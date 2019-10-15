@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View, TextInput, Alert } from 'react-native';
+import { Text, View, TextInput, Alert, Platform } from 'react-native';
 import React from "react";
 import styles from '../styles';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
@@ -132,7 +132,7 @@ private destroyed:any;
      
         return (
             <ScrollView>
-            <Header/>
+            {Platform.OS === 'android' ?  <Header/>: null} 
                 <SafeAreaView 
                 forceInset={{ top: 'always' }}
                 style={{ flex: 0}}>
