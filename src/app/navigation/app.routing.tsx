@@ -8,6 +8,6 @@ export default createAppContainer(createSwitchNavigator({
     Auth: AuthRouting,
     },
     {
-        initialRouteName: 'Auth',
+        initialRouteName: 'Home',
     }
 ));

@@ -4,7 +4,7 @@ import window from '../../../../theme/variables';
 
 export default StyleSheet.create({
     mapPageWrapper: {
-        height: window.height - 215,
+        height: window.height - 210,
         position: 'relative'
     },
     title: {
