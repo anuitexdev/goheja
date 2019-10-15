@@ -44,8 +44,6 @@ class PersonalInfoScreen extends Component<Props, State> {
     componentWillMount = () => {
         this.translationService = new TranslateService();
         this.destroyed = new Subject();
-        console.log(this.state.signUpData);
-
         this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
             this.setState({
                 translateMethod: res,

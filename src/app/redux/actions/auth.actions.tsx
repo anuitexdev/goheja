@@ -86,6 +86,7 @@ export const signUp = (userData: any) => {
         );
 
         await AuthService.confirmMail(userData.auth).then(res => {
+        console.log(res);
 
             // dispatch(successAuth('', 'register'));
         }
