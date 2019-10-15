@@ -5,6 +5,8 @@ import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import TranslateService from '../../../../../services/translation.service';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 interface Props {
     nextStepNumber: (nextStepData: any) => void,
@@ -25,8 +27,7 @@ interface State {
 
 
 class PersonalInfoScreen extends Component<Props, State> {
-    private languageSubscription: any;
-    private getCurrentLanguageSubscription: any;
+    private destroyed:any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
 
@@ -42,13 +43,14 @@ class PersonalInfoScreen extends Component<Props, State> {
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.destroyed = new Subject();
+         this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
         this.setState({
             translateMethod: res,
         })
         });
 
-        this.getCurrentLanguageSubscription = this.translationService.getCurrentLanguage().subscribe(res => {
+         this.translationService.getCurrentLanguage().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
             this.setState({
                 currentLanguage: res.language,
             })
@@ -57,8 +59,8 @@ class PersonalInfoScreen extends Component<Props, State> {
     }
 
     componentWillUnmount = () => {
-        this.languageSubscription.unsubscribe();
-        this.getCurrentLanguageSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     public onInputChange = async (value: any) => {

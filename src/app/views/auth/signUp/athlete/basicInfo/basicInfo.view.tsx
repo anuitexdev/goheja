@@ -9,6 +9,8 @@ import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
 import ValidationService from '../../../../../shared/validation/validation.service'
 import TranslateService from '../../../../../services/translation.service';
 import { ScrollView } from "react-native-gesture-handler";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 interface State {
     firstname: string,
@@ -38,8 +40,7 @@ interface Props {
 class BasicInfoAthleteScreen extends Component<Props, State> {
 
     private validationService = new ValidationService();
-    private languageSubscription: any;
-    private getCurrentLanguageSubscription: any;
+    private destroyed:any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
 
@@ -65,13 +66,14 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.destroyed = new Subject();
+         this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
             this.setState({
                 translateMethod: res,
             })
         });
 
-        this.getCurrentLanguageSubscription = this.translationService.getCurrentLanguage().subscribe(res => {
+         this.translationService.getCurrentLanguage().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
             this.setState({
                 currentLanguage: res.language,
             })
@@ -79,8 +81,8 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
     }
 
     componentWillUnmount = () => {
-        this.languageSubscription.unsubscribe();
-        this.getCurrentLanguageSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
 
     }
 

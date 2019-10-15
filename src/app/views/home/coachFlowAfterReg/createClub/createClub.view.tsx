@@ -5,6 +5,8 @@ import createClubStyle from './createClub.style';
 import { TextInput, ScrollView } from 'react-native-gesture-handler';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import TranslateService from '../../../../services/translation.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 interface State {
     clubName: string;
@@ -18,6 +20,7 @@ interface Props {
 class CreateClubView extends Component<Props, State> {
 
     private languageSubscription: any;
+    private destroyed: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
         this.state = {
@@ -28,7 +31,8 @@ class CreateClubView extends Component<Props, State> {
 
     componentWillMount() {
         this.translationService = new TranslateService();
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.destroyed = new Subject();
+        this.languageSubscription = this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
             this.setState({
                 translateMethod: res,
             })
@@ -36,11 +40,12 @@ class CreateClubView extends Component<Props, State> {
     }
 
     componentWillUnmount() {
-        this.languageSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     public onSubmit() {
-        this.props.nextStepNumber({clubName: this.state.clubName})
+        this.props.nextStepNumber({ clubName: this.state.clubName })
     }
 
     render() {

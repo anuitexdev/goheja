@@ -19,7 +19,7 @@ export class AuthService {
         return axiosInstance.post(`${environment.backendUrl}Security/`, userData)
             .then((response) => {
                 console.log(response);
-                return response;
+                return response; 
             })
             .catch((error) => {
                 console.log(error);

@@ -5,6 +5,8 @@ import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import TranslateService from '../../../../../services/translation.service';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 interface Props {
     nextStepNumber: (nextStepData: any) => void,
@@ -19,8 +21,7 @@ interface State {
 }
 
 class UnitsAthleteScreen extends Component<Props, State> {
-
-    private languageSubscription: any;
+    private destroyed:any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
         this.state = {
@@ -33,7 +34,8 @@ class UnitsAthleteScreen extends Component<Props, State> {
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.destroyed = new Subject();
+        this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
             this.setState({
                 translateMethod: res,
             })
@@ -42,7 +44,8 @@ class UnitsAthleteScreen extends Component<Props, State> {
     }
 
     componentWillUnmount = () => {
-        this.languageSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     private unitValidation(value: string) {

@@ -16,6 +16,8 @@ import FbLogin from '../../../components/fbAuth/fbAuth';
 import * as regExp from '../../../shared/validation/regexps';
 import TranslateService from '../../../services/translation.service';
 import SafeAreaView from 'react-native-safe-area-view';
+import { Subject } from "rxjs";
+import { takeUntil } from 'rxjs/operators';
 
 interface State {
     email: string,
@@ -41,8 +43,7 @@ interface Props {
 
 class SignInScreen extends Component<Props, State> {
 
-private languageSubscription: any;
-private translationSubscription: any;
+private destroyed:any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
         this.state = {
@@ -59,13 +60,14 @@ private translationSubscription: any;
 
     componentWillMount = () => {
       this.translationService = new TranslateService();
-      this.languageSubscription = this.translationService.getCurrentLanguage().subscribe(res=>{
+      this.destroyed = new Subject();
+       this.translationService.getCurrentLanguage().pipe(takeUntil(this.destroyed)).subscribe((res: any)=>{
              this.setState({
                  currentLanguage: res.language,
              })
             });
         
-       this.translationSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
             this.setState({
                 translateMethod: res,
             })
@@ -73,8 +75,8 @@ private translationSubscription: any;
     }
 
     componentWillUnmount(){
-        this.languageSubscription.unsubscribe();
-        this.translationSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     private onSubmit = async () => {

@@ -8,6 +8,8 @@ import Wizard from "../../../components/wizard/wizard.view";
 import CoachLocationAreaView from './coachLocationArea/coachLocationArea.view';
 import ClubDetailsView from './clubDetails/clubDetails.view';
 import TranslateService from '../../../services/translation.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 interface State {
   translateMethod: (str: string) => string;
 }
@@ -18,7 +20,7 @@ interface Props {
 }
 
 class CoachFlowAfterRegView extends Component<Props, State> {
-  private languageSubscription: any;
+  private destroyed: any;
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.state = {
@@ -28,7 +30,8 @@ class CoachFlowAfterRegView extends Component<Props, State> {
 
   componentWillMount() {
     this.translationService = new TranslateService();
-    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+    this.destroyed = new Subject();
+    this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
       this.setState({
         translateMethod: res,
       })
@@ -38,7 +41,8 @@ class CoachFlowAfterRegView extends Component<Props, State> {
 
 
   componentWillUnmount() {
-    this.languageSubscription.unsubscribe();
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   render() {

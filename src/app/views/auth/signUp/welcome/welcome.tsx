@@ -6,6 +6,8 @@ import styles from '../../styles';
 import { NavigationScreenProp, NavigationParams, NavigationState } from 'react-navigation';
 import * as actions from '../../../../redux/actions/auth.actions';
 import TranslateService from '../../../../services/translation.service';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
@@ -17,17 +19,19 @@ interface State {
 }
 class WelcomeScreen extends Component<Props, State> {
 
-    private languageSubscription: any;
+
+    private destroyed: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
-        this.translationService = new TranslateService();
         this.state = {
             translateMethod: (str: string) => '',
         }
     }
 
     componentWillMount = () => {
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.translationService = new TranslateService();
+        this.destroyed = new Subject();
+        this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
             this.setState({
                 translateMethod: res,
             })
@@ -35,7 +39,8 @@ class WelcomeScreen extends Component<Props, State> {
     }
 
     componentWillUnmount = () => {
-        this.languageSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     public redirectToWelcome = (role: number) => {

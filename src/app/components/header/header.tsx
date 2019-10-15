@@ -90,7 +90,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
           }}>
           Go Heja
         </Text>
-        <View style={{ position: 'relative' }}>
+        <View style={{ position: 'relative'}}>
           <TouchableOpacity
             style={{ flexDirection: 'row', alignItems: 'center' }}
             onPress={() => this.toggleDropDown()}

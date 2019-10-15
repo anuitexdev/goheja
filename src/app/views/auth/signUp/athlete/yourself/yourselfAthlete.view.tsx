@@ -9,6 +9,8 @@ import Icon from "react-native-vector-icons/Ionicons";
 import * as actions from '../../../../../redux/actions/auth.actions';
 import moment from 'moment';
 import TranslateService from '../../../../../services/translation.service';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 interface Props {
     nextStepNumber: (nextStepData: any) => void,
@@ -27,8 +29,7 @@ interface State {
 }
 
 class YourSelfAthleteScreen extends Component<Props, State> {
-    private languageSubscription: any;
-    private getCurrentLanguageSubscription: any;
+    private destroyed: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
 
@@ -46,13 +47,14 @@ class YourSelfAthleteScreen extends Component<Props, State> {
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.destroyed = new Subject();
+        this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
             this.setState({
                 translateMethod: res,
             })
         });
 
-        this.getCurrentLanguageSubscription = this.translationService.getCurrentLanguage().subscribe(res => {
+        this.translationService.getCurrentLanguage().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
             this.setState({
                 currentLanguage: res.language,
             })
@@ -61,8 +63,8 @@ class YourSelfAthleteScreen extends Component<Props, State> {
     }
 
     componentWillUnmount = () => {
-        this.languageSubscription.unsubscribe();
-        this.getCurrentLanguageSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     public showDateTimePicker = () => {

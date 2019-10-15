@@ -5,6 +5,8 @@ import { Text, View, TouchableWithoutFeedback, TextInput } from "react-native";
 import cyclingStyles from './cyclingFtp.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TranslateService from '../../../../services/translation.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 interface State {
     activeInputNumber: number,
@@ -26,7 +28,7 @@ class CyclingFtpView extends Component<Props, State> {
     private inputHundreds: any;
     private inputDozents: any;
     private inputUnits: any;
-    private languageSubscription: any
+    private destroyed: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
 
@@ -46,20 +48,19 @@ class CyclingFtpView extends Component<Props, State> {
 
     componentWillMount = () => {
         this.translationService = new TranslateService();
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+        this.destroyed = new Subject();
+        this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
             this.setState({
                 translateMethod: res,
             })
-
-        });
-        this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
 
         });
 
     }
 
     componentWillUnmount = () => {
-        this.languageSubscription.unsubscribe();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     public setModalVisible = () => {
@@ -171,7 +172,7 @@ class CyclingFtpView extends Component<Props, State> {
                     <View style={cyclingStyles.footerBtns}>
                         <TouchableWithoutFeedback onPress={this.changeModal}>
                             <Text style={cyclingStyles.skipBtn}>
-                            {this.state.translateMethod('translation.common.skip')}  >
+                                {this.state.translateMethod('translation.common.skip')}  >
                             </Text>
                         </TouchableWithoutFeedback>
                         {
@@ -181,15 +182,15 @@ class CyclingFtpView extends Component<Props, State> {
                                 <TouchableWithoutFeedback onPress={this.changeModal}>
                                     <View style={cyclingStyles.nextBtn}>
                                         <Text style={cyclingStyles.nextBtnText}>
-                                        {this.state.translateMethod('translation.common.iDontKnow')} 
-                                    </Text>
+                                            {this.state.translateMethod('translation.common.iDontKnow')}
+                                        </Text>
                                     </View>
                                 </TouchableWithoutFeedback> :
                                 <TouchableWithoutFeedback onPress={this.changeModal}>
                                     <View style={cyclingStyles.nextBtn}>
                                         <Text style={cyclingStyles.nextBtnText}>
-                                        {this.state.translateMethod('translation.common.next')}
-                                    </Text>
+                                            {this.state.translateMethod('translation.common.next')}
+                                        </Text>
                                     </View>
                                 </TouchableWithoutFeedback>
                         }

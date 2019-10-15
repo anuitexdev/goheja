@@ -13,7 +13,8 @@ import Slider from 'react-native-slider';
 import Geolocation from '@react-native-community/geolocation';
 import TranslateService from '../../../../services/translation.service';
 import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
-import SafeAreaView from 'react-native-safe-area-view';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 interface State {
@@ -54,7 +55,8 @@ export let request_location_runtime_permission = async () => {
 }
 
 class CoachLocationAreaView extends Component<Props, State> {
-  private languageSubscription: any;
+
+  private destroyed: any;
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.state = {
@@ -79,7 +81,8 @@ class CoachLocationAreaView extends Component<Props, State> {
   componentWillMount() {
     this.getCurrentLocation();
     this.translationService = new TranslateService();
-    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+    this.destroyed = new Subject();
+    this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
       this.setState({
         translateMethod: res,
       })
@@ -87,7 +90,8 @@ class CoachLocationAreaView extends Component<Props, State> {
   }
 
   componentWillUnmount() {
-    this.languageSubscription.unsubscribe();
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   public showAddressModal = () => {

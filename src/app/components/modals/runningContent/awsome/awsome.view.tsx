@@ -7,6 +7,8 @@ import awsome from './awsome.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 import TranslateService from '../../../../services/translation.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 interface State {
   activeInputNumber: number;
   unitsOfHours: string;
@@ -23,7 +25,7 @@ interface Props {
   modalNumber: number;
   modalClose: () => void;
   modalOpen: () => void;
-  changeModal: (value: {awesome: string}) => void;
+  changeModal: (value: { awesome: string }) => void;
   state: any
 }
 
@@ -34,8 +36,8 @@ class AwsomeView extends Component<Props, State> {
   private inputUnitsOfMinutes: any;
   private inputDozentsOfSeconds: any;
   private inputUnitsOfSeconds: any;
-  public languageSubscription: any;
   public translateMethod: any;
+  private destroyed: any;
 
   constructor(props: Props, public translationService: TranslateService) {
     super(props);
@@ -50,14 +52,16 @@ class AwsomeView extends Component<Props, State> {
       awesomeValue: ''
     };
     this.translationService = new TranslateService();
-    this.languageSubscription = this.translationService.getTranslateMethod().subscribe(res => {
+    this.destroyed = new Subject();
+    this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
       this.forceUpdate();
       this.translateMethod = res
     });
-}
+  }
 
   componentWillUnmount() {
-      this.languageSubscription.unsubscribe();
+    this.destroyed.next();
+    this.destroyed.complete();
   }
   public setModalVisible = () => {
     this.props.modalOpen();
@@ -73,7 +77,7 @@ class AwsomeView extends Component<Props, State> {
     const fullTime = moment(value, 'HHmmss');
     const formatTime = fullTime.format('HH:mm:ss')
     return formatTime;
-}
+  }
 
 
   public setValue = async (input: any, value: any) => {
@@ -97,7 +101,7 @@ class AwsomeView extends Component<Props, State> {
   };
 
   public changeModal = () => {
-    this.props.changeModal({awesome: this.state.awesomeValue});
+    this.props.changeModal({ awesome: this.state.awesomeValue });
   };
 
   render() {
@@ -115,160 +119,160 @@ class AwsomeView extends Component<Props, State> {
             {this.translateMethod('translation.common.thatIsAwsome')}
           </Text>
           <Text style={awsome.subtitle}>
-           
-            {this.translateMethod('translation.exposeIDE.views.userSetSports.howLongDidtheHalfMarathonTookYou')}
-            </Text>
 
-            <View style={awsome.fullComponent}>
-                <View style={{alignItems: 'center'}}>
-                    <View style={{flexDirection: 'row'}}>
-                        <TextInput
-                        ref={ref => (this.inputDozentsOfHours = ref)}
-                        placeholder="0"
-                        onFocus={() => this.changeFocus(1)}
-                        maxLength={1}
-                        keyboardType={"number-pad"}
-                        style={
-                            this.state.activeInputNumber === 1
-                            ? awsome.focusInput
-                            : awsome.infoInput
-                        }
-                        onChangeText={(dozentsOfHours) => this.setValue(this.inputUnitsOfHours, {dozentsOfHours})}
-                        >
-                        </TextInput>
-                        <TextInput
-                        placeholder="0"
-                        ref={ref => (this.inputUnitsOfHours = ref)}
-                        maxLength={1}
-                        keyboardType={"number-pad"}
-                        onFocus={() => this.changeFocus(2)}
-                        onChangeText={(unitsOfHours) => this.setValue(this.inputDozentsOfMinutes, {unitsOfHours})}
-                        style={[
-                            this.state.activeInputNumber === 2
-                            ? awsome.focusInput
-                            : awsome.infoInput,
-                            {marginRight: 8},
-                        ]}>
-                        </TextInput>
-                    </View>
-                    <Text style={{fontSize: 20, color: '#99a8af', marginTop: 13}}>
-                        H
+            {this.translateMethod('translation.exposeIDE.views.userSetSports.howLongDidtheHalfMarathonTookYou')}
+          </Text>
+
+          <View style={awsome.fullComponent}>
+            <View style={{ alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row' }}>
+                <TextInput
+                  ref={ref => (this.inputDozentsOfHours = ref)}
+                  placeholder="0"
+                  onFocus={() => this.changeFocus(1)}
+                  maxLength={1}
+                  keyboardType={"number-pad"}
+                  style={
+                    this.state.activeInputNumber === 1
+                      ? awsome.focusInput
+                      : awsome.infoInput
+                  }
+                  onChangeText={(dozentsOfHours) => this.setValue(this.inputUnitsOfHours, { dozentsOfHours })}
+                >
+                </TextInput>
+                <TextInput
+                  placeholder="0"
+                  ref={ref => (this.inputUnitsOfHours = ref)}
+                  maxLength={1}
+                  keyboardType={"number-pad"}
+                  onFocus={() => this.changeFocus(2)}
+                  onChangeText={(unitsOfHours) => this.setValue(this.inputDozentsOfMinutes, { unitsOfHours })}
+                  style={[
+                    this.state.activeInputNumber === 2
+                      ? awsome.focusInput
+                      : awsome.infoInput,
+                    { marginRight: 8 },
+                  ]}>
+                </TextInput>
+              </View>
+              <Text style={{ fontSize: 20, color: '#99a8af', marginTop: 13 }}>
+                H
                     </Text>
+            </View>
+            <View style={awsome.colonWrapper}>
+              <Text style={awsome.colon}>:</Text>
+            </View>
+            <View style={{ alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row' }}>
+                <TextInput
+                  ref={ref => (this.inputDozentsOfMinutes = ref)}
+                  style={[
+                    this.state.activeInputNumber === 3
+                      ? awsome.focusInput
+                      : awsome.infoInput,
+                    { marginLeft: 8 },
+                  ]}
+                  placeholder="0"
+                  maxLength={1}
+                  keyboardType={"number-pad"}
+                  onChangeText={(dozentsOfMinutes) => this.setValue(this.inputUnitsOfMinutes, { dozentsOfMinutes })}
+                  onFocus={() => this.changeFocus(3)}>
+                </TextInput>
+                <TextInput
+                  ref={ref => (this.inputUnitsOfMinutes = ref)}
+                  style={[
+                    this.state.activeInputNumber === 4
+                      ? awsome.focusInput
+                      : awsome.infoInput,
+                    { marginRight: 0 },
+                  ]}
+                  placeholder="0"
+                  maxLength={1}
+                  keyboardType={"number-pad"}
+                  onChangeText={(unitsOfMinutes) => this.setValue(this.inputDozentsOfSeconds, { unitsOfMinutes })}
+                  onFocus={() => this.changeFocus(4)}>
+                </TextInput>
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginLeft: 10,
+                  }}>
                 </View>
-                <View style={awsome.colonWrapper}>
-                    <Text style={awsome.colon}>:</Text>
-                </View>
-                <View style={{alignItems: 'center'}}>
-                    <View style={{flexDirection: 'row'}}>
-                        <TextInput
-                        ref={ref => (this.inputDozentsOfMinutes = ref)}
-                        style={[
-                            this.state.activeInputNumber === 3
-                            ? awsome.focusInput
-                            : awsome.infoInput,
-                            {marginLeft: 8},
-                        ]}
-                        placeholder="0"
-                        maxLength={1}
-                        keyboardType={"number-pad"}
-                        onChangeText={(dozentsOfMinutes) => this.setValue(this.inputUnitsOfMinutes, {dozentsOfMinutes})}
-                        onFocus={() => this.changeFocus(3)}>
-                        </TextInput>
-                        <TextInput
-                        ref={ref => (this.inputUnitsOfMinutes = ref)}
-                        style={[
-                            this.state.activeInputNumber === 4
-                            ? awsome.focusInput
-                            : awsome.infoInput,
-                            {marginRight: 0},
-                        ]}
-                        placeholder="0"
-                        maxLength={1}
-                        keyboardType={"number-pad"}
-                        onChangeText={(unitsOfMinutes) => this.setValue(this.inputDozentsOfSeconds, {unitsOfMinutes})}
-                        onFocus={() => this.changeFocus(4)}>
-                        </TextInput>
-                        <View
-                            style={{
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                marginLeft: 10,
-                            }}>
-                        </View>
-                    </View>
-                    <Text
-                        style={{
-                        fontSize: 20,
-                        color: '#99a8af',
-                        marginTop: 13,
-                        marginRight: 24,
-                        }}>
-                        {this.translateMethod('translation.common.min')}
-                    </Text>
-                </View>
-                <View style={awsome.colonWrapper}>
-                    <Text style={awsome.colon}>:</Text>
-                </View>
-                <View style={{alignItems: 'center'}}>
-                    <View style={{flexDirection: 'row'}}>
-                        <TextInput
-                            ref={ref => (this.inputDozentsOfSeconds = ref)}
-                            style={[
-                                this.state.activeInputNumber === 5
-                                ? awsome.focusInput
-                                : awsome.infoInput,
-                                {marginLeft: 8},
-                            ]}
-                            placeholder="0"
-                            maxLength={1}
-                            keyboardType={"number-pad"}
-                            onChangeText={(dozentsOfSeconds) => this.setValue(this.inputUnitsOfSeconds, {dozentsOfSeconds})}
-                            onFocus={() => this.changeFocus(5)}>
-                        </TextInput>
-                        <TextInput
-                            ref={ref => (this.inputUnitsOfSeconds = ref)}
-                            style={[
-                                this.state.activeInputNumber === 6
-                                ? awsome.focusInput
-                                : awsome.infoInput,
-                                {marginRight: 0},
-                            ]}
-                            placeholder="0"
-                            onChangeText={(unitsOfSeconds) => this.setValue(this.inputUnitsOfSeconds, {unitsOfSeconds})}
-                            maxLength={1}
-                            keyboardType={"number-pad"}
-                            onFocus={() => this.changeFocus(6)}>
-                        </TextInput>
-                    </View>
-                    <Text
-                        style={{
-                        fontSize: 20,
-                        color: '#99a8af',
-                        marginTop: 13,
-                        marginRight: 24,
-                        }}>
-                        {this.translateMethod('translation.common.sec')}
-                    </Text>
+              </View>
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: '#99a8af',
+                  marginTop: 13,
+                  marginRight: 24,
+                }}>
+                {this.translateMethod('translation.common.min')}
+              </Text>
+            </View>
+            <View style={awsome.colonWrapper}>
+              <Text style={awsome.colon}>:</Text>
+            </View>
+            <View style={{ alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row' }}>
+                <TextInput
+                  ref={ref => (this.inputDozentsOfSeconds = ref)}
+                  style={[
+                    this.state.activeInputNumber === 5
+                      ? awsome.focusInput
+                      : awsome.infoInput,
+                    { marginLeft: 8 },
+                  ]}
+                  placeholder="0"
+                  maxLength={1}
+                  keyboardType={"number-pad"}
+                  onChangeText={(dozentsOfSeconds) => this.setValue(this.inputUnitsOfSeconds, { dozentsOfSeconds })}
+                  onFocus={() => this.changeFocus(5)}>
+                </TextInput>
+                <TextInput
+                  ref={ref => (this.inputUnitsOfSeconds = ref)}
+                  style={[
+                    this.state.activeInputNumber === 6
+                      ? awsome.focusInput
+                      : awsome.infoInput,
+                    { marginRight: 0 },
+                  ]}
+                  placeholder="0"
+                  onChangeText={(unitsOfSeconds) => this.setValue(this.inputUnitsOfSeconds, { unitsOfSeconds })}
+                  maxLength={1}
+                  keyboardType={"number-pad"}
+                  onFocus={() => this.changeFocus(6)}>
+                </TextInput>
+              </View>
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: '#99a8af',
+                  marginTop: 13,
+                  marginRight: 24,
+                }}>
+                {this.translateMethod('translation.common.sec')}
+              </Text>
             </View>
           </View>
 
           <View style={awsome.footerBtns}>
-            <TouchableWithoutFeedback  onPress={this.changeModal}>
+            <TouchableWithoutFeedback onPress={this.changeModal}>
               <Text style={awsome.skipBtn}> {this.translateMethod('translation.common.skip')} ></Text>
             </TouchableWithoutFeedback>
             {
               this.state.awesomeValue === '' ?
-              (<TouchableWithoutFeedback onPress={this.changeModal}>
-                <View style={awsome.nextBtn}>
-                  <Text style={awsome.nextBtnText}>{this.translateMethod('translation.common.iDontKnow')}</Text>
-                </View>
-              </TouchableWithoutFeedback>)
-              :
-              (<TouchableWithoutFeedback onPress={this.changeModal}>
-                <View style={awsome.nextBtn}>
-                  <Text style={awsome.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
-                </View>
-              </TouchableWithoutFeedback>)}
+                (<TouchableWithoutFeedback onPress={this.changeModal}>
+                  <View style={awsome.nextBtn}>
+                    <Text style={awsome.nextBtnText}>{this.translateMethod('translation.common.iDontKnow')}</Text>
+                  </View>
+                </TouchableWithoutFeedback>)
+                :
+                (<TouchableWithoutFeedback onPress={this.changeModal}>
+                  <View style={awsome.nextBtn}>
+                    <Text style={awsome.nextBtnText}>{this.translateMethod('translation.common.next')}</Text>
+                  </View>
+                </TouchableWithoutFeedback>)}
           </View>
         </View>
       </View>
@@ -285,7 +289,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
   modalClose: () => dispatch(actions.modalClose()),
   modalOpen: () => dispatch(actions.modalOpen()),
-  changeModal: (value: {awesome: string}) => dispatch(actions.changeRunningModal(value)),
+  changeModal: (value: { awesome: string }) => dispatch(actions.changeRunningModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AwsomeView);
