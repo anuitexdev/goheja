@@ -17,7 +17,7 @@ import Navigation from "./navigation/app.routing";
 import reducers from './redux/reducers';
 import SafeAreaView from 'react-native-safe-area-view';
 import Header from './components/header/header';
-import { StatusBar, Alert } from 'react-native';
+import { StatusBar, Platform } from 'react-native';
 
 let store = createStore(reducers, applyMiddleware(thunk));
 
@@ -32,7 +32,7 @@ export default class App extends Component {
     <Provider store={store}>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={{backgroundColor: 'red'}}/>
-      
+      {Platform.OS === 'ios' ?  <Header/>: null} 
       <Navigation />
       <SafeAreaView forceInset={{bottom: 'always'}} style={{backgroundColor: 'red'}}/>
     </Provider>
