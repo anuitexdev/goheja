@@ -132,6 +132,7 @@ private destroyed:any;
      
         return (
             <ScrollView>
+            <Header/>
                 <SafeAreaView 
                 forceInset={{ top: 'always' }}
                 style={{ flex: 0}}>

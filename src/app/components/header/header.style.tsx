@@ -16,6 +16,7 @@ export default StyleSheet.create({
         right: -15,
         top: -15,
         padding: 10,
+        zIndex: 999
         
     },
     languageItemWrapper: {

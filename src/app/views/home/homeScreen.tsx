@@ -5,6 +5,7 @@ import { NavigationState } from 'react-navigation';
 import CoachFlowAfterRegView from './coachFlowAfterReg/coachFlowAfterReg.view';
 import SportsView from './sports/sports.view'
 import { connect } from 'react-redux';
+import Header from '../../components/header/header';
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
@@ -30,6 +31,7 @@ class HomeScreen extends Component<Props, State> {
     render() {
         return (
             <Fragment>
+            <Header/>
                 <View>
                     {/* <Header/> */}
                     {

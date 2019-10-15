@@ -30,7 +30,7 @@ export default class App extends Component {
   return (
     <Provider store={store}>
       <SafeAreaView style={{backgroundColor: 'red'}}/>
-      <Header/>
+      
       <Navigation />
     </Provider>
   )}
