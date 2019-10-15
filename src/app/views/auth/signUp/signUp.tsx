@@ -1,7 +1,7 @@
 import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { ScrollView, SafeAreaView } from "react-native";
+import { ScrollView, SafeAreaView, Platform } from "react-native";
 import WelcomeScreen from './welcome/welcome';
 import CoachScreen from './coach/coach.view';
 import Header from '../../../components/header/header';
@@ -25,7 +25,7 @@ class SignUpScreen extends Component<Props> {
         return (
                 <ScrollView> 
                     <SafeAreaView style={{flex: 1}}/>
-                     <Header /> 
+                    {Platform.OS === 'android' ?  <Header/>: null} 
                     { 
                         this.props.role === -1 ? <WelcomeScreen navigation={this.props.navigation} /> 
                         : this.props.role === 1 ? <AthleteScreen/> 
