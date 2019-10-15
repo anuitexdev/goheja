@@ -8,13 +8,13 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconFeather from 'react-native-vector-icons/Feather';
 import AddAddressModal from '../../../../components/modals/addAddress/addAddress.modal';
 import axiosInstance from '../../../../shared/interceptors/axios.interceptor';
-import environment from '../../../../environments/environment';
 import Slider from 'react-native-slider';
 import Geolocation from '@react-native-community/geolocation';
 import TranslateService from '../../../../services/translation.service';
 import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import Config from 'react-native-config';
 
 
 interface State {
@@ -110,10 +110,10 @@ class CoachLocationAreaView extends Component<Props, State> {
     this.props.nextStepNumber({});
   };
 
-  public getLatLong = async (lat, long) => {
+  public getLatLong = async (lat: any, long: any) => {
     await axiosInstance
       .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${environment.API_KEY}`,
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${Config.GOOGLE_MAPS_API_KEY}`,
       )
       .then(response => {
         console.log(response);

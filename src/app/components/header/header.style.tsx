@@ -2,6 +2,22 @@ import { StyleSheet, Dimensions } from "react-native";
 const window = Dimensions.get('window');
 
 export default StyleSheet.create({
+
+    headerWrapperIos: {
+        height: 80,
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 20,
+        zIndex:  999,
+    },
+    headerWrapperAndroid: {
+        height: 80,
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 20,
+    },
     languageDropDown: {
         height: 260,
         width: 200,

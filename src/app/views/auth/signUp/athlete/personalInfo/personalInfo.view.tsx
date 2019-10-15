@@ -18,7 +18,7 @@ interface Props {
 interface State {
     height: number,
     weight: number,
-    fat: number,
+    bodyfat: number,
     signUpData: any,
     currentLanguage: string,
     translateMethod: (str: string) => string;
@@ -27,14 +27,14 @@ interface State {
 
 
 class PersonalInfoScreen extends Component<Props, State> {
-    private destroyed:any;
+    private destroyed: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props)
 
         this.state = {
             height: 0,
             weight: 0,
-            fat: 0,
+            bodyfat: 0,
             signUpData: this.props.signUpData,
             currentLanguage: '',
             translateMethod: (str: string) => '',
@@ -44,13 +44,15 @@ class PersonalInfoScreen extends Component<Props, State> {
     componentWillMount = () => {
         this.translationService = new TranslateService();
         this.destroyed = new Subject();
-         this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
-        this.setState({
-            translateMethod: res,
-        })
+        console.log(this.state.signUpData);
+
+        this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
+            this.setState({
+                translateMethod: res,
+            })
         });
 
-         this.translationService.getCurrentLanguage().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
+        this.translationService.getCurrentLanguage().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
             this.setState({
                 currentLanguage: res.language,
             })
@@ -66,22 +68,16 @@ class PersonalInfoScreen extends Component<Props, State> {
     public onInputChange = async (value: any) => {
         await this.setState({
             ...value,
+            signUpData: {
+                ...this.state.signUpData,
+                ...value,
+            }
         });
     }
 
     public onSubmit = async () => {
         this.props.nextStepNumber(this.state);
-        
-        await this.setState({
-            signUpData: {
-                ...this.state.signUpData,
-                height: this.state.height,
-                weight: this.state.weight,
-                fat: this.state.fat,
-                userType: this.props.userType,
-            }
-        });        
-        this.props.signUp({...this.state.signUpData,userType: this.props.userType });
+        this.props.signUp({ ...this.state.signUpData, userType: this.props.userType });
     }
 
     render() {
@@ -136,7 +132,7 @@ class PersonalInfoScreen extends Component<Props, State> {
                                     style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                     placeholder='Type your body fat…'
                                     keyboardType='phone-pad'
-                                    onChangeText={(fat) => this.onInputChange({ fat })}
+                                    onChangeText={(bodyfat) => this.onInputChange({ bodyfat })}
                                 />
                                 <Text style={styles.formUnit}>%</Text>
                             </View>
