@@ -24,7 +24,6 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         paddingBottom: 6,
         paddingTop: 6,
-        zIndex: 8888
     },
     languageItemHeader: {
         flexDirection: 'row',

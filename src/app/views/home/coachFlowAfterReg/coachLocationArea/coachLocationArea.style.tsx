@@ -4,7 +4,7 @@ import window from '../../../../theme/variables';
 
 export default StyleSheet.create({
     mapPageWrapper: {
-        height: window.height,
+        height: window.height - 215,
         position: 'relative'
     },
     title: {
@@ -82,7 +82,8 @@ export default StyleSheet.create({
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         position: 'absolute',
-        bottom: 145,
+        bottom: 0,
+        height: 100,
         right: 0,
         zIndex: 9999,
         width: window.width
@@ -119,21 +120,22 @@ export default StyleSheet.create({
         position: 'absolute',
         zIndex: 9999,
         right: 20,
-        bottom: 165
+        bottom: 20
     },
     nextBtnText: {
         color: 'white'
     },
     range: {
         paddingTop: 25,
-        paddingBottom: 25,
+        paddingBottom: 45,
+        paddingRight: 20,
         paddingLeft: 20,
-        paddingRight: 10,
         backgroundColor: 'white',
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         position: 'absolute',
-        bottom: 145,
+        bottom: 0,
+        height: 150,
         right: 0,
         zIndex: 9999,
         width: window.width

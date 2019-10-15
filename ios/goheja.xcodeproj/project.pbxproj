@@ -8,125 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* gohejaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gohejaTests.m */; };
+		0E7909DA767B42E59134EA5C /* libPods-goheja.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4366E930429692CFE33097BA /* libPods-goheja.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2B0719B45F74E51C966A91F3 /* libPods-goheja-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FB227150FC21E720B4242EC /* libPods-goheja-tvOS.a */; };
+		1B1B0E632233CFB3463A9DF8 /* libPods-gohejaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DD5233A2B18F0165ABDF0C /* libPods-gohejaTests.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* gohejaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gohejaTests.m */; };
 		4B427900234B2D5A00744BA2 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4278FF234B2D5A00744BA2 /* HealthKit.framework */; };
-		5B37B9655123BD63A15BE1B4 /* libPods-goheja.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC2795B8AB97B9B5CFC63FA /* libPods-goheja.a */; settings = {ATTRIBUTES = (Required, ); }; };
-		811AE3D1EF42CDB37231CE31 /* libPods-goheja-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 229786DBE183683F622CB0E7 /* libPods-goheja-tvOSTests.a */; };
-		84C49728234F4C9A00DE65CF /* Icon-App-76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970D234F4C9A00DE65CF /* Icon-App-76x76@2x.png */; };
-		84C49729234F4C9A00DE65CF /* Icon-App-76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970D234F4C9A00DE65CF /* Icon-App-76x76@2x.png */; };
-		84C4972A234F4C9A00DE65CF /* Icon-App-76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970D234F4C9A00DE65CF /* Icon-App-76x76@2x.png */; };
-		84C4972B234F4C9A00DE65CF /* Icon-App-76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970D234F4C9A00DE65CF /* Icon-App-76x76@2x.png */; };
-		84C4972C234F4C9A00DE65CF /* Icon-App-29x29@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970E234F4C9A00DE65CF /* Icon-App-29x29@1x.png */; };
-		84C4972D234F4C9A00DE65CF /* Icon-App-29x29@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970E234F4C9A00DE65CF /* Icon-App-29x29@1x.png */; };
-		84C4972E234F4C9A00DE65CF /* Icon-App-29x29@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970E234F4C9A00DE65CF /* Icon-App-29x29@1x.png */; };
-		84C4972F234F4C9A00DE65CF /* Icon-App-29x29@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970E234F4C9A00DE65CF /* Icon-App-29x29@1x.png */; };
-		84C49730234F4C9A00DE65CF /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970F234F4C9A00DE65CF /* Icon-40@2x.png */; };
-		84C49731234F4C9A00DE65CF /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970F234F4C9A00DE65CF /* Icon-40@2x.png */; };
-		84C49732234F4C9A00DE65CF /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970F234F4C9A00DE65CF /* Icon-40@2x.png */; };
-		84C49733234F4C9A00DE65CF /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4970F234F4C9A00DE65CF /* Icon-40@2x.png */; };
-		84C49734234F4C9A00DE65CF /* Icon-App-40x40@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49710234F4C9A00DE65CF /* Icon-App-40x40@1x.png */; };
-		84C49735234F4C9A00DE65CF /* Icon-App-40x40@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49710234F4C9A00DE65CF /* Icon-App-40x40@1x.png */; };
-		84C49736234F4C9A00DE65CF /* Icon-App-40x40@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49710234F4C9A00DE65CF /* Icon-App-40x40@1x.png */; };
-		84C49737234F4C9A00DE65CF /* Icon-App-40x40@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49710234F4C9A00DE65CF /* Icon-App-40x40@1x.png */; };
-		84C49738234F4C9A00DE65CF /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49711234F4C9A00DE65CF /* Icon-29@2x.png */; };
-		84C49739234F4C9A00DE65CF /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49711234F4C9A00DE65CF /* Icon-29@2x.png */; };
-		84C4973A234F4C9A00DE65CF /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49711234F4C9A00DE65CF /* Icon-29@2x.png */; };
-		84C4973B234F4C9A00DE65CF /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49711234F4C9A00DE65CF /* Icon-29@2x.png */; };
-		84C4973C234F4C9A00DE65CF /* Icon-App-20x20@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49712234F4C9A00DE65CF /* Icon-App-20x20@1x.png */; };
-		84C4973D234F4C9A00DE65CF /* Icon-App-20x20@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49712234F4C9A00DE65CF /* Icon-App-20x20@1x.png */; };
-		84C4973E234F4C9A00DE65CF /* Icon-App-20x20@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49712234F4C9A00DE65CF /* Icon-App-20x20@1x.png */; };
-		84C4973F234F4C9A00DE65CF /* Icon-App-20x20@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49712234F4C9A00DE65CF /* Icon-App-20x20@1x.png */; };
-		84C49740234F4C9A00DE65CF /* Icon-App-40x40@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49713234F4C9A00DE65CF /* Icon-App-40x40@2x-1.png */; };
-		84C49741234F4C9A00DE65CF /* Icon-App-40x40@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49713234F4C9A00DE65CF /* Icon-App-40x40@2x-1.png */; };
-		84C49742234F4C9A00DE65CF /* Icon-App-40x40@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49713234F4C9A00DE65CF /* Icon-App-40x40@2x-1.png */; };
-		84C49743234F4C9A00DE65CF /* Icon-App-40x40@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49713234F4C9A00DE65CF /* Icon-App-40x40@2x-1.png */; };
-		84C49744234F4C9A00DE65CF /* Icon-App-20x20@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49714234F4C9A00DE65CF /* Icon-App-20x20@2x-1.png */; };
-		84C49745234F4C9A00DE65CF /* Icon-App-20x20@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49714234F4C9A00DE65CF /* Icon-App-20x20@2x-1.png */; };
-		84C49746234F4C9A00DE65CF /* Icon-App-20x20@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49714234F4C9A00DE65CF /* Icon-App-20x20@2x-1.png */; };
-		84C49747234F4C9A00DE65CF /* Icon-App-20x20@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49714234F4C9A00DE65CF /* Icon-App-20x20@2x-1.png */; };
-		84C49748234F4C9A00DE65CF /* Icon-App-83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49715234F4C9A00DE65CF /* Icon-App-83.5x83.5@2x.png */; };
-		84C49749234F4C9A00DE65CF /* Icon-App-83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49715234F4C9A00DE65CF /* Icon-App-83.5x83.5@2x.png */; };
-		84C4974A234F4C9A00DE65CF /* Icon-App-83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49715234F4C9A00DE65CF /* Icon-App-83.5x83.5@2x.png */; };
-		84C4974B234F4C9A00DE65CF /* Icon-App-83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49715234F4C9A00DE65CF /* Icon-App-83.5x83.5@2x.png */; };
-		84C4974C234F4C9A00DE65CF /* Icon-44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49716234F4C9A00DE65CF /* Icon-44@2x.png */; };
-		84C4974D234F4C9A00DE65CF /* Icon-44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49716234F4C9A00DE65CF /* Icon-44@2x.png */; };
-		84C4974E234F4C9A00DE65CF /* Icon-44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49716234F4C9A00DE65CF /* Icon-44@2x.png */; };
-		84C4974F234F4C9A00DE65CF /* Icon-44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49716234F4C9A00DE65CF /* Icon-44@2x.png */; };
-		84C49750234F4C9A00DE65CF /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49717234F4C9A00DE65CF /* Icon-29@3x.png */; };
-		84C49751234F4C9A00DE65CF /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49717234F4C9A00DE65CF /* Icon-29@3x.png */; };
-		84C49752234F4C9A00DE65CF /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49717234F4C9A00DE65CF /* Icon-29@3x.png */; };
-		84C49753234F4C9A00DE65CF /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49717234F4C9A00DE65CF /* Icon-29@3x.png */; };
-		84C49754234F4C9A00DE65CF /* Icon-App-20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49718234F4C9A00DE65CF /* Icon-App-20x20@3x.png */; };
-		84C49755234F4C9A00DE65CF /* Icon-App-20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49718234F4C9A00DE65CF /* Icon-App-20x20@3x.png */; };
-		84C49756234F4C9A00DE65CF /* Icon-App-20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49718234F4C9A00DE65CF /* Icon-App-20x20@3x.png */; };
-		84C49757234F4C9A00DE65CF /* Icon-App-20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49718234F4C9A00DE65CF /* Icon-App-20x20@3x.png */; };
-		84C49758234F4C9A00DE65CF /* Icon-27.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49719234F4C9A00DE65CF /* Icon-27.5@2x.png */; };
-		84C49759234F4C9A00DE65CF /* Icon-27.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49719234F4C9A00DE65CF /* Icon-27.5@2x.png */; };
-		84C4975A234F4C9A00DE65CF /* Icon-27.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49719234F4C9A00DE65CF /* Icon-27.5@2x.png */; };
-		84C4975B234F4C9A00DE65CF /* Icon-27.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49719234F4C9A00DE65CF /* Icon-27.5@2x.png */; };
-		84C4975C234F4C9A00DE65CF /* ItunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971A234F4C9A00DE65CF /* ItunesArtwork@2x.png */; };
-		84C4975D234F4C9A00DE65CF /* ItunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971A234F4C9A00DE65CF /* ItunesArtwork@2x.png */; };
-		84C4975E234F4C9A00DE65CF /* ItunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971A234F4C9A00DE65CF /* ItunesArtwork@2x.png */; };
-		84C4975F234F4C9A00DE65CF /* ItunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971A234F4C9A00DE65CF /* ItunesArtwork@2x.png */; };
-		84C49760234F4C9A00DE65CF /* Icon-86@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971B234F4C9A00DE65CF /* Icon-86@2x.png */; };
-		84C49761234F4C9A00DE65CF /* Icon-86@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971B234F4C9A00DE65CF /* Icon-86@2x.png */; };
-		84C49762234F4C9A00DE65CF /* Icon-86@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971B234F4C9A00DE65CF /* Icon-86@2x.png */; };
-		84C49763234F4C9A00DE65CF /* Icon-86@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971B234F4C9A00DE65CF /* Icon-86@2x.png */; };
-		84C49764234F4C9A00DE65CF /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971C234F4C9A00DE65CF /* Contents.json */; };
-		84C49765234F4C9A00DE65CF /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971C234F4C9A00DE65CF /* Contents.json */; };
-		84C49766234F4C9A00DE65CF /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971C234F4C9A00DE65CF /* Contents.json */; };
-		84C49767234F4C9A00DE65CF /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971C234F4C9A00DE65CF /* Contents.json */; };
-		84C49768234F4C9A00DE65CF /* Icon-98@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971D234F4C9A00DE65CF /* Icon-98@2x.png */; };
-		84C49769234F4C9A00DE65CF /* Icon-98@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971D234F4C9A00DE65CF /* Icon-98@2x.png */; };
-		84C4976A234F4C9A00DE65CF /* Icon-98@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971D234F4C9A00DE65CF /* Icon-98@2x.png */; };
-		84C4976B234F4C9A00DE65CF /* Icon-98@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971D234F4C9A00DE65CF /* Icon-98@2x.png */; };
-		84C4976C234F4C9A00DE65CF /* Icon-App-20x20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971E234F4C9A00DE65CF /* Icon-App-20x20@2x.png */; };
-		84C4976D234F4C9A00DE65CF /* Icon-App-20x20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971E234F4C9A00DE65CF /* Icon-App-20x20@2x.png */; };
-		84C4976E234F4C9A00DE65CF /* Icon-App-20x20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971E234F4C9A00DE65CF /* Icon-App-20x20@2x.png */; };
-		84C4976F234F4C9A00DE65CF /* Icon-App-20x20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971E234F4C9A00DE65CF /* Icon-App-20x20@2x.png */; };
-		84C49770234F4C9A00DE65CF /* Icon-App-29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971F234F4C9A00DE65CF /* Icon-App-29x29@3x.png */; };
-		84C49771234F4C9A00DE65CF /* Icon-App-29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971F234F4C9A00DE65CF /* Icon-App-29x29@3x.png */; };
-		84C49772234F4C9A00DE65CF /* Icon-App-29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971F234F4C9A00DE65CF /* Icon-App-29x29@3x.png */; };
-		84C49773234F4C9A00DE65CF /* Icon-App-29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C4971F234F4C9A00DE65CF /* Icon-App-29x29@3x.png */; };
-		84C49774234F4C9A00DE65CF /* Icon-App-40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49720234F4C9A00DE65CF /* Icon-App-40x40@2x.png */; };
-		84C49775234F4C9A00DE65CF /* Icon-App-40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49720234F4C9A00DE65CF /* Icon-App-40x40@2x.png */; };
-		84C49776234F4C9A00DE65CF /* Icon-App-40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49720234F4C9A00DE65CF /* Icon-App-40x40@2x.png */; };
-		84C49777234F4C9A00DE65CF /* Icon-App-40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49720234F4C9A00DE65CF /* Icon-App-40x40@2x.png */; };
-		84C49778234F4C9A00DE65CF /* Icon-App-29x29@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49721234F4C9A00DE65CF /* Icon-App-29x29@2x-1.png */; };
-		84C49779234F4C9A00DE65CF /* Icon-App-29x29@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49721234F4C9A00DE65CF /* Icon-App-29x29@2x-1.png */; };
-		84C4977A234F4C9A00DE65CF /* Icon-App-29x29@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49721234F4C9A00DE65CF /* Icon-App-29x29@2x-1.png */; };
-		84C4977B234F4C9A00DE65CF /* Icon-App-29x29@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49721234F4C9A00DE65CF /* Icon-App-29x29@2x-1.png */; };
-		84C4977C234F4C9A00DE65CF /* Icon-24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49722234F4C9A00DE65CF /* Icon-24@2x.png */; };
-		84C4977D234F4C9A00DE65CF /* Icon-24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49722234F4C9A00DE65CF /* Icon-24@2x.png */; };
-		84C4977E234F4C9A00DE65CF /* Icon-24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49722234F4C9A00DE65CF /* Icon-24@2x.png */; };
-		84C4977F234F4C9A00DE65CF /* Icon-24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49722234F4C9A00DE65CF /* Icon-24@2x.png */; };
-		84C49780234F4C9A00DE65CF /* Icon-App-60x60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49723234F4C9A00DE65CF /* Icon-App-60x60@3x.png */; };
-		84C49781234F4C9A00DE65CF /* Icon-App-60x60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49723234F4C9A00DE65CF /* Icon-App-60x60@3x.png */; };
-		84C49782234F4C9A00DE65CF /* Icon-App-60x60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49723234F4C9A00DE65CF /* Icon-App-60x60@3x.png */; };
-		84C49783234F4C9A00DE65CF /* Icon-App-60x60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49723234F4C9A00DE65CF /* Icon-App-60x60@3x.png */; };
-		84C49784234F4C9A00DE65CF /* Icon-App-60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49724234F4C9A00DE65CF /* Icon-App-60x60@2x.png */; };
-		84C49785234F4C9A00DE65CF /* Icon-App-60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49724234F4C9A00DE65CF /* Icon-App-60x60@2x.png */; };
-		84C49786234F4C9A00DE65CF /* Icon-App-60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49724234F4C9A00DE65CF /* Icon-App-60x60@2x.png */; };
-		84C49787234F4C9A00DE65CF /* Icon-App-60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49724234F4C9A00DE65CF /* Icon-App-60x60@2x.png */; };
-		84C49788234F4C9A00DE65CF /* Icon-App-76x76@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49725234F4C9A00DE65CF /* Icon-App-76x76@1x.png */; };
-		84C49789234F4C9A00DE65CF /* Icon-App-76x76@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49725234F4C9A00DE65CF /* Icon-App-76x76@1x.png */; };
-		84C4978A234F4C9A00DE65CF /* Icon-App-76x76@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49725234F4C9A00DE65CF /* Icon-App-76x76@1x.png */; };
-		84C4978B234F4C9A00DE65CF /* Icon-App-76x76@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49725234F4C9A00DE65CF /* Icon-App-76x76@1x.png */; };
-		84C4978C234F4C9A00DE65CF /* Icon-App-40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49726234F4C9A00DE65CF /* Icon-App-40x40@3x.png */; };
-		84C4978D234F4C9A00DE65CF /* Icon-App-40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49726234F4C9A00DE65CF /* Icon-App-40x40@3x.png */; };
-		84C4978E234F4C9A00DE65CF /* Icon-App-40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49726234F4C9A00DE65CF /* Icon-App-40x40@3x.png */; };
-		84C4978F234F4C9A00DE65CF /* Icon-App-40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49726234F4C9A00DE65CF /* Icon-App-40x40@3x.png */; };
-		84C49790234F4C9A00DE65CF /* Icon-App-29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49727234F4C9A00DE65CF /* Icon-App-29x29@2x.png */; };
-		84C49791234F4C9A00DE65CF /* Icon-App-29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49727234F4C9A00DE65CF /* Icon-App-29x29@2x.png */; };
-		84C49792234F4C9A00DE65CF /* Icon-App-29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49727234F4C9A00DE65CF /* Icon-App-29x29@2x.png */; };
-		84C49793234F4C9A00DE65CF /* Icon-App-29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C49727234F4C9A00DE65CF /* Icon-App-29x29@2x.png */; };
-		84EFE332234F700F00E338BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EFE331234F700F00E338BB /* Assets.xcassets */; };
-		DD0CCDD92F69CEFE4A701B00 /* libPods-gohejaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F177ED55F6A43D149382D429 /* libPods-gohejaTests.a */; };
+		C02A8045BE7BEF461CBFDDEE /* libPods-goheja-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0B86DE4FE33A6B9C7CA1647 /* libPods-goheja-tvOSTests.a */; };
+		C0D563792583B3AD220A72D1 /* libPods-goheja-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B6B558518577F3D8023B1A /* libPods-goheja-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +42,7 @@
 		00E356EE1AD99517003FC87E /* gohejaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gohejaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* gohejaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gohejaTests.m; sourceTree = "<group>"; };
+		079D87EE8F57CCCC3A843FF0 /* Pods-gohejaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gohejaTests.release.xcconfig"; path = "Target Support Files/Pods-gohejaTests/Pods-gohejaTests.release.xcconfig"; sourceTree = "<group>"; };
 		07F915729FEC4F45A897DE04 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		0A81FF8226094CCE830E7FEE /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		102A16A1A966445C8AE74A60 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
@@ -162,61 +54,32 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = goheja/main.m; sourceTree = "<group>"; };
 		154147D9518D44368CF02450 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		15A53138CD0B47ED81B844F4 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		16D6884B784C779C9C6B8AA9 /* Pods-goheja-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOS.release.xcconfig"; path = "Target Support Files/Pods-goheja-tvOS/Pods-goheja-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		229786DBE183683F622CB0E7 /* libPods-goheja-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-goheja-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22B6B558518577F3D8023B1A /* libPods-goheja-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-goheja-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* goheja-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "goheja-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* goheja-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "goheja-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E110901D2E042D58FD70339 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		3365A6F77C7B48EE9C4820C1 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		37FD8F6BEFF64B0B855CCB41 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		380ED8DEF1A3845E68711E25 /* Pods-goheja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja.release.xcconfig"; path = "Target Support Files/Pods-goheja/Pods-goheja.release.xcconfig"; sourceTree = "<group>"; };
 		40ED687963364083A83A5267 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		4366E930429692CFE33097BA /* libPods-goheja.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-goheja.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B4278FF234B2D5A00744BA2 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		4BD46EE7234729FA0077D15A /* goheja.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = goheja.entitlements; path = goheja/goheja.entitlements; sourceTree = "<group>"; };
-		4DC2795B8AB97B9B5CFC63FA /* libPods-goheja.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-goheja.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53B9F521D1934706A856AF5A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		5BF6ECFEB75FE4CDD487226D /* Pods-goheja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja.debug.xcconfig"; path = "Target Support Files/Pods-goheja/Pods-goheja.debug.xcconfig"; sourceTree = "<group>"; };
-		6FB227150FC21E720B4242EC /* libPods-goheja-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-goheja-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		84C4970D234F4C9A00DE65CF /* Icon-App-76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-76x76@2x.png"; sourceTree = "<group>"; };
-		84C4970E234F4C9A00DE65CF /* Icon-App-29x29@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-29x29@1x.png"; sourceTree = "<group>"; };
-		84C4970F234F4C9A00DE65CF /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
-		84C49710234F4C9A00DE65CF /* Icon-App-40x40@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-40x40@1x.png"; sourceTree = "<group>"; };
-		84C49711234F4C9A00DE65CF /* Icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@2x.png"; sourceTree = "<group>"; };
-		84C49712234F4C9A00DE65CF /* Icon-App-20x20@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-20x20@1x.png"; sourceTree = "<group>"; };
-		84C49713234F4C9A00DE65CF /* Icon-App-40x40@2x-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-40x40@2x-1.png"; sourceTree = "<group>"; };
-		84C49714234F4C9A00DE65CF /* Icon-App-20x20@2x-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-20x20@2x-1.png"; sourceTree = "<group>"; };
-		84C49715234F4C9A00DE65CF /* Icon-App-83.5x83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-83.5x83.5@2x.png"; sourceTree = "<group>"; };
-		84C49716234F4C9A00DE65CF /* Icon-44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-44@2x.png"; sourceTree = "<group>"; };
-		84C49717234F4C9A00DE65CF /* Icon-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@3x.png"; sourceTree = "<group>"; };
-		84C49718234F4C9A00DE65CF /* Icon-App-20x20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-20x20@3x.png"; sourceTree = "<group>"; };
-		84C49719234F4C9A00DE65CF /* Icon-27.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-27.5@2x.png"; sourceTree = "<group>"; };
-		84C4971A234F4C9A00DE65CF /* ItunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ItunesArtwork@2x.png"; sourceTree = "<group>"; };
-		84C4971B234F4C9A00DE65CF /* Icon-86@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-86@2x.png"; sourceTree = "<group>"; };
-		84C4971C234F4C9A00DE65CF /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
-		84C4971D234F4C9A00DE65CF /* Icon-98@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-98@2x.png"; sourceTree = "<group>"; };
-		84C4971E234F4C9A00DE65CF /* Icon-App-20x20@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-20x20@2x.png"; sourceTree = "<group>"; };
-		84C4971F234F4C9A00DE65CF /* Icon-App-29x29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-29x29@3x.png"; sourceTree = "<group>"; };
-		84C49720234F4C9A00DE65CF /* Icon-App-40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-40x40@2x.png"; sourceTree = "<group>"; };
-		84C49721234F4C9A00DE65CF /* Icon-App-29x29@2x-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-29x29@2x-1.png"; sourceTree = "<group>"; };
-		84C49722234F4C9A00DE65CF /* Icon-24@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-24@2x.png"; sourceTree = "<group>"; };
-		84C49723234F4C9A00DE65CF /* Icon-App-60x60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-60x60@3x.png"; sourceTree = "<group>"; };
-		84C49724234F4C9A00DE65CF /* Icon-App-60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-60x60@2x.png"; sourceTree = "<group>"; };
-		84C49725234F4C9A00DE65CF /* Icon-App-76x76@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-76x76@1x.png"; sourceTree = "<group>"; };
-		84C49726234F4C9A00DE65CF /* Icon-App-40x40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-40x40@3x.png"; sourceTree = "<group>"; };
-		84C49727234F4C9A00DE65CF /* Icon-App-29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-29x29@2x.png"; sourceTree = "<group>"; };
-		84EFE331234F700F00E338BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		87E04101E716D45348CD31DC /* Pods-gohejaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gohejaTests.debug.xcconfig"; path = "Target Support Files/Pods-gohejaTests/Pods-gohejaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		727BD041C88E7CB56B3A8058 /* Pods-gohejaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gohejaTests.debug.xcconfig"; path = "Target Support Files/Pods-gohejaTests/Pods-gohejaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7E8B5A1C313A73372CE46DE9 /* Pods-goheja-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-goheja-tvOSTests/Pods-goheja-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8943768669424CFF8DA38B28 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
-		894E0DAB2340624D77218EF4 /* Pods-goheja-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-goheja-tvOS/Pods-goheja-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		924EE6BC2A0DFD569FBEB1B3 /* Pods-goheja-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-goheja-tvOSTests/Pods-goheja-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		ABF238D5EC47EC2B3442B4FF /* Pods-gohejaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gohejaTests.release.xcconfig"; path = "Target Support Files/Pods-gohejaTests/Pods-gohejaTests.release.xcconfig"; sourceTree = "<group>"; };
+		8E529CB2A290C18F69B5392E /* Pods-goheja-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-goheja-tvOSTests/Pods-goheja-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		8EDCA83D19795D0DFA5C3F89 /* Pods-goheja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja.debug.xcconfig"; path = "Target Support Files/Pods-goheja/Pods-goheja.debug.xcconfig"; sourceTree = "<group>"; };
 		AC7A8987826E48529088F0D3 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		B426C309F56040B2F1CDD9BA /* Pods-goheja-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-goheja-tvOSTests/Pods-goheja-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B49C517374204DC593FAED09 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		C50D9F0D26670C6B25ADD6A9 /* Pods-goheja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja.release.xcconfig"; path = "Target Support Files/Pods-goheja/Pods-goheja.release.xcconfig"; sourceTree = "<group>"; };
+		C4DD5233A2B18F0165ABDF0C /* libPods-gohejaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gohejaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C734C7F9F69337197F9D53B4 /* Pods-goheja-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOS.release.xcconfig"; path = "Target Support Files/Pods-goheja-tvOS/Pods-goheja-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		E0B86DE4FE33A6B9C7CA1647 /* libPods-goheja-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-goheja-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E168BD59CB42480BABBAE12F /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		E3BBF4AF8BAF644D190A6382 /* Pods-goheja-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-goheja-tvOS/Pods-goheja-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F177ED55F6A43D149382D429 /* libPods-gohejaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gohejaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2BAD5918394436382AC646D /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		FAE191677F1149978E3FFE97 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,7 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD0CCDD92F69CEFE4A701B00 /* libPods-gohejaTests.a in Frameworks */,
+				1B1B0E632233CFB3463A9DF8 /* libPods-gohejaTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,8 +97,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B37B9655123BD63A15BE1B4 /* libPods-goheja.a in Frameworks */,
 				4B427900234B2D5A00744BA2 /* HealthKit.framework in Frameworks */,
+				0E7909DA767B42E59134EA5C /* libPods-goheja.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B0719B45F74E51C966A91F3 /* libPods-goheja-tvOS.a in Frameworks */,
+				C0D563792583B3AD220A72D1 /* libPods-goheja-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				811AE3D1EF42CDB37231CE31 /* libPods-goheja-tvOSTests.a in Frameworks */,
+				C02A8045BE7BEF461CBFDDEE /* libPods-goheja-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,10 +159,10 @@
 				4B4278FF234B2D5A00744BA2 /* HealthKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				4DC2795B8AB97B9B5CFC63FA /* libPods-goheja.a */,
-				6FB227150FC21E720B4242EC /* libPods-goheja-tvOS.a */,
-				229786DBE183683F622CB0E7 /* libPods-goheja-tvOSTests.a */,
-				F177ED55F6A43D149382D429 /* libPods-gohejaTests.a */,
+				4366E930429692CFE33097BA /* libPods-goheja.a */,
+				22B6B558518577F3D8023B1A /* libPods-goheja-tvOS.a */,
+				E0B86DE4FE33A6B9C7CA1647 /* libPods-goheja-tvOSTests.a */,
+				C4DD5233A2B18F0165ABDF0C /* libPods-gohejaTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -399,14 +262,14 @@
 		A674A3A92AE70E3BF9E695B7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5BF6ECFEB75FE4CDD487226D /* Pods-goheja.debug.xcconfig */,
-				C50D9F0D26670C6B25ADD6A9 /* Pods-goheja.release.xcconfig */,
-				894E0DAB2340624D77218EF4 /* Pods-goheja-tvOS.debug.xcconfig */,
-				16D6884B784C779C9C6B8AA9 /* Pods-goheja-tvOS.release.xcconfig */,
-				B426C309F56040B2F1CDD9BA /* Pods-goheja-tvOSTests.debug.xcconfig */,
-				924EE6BC2A0DFD569FBEB1B3 /* Pods-goheja-tvOSTests.release.xcconfig */,
-				87E04101E716D45348CD31DC /* Pods-gohejaTests.debug.xcconfig */,
-				ABF238D5EC47EC2B3442B4FF /* Pods-gohejaTests.release.xcconfig */,
+				8EDCA83D19795D0DFA5C3F89 /* Pods-goheja.debug.xcconfig */,
+				380ED8DEF1A3845E68711E25 /* Pods-goheja.release.xcconfig */,
+				E3BBF4AF8BAF644D190A6382 /* Pods-goheja-tvOS.debug.xcconfig */,
+				C734C7F9F69337197F9D53B4 /* Pods-goheja-tvOS.release.xcconfig */,
+				7E8B5A1C313A73372CE46DE9 /* Pods-goheja-tvOSTests.debug.xcconfig */,
+				8E529CB2A290C18F69B5392E /* Pods-goheja-tvOSTests.release.xcconfig */,
+				727BD041C88E7CB56B3A8058 /* Pods-gohejaTests.debug.xcconfig */,
+				079D87EE8F57CCCC3A843FF0 /* Pods-gohejaTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -418,7 +281,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "gohejaTests" */;
 			buildPhases = (
-				662BAB415B7534BD5A4C3E5A /* [CP] Check Pods Manifest.lock */,
+				C1D16794794974C2D5D22E45 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -437,13 +300,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "goheja" */;
 			buildPhases = (
-				81C5779C09D635FE82996282 /* [CP] Check Pods Manifest.lock */,
+				85111F08B0C2CA30A4110E01 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				382724873F75B410759E5192 /* [CP] Copy Pods Resources */,
+				3D7DB6C8361DEA09D400102E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -458,7 +321,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "goheja-tvOS" */;
 			buildPhases = (
-				4DC2E59F7BC4F8B2365FA2C9 /* [CP] Check Pods Manifest.lock */,
+				5C7F5169AB5F71FD4BD097B9 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -478,7 +341,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "goheja-tvOSTests" */;
 			buildPhases = (
-				E46B605335F18BBE052466D5 /* [CP] Check Pods Manifest.lock */,
+				FA9C6876EA351B06412FA931 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -720,7 +583,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		382724873F75B410759E5192 /* [CP] Copy Pods Resources */ = {
+		3D7DB6C8361DEA09D400102E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -728,6 +591,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-goheja/Pods-goheja-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
@@ -748,6 +612,7 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
@@ -770,7 +635,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-goheja/Pods-goheja-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4DC2E59F7BC4F8B2365FA2C9 /* [CP] Check Pods Manifest.lock */ = {
+		5C7F5169AB5F71FD4BD097B9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -792,29 +657,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		662BAB415B7534BD5A4C3E5A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-gohejaTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		81C5779C09D635FE82996282 /* [CP] Check Pods Manifest.lock */ = {
+		85111F08B0C2CA30A4110E01 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -836,7 +679,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E46B605335F18BBE052466D5 /* [CP] Check Pods Manifest.lock */ = {
+		C1D16794794974C2D5D22E45 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gohejaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA9C6876EA351B06412FA931 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -963,7 +828,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 87E04101E716D45348CD31DC /* Pods-gohejaTests.debug.xcconfig */;
+			baseConfigurationReference = 727BD041C88E7CB56B3A8058 /* Pods-gohejaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
@@ -989,7 +854,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ABF238D5EC47EC2B3442B4FF /* Pods-gohejaTests.release.xcconfig */;
+			baseConfigurationReference = 079D87EE8F57CCCC3A843FF0 /* Pods-gohejaTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
@@ -1012,7 +877,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BF6ECFEB75FE4CDD487226D /* Pods-goheja.debug.xcconfig */;
+			baseConfigurationReference = 8EDCA83D19795D0DFA5C3F89 /* Pods-goheja.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = goheja/goheja.entitlements;
@@ -1037,7 +902,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C50D9F0D26670C6B25ADD6A9 /* Pods-goheja.release.xcconfig */;
+			baseConfigurationReference = 380ED8DEF1A3845E68711E25 /* Pods-goheja.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = goheja/goheja.entitlements;
@@ -1062,7 +927,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 894E0DAB2340624D77218EF4 /* Pods-goheja-tvOS.debug.xcconfig */;
+			baseConfigurationReference = E3BBF4AF8BAF644D190A6382 /* Pods-goheja-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1093,7 +958,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 16D6884B784C779C9C6B8AA9 /* Pods-goheja-tvOS.release.xcconfig */;
+			baseConfigurationReference = C734C7F9F69337197F9D53B4 /* Pods-goheja-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1124,7 +989,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B426C309F56040B2F1CDD9BA /* Pods-goheja-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 7E8B5A1C313A73372CE46DE9 /* Pods-goheja-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1154,7 +1019,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 924EE6BC2A0DFD569FBEB1B3 /* Pods-goheja-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 8E529CB2A290C18F69B5392E /* Pods-goheja-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
