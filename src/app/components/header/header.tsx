@@ -7,6 +7,7 @@ import header from './header.style';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/auth.actions';
 import BaseTranslateService from '../../shared/helpers/basicTranslate.service';
+import styles from 'src/app/views/auth/signUp/athlete/personalInfo/styles';
 
 interface Props {
   changeLanguage: (data: string) => void,
@@ -73,14 +74,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
     return (
 
       <View
-        style={{
-          height: 80,
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          alignItems: 'center',
-          padding: 20,
-          zIndex: Platform.OS === 'ios' ? 999 : 0,
-        }}>
+        style={Platform.OS === 'android'? header.headerWrapperAndroid : header.headerWrapperIos}>
         <Text
           style={{
             color: 'black',
