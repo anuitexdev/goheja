@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Platform } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
@@ -79,7 +79,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
           flexDirection: 'row',
           alignItems: 'center',
           padding: 20,
-          // zIndex: 9999,
+          zIndex: Platform.OS === 'ios' ? 999 : 0,
         }}>
         <Text
           style={{
