@@ -79,7 +79,7 @@ class CoachLocationAreaView extends Component<Props, State> {
   }
 
   componentWillMount() {
-    this.getCurrentLocation();
+    //this.getCurrentLocation();
     this.translationService = new TranslateService();
     this.destroyed = new Subject();
     this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
@@ -126,17 +126,7 @@ class CoachLocationAreaView extends Component<Props, State> {
   };
 
   getCurrentLocation = async () => {
-    if(Platform.OS == 'ios') {
-      Geolocation.getCurrentPosition(
-        position => {
-          console.log(position)
-        },
-        error => {
-          Alert.alert(error.message)
-        },
-        {enableHighAccuracy: false, timeout: 50000}
-      );
-    }
+  
     await request_location_runtime_permission();
     Geolocation.getCurrentPosition(
       async (position) => {

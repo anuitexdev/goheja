@@ -133,6 +133,8 @@ PODS:
     - React-cxxreact (= 0.60.5)
     - React-jsi (= 0.60.5)
   - React-jsinspector (0.60.5)
+  - react-native-config (0.11.7):
+    - React
   - react-native-fbsdk (1.0.4):
     - React
     - react-native-fbsdk/Core (= 1.0.4)
@@ -211,6 +213,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-config (from `../node_modules/react-native-config`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-google-maps (from `../node_modules/react-native-maps/react-native-google-maps.podspec`)
@@ -268,6 +271,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-config:
+    :path: "../node_modules/react-native-config"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
   react-native-geolocation:
@@ -317,10 +322,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   react-native-google-maps:
-    :commit: de122bf654fbda9ac8106d328b9e4d1b116306f3
+    :commit: 348b1ecbf0320bc7e64b8095ef02c69f130a0aae
     :git: https://github.com/react-native-community/react-native-maps.git
   react-native-maps:
-    :commit: de122bf654fbda9ac8106d328b9e4d1b116306f3
+    :commit: 348b1ecbf0320bc7e64b8095ef02c69f130a0aae
     :git: https://github.com/react-native-community/react-native-maps.git
 
 SPEC CHECKSUMS:
@@ -343,6 +348,7 @@ SPEC CHECKSUMS:
   React-jsi: 4d8c9efb6312a9725b18d6fc818ffc103f60fec2
   React-jsiexecutor: 90ad2f9db09513fc763bc757fdc3c4ff8bde2a30
   React-jsinspector: e08662d1bf5b129a3d556eb9ea343a3f40353ae4
+  react-native-config: 55548054279d92e0e4566ea15a8b9b81028ec342
   react-native-fbsdk: 45e28bbab3e905cbc635c0bdd3444b372e933ae9
   react-native-geolocation: cbd9d6bd06bac411eed2671810f454d4908484a8
   react-native-google-maps: 88d750ad441b19c24885f20d43a55ecac25939b5
@@ -367,6 +373,6 @@ SPEC CHECKSUMS:
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   yoga: 312528f5bbbba37b4dcea5ef00e8b4033fdd9411
 
-PODFILE CHECKSUM: b64a25f278f0c4a919ab67cdd5a03181f8653fc8
+PODFILE CHECKSUM: 71ca5c5298f20363017035c5d08e07625d4fe8b1
 
-COCOAPODS: 1.8.1
+COCOAPODS: 1.8.3

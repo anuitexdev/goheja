@@ -64,3 +64,5 @@ buck-out/
 *.db
 *.opendb
 /.vs
+# react-native-config codegen
+ios/tmp.xcconfig

@@ -18,6 +18,10 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleDisplayName</key>
+	<string>__RN_CONFIG_DISPLAY_NAME</string>
+	<key>CFBundleIdentifier</key>
+	<string>__RN_CONFIG_BUNDLE_ID</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
