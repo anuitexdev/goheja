@@ -126,24 +126,49 @@ class CoachLocationAreaView extends Component<Props, State> {
   };
 
   getCurrentLocation = async () => {
-  
-    await request_location_runtime_permission();
-    Geolocation.getCurrentPosition(
-      async (position) => {
-        console.log(position);
-        await this.setState({
-          region: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121
-          }
-        })
-      },
-      (error) => { console.log(error); },
-      { enableHighAccuracy: true, timeout: 30000 }
-    )
-    this.getLatLong(this.state.region.latitude, this.state.region.longitude);
+     if(Platform.OS === "ios"){
+      await Geolocation.getCurrentPosition(
+        async (position) => {
+          this.setState({
+            marker: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            region: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121
+            }
+          })
+          await this.getLatLong(this.state.region.latitude, this.state.region.longitude);
+        },
+        (error) => { console.log(error); },
+        { enableHighAccuracy: true, timeout: 30000 }
+      ) 
+    } else {
+      await request_location_runtime_permission();
+      await Geolocation.getCurrentPosition(
+        async (position) => {
+          this.setState({
+            marker: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            region: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121
+            }
+          })
+          await this.getLatLong(this.state.region.latitude, this.state.region.longitude);
+        },
+        (error) => { console.log(error); },
+        { enableHighAccuracy: true, timeout: 30000 }
+      )
+    }
+    
   }
 
 
