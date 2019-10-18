@@ -8,13 +8,13 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconFeather from 'react-native-vector-icons/Feather';
 import AddAddressModal from '../../../../components/modals/addAddress/addAddress.modal';
 import axiosInstance from '../../../../shared/interceptors/axios.interceptor';
-import environment from '../../../../environments/environment';
 import Slider from 'react-native-slider';
 import Geolocation from '@react-native-community/geolocation';
 import TranslateService from '../../../../services/translation.service';
 import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import Config from 'react-native-config';
 
 
 interface State {
@@ -79,7 +79,7 @@ class CoachLocationAreaView extends Component<Props, State> {
   }
 
   componentWillMount() {
-    this.getCurrentLocation();
+    //this.getCurrentLocation();
     this.translationService = new TranslateService();
     this.destroyed = new Subject();
     this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
@@ -110,10 +110,10 @@ class CoachLocationAreaView extends Component<Props, State> {
     this.props.nextStepNumber({});
   };
 
-  public getLatLong = async (lat, long) => {
+  public getLatLong = async (lat: any, long: any) => {
     await axiosInstance
       .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${environment.API_KEY}`,
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${Config.GOOGLE_MAPS_API_KEY}`,
       )
       .then(response => {
         console.log(response);
@@ -126,34 +126,49 @@ class CoachLocationAreaView extends Component<Props, State> {
   };
 
   getCurrentLocation = async () => {
-    if(Platform.OS == 'ios') {
-      Geolocation.getCurrentPosition(
-        position => {
-          console.log(position)
+     if(Platform.OS === "ios"){
+      await Geolocation.getCurrentPosition(
+        async (position) => {
+          this.setState({
+            marker: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            region: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121
+            }
+          })
+          await this.getLatLong(this.state.region.latitude, this.state.region.longitude);
         },
-        error => {
-          Alert.alert(error.message)
+        (error) => { console.log(error); },
+        { enableHighAccuracy: true, timeout: 30000 }
+      ) 
+    } else {
+      await request_location_runtime_permission();
+      await Geolocation.getCurrentPosition(
+        async (position) => {
+          this.setState({
+            marker: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            region: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121
+            }
+          })
+          await this.getLatLong(this.state.region.latitude, this.state.region.longitude);
         },
-        {enableHighAccuracy: false, timeout: 50000}
-      );
+        (error) => { console.log(error); },
+        { enableHighAccuracy: true, timeout: 30000 }
+      )
     }
-    await request_location_runtime_permission();
-    Geolocation.getCurrentPosition(
-      async (position) => {
-        console.log(position);
-        await this.setState({
-          region: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121
-          }
-        })
-      },
-      (error) => { console.log(error); },
-      { enableHighAccuracy: true, timeout: 30000 }
-    )
-    this.getLatLong(this.state.region.latitude, this.state.region.longitude);
+    
   }
 
 

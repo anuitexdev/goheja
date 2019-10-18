@@ -1,11 +1,11 @@
-import environment from '../environments/environment';
 import axiosInstance from '../shared/interceptors/axios.interceptor';
 import SportConfigData from '../shared/models/sportConfigData.model';
+import Config from 'react-native-config';
 
 export class SportService {
 
     public setSportConfig(SportConfigData: SportConfigData): Promise<any> {
-        return axiosInstance.post(`${environment.backendUrl}Users/TestEnv`, SportConfigData)
+        return axiosInstance.post(`${Config.API_URL}Users/TestEnv`, SportConfigData)
                 .then((response) => {
                     console.log(response)
                     return response

@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Platform } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
@@ -7,6 +7,7 @@ import header from './header.style';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/auth.actions';
 import BaseTranslateService from '../../shared/helpers/basicTranslate.service';
+import styles from 'src/app/views/auth/signUp/athlete/personalInfo/styles';
 
 interface Props {
   changeLanguage: (data: string) => void,
@@ -73,14 +74,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
     return (
 
       <View
-        style={{
-          height: 80,
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          alignItems: 'center',
-          padding: 20,
-          // zIndex: 9999,
-        }}>
+        style={Platform.OS === 'android'? header.headerWrapperAndroid : header.headerWrapperIos}>
         <Text
           style={{
             color: 'black',

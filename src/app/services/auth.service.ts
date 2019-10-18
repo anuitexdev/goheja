@@ -1,8 +1,8 @@
-import environment from "../environments/environment";
 import UserSignInData from "../shared/models/userSignInData.model";
 import axiosInstance from '../shared/interceptors/axios.interceptor';
 import { AsyncStorage } from 'react-native';
 import ResetPasswordData from "../shared/models/resetPasswordData.model";
+import Config from 'react-native-config';
 
 export class AuthService {
 
@@ -16,10 +16,10 @@ export class AuthService {
 
     public signIn(userData: UserSignInData): Promise<any> {
 
-        return axiosInstance.post(`${environment.backendUrl}Security/`, userData)
+        return axiosInstance.post(`${Config.API_URL}Security/`, userData)
             .then((response) => {
                 console.log(response);
-                return response; 
+                return response;
             })
             .catch((error) => {
                 console.log(error);
@@ -28,8 +28,7 @@ export class AuthService {
     }
 
     public signUp(userData: any): Promise<any> {
-
-        return axiosInstance.post(`${environment.backendUrl}Users`, userData)
+        return axiosInstance.post(`${Config.API_URL}Users`, userData)
             .then((response) => {
                 console.log(response);
                 return response;
@@ -41,7 +40,7 @@ export class AuthService {
     }
 
     public sendCode(code: string): Promise<any> {
-        return axiosInstance.get(`${environment.backendUrl}General/${code}`)
+        return axiosInstance.get(`${Config.API_URL}General/${code}`)
             .then((response) => {
                 console.log(response);
                 return response;
@@ -53,7 +52,7 @@ export class AuthService {
     }
 
     public getLanguage(language: string): Promise<any> {
-        return axiosInstance.post(`${environment.backendUrl}languages/${language}`)
+        return axiosInstance.post(`${Config.API_URL}languages/${language}`)
             .then((response) => {
                 return response;
             })
@@ -63,7 +62,7 @@ export class AuthService {
             })
     }
     public getAllLanguages(): Promise<any> {
-        return axiosInstance.post(`${environment.backendUrl}languages/getall`)
+        return axiosInstance.post(`${Config.API_URL}languages/getall`)
             .then((response) => {
                 console.log(response);
                 return response;
@@ -75,7 +74,7 @@ export class AuthService {
     }
 
     public resetPassword(resetData: ResetPasswordData): Promise<any> {
-        return axiosInstance.put(`${environment.backendUrl}Users`, resetData)
+        return axiosInstance.put(`${Config.API_URL}Users`, resetData)
             .then((response) => {
                 return response;
             })
@@ -86,7 +85,7 @@ export class AuthService {
     }
 
     public confirmMail(email: string): Promise<any> {
-        return axiosInstance.post(`${environment.backendUrl}General/confirmation?mail=${email}`)
+        return axiosInstance.post(`${Config.API_URL}General/confirmation?mail=${email}`)
             .then((response) => {
                 return response;
             })

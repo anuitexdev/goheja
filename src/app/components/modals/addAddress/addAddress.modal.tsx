@@ -15,7 +15,7 @@ import IconMat from 'react-native-vector-icons/MaterialIcons';
 import * as actions from '../../../redux/actions/createGroup.actions';
 import {countriesList} from '../../../shared/helpers/countries.list';
 import axiosInstance from '../../../shared/interceptors/axios.interceptor';
-import environment from '../../../environments/environment';
+import Config from 'react-native-config';
 
 interface State {
   selectedCountry: string;
@@ -48,7 +48,7 @@ class AddAddressModal extends Component<Props, State> {
   public getCoordsFromCountry = async (address: any) => {
     await axiosInstance
       .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${environment.API_KEY}`,
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${Config.GOOGLE_MAPS_API_KEY}`,
       )
       .then(response => {
         console.log(response);
