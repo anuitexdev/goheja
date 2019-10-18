@@ -1,8 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { View, Text, TouchableOpacity, PermissionsAndroid, Alert, Platform } from 'react-native';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  PermissionsAndroid,
+  Alert,
+  Platform,
+} from 'react-native';
 import coachLocationArea from './coachLocationArea.style';
-import MapView, { PROVIDER_GOOGLE, Circle } from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Circle} from 'react-native-maps';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconFeather from 'react-native-vector-icons/Feather';
@@ -12,10 +19,9 @@ import Slider from 'react-native-slider';
 import Geolocation from '@react-native-community/geolocation';
 import TranslateService from '../../../../services/translation.service';
 import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 import Config from 'react-native-config';
-
 
 interface State {
   avatarSource: any;
@@ -33,29 +39,9 @@ interface Props {
   clubName: string;
 }
 
-
-export let request_location_runtime_permission = async () => {
-
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    )
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-
-      Alert.alert("Location Permission Granted.");
-    }
-    else {
-
-      Alert.alert("Location Permission Not Granted");
-
-    }
-  } catch (err) {
-    console.warn(err)
-  }
-}
+export let request_location_runtime_permission = async () => {};
 
 class CoachLocationAreaView extends Component<Props, State> {
-
   private destroyed: any;
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
@@ -82,11 +68,14 @@ class CoachLocationAreaView extends Component<Props, State> {
     //this.getCurrentLocation();
     this.translationService = new TranslateService();
     this.destroyed = new Subject();
-    this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
-      this.setState({
-        translateMethod: res,
-      })
-    });
+    this.translationService
+      .getTranslateMethod()
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(res => {
+        this.setState({
+          translateMethod: res,
+        });
+      });
   }
 
   componentWillUnmount() {
@@ -125,59 +114,67 @@ class CoachLocationAreaView extends Component<Props, State> {
       });
   };
 
-  getCurrentLocation = async () => {
-     if(Platform.OS === "ios"){
-      await Geolocation.getCurrentPosition(
-        async (position) => {
-          this.setState({
-            marker: {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            },
-            region: {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              latitudeDelta: 0.015,
-              longitudeDelta: 0.0121
-            }
-          })
-          await this.getLatLong(this.state.region.latitude, this.state.region.longitude);
-        },
-        (error) => { console.log(error); },
-        { enableHighAccuracy: true, timeout: 30000 }
-      ) 
-    } else {
-      await request_location_runtime_permission();
-      await Geolocation.getCurrentPosition(
-        async (position) => {
-          this.setState({
-            marker: {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            },
-            region: {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              latitudeDelta: 0.015,
-              longitudeDelta: 0.0121
-            }
-          })
-          await this.getLatLong(this.state.region.latitude, this.state.region.longitude);
-        },
-        (error) => { console.log(error); },
-        { enableHighAccuracy: true, timeout: 30000 }
-      )
+  request_location_runtime_permission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        this.getCurrentLocation();
+      } else {
+        Alert.alert('Location Permission Not Granted');
+      }
+    } catch (err) {
+      console.warn(err);
     }
-    
   }
 
+  getCurrentLocation = async () => {
+    console.log('sss')
+    await Geolocation.getCurrentPosition(
+      async position => {
+        this.setState({
+          marker: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          },
+          region: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          },
+        });
+        await this.getLatLong(
+          this.state.region.latitude,
+          this.state.region.longitude,
+        );
+      },
+      error => {
+        console.log(error);
+      },
+      {enableHighAccuracy: true, timeout: 30000},
+    );
+  };
+
+  setCurrentLocation = async () => {
+    if (Platform.OS === 'ios') {
+      this.getCurrentLocation();;
+    } else {
+      await this.request_location_runtime_permission();
+    }
+  };
 
   render() {
     return (
-
       <View style={coachLocationArea.mapPageWrapper}>
         <Text style={coachLocationArea.title}>
-          {translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.WhereusuallyTeamsAreTraninig'), this.props.clubName)}
+          {translationReplaceHelper.translationReplace(
+            this.state.translateMethod(
+              'translation.exposeIDE.views.regestrationNewClub.WhereusuallyTeamsAreTraninig',
+            ),
+            this.props.clubName,
+          )}
         </Text>
         <View style={coachLocationArea.mapWrapper}>
           <MapView
@@ -195,80 +192,85 @@ class CoachLocationAreaView extends Component<Props, State> {
           </MapView>
 
           {this.props.location == '' ? (
-            <TouchableOpacity style={coachLocationArea.currentLocationBtn} onPress={this.getCurrentLocation}>
+            <TouchableOpacity
+              style={coachLocationArea.currentLocationBtn}
+              onPress={this.setCurrentLocation}>
               <Icon
-                style={{ color: '#707B7F' }}
+                style={{color: '#707B7F'}}
                 size={25}
                 name={'location-arrow'}
               />
               <Text style={coachLocationArea.currentLocationBtnText}>
-                {this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.useMyCurrentLocationArea')}
+                {this.state.translateMethod(
+                  'translation.exposeIDE.views.regestrationNewClub.useMyCurrentLocationArea',
+                )}
               </Text>
             </TouchableOpacity>
           ) : null}
 
-          {
-            this.props.location != '' ?
-              (
-                <View style={coachLocationArea.finalLocation}>
-                  <View style={{ flexDirection: 'row' }}>
-                    <Icon
-                      style={{ color: '#707B7F' }}
-                      size={25}
-                      name={'location-arrow'}
-                    />
-                    <Text style={coachLocationArea.finalLocationText}>
-                      {this.props.location}
-                    </Text>
-                  </View>
-                  <TouchableOpacity
-                    onPress={() =>
-                      this.setState({ editLocation: !this.state.editLocation })
-                    }>
-                    {this.state.editLocation == false ? (
-                      <IconFeather
-                        style={{ color: '#707B7F' }}
-                        size={24}
-                        name={'edit-2'}
-                      />
-                    ) : (
-                        <Text style={coachLocationArea.doneBtn}>Done</Text>
-                      )}
-                  </TouchableOpacity>
-                </View>
-              ) : null
-          }
+          {this.props.location != '' ? (
+            <View style={coachLocationArea.finalLocation}>
+              <View style={{flexDirection: 'row'}}>
+                <Icon
+                  style={{color: '#707B7F'}}
+                  size={25}
+                  name={'location-arrow'}
+                />
+                <Text style={coachLocationArea.finalLocationText}>
+                  {this.props.location}
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() =>
+                  this.setState({editLocation: !this.state.editLocation})
+                }>
+                {this.state.editLocation == false ? (
+                  <IconFeather
+                    style={{color: '#707B7F'}}
+                    size={24}
+                    name={'edit-2'}
+                  />
+                ) : (
+                  <Text style={coachLocationArea.doneBtn}>Done</Text>
+                )}
+              </TouchableOpacity>
+            </View>
+          ) : null}
         </View>
         {this.props.location == '' ? (
-          
           <View style={coachLocationArea.addAddress}>
             <TouchableOpacity
               style={coachLocationArea.addressBtn}
               onPress={this.showAddressModal}>
               <Text style={coachLocationArea.addressBtnText}>
-                {this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.addAddressManually')}
+                {this.state.translateMethod(
+                  'translation.exposeIDE.views.regestrationNewClub.addAddressManually',
+                )}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity style={coachLocationArea.skipBtn}>
-              <Text style={coachLocationArea.skipBtnText}>{this.state.translateMethod('translation.common.skip')}</Text>
+              <Text style={coachLocationArea.skipBtnText}>
+                {this.state.translateMethod('translation.common.skip')}
+              </Text>
             </TouchableOpacity>
           </View>
-
         ) : null}
-        {
-          this.props.location != '' ? (
-            <TouchableOpacity
-              style={coachLocationArea.nextBtn}
-              onPress={this.onSubmit}>
-              <Text style={coachLocationArea.nextBtnText}>{this.state.translateMethod('translation.common.next')}</Text>
-            </TouchableOpacity>
-          ) : null
-        }
+        {this.props.location != '' ? (
+          <TouchableOpacity
+            style={coachLocationArea.nextBtn}
+            onPress={this.onSubmit}>
+            <Text style={coachLocationArea.nextBtnText}>
+              {this.state.translateMethod('translation.common.next')}
+            </Text>
+          </TouchableOpacity>
+        ) : null}
 
         {this.state.editLocation == true ? (
           <View style={coachLocationArea.range}>
             <Text style={coachLocationArea.radiusText}>
-              {this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.radiusFromSelectedLocation')}
+              {this.state.translateMethod(
+                'translation.exposeIDE.views.regestrationNewClub.radiusFromSelectedLocation',
+              )}
             </Text>
             <View style={coachLocationArea.sliderWrapper}>
               <Slider
@@ -280,7 +282,7 @@ class CoachLocationAreaView extends Component<Props, State> {
                 step={1}
                 value={this.state.rangeValue}
                 onValueChange={(value: any) =>
-                  this.setState({ rangeValue: value })
+                  this.setState({rangeValue: value})
                 }
                 thumbTintColor={'white'}
                 thumbTouchSize={{
@@ -292,7 +294,7 @@ class CoachLocationAreaView extends Component<Props, State> {
                   width: 50,
                   borderRadius: 1000,
                   shadowColor: 'black',
-                  shadowOffset: { width: 4, height: 4 },
+                  shadowOffset: {width: 4, height: 4},
                   shadowOpacity: 0.2,
                   shadowRadius: 6,
                   elevation: 30,
@@ -316,7 +318,7 @@ class CoachLocationAreaView extends Component<Props, State> {
 
 const mapStateToProps = (state: any) => ({
   location: state.CreateGroupReducer.location,
-  clubName: state.CreateGroupReducer.clubData.clubName
+  clubName: state.CreateGroupReducer.clubData.clubName,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
