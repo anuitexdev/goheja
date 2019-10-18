@@ -9,7 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import coachLocationArea from './coachLocationArea.style';
-import MapView, {PROVIDER_GOOGLE, Circle} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Circle, Marker} from 'react-native-maps';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconFeather from 'react-native-vector-icons/Feather';
@@ -156,8 +156,7 @@ class CoachLocationAreaView extends Component<Props, State> {
       {enableHighAccuracy: true, timeout: 30000},
     );
   };
-
-  setCurrentLocation = async () => {
+  setCurrentLocation = async () => {    
     if (Platform.OS === 'ios') {
       this.getCurrentLocation();;
     } else {
@@ -181,6 +180,12 @@ class CoachLocationAreaView extends Component<Props, State> {
             provider={PROVIDER_GOOGLE} // remove if not using Google Maps
             style={coachLocationArea.map}
             region={this.state.region}>
+            <Marker
+            coordinate={{latitude: this.state.marker.latitude,
+              longitude: this.state.marker.longitude}}
+            title={'test'}
+            description={'test2'}
+          />
             {this.props.location != '' ? (
               <Circle
                 radius={0 + this.state.rangeValue * 10}
