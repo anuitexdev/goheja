@@ -45,7 +45,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
       language: value,
       key,
     });
-  
+    this.toggleDropDown();
   }
 
   private toggleDropDown = () => {

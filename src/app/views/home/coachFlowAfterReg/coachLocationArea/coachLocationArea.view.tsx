@@ -130,7 +130,6 @@ class CoachLocationAreaView extends Component<Props, State> {
   }
 
   getCurrentLocation = async () => {
-    console.log('sss')
     await Geolocation.getCurrentPosition(
       async position => {
         this.setState({
