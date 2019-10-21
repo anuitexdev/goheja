@@ -98,14 +98,15 @@ class YourSelfCoachScreen extends Component<Props, State> {
     };
 
     public handleDatePicked = (date: any) => {
-        const formattedDate = moment(date, 'DD-MM-YYYY');
-        let signUpDate = moment(formattedDate).format('YYYY-MM-DDTHH:mm:ss:SSZ');
+        const formattedDate = moment(date).format('DD-MM-YYYY');
+        this.setState({
+            birthDateError: false,
+        })
+        let signUpDate = moment(date).format('YYYY-MM-DDTHH:mm:ss:SSZ')
         this.setState({
             dob: signUpDate,
-            birthDateError: false,
-            formatedBirthDate: date,
-            valueOfDatePicker: date,
-        });
+            formatedBirthDate: formattedDate,
+        })
         this.hideDateTimePicker();
     };
 
@@ -190,23 +191,18 @@ class YourSelfCoachScreen extends Component<Props, State> {
                         <Text style={styles.pageHeader}>{this.state.translateMethod('translation.exposeIDE.views.regestration.tellUsAboutYourself')}</Text>
 
                         <View>
-                            <View>
+                            <View >
                                 <Text style={styles.label}>Birth Day</Text>
-                                <TouchableOpacity
-                                    onPress={this.showDatePicker}
-                                    style={styles.datePicker}>
+                                <TouchableOpacity onPress={this.showDateTimePicker} style={styles.datePicker}>
                                     <TextInput
                                         placeholder={this.state.translateMethod('translation.exposeIDE.views.regestration.bithDatePlaceHolder')}
-                                        style={
-                                            !this.state.birthDateError
-                                                ? this.state.currentLanguage !== 'Hebrew' ?
-                                                    styles.input : styles.hebInput :
-                                                this.state.currentLanguage !== 'Hebrew' ?
-                                                    styles.inputError : styles.inputHebError
-                                        }
+                                        style={!this.state.birthDateError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
+                                            this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
                                         editable={false}
                                         onFocus={this.showDateTimePicker}
-                                        value={this.state.valueOfDatePicker}></TextInput>
+                                        value={this.state.formatedBirthDate}
+                                    ></TextInput>
+                                    {this.state.birthDateError ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                                     <Icon
                                         style={styles.dateIcon}
                                         size={25}
@@ -218,14 +214,6 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                     onConfirm={this.handleDatePicked}
                                     onCancel={this.hideDateTimePicker}
                                 />
-                                <CustomDatePicker
-                                    toggleDatePicker={this.state.toggleDatePicker}
-                                    hideDatePicker={this.hideDatePicker}
-                                    setDatePickerValue={this.handleDatePicked}
-                                />
-                                {this.state.birthDateError ? (
-                                    <Text style={styles.errorText}>This field is Mandatory</Text>
-                                ) : null}
                             </View>
                             <View style={styles.genderField}>
                                 <View style={styles.genderTitleContainer}>
