@@ -146,6 +146,7 @@ private destroyed:any;
                             style={!this.state.emailError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                             onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
+                            keyboardType={'email-address'}
                             autoCapitalize="none"
                         ></TextInput>
                     </View>

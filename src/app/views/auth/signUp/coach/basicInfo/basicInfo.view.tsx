@@ -157,6 +157,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.Login.email')}</Text>
                     <TextInput
                         placeholder={this.state.translateMethod('translation.common.EmailPlaceHolder')}
+                        keyboardType={'email-address'}
                         value={this.state.auth}
                         style={!this.state.validationObject.auth ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
