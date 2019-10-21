@@ -45,7 +45,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
       language: value,
       dropDownIsVisible: !this.state.dropDownIsVisible,
       key,
-      dropDownIsVisible: !this.state.dropDownIsVisible
+      dropDownIsVisible: !this.state.dropDownIsVisible,
     });
   }
 
