@@ -44,9 +44,9 @@ class Header extends Component<Props, State, BaseTranslateService> {
       await this.setState({
       language: value,
       key,
-      dropDownIsVisible: !this.state.dropDownIsVisible
+      dropDownIsVisible: !this.state.dropDownIsVisible,
     });
-    this.toggleDropDown();
+
   }
 
   private toggleDropDown = () => {

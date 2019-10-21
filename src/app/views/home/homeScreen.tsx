@@ -6,6 +6,7 @@ import CoachFlowAfterRegView from './coachFlowAfterReg/coachFlowAfterReg.view';
 import SportsView from './sports/sports.view'
 import { connect } from 'react-redux';
 import Header from '../../components/header/header';
+import ChartScreen from '../home/chart/chart.view';
 
 interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>,
@@ -41,7 +42,7 @@ class HomeScreen extends Component<Props, State> {
                         this.props.userType == 0 ?
                         <CoachFlowAfterRegView />
                     :
-                    null
+                    <ChartScreen/>
                     }
                 </View>
             </Fragment>
