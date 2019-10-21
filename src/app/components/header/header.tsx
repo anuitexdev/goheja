@@ -43,6 +43,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
      await this.props.changeLanguage(value);
       await this.setState({
       language: value,
+      dropDownIsVisible: !this.state.dropDownIsVisible,
       key,
       dropDownIsVisible: !this.state.dropDownIsVisible
     });

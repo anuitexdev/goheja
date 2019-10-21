@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../../redux/actions/modal.actions';
 import { Text, View, TouchableWithoutFeedback, TextInput } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import swimtime from './swimTime.style';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ModalReducer from '../../../../redux/reducers/modal.reducer';
 import moment from 'moment';
 import TranslateService from '../../../../services/translation.service';
-import { tsThisType } from '@babel/types';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 interface State {

@@ -155,6 +155,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                         style={!this.state.errors.auth ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                         onChangeText={(auth) => this.handleChange({ auth })}
+                        keyboardType={"email-address"}
                     ></TextInput>
                     {this.state.errors.auth ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
