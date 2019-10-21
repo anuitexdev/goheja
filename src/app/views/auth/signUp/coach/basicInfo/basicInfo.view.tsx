@@ -186,6 +186,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         value={this.state.auth}
                         style={!this.state.validationObject.auth ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
+                        keyboardType={"email-address"}
                         onChangeText={auth => this.handleChange({ auth })}></TextInput>
                     {this.state.validationObject.auth ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
