@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<string>For background cheduling sport tasks</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -10,6 +12,10 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconName</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleIcons</key>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -18,6 +24,10 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleDisplayName</key>
+	<string>__RN_CONFIG_DISPLAY_NAME</string>
+	<key>CFBundleIdentifier</key>
+	<string>__RN_CONFIG_BUNDLE_ID</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
@@ -47,6 +57,8 @@
 	<string>Info about health for sport trainings statistics</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We use your location to record your activity</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>to enable geolocation when using the app</string>
 	<key>NSLocationUsageDescription</key>
 	<string>We use your location to record your activity</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

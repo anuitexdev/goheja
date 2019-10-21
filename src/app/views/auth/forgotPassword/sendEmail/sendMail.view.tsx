@@ -52,20 +52,18 @@ class SendMailScreen extends Component<Props,State> {
     }
 
     private handleChange = async (email: string) => {
-       
+
        await this.setState({
             email,
             emailError: true
-        })
-        console.log(this.state);
-        
+        })        
     }
 
     private onSubmit = async() => {
         const emailError = this.validationService.validateEmail(this.state.email);
         await this.setState({
             emailError,
-        })        
+        })
 
         if(!this.state.emailError){ return;}
 
@@ -87,6 +85,7 @@ class SendMailScreen extends Component<Props,State> {
                         placeholder='Alona@morning.agency'
                         style={!this.state.emailError ? styles.inputError : styles.input}
                         onChangeText = {(email: string) => this.handleChange(email)}
+                        keyboardType={"email-address"}
                     />
                     {!this.state.emailError? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>

@@ -59,7 +59,7 @@ export default StyleSheet.create({
         color: '#1373fa',
         fontSize: 16,
         textAlign: 'center',
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
     },
     screenTitle: {
         color: '#272e43',
