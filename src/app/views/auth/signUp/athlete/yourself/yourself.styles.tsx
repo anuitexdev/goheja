@@ -70,6 +70,48 @@ export default StyleSheet.create({
     genderField: {
         marginTop: 39
     },
+    genderTitleContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingBottom: 15,
+    },
+    genderCheckBox: {
+        width: 15,
+        height: 15,
+        borderWidth: 1,
+        borderColor: '#000',
+        marginRight: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingBottom: 3,
+    },
+    genderCheckBoxError: {
+        width: 15,
+        height: 15,
+        borderWidth: 1,
+        borderColor: 'red',
+        marginRight: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingBottom: 3,
+    },
+    genderCheckBoxField: {
+        flexDirection: 'row',
+        alignItems: 'center',
+
+    },
+    checkIcon: {
+        height: 10,
+        width: 6,
+        borderBottomWidth: 2.5,
+        borderBottomColor: '#000',
+        borderStyle: 'solid',
+        borderRightColor: '#000',
+        borderRightWidth: 2.5,
+        transform: [{ rotate: '45deg' }],
+        zIndex: 999,
+    },
     hebInput: {
         borderRadius: 2,
         borderWidth: 1,
