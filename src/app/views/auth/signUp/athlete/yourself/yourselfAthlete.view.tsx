@@ -126,13 +126,15 @@ class YourSelfAthleteScreen extends Component<Props, State> {
         if (value === 'Neither') {
             genderValue = 3;
         }
+        if (value === 'Undefined') {
+            genderValue = 4;
+        }
+
         this.setState({
             genderError: false,
-        })
-        this.setState({
             gender: genderValue,
         });
-    }
+    };
 
     render() {
         const options = [
@@ -174,8 +176,25 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                 />
                             </View>
                             <View style={styles.genderField}>
-                                <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.regestration.gender')}</Text>
-                                <View >
+                                <View style={styles.genderTitleContainer}>
+                                    <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.regestration.gender')}</Text>
+                                    <TouchableOpacity
+                                        style={styles.genderCheckBoxField}
+                                        onPress={() => this.setSelectedOption('Undefined')}>
+                                        <View
+                                            style={
+                                                this.state.genderError
+                                                    ? styles.genderCheckBoxError
+                                                    : styles.genderCheckBox
+                                            }>
+                                            {this.state.gender === 4 ? (
+                                                <View style={styles.checkIcon}></View>
+                                            ) : null}
+                                        </View>
+                                        <Text>I prefer not to say</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View>
                                     <SegmentedControls
                                         options={options}
                                         tint={'#99a8af'}
@@ -183,11 +202,19 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                         backTint={'#fff'}
                                         selectedBackgroundColor={'#4D5A5F'}
                                         onSelection={this.setSelectedOption}
-                                        containerBorderTint={this.state.genderError ? 'red' : '#cfd8dc'}
-                                        separatorTint={'#cfd8dc'}
-                                        selectedOption={this.state.gender === 1 ? this.state.translateMethod('translation.exposeIDE.views.regestration.male') :
-                                            this.state.gender === 2 ? this.state.translateMethod('translation.exposeIDE.views.regestration.female') : this.state.gender === 3 ? 'Neither' :
-                                                this.state.translateMethod('translation.exposeIDE.views.regestration.male')}
+                                        containerBorderTint={
+                                            this.state.genderError ? 'red' : '#cfd8dc'
+                                        }
+                                        separatorTint={this.state.genderError ? 'red' : '#cfd8dc'}
+                                        selectedOption={
+                                            this.state.gender === 1
+                                                ? this.state.translateMethod('translation.exposeIDE.views.regestration.male')
+                                                : this.state.gender === 2
+                                                    ? this.state.translateMethod('translation.exposeIDE.views.regestration.female')
+                                                    : this.state.gender === 3
+                                                        ? 'Neither'
+                                                        : null
+                                        }
                                         optionStyle={{
                                             paddingBottom: 12,
                                             paddingTop: 12,
@@ -195,7 +222,11 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                             paddingRight: 12,
                                         }}
                                     />
-                                    {this.state.genderError ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
+                                    {this.state.genderError ? (
+                                        <Text style={styles.errorText}>
+                                            This field is Mandatory
+                    </Text>
+                                    ) : null}
                                 </View>
                             </View>
                         </View>

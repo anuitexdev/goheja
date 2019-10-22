@@ -14,10 +14,6 @@ export default StyleSheet.create({
     formField: {
         paddingBottom: 39,
     },
-    phoneInput: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
     label: {
         fontSize: 14,
         color: '#272e43',
@@ -32,6 +28,17 @@ export default StyleSheet.create({
         color: '#282E44',
         paddingVertical: 0,
         height: 50,
+    },
+    phoneInput: { 
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: '#cfd8dc',
+        paddingLeft: 15,
+        color: '#282E44',
+        paddingVertical: 0,
+        height: 50,
+        flexDirection: "row",
+        alignItems: "center"
     },
     inputHeb: {
         borderRadius: 2,
