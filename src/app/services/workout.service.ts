@@ -1,16 +1,15 @@
 import axiosInstance from '../shared/interceptors/axios.interceptor';
 import Config from 'react-native-config';
 
-export default class WorkoutService {
+export class WorkoutService {
 
     public getChartData(): Promise<any> {
         const testData: any = {
             workoutId:"5da6d55955ec451b68fc0ae3", 
             userId:"5b96853cdd6505dd6ba78a8c",
-            specGroup:"TestEnv",
+            specGroup:"TestEnv"
            }
-           
-        return axiosInstance.post(`${Config.API_URL}WorkOuts`, testData)
+        return axiosInstance.get(`${Config.API_URL}WorkOuts`, testData)
                 .then((response) => {
                     console.log(response)
                     return response
@@ -23,4 +22,4 @@ export default class WorkoutService {
     
 }
 
-// export default new WorkoutService();
+export default new WorkoutService();
