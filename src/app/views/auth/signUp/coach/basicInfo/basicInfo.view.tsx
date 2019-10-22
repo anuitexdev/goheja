@@ -61,7 +61,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                 firstname: false,
                 lastName: false,
                 auth: false,
-                phone: false,
+                phone: true,
                 password: false,
                 confirmPassword: false,
                 formError: false,
@@ -136,12 +136,12 @@ class CoachBasicInfoScreen extends Component<Props, State> {
             countryCode: `+${countryCode}`
         })
     };
-    private setPhoneNumber = (number: number) => {
+    private setPhoneNumber = async (number: number) => {
         let phoneNumber =+ number.toString();
-        this.setState({
-            phone: `+${phoneNumber}`
+        await this.setState({
+            phone: `+${phoneNumber}`,
+            validationObject: {phone: this.phone.isValidNumber(phoneNumber)}
         })
-        console.log(this.state.phone);
     }
 
     render() {
@@ -218,7 +218,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                             style={this.state.validationObject.phone ? this.state.currentLanguage !== 'Hebrew' ? [styles.inputError, { width: window.width - 160 }] : [styles.inputErrorHeb, { width: window.width - 160 }] : this.state.currentLanguage !== 'Hebrew' ? [styles.input, { width: window.width - 160 }] : [styles.inputHeb, { width: window.width - 160 }]}
                             onChangeText={phone => this.handleChange({ phone })}></TextInput> */}
                     </View>
-                    {/* {this.state.validationObject.phone ? <Text style={styles.errorText}>This field is mandatory</Text> : null} */}
+                    {!this.state.validationObject.phone ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
 
                 <View style={styles.formField}>
