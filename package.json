@@ -16,6 +16,7 @@
     "@types/lodash.memoize": "^4.1.6",
     "@types/react-native-fbsdk": "^1.0.0",
     "@types/react-native-fs": "^2.8.3",
+    "@types/react-native-phone-input": "^0.2.0",
     "@types/react-native-vector-icons": "^6.4.1",
     "@types/react-navigation-material-bottom-tabs": "^0.3.1",
     "@types/react-redux": "^7.1.2",

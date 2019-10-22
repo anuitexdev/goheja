@@ -7,6 +7,7 @@ import IconIon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../../redux/actions/auth.actions';
 import UserSignUpData from '../../../../../shared/models/userSignUpData.model';
 import RNPickerSelect from 'react-native-picker-select';
+import PhoneInput from 'react-native-phone-input';
 import window from '../../../../../theme/variables';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import ValidationService from '../../../../../shared/validation/validation.service';
@@ -39,6 +40,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
 
     private validationService = new ValidationService();
     private destroyed: any;
+    private phone: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
 
@@ -166,7 +168,12 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                 <Text style={styles.label}>Phone No.</Text>
                 <View style={styles.formField}>
                     <View style={styles.phoneInput}>
-                        <RNPickerSelect
+                        <PhoneInput 
+                            ref={ref => {
+                                this.phone = ref
+                            }}
+                        />
+                        {/* <RNPickerSelect
                             onValueChange={value => this.setState({ updatedPhoneValue: value })}
                             items={countries}
                         >
@@ -188,7 +195,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                             keyboardType={'number-pad'}
                             value={this.state.phone}
                             style={this.state.validationObject.phone ? this.state.currentLanguage !== 'Hebrew' ? [styles.inputError, { width: window.width - 160 }] : [styles.inputErrorHeb, { width: window.width - 160 }] : this.state.currentLanguage !== 'Hebrew' ? [styles.input, { width: window.width - 160 }] : [styles.inputHeb, { width: window.width - 160 }]}
-                            onChangeText={phone => this.handleChange({ phone })}></TextInput>
+                            onChangeText={phone => this.handleChange({ phone })}></TextInput> */}
                     </View>
                     {this.state.validationObject.phone ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
