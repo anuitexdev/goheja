@@ -11,7 +11,7 @@ export default class WorkoutService {
            }
            console.log(testData);
            
-        return axiosInstance.get(`${Config.API_URL}WorkOuts`, testData)
+        return axiosInstance.post(`${Config.API_URL}WorkOuts`, testData)
                 .then((response) => {
                     console.log(response)
                     return response
