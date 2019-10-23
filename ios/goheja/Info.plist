@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
-	<string>For sport tasks background scheduling</string>
+	<string>For sport tasks background cheduling</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -59,8 +59,6 @@
 	<string>We use your location to record your activity</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app uses location service to provide better use experience</string>
-	<key>NSCameraUsageDescription</key>
-  	<string>Use camera</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Images for profile avatar and team avatar</string>
 	<key>NSPhotoLibraryUsageDescription</key>
