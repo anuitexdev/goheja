@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
-	<string>For background cheduling sport tasks</string>
+	<string>For sport tasks background cheduling</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -52,7 +52,7 @@
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Info about health for sport trainings statistics</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>to enable geolocation when using the app</string>
+	<string>To enable geolocation when using the app</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We use your location to record your activity</string>
 	<key>NSLocationUsageDescription</key>
