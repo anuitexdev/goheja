@@ -70,6 +70,7 @@ export default StyleSheet.create({
         borderRadius: 2,
         borderWidth: 1,
         borderColor: '#cfd8dc',
+        color: '#282E44',
         paddingLeft: 15,
         paddingVertical: 0,
         height: 50,
@@ -194,7 +195,7 @@ export default StyleSheet.create({
         borderColor: 'red',
         paddingLeft: 15,
         paddingVertical: 0,
-        height: 50,
+        height: 50, 
     },
     inputHebError: {
         borderRadius: 2,
