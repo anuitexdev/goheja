@@ -12,13 +12,13 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 interface State {
-  avatarSource: any,
+  imgPath: any,
   translateMethod: (str: string) => string,
 }
 
 interface Props {
-  nextStepNumber: (stepData: { avatarSource: string }) => void,
-  clubName: string,
+  nextStepNumber: (stepData: { imgPath: string }) => void,
+  name: string,
 }
 
 
@@ -27,7 +27,7 @@ class CoachClubLogoView extends Component<Props, State> {
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.state = {
-      avatarSource: '',
+      imgPath: '',
       translateMethod: (str: string) => '',
     }
   }
@@ -91,7 +91,7 @@ class CoachClubLogoView extends Component<Props, State> {
         // const source = { uri: 'data:image/jpeg;base64,' + response.data };
 
         this.setState({
-          avatarSource: source,
+          imgPath: source,
         });
       }
     });
@@ -111,17 +111,17 @@ class CoachClubLogoView extends Component<Props, State> {
 
     return (
       <View style={coachClubLogo.photoWrapper}>
-        <Text style={coachClubLogo.titleLogo}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.addLogo'), this.props.clubName)}</Text>
+        <Text style={coachClubLogo.titleLogo}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.addLogo'), this.props.name)}</Text>
         {
-          this.state.avatarSource == '' ?
+          this.state.imgPath == '' ?
             <TouchableHighlight
               onPress={() => this.chooseImage(options)}
               style={coachClubLogo.photoPicker}
             >
-              <Text style={coachClubLogo.photoBtnTitle}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadClubLogo'), this.props.clubName)}</Text>
+              <Text style={coachClubLogo.photoBtnTitle}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadClubLogo'), this.props.name)}</Text>
             </TouchableHighlight> :
             <View style={coachClubLogo.newPhoto}>
-              <Image source={this.state.avatarSource} style={coachClubLogo.pickedPhoto} />
+              <Image source={this.state.imgPath} style={coachClubLogo.pickedPhoto} />
               <TouchableHighlight
                 onPress={() => this.chooseImage(options)}
               >
@@ -132,7 +132,7 @@ class CoachClubLogoView extends Component<Props, State> {
         }
         <View style={coachClubLogo.wrapperBtn}>
           {
-            this.state.avatarSource !== '' ?
+            this.state.imgPath !== '' ?
               <TouchableHighlight
                 style={coachClubLogo.nextBtn}
                 onPress={this.onSubmit}
@@ -153,11 +153,11 @@ class CoachClubLogoView extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-  clubName: state.CreateGroupReducer.clubData.clubName
+  name: state.CreateGroupReducer.clubDTO.name
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  nextStepNumber: (stepData: { avatarSource: string }) => dispatch(actions.changeStep(stepData))
+  nextStepNumber: (stepData: { imgPath: string }) => dispatch(actions.changeStep(stepData))
 });
 
 export default connect(

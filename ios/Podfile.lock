@@ -322,10 +322,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   react-native-google-maps:
-    :commit: 348b1ecbf0320bc7e64b8095ef02c69f130a0aae
+    :commit: cc12beecc71363f68d9beebb00b5885ed6d3912c
     :git: https://github.com/react-native-community/react-native-maps.git
   react-native-maps:
-    :commit: 348b1ecbf0320bc7e64b8095ef02c69f130a0aae
+    :commit: cc12beecc71363f68d9beebb00b5885ed6d3912c
     :git: https://github.com/react-native-community/react-native-maps.git
 
 SPEC CHECKSUMS:
