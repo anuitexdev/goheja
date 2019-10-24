@@ -18,7 +18,7 @@
                   "FAQ": "FAQ",
                   "messages": {
                       "error": "Email or Password is incorrect!",
-                      "success": "ok message here",
+                      "success": "Ok message here",
                       "exits": "Email allready exists"
                   }
               },
