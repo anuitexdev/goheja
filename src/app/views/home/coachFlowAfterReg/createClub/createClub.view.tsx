@@ -14,7 +14,7 @@ interface State {
 }
 
 interface Props {
-    nextStepNumber: (step: { clubName: string }) => void
+    nextStepNumber: (step: { name: string }) => void
 }
 
 class CreateClubView extends Component<Props, State> {
@@ -45,7 +45,7 @@ class CreateClubView extends Component<Props, State> {
     }
 
     public onSubmit() {
-        this.props.nextStepNumber({ clubName: this.state.clubName })
+        this.props.nextStepNumber({ name: this.state.clubName })
     }
 
     render() {

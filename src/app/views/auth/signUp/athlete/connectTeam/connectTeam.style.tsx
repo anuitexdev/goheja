@@ -45,6 +45,7 @@ export default StyleSheet.create({
         borderRadius: 2,
         borderWidth: 1,
         borderColor: '#cfd8dc',
+        color: '#282E44',
         paddingTop: 10,
         paddingBottom: 10,
         textAlign: 'center',

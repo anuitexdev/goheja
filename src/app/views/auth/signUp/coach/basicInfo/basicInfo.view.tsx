@@ -191,6 +191,7 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                             ref={ref => {
                                 this.phone = ref
                             }}
+                            textStyle={{color: '#282E44'}}
                             value={this.state.countryCode}
                             onSelectCountry={(country: string) => {this.setCountry(country)}}
                             onChangePhoneNumber={(number: number) => {this.setPhoneNumber(number)}}

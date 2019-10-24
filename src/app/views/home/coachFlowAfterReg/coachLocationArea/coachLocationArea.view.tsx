@@ -49,15 +49,15 @@ class CoachLocationAreaView extends Component<Props, State> {
       avatarSource: '',
       toggleAddressModal: false,
       region: {
-        latitude: 49.9935,
-        longitude: 36.230385,
+        latitude: null,
+        longitude: null,
         latitudeDelta: 0.015,
         longitudeDelta: 0.0121,
       },
       translateMethod: (str: string) => '',
       marker: {
-        latitude: 49.9935,
-        longitude: 36.230385,
+        latitude: null,
+        longitude: null,
       },
       rangeValue: 20,
       editLocation: false,
@@ -65,7 +65,20 @@ class CoachLocationAreaView extends Component<Props, State> {
   }
 
   componentWillMount() {
-    //this.getCurrentLocation();
+    Geolocation.getCurrentPosition(info => {
+      this.setState({
+        region: {
+          latitude: info.coords.latitude,
+          longitude: info.coords.longitude,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121,
+        },
+        marker: {
+          latitude: info.coords.latitude,
+          longitude: info.coords.longitude,
+        }
+      })
+    });
     this.translationService = new TranslateService();
     this.destroyed = new Subject();
     this.translationService
@@ -96,7 +109,11 @@ class CoachLocationAreaView extends Component<Props, State> {
   };
 
   public onSubmit = () => {
-    this.props.nextStepNumber({});
+    this.props.nextStepNumber({
+      lat: this.state.region.latitude,
+      lng: this.state.region.longitude,
+      radius: this.state.rangeValue
+    });
   };
 
   public getLatLong = async (lat: any, long: any) => {
@@ -175,27 +192,29 @@ class CoachLocationAreaView extends Component<Props, State> {
           )}
         </Text>
         <View style={coachLocationArea.mapWrapper}>
-          <MapView
-            provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-            style={coachLocationArea.map}
-            region={this.state.region}>
-            <Marker
-            coordinate={{latitude: this.state.marker.latitude,
-              longitude: this.state.marker.longitude}}
-            title={'test'}
-            description={'test2'}
-          />
-            {this.props.location != '' ? (
-              <Circle
-                radius={0 + this.state.rangeValue * 10}
-                center={this.state.region}
-                strokeColor={'rgba(136,197,254,.5)'}
-                fillColor={'rgba(136,197,254,.5)'}
+          {this.state.region.latitude !== null 
+            ? <MapView
+                provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                style={coachLocationArea.map}
+                region={this.state.region}>
+                <Marker
+                coordinate={{latitude: this.state.marker.latitude,
+                  longitude: this.state.marker.longitude}}
+                title={'test'}
+                description={'test2'}
               />
-            ) : null}
-          </MapView>
-
-          {this.props.location == '' ? (
+                
+                <Circle
+                  radius={0 + this.state.rangeValue * 10}
+                  center={this.state.region}
+                  strokeColor={'rgba(136,197,254,.5)'}
+                  fillColor={'rgba(136,197,254,.5)'}
+                />
+                
+              </MapView>
+            : null}
+          
+          {this.props.location == '' ? 
             <TouchableOpacity
               style={coachLocationArea.currentLocationBtn}
               onPress={this.setCurrentLocation}>
@@ -210,9 +229,9 @@ class CoachLocationAreaView extends Component<Props, State> {
                 )}
               </Text>
             </TouchableOpacity>
-          ) : null}
+           : null}
 
-          {this.props.location != '' ? (
+          {this.props.location != '' ? 
             <View style={coachLocationArea.finalLocation}>
               <View style={{flexDirection: 'row'}}>
                 <Icon
@@ -228,20 +247,20 @@ class CoachLocationAreaView extends Component<Props, State> {
                 onPress={() =>
                   this.setState({editLocation: !this.state.editLocation})
                 }>
-                {this.state.editLocation == false ? (
+                {this.state.editLocation == false ? 
                   <IconFeather
                     style={{color: '#707B7F'}}
                     size={24}
                     name={'edit-2'}
                   />
-                ) : (
+                 : 
                   <Text style={coachLocationArea.doneBtn}>Done</Text>
-                )}
+                }
               </TouchableOpacity>
             </View>
-          ) : null}
+           : null}
         </View>
-        {this.props.location == '' ? (
+        {this.props.location == '' ? 
           <View style={coachLocationArea.addAddress}>
             <TouchableOpacity
               style={coachLocationArea.addressBtn}
@@ -252,14 +271,14 @@ class CoachLocationAreaView extends Component<Props, State> {
                 )}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={coachLocationArea.skipBtn}>
+            {/* <TouchableOpacity style={coachLocationArea.skipBtn}>
               <Text style={coachLocationArea.skipBtnText}>
                 {this.state.translateMethod('translation.common.skip')}
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
-        ) : null}
-        {this.props.location != '' ? (
+         : null}
+        {this.state.region.latitude != null ? 
           <TouchableOpacity
             style={coachLocationArea.nextBtn}
             onPress={this.onSubmit}>
@@ -267,9 +286,9 @@ class CoachLocationAreaView extends Component<Props, State> {
               {this.state.translateMethod('translation.common.next')}
             </Text>
           </TouchableOpacity>
-        ) : null}
+         : null}
 
-        {this.state.editLocation == true ? (
+        {this.state.editLocation == true ? 
           <View style={coachLocationArea.range}>
             <Text style={coachLocationArea.radiusText}>
               {this.state.translateMethod(
@@ -309,7 +328,7 @@ class CoachLocationAreaView extends Component<Props, State> {
               </Text>
             </View>
           </View>
-        ) : null}
+         : null}
 
         <AddAddressModal
           toggleAddressModal={this.state.toggleAddressModal}
