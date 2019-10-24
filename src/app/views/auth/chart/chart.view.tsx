@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import {
-//     LineChart,
-//     // BarChart,
-//     // PieChart,
-//     // ProgressChart,
-//     // ContributionGraph,
-//     // StackedBarChart
-// } from "react-native-chart-kit";
+import {
+    LineChart,
+    BarChart,
+    PieChart,
+    ProgressChart,
+    ContributionGraph,
+    StackedBarChart
+} from "react-native-chart-kit";
 import { Dimensions, View, Text, Alert, ScrollView, Platform } from 'react-native';
 import WorkoutService from '../../../services/workout.service';
 import Header from '../../../components/header/header';
@@ -161,12 +161,6 @@ class ChartScreen extends Component<Props, State> {
         })
     }
 
-    private changeMultichart = () => {
-        this.setState({
-            isMultichart: !this.state.isMultichart,
-        })
-    }
-
 
     render() {
 
@@ -192,232 +186,164 @@ class ChartScreen extends Component<Props, State> {
                         <Text>Distance/Time</Text>
 
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={this.changeMultichart}
-                        style={{
-                            padding: 10,
-                            borderRadius: 4,
-                            borderWidth: 0.5,
-                            borderColor: '#d6d7da',
-                        }}
-                    >
-                        <Text>Multichart</Text>
-
-                    </TouchableOpacity>
                 </View>
                 <View style={{ paddingBottom: 50 }}>
-                  {
-                        // {!this.state.isMultichart ?
-                    //     <View>
-                    //         <Text>Heart Rate</Text>
-                    //         <LineChart
-                    //             data={{
-                    //                 labels: this.state.isTime ? this.state.heartTime.slice(0, 6) : this.state.distance.length !== 0 ? this.state.distance : [0, 1],
-                    //                 datasets: [
-                    //                     {
-                    //                         data: this.state.heartRate.length === 0 ? [0, 1] : this.state.heartRate.slice(0, 10)
-                    //                     }
-                    //                 ]
-                    //             }}
-                    //             onDataPointClick={(value: any) => Alert.alert(value.toString())
-                    //             }
-                    //             width={Dimensions.get("window").width} // from react-native
-                    //             height={220}
-                    //             yAxisLabel={""}
-                    //             chartConfig={{
-                    //                 backgroundColor: "#fff",
-                    //                 backgroundGradientFrom: "#fb8c00",
-                    //                 backgroundGradientTo: "#ffa726",
-                    //                 decimalPlaces: 2, // optional, defaults to 2dp
-                    //                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    //                 labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    //                 style: {
-                    //                     borderRadius: 16
-                    //                 },
-                    //                 propsForDots: {
-                    //                     r: "6",
-                    //                     strokeWidth: "2",
-                    //                     stroke: "#ffa726"
-                    //                 }
-                    //             }}
-                    //             bezier
-                    //             style={{
-                    //                 marginVertical: 8,
-                    //                 borderRadius: 16,
-                    //                 paddingBottom: 50
-                    //             }}
-                    //         />
-                    //         <Text>Run cadence</Text>
-                    //         <LineChart
-                    //             data={{
-                    //                 labels: this.state.isTime ? this.state.heartTime.slice(0, 6) : this.state.distance.length !== 0 ? this.state.distance : [0, 1],
-                    //                 datasets: [
-                    //                     {
-                    //                         data: this.state.heartRate.length === 0 ? [0, 1] : this.state.Cadence.slice(0, 10),
-                    //                     },
-                    //                     // {
-                    //                     //     data: this.state.heartRate.length === 0 ? [0, 1] : [33.33,33.33,33.33,],
-                    //                     // }
-                    //                 ]
-                    //             }}
-                    //             onDataPointClick={(value: any) => console.log(value)
-                    //             }
-                    //             horizontalLabelRotation={3}
-                    //             width={Dimensions.get("window").width} // from react-native
-                    //             height={220}
-                    //             yAxisLabel={""}
-                    //             chartConfig={{
-                    //                 backgroundColor: "#fff",
-                    //                 backgroundGradientFrom: "#fb8c00",
-                    //                 backgroundGradientTo: "#ffa726",
-                    //                 decimalPlaces: 2, // optional, defaults to 2dp
-                    //                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    //                 labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    //                 style: {
-                    //                     borderRadius: 16
-                    //                 },
-                    //                 propsForDots: {
-                    //                     r: "6",
-                    //                     strokeWidth: "2",
-                    //                     stroke: "#ffa726"
-                    //                 }
-                    //             }}
-                    //             bezier
-                    //             style={{
-                    //                 marginVertical: 8,
-                    //                 borderRadius: 16,
-                    //                 paddingBottom: 50
-                    //             }}
-                    //         />
-                    //         <Text>Pace</Text>
-                    //         <LineChart
-                    //             data={{
-                    //                 labels: this.state.isTime ? this.state.heartTime.slice(0, 6) : this.state.distance.length !== 0 ? this.state.distance : [0, 1],
-                    //                 datasets: [
-                    //                     {
-                    //                         data: this.state.pace.length === 0 ? [0, 1] : this.state.pace.slice(0, 10)
-                    //                     }
-                    //                 ]
-                    //             }}
-                    //             onDataPointClick={(value: any) => console.log(value)
-                    //             }
-                    //             width={Dimensions.get("window").width} // from react-native
-                    //             height={220}
-                    //             yAxisLabel={""}
-                    //             chartConfig={{
-                    //                 backgroundColor: "#fff",
-                    //                 backgroundGradientFrom: "#fb8c00",
-                    //                 backgroundGradientTo: "#ffa726",
-                    //                 decimalPlaces: 2, // optional, defaults to 2dp
-                    //                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    //                 labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    //                 style: {
-                    //                     borderRadius: 16
-                    //                 },
-                    //                 propsForDots: {
-                    //                     r: "6",
-                    //                     strokeWidth: "2",
-                    //                     stroke: "#ffa726"
-                    //                 }
-                    //             }}
-                    //             bezier
-                    //             style={{
-                    //                 marginVertical: 8,
-                    //                 borderRadius: 16,
-                    //                 paddingBottom: 50
-                    //             }}
-                    //         />
-                    //         <Text>Elevation</Text>
-                    //         <LineChart
-                    //             data={{
-                    //                 labels: this.state.isTime ? this.state.heartTime.slice(0, 6) : this.state.distance.length !== 0 ? this.state.distance : [0, 1],
-                    //                 datasets: [
-                    //                     {
-                    //                         data: this.state.elevation.length === 0 ? [0, 1] : this.state.elevation.slice(0, 10)
-                    //                     }
-                    //                 ]
-                    //             }}
-                    //             onDataPointClick={(value: any) => console.log(value)
-                    //             }
-                    //             width={Dimensions.get("window").width} // from react-native
-                    //             height={220}
-                    //             yAxisLabel={""}
-                    //             chartConfig={{
-                    //                 backgroundColor: "#fff",
-                    //                 backgroundGradientFrom: "#fb8c00",
-                    //                 backgroundGradientTo: "#ffa726",
-                    //                 decimalPlaces: 2, // optional, defaults to 2dp
-                    //                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    //                 labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    //                 style: {
-                    //                     borderRadius: 16
-                    //                 },
-                    //                 propsForDots: {
-                    //                     r: "6",
-                    //                     strokeWidth: "2",
-                    //                     stroke: "#ffa726"
-                    //                 }
-                    //             }}
-                    //             bezier
-                    //             style={{
-                    //                 marginVertical: 8,
-                    //                 borderRadius: 16,
-                    //                 paddingBottom: 50
-                    //             }}
-                    //         />
-                    //     </View>
-                    //     :
+                    <Text>Heart Rate</Text>
+                    <LineChart
+                        data={{
+                            labels: this.state.isTime ? this.state.heartTime.slice(0, 6) : this.state.distance.length !== 0 ? this.state.distance : [0, 1],
+                            datasets: [
+                                {
+                                    data: this.state.heartRate.length === 0 ? [0, 1] : this.state.heartRate
+                                }
+                            ]
+                        }}
+                        onDataPointClick={(value: any) => Alert.alert(value.toString())
+                        }
+                        width={Dimensions.get("window").width} // from react-native
+                        height={220}
+                        yAxisLabel={""}
+                        chartConfig={{
+                            backgroundColor: "#fff",
+                            backgroundGradientFrom: "#fb8c00",
+                            backgroundGradientTo: "#ffa726",
+                            decimalPlaces: 2, // optional, defaults to 2dp
+                            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                            style: {
+                                borderRadius: 16
+                            },
+                            propsForDots: {
+                                r: "6",
+                                strokeWidth: "2",
+                                stroke: "#ffa726"
+                            }
+                        }}
+                        bezier
+                        style={{
+                            marginVertical: 8,
+                            borderRadius: 16,
+                            paddingBottom: 50
+                        }}
+                    />
+                    <Text>Run cadence</Text>
+                    <LineChart
+                        data={{
+                            labels: this.state.isTime ? this.state.heartTime.slice(0, 6) : this.state.distance.length !== 0 ? this.state.distance : [0, 1],
+                            datasets: [
+                                {
+                                    data: this.state.heartRate.length === 0 ? [0, 1] : this.state.Cadence,
+                                },
+                                // {
+                                //     data: this.state.heartRate.length === 0 ? [0, 1] : [33.33,33.33,33.33,],
+                                // }
+                            ]
+                        }}
+                        onDataPointClick={(value: any) => console.log(value)
+                        }
+                        width={Dimensions.get("window").width} // from react-native
+                        height={220}
+                        yAxisLabel={""}
+                        chartConfig={{
+                            backgroundColor: "#fff",
+                            backgroundGradientFrom: "#fb8c00",
+                            backgroundGradientTo: "#ffa726",
+                            decimalPlaces: 2, // optional, defaults to 2dp
+                            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                            style: {
+                                borderRadius: 16
+                            },
+                            propsForDots: {
+                                r: "6",
+                                strokeWidth: "2",
+                                stroke: "#ffa726"
+                            }
+                        }}
+                        bezier
+                        style={{
+                            marginVertical: 8,
+                            borderRadius: 16,
+                            paddingBottom: 50
+                        }}
+                    />
+                    <Text>Pace</Text>
+                    <LineChart
+                        data={{
+                            labels: this.state.isTime ? this.state.heartTime.slice(0, 6) : this.state.distance.length !== 0 ? this.state.distance : [0, 1],
+                            datasets: [
+                                {
+                                    data: this.state.pace.length === 0 ? [0, 1] : this.state.pace
+                                }
+                            ]
+                        }}
+                        onDataPointClick={(value: any) => console.log(value)
+                        }
+                        width={Dimensions.get("window").width} // from react-native
+                        height={220}
+                        yAxisLabel={""}
+                        chartConfig={{
+                            backgroundColor: "#fff",
+                            backgroundGradientFrom: "#fb8c00",
+                            backgroundGradientTo: "#ffa726",
+                            decimalPlaces: 2, // optional, defaults to 2dp
+                            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                            style: {
+                                borderRadius: 16
+                            },
+                            propsForDots: {
+                                r: "6",
+                                strokeWidth: "2",
+                                stroke: "#ffa726"
+                            }
+                        }}
+                        bezier
+                        style={{
+                            marginVertical: 8,
+                            borderRadius: 16,
+                            paddingBottom: 50
+                        }}
+                    />
+                    <Text>Elevation</Text>
+                    <LineChart
+                        data={{
+                            labels: this.state.isTime ? this.state.heartTime.slice(0, 6) : this.state.distance.length !== 0 ? this.state.distance : [0, 1],
+                            datasets: [
+                                {
+                                    data: this.state.elevation.length === 0 ? [0, 1] : this.state.elevation
+                                }
+                            ]
+                        }}
+                        onDataPointClick={(value: any) => console.log(value)
+                        }
+                        width={Dimensions.get("window").width} // from react-native
+                        height={220}
+                        yAxisLabel={""}
+                        chartConfig={{
+                            backgroundColor: "#fff",
+                            backgroundGradientFrom: "#fb8c00",
+                            backgroundGradientTo: "#ffa726",
+                            decimalPlaces: 2, // optional, defaults to 2dp
+                            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                            style: {
+                                borderRadius: 16
+                            },
+                            propsForDots: {
+                                r: "6",
+                                strokeWidth: "2",
+                                stroke: "#ffa726"
+                            }
+                        }}
+                        bezier
+                        style={{
+                            marginVertical: 8,
+                            borderRadius: 16,
+                            paddingBottom: 50
+                        }}
+                    />
 
-                    //     <LineChart
-                    //         data={{
-                    //             labels: this.state.isTime ? this.state.heartTime.slice(0, 6) : this.state.distance.length !== 0 ? this.state.distance : [0, 1],
-                    //             datasets: [
-                    //                 {
-                    //                     data: this.state.heartRate.length === 0 ? [0, 1] : this.state.heartRate.slice(0, 10)
-                    //                 },
-                    //                 {
-                    //                     data: this.state.heartRate.length === 0 ? [0, 1] : this.state.Cadence.slice(0, 10),
-                    //                 },
-                    //                 {
-                    //                     data: this.state.pace.length === 0 ? [0, 1] : this.state.pace.slice(0, 10)
-                    //                 },
-                    //                 {
-                    //                     data: this.state.elevation.length === 0 ? [0, 1] : this.state.elevation.slice(0, 10)
-                    //                 },
-
-                    //             ]
-                    //         }}
-                    //         onDataPointClick={(value: any) => console.log(value)
-                    //         }
-                    //         // colors={["#b00", "#666", "#fff", "#345eeb"]}
-                    //         width={Dimensions.get("window").width} // from react-native
-                    //         height={220}
-                    //         yAxisLabel={""}
-                    //         chartConfig={{
-                    //             backgroundColor: "#fff",
-                    //             backgroundGradientFrom: "#fb8c00",
-                    //             backgroundGradientTo: "#ffa726",
-                    //             decimalPlaces: 2, // optional, defaults to 2dp
-                    //             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    //             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    //             style: {
-                    //                 borderRadius: 16
-                    //             },
-                    //             propsForDots: {
-                    //                 r: "6",
-                    //                 strokeWidth: "2",
-                    //                 stroke: "#ffa726"
-                    //             }
-                    //         }}
-                    //         bezier
-                    //         style={{
-                    //             marginVertical: 8,
-                    //             borderRadius: 16,
-                    //             paddingBottom: 50
-                    //         }}
-                    //     />
-                    // }
-                  }
                 </View>
             </ScrollView>
         );

@@ -9,7 +9,6 @@ export default class WorkoutService {
             userId:"5b96853cdd6505dd6ba78a8c",
             specGroup:"TestEnv",
            }
-           console.log(testData);
            
         return axiosInstance.post(`${Config.API_URL}WorkOuts`, testData)
                 .then((response) => {
