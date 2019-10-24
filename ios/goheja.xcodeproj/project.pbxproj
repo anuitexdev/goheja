@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* gohejaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gohejaTests.m */; };
 		0185E8470A912EDDF590C80F /* libPods-goheja.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB35E18DAC74D8DF15ED4D8 /* libPods-goheja.a */; };
@@ -750,7 +751,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = goheja/goheja.entitlements;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0.240;
+				CURRENT_PROJECT_VERSION = 1.0.250;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = ACS2X6ERDY;
 				INFOPLIST_FILE = goheja/Info.plist;
@@ -759,7 +760,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.24;
+				MARKETING_VERSION = 1.0.25;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -780,7 +781,7 @@
 				CODE_SIGN_ENTITLEMENTS = goheja/goheja.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0.240;
+				CURRENT_PROJECT_VERSION = 1.0.250;
 				DEVELOPMENT_TEAM = ACS2X6ERDY;
 				INFOPLIST_FILE = goheja/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -788,7 +789,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.24;
+				MARKETING_VERSION = 1.0.25;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
