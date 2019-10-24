@@ -17,7 +17,7 @@
                   "TermsOfUse": "Terms of use",
                   "FAQ": "FAQ",
                   "messages": {
-                      "error": "Email or PAssword is incorrect!!",
+                      "error": "Email or Password is incorrect!",
                       "success": "ok message here",
                       "exits": "Email allready exists"
                   }
@@ -40,7 +40,7 @@
                   "weight": "Weight",
                   "BofyFatPercentage": "Body fat ",
                   "messages": {
-                      "error": "Email or PAssword is incorrect!",
+                      "error": "Email or Password is incorrect!",
                       "success": "Template with name {{name}} successfully created!",
                       "exits": "Template with the name {{name}} already exits!"
                   }
@@ -62,7 +62,7 @@
                   "howLongDidtheHalfMarathonTookYou": "How long did the 1/2 Marathon took you?",
                   "whatWastheAvgHeartRateDyringThathalfMarathon": "What was your Avg. heart rate during that 1/2 marathon?",
                   "messages": {
-                      "error": "Email or PAssword is incorrect!!",
+                      "error": "Email or Password is incorrect!",
                       "success": "ok message here",
                       "exits": "Email allready exists"
                   }
