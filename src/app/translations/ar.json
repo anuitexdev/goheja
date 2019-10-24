@@ -62,7 +62,7 @@
                   "howLongDidtheHalfMarathonTookYou": "מה התוצאה של חצי המרתון",
                   "whatWastheAvgHeartRateDyringThathalfMarathon": "ומה היה הדופק הממוצע",
                   "messages": {
-                      "error": "Email or PAssword is incorrect!!",
+                      "error": "Email or Password is incorrect!",
                       "success": "ok message here",
                       "exits": "Email allready exists"
                   }

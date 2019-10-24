@@ -150,6 +150,7 @@ private destroyed:any;
                             onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                             keyboardType={'email-address'}
                             autoCapitalize="none"
+                            keyboardType={"email-address"}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>

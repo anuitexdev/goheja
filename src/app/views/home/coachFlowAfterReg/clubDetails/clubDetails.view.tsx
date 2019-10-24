@@ -19,14 +19,13 @@ interface State {
   error: any;
   keyboardIsOpen: boolean;
   translateMethod: (str: string) => string;
-  clubData: any;
 }
 
 interface Props {
   nextStepNumber: (clubData: any) => void;
   registerGroup: (clubRegisterData: ClubDataModel) => void;
   clubName: string;
-  clubData: any;
+  clubDTO: any;
 }
 
 class ClubDetailsView extends Component<Props, State> {
@@ -40,20 +39,19 @@ class ClubDetailsView extends Component<Props, State> {
 
     this.state = {
       arrayOfDays: [
-        { key: 'S', value: 'Sunday' },
-        { key: 'M', value: 'Monday' },
-        { key: 'T', value: 'Tuesday' },
-        { key: 'W', value: 'Wednesday' },
-        { key: 'T', value: 'Thursday' },
-        { key: 'F', value: 'Friday' },
-        { key: 'S', value: 'Saturday' },
+        { key: 'S', value: 1 },
+        { key: 'M', value: 2 },
+        { key: 'T', value: 3 },
+        { key: 'W', value: 4 },
+        { key: 'T', value: 5 },
+        { key: 'F', value: 6 },
+        { key: 'S', value: 7 },
       ],
       weekWorkDays: [],
       openTime: '',
       closeTime: '',
       isFocused: false,
       keyboardIsOpen: false,
-      clubData: this.props.clubData,
       translateMethod: (str: string) => '',
       error: {
         openTimeError: '',
@@ -107,19 +105,19 @@ class ClubDetailsView extends Component<Props, State> {
 
     const re = /^0[0-9]|1[0-9]|2[0-3]:[0-5][0-9]$/;
     if (re.test(value)) {
+      console.log(this.state.openTime, this.state.closeTime)
       const clubData = {
-        name: this.state.clubData.clubName,
+        name: this.props.clubDTO.name,
         code: "st",
-        lat: 42.00987,
-        lng: 42.1234,
-        radius: 30,
-        imgPath: this.state.clubData.avatarSource.uri,
+        lat: this.props.clubDTO.lat,
+        lng: this.props.clubDTO.lng,
+        radius: this.props.clubDTO.radius,
+        imgPath: this.props.clubDTO.imgPath,
         weekWorkDays: this.state.weekWorkDays,
         startOfDay: 360,
         endOfDay: 1360,
-        firstDayInWeek: 1
-
-      }
+        firstDayInWeek: Math.min.apply(Math, this.state.weekWorkDays)
+      }   
       this.props.registerGroup(clubData);
       this.props.nextStepNumber(clubTime);
     } else {
@@ -232,8 +230,9 @@ class ClubDetailsView extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-  clubName: state.CreateGroupReducer.clubData.clubName,
-  clubData: state.CreateGroupReducer.clubData,
+  clubName: state.CreateGroupReducer.clubDTO.name,
+  clubData: state.CreateGroupReducer.clubDTO,
+  clubDTO: state.CreateGroupReducer.clubDTO,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
