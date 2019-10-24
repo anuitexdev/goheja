@@ -4,6 +4,18 @@ let CreateGroupDefaultState = {
         clubName: '',
         avatarSource: '',
     },
+    clubDTO: {
+        name: '',
+        code: '',
+        lat: null,
+        lng: null,
+        radius: null,
+        imgPath: '',
+        weekWorkDays:[],
+        startOfDay: null,
+        endOfDay: null,
+        firstDayInWeek: null
+    },
     location: ''
 }
 

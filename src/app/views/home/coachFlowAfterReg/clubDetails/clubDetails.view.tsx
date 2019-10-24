@@ -19,14 +19,14 @@ interface State {
   error: any;
   keyboardIsOpen: boolean;
   translateMethod: (str: string) => string;
-  clubData: any;
+  clubDTO: any;
 }
 
 interface Props {
   nextStepNumber: (clubData: any) => void;
   registerGroup: (clubRegisterData: ClubDataModel) => void;
   clubName: string;
-  clubData: any;
+  clubDTO: any;
 }
 
 class ClubDetailsView extends Component<Props, State> {
@@ -53,7 +53,7 @@ class ClubDetailsView extends Component<Props, State> {
       closeTime: '',
       isFocused: false,
       keyboardIsOpen: false,
-      clubData: this.props.clubData,
+      clubDTO: this.props.clubDTO,
       translateMethod: (str: string) => '',
       error: {
         openTimeError: '',
@@ -108,12 +108,12 @@ class ClubDetailsView extends Component<Props, State> {
     const re = /^0[0-9]|1[0-9]|2[0-3]:[0-5][0-9]$/;
     if (re.test(value)) {
       const clubData = {
-        name: this.state.clubData.clubName,
+        name: this.state.clubDTO.name,
         code: "st",
         lat: 42.00987,
         lng: 42.1234,
         radius: 30,
-        imgPath: this.state.clubData.avatarSource.uri,
+        imgPath: this.state.clubDTO.imgPath,
         weekWorkDays: this.state.weekWorkDays,
         startOfDay: 360,
         endOfDay: 1360,
@@ -232,8 +232,8 @@ class ClubDetailsView extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-  clubName: state.CreateGroupReducer.clubData.clubName,
-  clubData: state.CreateGroupReducer.clubData,
+  clubName: state.CreateGroupReducer.clubDTO.name,
+  clubData: state.CreateGroupReducer.clubDTO,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
