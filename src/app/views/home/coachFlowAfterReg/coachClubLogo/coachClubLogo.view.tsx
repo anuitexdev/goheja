@@ -18,7 +18,7 @@ interface State {
 
 interface Props {
   nextStepNumber: (stepData: { imgPath: string }) => void,
-  clubName: string,
+  name: string,
 }
 
 
@@ -111,14 +111,14 @@ class CoachClubLogoView extends Component<Props, State> {
 
     return (
       <View style={coachClubLogo.photoWrapper}>
-        <Text style={coachClubLogo.titleLogo}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.addLogo'), this.props.clubName)}</Text>
+        <Text style={coachClubLogo.titleLogo}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.addLogo'), this.props.name)}</Text>
         {
           this.state.imgPath == '' ?
             <TouchableHighlight
               onPress={() => this.chooseImage(options)}
               style={coachClubLogo.photoPicker}
             >
-              <Text style={coachClubLogo.photoBtnTitle}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadClubLogo'), this.props.clubName)}</Text>
+              <Text style={coachClubLogo.photoBtnTitle}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.uploadClubLogo'), this.props.name)}</Text>
             </TouchableHighlight> :
             <View style={coachClubLogo.newPhoto}>
               <Image source={this.state.imgPath} style={coachClubLogo.pickedPhoto} />
@@ -153,7 +153,7 @@ class CoachClubLogoView extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-  clubName: state.CreateGroupReducer.clubData.clubName
+  name: state.CreateGroupReducer.clubDTO.name
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

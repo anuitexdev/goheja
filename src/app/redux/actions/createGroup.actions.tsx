@@ -12,8 +12,6 @@ export const registerGroup = (groupData: any) => {
     return async (dispatch: any) => {
         await CoachGroupService.createGroup(groupData).then(res => {
             console.log(res);
-
-  
             // dispatch(successAuth('', 'register'));
         }
         )
