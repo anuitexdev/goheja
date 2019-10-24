@@ -99,7 +99,9 @@ private destroyed:any;
     public forgotPasswordRedirect = () => {
         this.props.navigation.navigate('forgotPassword');
     }
-
+    public chartRedirect = () => {
+        this.props.navigation.navigate('chart');
+    }
     private handleChange = (data: any): void => {
         const errors = this.validateFields(data);
         const { type, ...signInData } = data;
@@ -190,7 +192,22 @@ private destroyed:any;
                     <View style={styles.fbContainer}>
                     <FbLogin />
                     </View>
-
+                    <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                    >
+                    <TouchableOpacity
+                    onPress={()=>this.chartRedirect()}
+                    style={{
+                        paddingTop: 20
+                    }}
+                    >
+                   <Text> Redirect to chart Page</Text>
+                    </TouchableOpacity>
+                    </View>
                 </View>
                 </SafeAreaView>
             </ScrollView>

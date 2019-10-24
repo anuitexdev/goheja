@@ -76,6 +76,7 @@ export class AuthService {
     public resetPassword(resetData: ResetPasswordData): Promise<any> {
         return axiosInstance.put(`${Config.API_URL}Users`, resetData)
             .then((response) => {
+                console.log(response);
                 return response;
             })
             .catch((error) => {
@@ -85,7 +86,7 @@ export class AuthService {
     }
 
     public confirmMail(email: string): Promise<any> {
-        return axiosInstance.post(`${Config.API_URL}General/confirmation?mail=${email}`)
+        return axiosInstance.get(`${Config.API_URL}General/confirmation?mail=${email}`)
             .then((response) => {
                 return response;
             })
