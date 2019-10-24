@@ -15,6 +15,7 @@ interface State {
     confirmPasswordError: boolean;
     translateMethod: (str: string) => string;
 
+
 }
 
 interface Props {
@@ -81,7 +82,7 @@ class ResetPasswordScreen extends Component<Props, State> {
         const resetData = {
             email: this.props.email,
             newPassword: this.state.password,
-        };
+        };       
         await this.props.resetPassword(resetData);
         this.props.changeScreen(3);
     }
