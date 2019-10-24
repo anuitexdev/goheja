@@ -104,9 +104,6 @@ private destroyed:any;
     public chartRedirect = () => {
         this.props.navigation.navigate('chart');
     }
-    public d3chartRedirect= () => {
-        this.props.navigation.navigate('test');
-    }
     private handleChange = (data: any): void => {
         const errors = this.validateFields(data);
         const { type, ...signInData } = data;
@@ -211,7 +208,6 @@ private destroyed:any;
                     <View style={styles.fbContainer}>
                     <FbLogin />
                     </View>
-
                     <View
                     style={{
                         flexDirection: 'row',
@@ -220,39 +216,7 @@ private destroyed:any;
                     }}
                     >
                     <TouchableOpacity
-                    onPress={()=>this.d3chartRedirect()}
-                    style={{
-                        paddingTop: 20
-                    }}
-                    >
-                   <Text> Redirect to D3chart Page</Text>
-                    </TouchableOpacity>
-                    </View>
-                    <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                    >
-                    <TouchableOpacity
-                    onPress={()=>this.d3chartRedirect()}
-                    style={{
-                        paddingTop: 20
-                    }}
-                    >
-                   <Text> Redirect to D3chart Page</Text>
-                    </TouchableOpacity>
-                    </View>
-                    <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                    >
-                    <TouchableOpacity
-                    onPress={()=>this.d3chartRedirect()}
+                    onPress={()=>this.chartRedirect()}
                     style={{
                         paddingTop: 20
                     }}
