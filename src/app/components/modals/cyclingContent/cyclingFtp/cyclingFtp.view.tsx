@@ -44,8 +44,6 @@ class CyclingFtpView extends Component<Props, State> {
     }
 
 
-
-
     componentWillMount = () => {
         this.translationService = new TranslateService();
         this.destroyed = new Subject();

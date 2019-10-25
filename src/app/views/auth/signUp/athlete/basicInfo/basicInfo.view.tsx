@@ -154,7 +154,9 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                         placeholder={this.state.translateMethod('translation.common.EmailPlaceHolder')}
                         style={!this.state.errors.auth ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
+                            keyboardType={'email-address'}
                         onChangeText={(auth) => this.handleChange({ auth })}
+                        keyboardType={"email-address"}
                     ></TextInput>
                     {this.state.errors.auth ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
