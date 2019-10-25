@@ -17,6 +17,8 @@ export default class ValidationService {
     }
 
     public validateBasicInfoForm(data: any) {
+        console.log(data);
+        
         const validationObject = regExps.coachBasicInfoValidators;
         let resultObject: any = {};
 
