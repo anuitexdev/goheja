@@ -241,6 +241,22 @@ private destroyed:any;
                         paddingTop: 20
                     }}
                     >
+                   <Text> Redirect to D3chart Page</Text>
+                    </TouchableOpacity>
+                    </View>
+                    <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                    >
+                    <TouchableOpacity
+                    onPress={()=>this.d3chartRedirect()}
+                    style={{
+                        paddingTop: 20
+                    }}
+                    >
                    <Text> Redirect to chart Page</Text>
                     </TouchableOpacity>
                     </View>
