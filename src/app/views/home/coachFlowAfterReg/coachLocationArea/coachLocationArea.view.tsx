@@ -67,21 +67,36 @@ class CoachLocationAreaView extends Component<Props, State> {
   }
 
   componentWillMount() {
-    Geolocation.getCurrentPosition(info => {
-      this.setState({
-        region: {
-          latitude: info.coords.latitude,
-          longitude: info.coords.longitude,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.0121,
-        },
-        marker: {
-          latitude: info.coords.latitude,
-          longitude: info.coords.longitude,
-        }
-      },() => {
-        this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor:'rgba(136,197,254,.5)'});
-      })
+    Geolocation.getCurrentPosition(position => {
+      if(Platform.OS === 'android') {
+        this.setState({
+          marker: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          },
+          region: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          },
+        });
+      } else {
+        this.setState({
+          marker: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          },
+          region: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          },
+        },() => {
+          this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor:'rgba(136,197,254,.5)'});
+        });
+      }
     });
     this.translationService = new TranslateService();
     this.destroyed = new Subject();
@@ -152,21 +167,36 @@ class CoachLocationAreaView extends Component<Props, State> {
   getCurrentLocation = async () => {
     await Geolocation.getCurrentPosition(
       async position => {
-        this.setState({
-          marker: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          },
-          region: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          },
-          
-        },() => {
-          this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor:'rgba(136,197,254,.5)'});
-        });
+        if(Platform.OS === 'android') {
+          this.setState({
+            marker: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            region: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121,
+            },
+          });
+        } else {
+          this.setState({
+            marker: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            region: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121,
+            },
+          },() => {
+            this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor:'rgba(136,197,254,.5)'});
+          });
+        }
+       
         await this.getLatLong(
           this.state.region.latitude,
           this.state.region.longitude,
@@ -229,6 +259,8 @@ class CoachLocationAreaView extends Component<Props, State> {
                   ref={ref => {this.circle = ref}}
                   radius={0 + this.state.rangeValue * 10}
                   center={this.state.region}
+                  fillColor={'rgba(136,197,254,.5)'}
+                  strokeColor={'rgba(136,197,254,.5)'}
                 />
                 
               </MapView>
