@@ -37,6 +37,7 @@ interface Props {
   location: string;
   nextStepNumber: (data: any) => void;
   clubName: string;
+  clubDTO: any;
 }
 
 export let request_location_runtime_permission = async () => {};
@@ -49,15 +50,15 @@ class CoachLocationAreaView extends Component<Props, State> {
       avatarSource: '',
       toggleAddressModal: false,
       region: {
-        latitude: null,
-        longitude: null,
+        latitude: this.props.clubDTO.lat,
+        longitude: this.props.clubDTO.lng,
         latitudeDelta: 0.015,
         longitudeDelta: 0.0121,
       },
       translateMethod: (str: string) => '',
       marker: {
-        latitude: null,
-        longitude: null,
+        latitude: this.props.clubDTO.lat,
+        longitude: this.props.clubDTO.lng,
       },
       rangeValue: 20,
       editLocation: false,
@@ -90,7 +91,6 @@ class CoachLocationAreaView extends Component<Props, State> {
         });
       });
   }
-
   componentWillUnmount() {
     this.destroyed.next();
     this.destroyed.complete();
@@ -179,6 +179,19 @@ class CoachLocationAreaView extends Component<Props, State> {
       await this.request_location_runtime_permission();
     }
   };
+  UNSAFE_componentWillReceiveProps(nextProps: any){
+    this.setState({
+      region:{
+        ...this.state.region,
+      latitude: nextProps.clubDTO.lat,
+      longitude: nextProps.clubDTO.lng,
+      },
+      marker: {
+        latitude: nextProps.clubDTO.lat,
+        longitude: nextProps.clubDTO.lng,
+      }
+    })
+  }
 
   render() {
     return (
@@ -342,6 +355,7 @@ class CoachLocationAreaView extends Component<Props, State> {
 const mapStateToProps = (state: any) => ({
   location: state.CreateGroupReducer.location,
   clubName: state.CreateGroupReducer.clubData.clubName,
+  clubDTO: state.CreateGroupReducer.clubDTO
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
