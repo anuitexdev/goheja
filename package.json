@@ -29,7 +29,6 @@
     "moment": "^2.24.0",
     "react": "16.8.6",
     "react-native": "0.60.5",
-    "react-native-button-spinner": "^0.1.4",
     "react-native-calendar-picker": "^6.0.1",
     "react-native-chart-kit": "^3.6.1",
     "react-native-config": "^0.11.7",
