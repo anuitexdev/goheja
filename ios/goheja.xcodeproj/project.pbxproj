@@ -751,7 +751,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = goheja/goheja.entitlements;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0.270;
+				CURRENT_PROJECT_VERSION = 1.0.260;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = ACS2X6ERDY;
 				INFOPLIST_FILE = goheja/Info.plist;
@@ -760,8 +760,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.27;
-				ONLY_ACTIVE_ARCH = YES;
+				MARKETING_VERSION = 1.0.26;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -770,7 +769,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.go-heja.react";
 				PRODUCT_NAME = goheja;
 				PROVISIONING_PROFILE_SPECIFIER = goheja_development_provision;
-				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -783,7 +781,7 @@
 				CODE_SIGN_ENTITLEMENTS = goheja/goheja.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0.270;
+				CURRENT_PROJECT_VERSION = 1.0.260;
 				DEVELOPMENT_TEAM = ACS2X6ERDY;
 				INFOPLIST_FILE = goheja/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -791,8 +789,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.27;
-				ONLY_ACTIVE_ARCH = NO;
+				MARKETING_VERSION = 1.0.26;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -801,7 +798,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.go-heja.react";
 				PRODUCT_NAME = goheja;
 				PROVISIONING_PROFILE_SPECIFIER = goheja_distribution_provision;
-				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
