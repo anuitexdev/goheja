@@ -161,6 +161,12 @@ class ChartScreen extends Component<Props, State> {
         })
     }
 
+    private changeMultichart = ()=>{
+        this.setState({
+            isMultichart: !this.state.isMultichart,
+        })
+    }
+
 
     render() {
 
@@ -186,8 +192,22 @@ class ChartScreen extends Component<Props, State> {
                         <Text>Distance/Time</Text>
 
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={this.changeMultichart}
+                        style={{
+                            padding: 10,
+                            borderRadius: 4,
+                            borderWidth: 0.5,
+                            borderColor: '#d6d7da',
+                        }}
+                    >
+                        <Text>Multichart</Text>
+
+                    </TouchableOpacity>
                 </View>
-                <View style={{ paddingBottom: 50 }}>
+                 <View style={{ paddingBottom: 50 }}>
+                 { !this.state.isMultichart ? 
+                    <View>
                     <Text>Heart Rate</Text>
                     <LineChart
                         data={{
@@ -343,7 +363,57 @@ class ChartScreen extends Component<Props, State> {
                             paddingBottom: 50
                         }}
                     />
-
+                    </View>
+                    : 
+                
+                    <LineChart
+                    data={{
+                        labels: this.state.isTime ? this.state.heartTime.slice(0, 6) : this.state.distance.length !== 0 ? this.state.distance : [0, 1],
+                        datasets: [
+                            {
+                                data: this.state.heartRate.length === 0 ? [0, 1] : this.state.heartRate
+                            },
+                            {
+                                data: this.state.heartRate.length === 0 ? [0, 1] : this.state.Cadence,
+                            },
+                            {
+                                data: this.state.pace.length === 0 ? [0, 1] : this.state.pace
+                            },
+                            {
+                                data: this.state.elevation.length === 0 ? [0, 1] : this.state.elevation
+                            },
+                           
+                        ]
+                    }}
+                    onDataPointClick={(value: any) => console.log(value)
+                    }
+                    width={Dimensions.get("window").width} // from react-native
+                    height={220}
+                    yAxisLabel={""}
+                    chartConfig={{
+                        backgroundColor: "#fff",
+                        backgroundGradientFrom: "#fb8c00",
+                        backgroundGradientTo: "#ffa726",
+                        decimalPlaces: 2, // optional, defaults to 2dp
+                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                        style: {
+                            borderRadius: 16
+                        },
+                        propsForDots: {
+                            r: "6",
+                            strokeWidth: "2",
+                            stroke: "#ffa726"
+                        }
+                    }}
+                    bezier
+                    style={{
+                        marginVertical: 8,
+                        borderRadius: 16,
+                        paddingBottom: 50
+                    }}
+                />
+                }
                 </View>
             </ScrollView>
         );
