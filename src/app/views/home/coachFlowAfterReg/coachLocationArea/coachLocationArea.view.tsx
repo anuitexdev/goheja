@@ -254,14 +254,22 @@ class CoachLocationAreaView extends Component<Props, State> {
                 title={'test'}
                 description={'test2'}
               />
+                {
+                  Platform.OS === 'android' ?
+                    <Circle
+                      ref={ref => {this.circle = ref}}
+                      radius={0 + this.state.rangeValue * 10}
+                      center={this.state.region}
+                      fillColor={'rgba(136,197,254,.5)'}
+                      strokeColor={'rgba(136,197,254,.5)'}
+                    />
+                  : <Circle
+                      ref={ref => {this.circle = ref}}
+                      radius={0 + this.state.rangeValue * 10}
+                      center={this.state.region}
+                    />
+                }
                 
-                <Circle
-                  ref={ref => {this.circle = ref}}
-                  radius={0 + this.state.rangeValue * 10}
-                  center={this.state.region}
-                  fillColor={'rgba(136,197,254,.5)'}
-                  strokeColor={'rgba(136,197,254,.5)'}
-                />
                 
               </MapView>
             : null}
