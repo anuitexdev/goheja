@@ -6,7 +6,9 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "android-clean": "cd android && gradlew clean"
+    "android-clean": "cd android && gradlew clean",
+    "clean:build:android": "rm -rf android/app/build",
+    "prod:android": "npm run clean:build:android  && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.6.7",
@@ -32,9 +34,11 @@
     "react-native-config": "^0.11.7",
     "react-native-countries": "^1.0.2",
     "react-native-country-picker-modal": "^1.7.2",
+    "react-native-d3-charts": "0.0.1",
     "react-native-datepicker": "^1.7.2",
     "react-native-fbsdk": "^1.0.4",
     "react-native-fs": "^2.14.1",
+    "react-native-fusioncharts": "^4.1.1",
     "react-native-geocoding": "^0.4.0",
     "react-native-geolocation-service": "^3.1.0",
     "react-native-gesture-handler": "^1.4.1",

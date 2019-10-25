@@ -102,6 +102,9 @@ private destroyed:any;
     public chartRedirect = () => {
         this.props.navigation.navigate('chart');
     }
+    public d3chartRedirect= () => {
+        this.props.navigation.navigate('test');
+    }
     private handleChange = (data: any): void => {
         const errors = this.validateFields(data);
         const { type, ...signInData } = data;
@@ -150,7 +153,6 @@ private destroyed:any;
                             onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                             keyboardType={'email-address'}
                             autoCapitalize="none"
-                            keyboardType={"email-address"}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
@@ -202,6 +204,22 @@ private destroyed:any;
                     >
                     <TouchableOpacity
                     onPress={()=>this.chartRedirect()}
+                    style={{
+                        paddingTop: 20
+                    }}
+                    >
+                   <Text> Redirect to D3chart Page</Text>
+                    </TouchableOpacity>
+                    </View>
+                    <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                    >
+                    <TouchableOpacity
+                    onPress={()=>this.d3chartRedirect()}
                     style={{
                         paddingTop: 20
                     }}
