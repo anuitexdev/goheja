@@ -44,6 +44,7 @@ export let request_location_runtime_permission = async () => {};
 
 class CoachLocationAreaView extends Component<Props, State> {
   private destroyed: any;
+  private circle: any;
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.state = {
@@ -78,6 +79,8 @@ class CoachLocationAreaView extends Component<Props, State> {
           latitude: info.coords.latitude,
           longitude: info.coords.longitude,
         }
+      },() => {
+        this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor:'rgba(136,197,254,.5)'});
       })
     });
     this.translationService = new TranslateService();
@@ -160,6 +163,9 @@ class CoachLocationAreaView extends Component<Props, State> {
             latitudeDelta: 0.015,
             longitudeDelta: 0.0121,
           },
+          
+        },() => {
+          this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor:'rgba(136,197,254,.5)'});
         });
         await this.getLatLong(
           this.state.region.latitude,
@@ -190,6 +196,8 @@ class CoachLocationAreaView extends Component<Props, State> {
         latitude: nextProps.clubDTO.lat,
         longitude: nextProps.clubDTO.lng,
       }
+    },() => {
+      this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor:'rgba(136,197,254,.5)'});
     })
   }
 
@@ -218,10 +226,9 @@ class CoachLocationAreaView extends Component<Props, State> {
               />
                 
                 <Circle
+                  ref={ref => {this.circle = ref}}
                   radius={0 + this.state.rangeValue * 10}
                   center={this.state.region}
-                  strokeColor={'rgba(136,197,254,.5)'}
-                  fillColor={'rgba(136,197,254,.5)'}
                 />
                 
               </MapView>
