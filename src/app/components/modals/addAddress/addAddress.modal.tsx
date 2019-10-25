@@ -68,7 +68,7 @@ class AddAddressModal extends Component<Props, State> {
     });
     this.getCoordsFromCountry(this.state.selectedAddress);
     this.props.hideAddressModal(false);
-    this.props.getLocation(this.state.fullAddress);
+    this.props.getLocation(loc);
   };
 
   getCountriesList = async () => {
@@ -146,7 +146,7 @@ class AddAddressModal extends Component<Props, State> {
 const mapStateToProps = (state: any) => ({});
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getLocation: (value: string) => dispatch(actions.getLocation(value)),
+  getLocation: (value: string) => dispatch(actions.googleLocation(value)),
 });
 
 export default connect(
