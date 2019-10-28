@@ -14,5 +14,6 @@ export const coachBasicInfoValidators ={
     phone: /./,
     password:/./,
     confirmPassword: /./,
+    countryCode:  /./,
 
 }
