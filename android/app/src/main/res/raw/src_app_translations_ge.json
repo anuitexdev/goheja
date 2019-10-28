@@ -1,0 +1,190 @@
+{
+  "_id": "5d80f1c7780be6075d36b019",
+  "languageName": "German",
+  "translation": {
+      "exposeIDE": {
+          "title": "GoHeja-System",
+          "views": {
+              "Login": {
+                  "email": "Email",
+                  "password": "Passwort",
+                  "buttonCaption": "Einloggen",
+                  "Text": "Ich habe kein GoHeja-Konto",
+                  "ForgotPasswordLink": "Passwort vergessen?",
+                  "signUpLink": "Melde dich kostenlos an",
+                  "Language": "Sprache",
+                  "PrivacyPolicy": "Privacy Policy",
+                  "TermsOfUse": "Datenschutz-Bestimmungen",
+                  "FAQ": "FAQ",
+                  "messages": {
+                      "error": "Email oder Passwort ist falsch!!",
+                      "success": "ok message here",
+                      "exits": "E-Mail existiert bereits"
+                  }
+              },
+              "regestration": {
+                  "imCoach": "Ich bin Trainer",
+                  "imAthlete": "Ich bin ein Athlet",
+                  "yourBasicInfo": "Ihre grundlegenden Informationen",
+                  "firstNameTitle": "Vorname",
+                  "firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
+                  "lasttNameTitle": "Familienname, Nachname",
+                  "tellUsAboutYourself": "Erzählen Sie uns von sich",
+                  "birthDate": "Geburtstag",
+                  "bithDatePlaceHolder": "Datum wählen",
+                  "gender": "Geschlecht",
+                  "male": "Männlich",
+                  "female": "weiblich",
+                  "iUse": "ich benutze",
+                  "height": "Höhe",
+                  "weight": "Gewicht",
+                  "BofyFatPercentage": "Körperfett",
+                  "messages": {
+                      "error": "Email oder Passwort ist falsch!",
+                      "success": "Template with name {{name}} successfully created!",
+                      "exits": "Template with the name {{name}} already exits!"
+                  }
+              },
+              "userSetSports": {
+                  "hello": "hello",
+                  "description": "we have verified your email and linched your accuont successfuly",
+                  "title": "Configure Your Sports ",
+                  "runningLacatetThreshold": "Running Lacatet Threshold",
+                  "runningThresholdPace": "Running Threshold Pace",
+                  "whatsYourRunningLactaTethreshold": "What's Your Running Lacta Tethreshold",
+                  "whatsYourRunningThresholdPace": "What's YourRunning ThresholdPace",
+                  "whatsYourCyclingFtp": "Cycling FTP?",
+                  "cyclingLacatetThreshold": "Cycling Lacatet Threshold",
+                  "oneHoureFlatRideMAxSpeed": "1h Flat ride Max Speed",
+                  "swimmingThresholdPace": "Swimming Threshold Pace",
+                  "best1000mSwimTime": "Best 1000m Swim Time?",
+                  "runningAchievments": "What was the last race you took part in?",
+                  "howLongDidtheHalfMarathonTookYou": "How long did the 1/2 Marathon took you?",
+                  "whatWastheAvgHeartRateDyringThathalfMarathon": "What was your Avg. heart rate during that 1/2 marathon?",
+                  "messages": {
+                      "error": "Email or Password is incorrect!",
+                      "success": "ok message here",
+                      "exits": "Email allready exists"
+                  }
+              },
+              "confirmation": {
+                  "text": "Wir haben Ihre E-Mail-Adresse überprüft und Ihr Konto erfolgreich abgeschlossen",
+                  "messages": {
+                      "error": "",
+                      "success": "ok message here"
+                  }
+              },
+              "forgot-password": {
+                  "title": "Hast du dein Passwort vergessen?",
+                  "text": "Keine Sorge, es dauert einige Momente, bis Sie es zurückgesetzt haben und wieder auf dem richtigen Weg sind.",
+                  "caption": "Geben Sie hier mail ein",
+                  "messages": {
+                      "emailNotFound": "Email wurde nicht gefunden",
+                      "success": "ok message here"
+                  }
+              },
+              "regestrationNewClub": {
+                  "welcome": "Willkommen bei GoHeja",
+                  "title": "Lass uns deinen Club gründen",
+                  "text": "Bitte füllen Sie das folgende Formular aus, um die beste Personalisierung und den besten Teamgeist zu erhalten",
+                  "actionText": "Erstelle deinen Club",
+                  "clubName": "Clubname",
+                  "caption": "Typ Vereinsname ...",
+                  "addLogo": "Fügen Sie das <club> -Logo hinzu",
+                  "uploadClubLogo": "Laden Sie das <club> -Logo hoch",
+                  "uploadDiffrentLogo": "Laden Sie ein anderes Logo hoch",
+                  "WhereusuallyTeamsAreTraninig": "Wo trainieren normalerweise <Club> Mannschaften?",
+                  "useMyCurrentLocationArea": "Mein aktuelles Standortgebiet verwenden",
+                  "addAddressManually": "Adresse manuell hinzufügen",
+                  "country": "Land",
+                  "countryCaption": "Land auswählen",
+                  "address": "Straßenname",
+                  "addressCaption": "Straßenname...",
+                  "locateButton": "Lokalisieren",
+                  "radiusFromSelectedLocation": "Radius vom ausgewählten Ort",
+                  "clubWorkingDays": "<Club> Arbeitstage",
+                  "clubWorkingHours": "<Club> Arbeitszeit",
+                  "days": [
+                      "S",
+                      "M",
+                      "T",
+                      "W",
+                      "T",
+                      "F",
+                      "S"
+                  ],
+                  "messages": {
+                      "clubNotFound": "Club nicht gefunden",
+                      "success": "ok message here"
+                  }
+              }
+          }
+      },
+      "common": {
+          "hi": "Hi",
+          "wow": "wow",
+          "thatIsAwsome": "Das ist großartig!",
+          "youRock": "Sie rocken!",
+          "cycling": "Radfahren",
+          "running": "Laufen",
+          "swimming": "Schwimmen",
+          "iDontKnow": "ich weiß es nicht",
+          "bpm": "bpm",
+          "min": "min",
+          "sec": "sec",
+          "whatsYour": "Was ist dein",
+          "WelcomeToGoHeja": "Willkommen in Go-Heja",
+          "confirmMessage": "Wir haben Ihnen eine Bestätigungs-E-Mail zur Bestätigung Ihres Kontos gesendet. Bitte genehmigen Sie die E-Mail, um fortzufahren",
+          "emailTitle": "Email",
+          "EmailPlaceHolder": "Geben Sie hier Ihre E-Mail-Adresse ein",
+          "PasswordTitle": "Geben Sie hier Ihre E-Mail-Adresse ein",
+          "PasswordPlaceHolder": "Geben Sie hier passowrd ein",
+          "active": "Aktiv",
+          "all": "Alle",
+          "back": "Zurück",
+          "cancel": "Stornieren",
+          "close": "Schließen",
+          "closeWindow": "Fenster jetzt schließen",
+          "confirm": "Bestätigen",
+          "continue": "Fortsetzen",
+          "create": "Erstellen",
+          "delete": "Löschen",
+          "description": "Beschreibung",
+          "edit": "Edit",
+          "errorOccurred": "Hoppla! Ein unerwarteter Fehler ist aufgetreten. Bitte starten Sie das Programm neu oder wenden Sie sich an unseren Support",
+          "finish": "Fertig",
+          "from": "von",
+          "goTo": "Gehe zu",
+          "headline": "Bildbeschriftung",
+          "new": "Neu",
+          "next": "Nächster",
+          "no": "Nein",
+          "noAddress": "Fehlende Adresse",
+          "noEmail": "Fehlende E-Mail-Adressen",
+          "noHeadline": "Fehlende Überschrift",
+          "noInternalDescription": "Fehlende Int. Beschreibung",
+          "noName": "Fehlender Name",
+          "noPhone": "Fehlende Telefonnummer",
+          "ok": "Okay",
+          "others": "Andere",
+          "password": "Passwort",
+          "reloadPage": "Seite neuladen",
+          "reset": "Zurücksetzen",
+          "restart": "Neustart",
+          "salutationOptions": "Ms|Miss|Mrs|Mr",
+          "save": "sparen",
+          "search": "Suche",
+          "select": "Select",
+          "selected": "Wählen",
+          "skip": "Überspringen",
+          "start": "Anfang",
+          "send": "Senden",
+          "stop": "Halt",
+          "to": "zu",
+          "today": "Heute",
+          "unknown": "Unbekannt",
+          "yes": "Ja",
+          "optional": "Optional"
+      }
+  }
+}
