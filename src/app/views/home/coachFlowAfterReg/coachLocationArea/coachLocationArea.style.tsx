@@ -7,6 +7,9 @@ export default StyleSheet.create({
         height: window.height - 210,
         position: 'relative'
     },
+    fullScreenMapPage: {
+        height:window.height
+    },
     title: {
         fontSize: 20,
         color: '#272D43',

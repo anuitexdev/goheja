@@ -28,6 +28,7 @@ interface Props {
   toggleAddressModal: boolean;
   hideAddressModal: (visible: boolean) => void;
   getLocation: (value: string) => void;
+  getLocationName: (value:string) => void;
 }
 
 class AddAddressModal extends Component<Props, State> {
@@ -62,13 +63,13 @@ class AddAddressModal extends Component<Props, State> {
 
   public getLocation = async () => {
     let loc = this.state.selectedCountry + ', ' + this.state.selectedAddress;
-
     await this.setState({
       fullAddress: loc,
     });
     this.getCoordsFromCountry(this.state.selectedAddress);
     this.props.hideAddressModal(false);
     this.props.getLocation(loc);
+    this.props.getLocationName(loc);
   };
 
   getCountriesList = async () => {
@@ -147,6 +148,7 @@ const mapStateToProps = (state: any) => ({});
 
 const mapDispatchToProps = (dispatch: any) => ({
   getLocation: (value: string) => dispatch(actions.googleLocation(value)),
+  getLocationName: (value: string) => dispatch(actions.getLocationName(value))
 });
 
 export default connect(
