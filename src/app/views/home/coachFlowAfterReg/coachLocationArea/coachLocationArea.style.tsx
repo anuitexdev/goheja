@@ -8,7 +8,11 @@ export default StyleSheet.create({
         position: 'relative'
     },
     fullScreenMapPage: {
-        height:window.height
+        height:window.height,
+        width: window.width - 50,
+        position: 'absolute',
+        top: -100,
+        left: 0
     },
     title: {
         fontSize: 20,

@@ -254,7 +254,7 @@ class CoachLocationAreaView extends Component<Props, State> {
 
   render() {
     return (
-      <View style={coachLocationArea.mapPageWrapper}>
+      <View style={!this.state.editLocation ? coachLocationArea.mapPageWrapper : coachLocationArea.fullScreenMapPage}>
         {
           this.state.editLocation === false
             ? <Text style={coachLocationArea.title}>
@@ -285,22 +285,34 @@ class CoachLocationAreaView extends Component<Props, State> {
               }}
 
             >
-              <Marker
-                coordinate={{
-                  latitude: this.state.marker.latitude,
-                  longitude: this.state.marker.longitude
-                }}
-                title={'test'}
-                description={'test2'}
-              // draggable
-              // onDragEnd={(e) => this.setState({
-              //   region: {
-              //     ...this.state.region,
-              //     longitude: e.nativeEvent.coordinate.longitude,
-              //     latitude: e.nativeEvent.coordinate.latitude
-              //   }
-              // })}
-              />
+              {
+                !this.state.editLocation
+                  ? <Marker
+                    coordinate={{
+                      latitude: this.state.marker.latitude,
+                      longitude: this.state.marker.longitude
+                    }}
+                    title={'test'}
+                    description={'test2'}
+                  />
+                  : <Marker
+                    coordinate={{
+                      latitude: this.state.marker.latitude,
+                      longitude: this.state.marker.longitude
+                    }}
+                    title={'test'}
+                    description={'test2'}
+                    draggable
+                    onDragEnd={(e) => this.setState({
+                      region: {
+                        ...this.state.region,
+                        longitude: e.nativeEvent.coordinate.longitude,
+                        latitude: e.nativeEvent.coordinate.latitude
+                      }
+                    })}
+                  />
+              }
+
               {
                 Platform.OS === 'android' ?
                   <Circle
