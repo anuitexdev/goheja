@@ -273,11 +273,15 @@ class CoachLocationAreaView extends Component<Props, State> {
               provider={PROVIDER_GOOGLE} // remove if not using Google Maps
               style={coachLocationArea.map}
               region={this.state.region}
-              // onRegionChangeComplete={e => {console.log(e)}}
               onPress={e => {
                 this.setState({
+                  ...this.state,
                   region: {
                     ...this.state.region,
+                    longitude: e.nativeEvent.coordinate.longitude,
+                    latitude: e.nativeEvent.coordinate.latitude
+                  },
+                  marker: {
                     longitude: e.nativeEvent.coordinate.longitude,
                     latitude: e.nativeEvent.coordinate.latitude
                   }
@@ -349,7 +353,13 @@ class CoachLocationAreaView extends Component<Props, State> {
               </Text>
             </TouchableOpacity>
             : null}
-
+          {
+            this.state.editLocation
+              ? <Text style={coachLocationArea.dragMap}>
+                Drag map to choose location
+              </Text>
+              : null
+          }
           {this.props.location != '' ?
             <View style={coachLocationArea.finalLocation}>
               <View style={{ flexDirection: 'row' }}>
