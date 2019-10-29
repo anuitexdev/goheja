@@ -110,6 +110,7 @@ class LactateView extends Component<Props, State> {
                     <View style={sport.fullComponent}>
                         <View style={{ flexDirection: 'row' }}>
                             <TextInput
+                                placeholderTextColor={'#393838'}
                                 ref={(ref) => this.inputHundreds = ref}
                                 placeholder="0"
                                 onFocus={() => this.changeFocus(1)}
@@ -120,6 +121,7 @@ class LactateView extends Component<Props, State> {
                             >
                             </TextInput>
                             <TextInput
+                                placeholderTextColor={'#393838'}
                                 placeholder="0"
                                 ref={(ref) => this.inputDozens = ref}
                                 maxLength={1}
@@ -130,6 +132,7 @@ class LactateView extends Component<Props, State> {
                             >
                             </TextInput>
                             <TextInput
+                                placeholderTextColor={'#393838'}
                                 ref={(ref) => this.inputUnits = ref}
                                 style={[this.state.activeInputNumber === 3 ? sport.focusInput : sport.infoInput, { marginRight: 0 }]}
                                 placeholder="0"

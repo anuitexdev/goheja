@@ -117,6 +117,7 @@ class ThresholdView extends Component<Props, State> {
             <View style={{ alignItems: 'center' }}>
               <View style={{ flexDirection: 'row' }}>
                 <TextInput
+                  placeholderTextColor={'#393838'}
                   ref={ref => (this.inputDozentsOfMinutes = ref)}
                   placeholder="0"
                   onFocus={() => this.changeFocus(1)}
@@ -131,6 +132,7 @@ class ThresholdView extends Component<Props, State> {
                     this.setValue(this.inputUnitsOfMinutes, { dozentsOfMinutes })
                   }></TextInput>
                 <TextInput
+                  placeholderTextColor={'#393838'}
                   placeholder="0"
                   ref={ref => (this.inputUnitsOfMinutes = ref)}
                   maxLength={1}
@@ -156,6 +158,7 @@ class ThresholdView extends Component<Props, State> {
             <View style={{ alignItems: 'center' }}>
               <View style={{ flexDirection: 'row' }}>
                 <TextInput
+                  placeholderTextColor={'#393838'}
                   ref={ref => (this.inputDozentsOfSeconds = ref)}
                   style={[
                     this.state.activeInputNumber === 3
@@ -171,6 +174,7 @@ class ThresholdView extends Component<Props, State> {
                   }
                   onFocus={() => this.changeFocus(3)}></TextInput>
                 <TextInput
+                  placeholderTextColor={'#393838'}
                   ref={ref => (this.inputUnitsOfSeconds = ref)}
                   style={[
                     this.state.activeInputNumber === 4

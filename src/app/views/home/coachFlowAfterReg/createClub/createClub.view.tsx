@@ -57,6 +57,7 @@ class CreateClubView extends Component<Props, State> {
                             <Text style={createClubStyle.titleName}>{this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubName')}</Text>
                             <View style={createClubStyle.inputWrapper}>
                                 <TextInput
+                                    placeholderTextColor={'#393838'}
                                     style={[this.state.clubName.length == 0 ? { fontStyle: 'italic' } : { fontStyle: 'normal' }, createClubStyle.inputClub]}
                                     placeholder={this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.caption')}
                                     onChangeText={(txt) => this.setState({ clubName: txt })}

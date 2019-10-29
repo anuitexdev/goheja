@@ -131,6 +131,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                 <View style={styles.formField}>
                     <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.regestration.firstNameTitle')}</Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         placeholder={this.state.translateMethod('translation.exposeIDE.views.regestration.firstNamePlaceholder')}
                         style={!this.state.errors.firstname ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
@@ -141,6 +142,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                 <View style={styles.formField}>
                     <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.regestration.lasttNameTitle')}</Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         placeholder='Type your last name'
                         style={!this.state.errors.lastName ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
@@ -151,6 +153,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                 <View style={styles.formField}>
                     <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.Login.email')}</Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         placeholder={this.state.translateMethod('translation.common.EmailPlaceHolder')}
                         style={!this.state.errors.auth ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
@@ -163,6 +166,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                 <View style={styles.formField}>
                     <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         placeholder={this.state.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
                         style={!this.state.errors.password ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
@@ -180,6 +184,7 @@ class BasicInfoAthleteScreen extends Component<Props, State> {
                 <View style={styles.formField}>
                     <Text style={styles.label}>{this.state.translateMethod('translation.common.confirm')} {this.state.translateMethod('translation.common.password')}</Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         placeholder={this.state.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
                         style={!this.state.errors.confirmPassword ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :

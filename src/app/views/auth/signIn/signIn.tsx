@@ -150,7 +150,7 @@ private destroyed:any;
                             onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                             keyboardType={'email-address'}
                             autoCapitalize="none"
-                            keyboardType={"email-address"}
+                            placeholderTextColor={'#393838'}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
@@ -161,6 +161,7 @@ private destroyed:any;
                             onChangeText={(password) => this.handleChange({ password, email: this.state.email, type: 'password' })}
                             style={!this.state.passwordError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
                              this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
+                             placeholderTextColor={'#393838'}
                         />
                         <Icon
                             style={styles.showPassword}
