@@ -95,6 +95,7 @@ class PersonalInfoScreen extends Component<Props, State> {
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
+                                    placeholderTextColor={'#393838'}
                                     style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                     placeholder='Type your height…'
                                     keyboardType='phone-pad'
@@ -111,6 +112,7 @@ class PersonalInfoScreen extends Component<Props, State> {
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
+                                    placeholderTextColor={'#393838'}
                                     style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                     placeholder='Type your weight'
                                     keyboardType='phone-pad'
@@ -127,6 +129,7 @@ class PersonalInfoScreen extends Component<Props, State> {
                             </View>
                             <View style={styles.formControl}>
                                 <TextInput
+                                    placeholderTextColor={'#393838'}
                                     style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                     placeholder='Type your body fat…'
                                     keyboardType='phone-pad'

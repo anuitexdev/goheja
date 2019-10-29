@@ -119,6 +119,7 @@ class SpeedView extends Component<Props, State> {
                     <View style={cyclingStyles.fullComponent}>
                         <View style={{ flexDirection: 'row' }}>
                             <TextInput
+                                placeholderTextColor={'#393838'}
                                 ref={(ref) => this.inputHundreds = ref}
                                 placeholder="0"
                                 onFocus={() => this.changeFocus(1)}
@@ -129,6 +130,7 @@ class SpeedView extends Component<Props, State> {
                             >
                             </TextInput>
                             <TextInput
+                                placeholderTextColor={'#393838'}
                                 placeholder="0"
                                 ref={(ref) => this.inputDozens = ref}
                                 maxLength={1}
@@ -142,6 +144,7 @@ class SpeedView extends Component<Props, State> {
                                 <Text style={cyclingStyles.textDot}>.</Text>
                             </View>
                             <TextInput
+                                placeholderTextColor={'#393838'}
                                 ref={(ref) => this.inputUnits = ref}
                                 style={[this.state.activeInputNumber === 3 ? cyclingStyles.focusInput : cyclingStyles.infoInput, { marginRight: 0, marginLeft: 8 }]}
                                 placeholder="0"

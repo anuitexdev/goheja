@@ -232,7 +232,6 @@ class CoachLocationAreaView extends Component<Props, State> {
           latitude: nextProps.clubDTO.lat,
           longitude: nextProps.clubDTO.lng,
         }
-      }, () => {
       })
     } else {
       this.setState({
@@ -246,8 +245,8 @@ class CoachLocationAreaView extends Component<Props, State> {
           latitude: nextProps.clubDTO.lat,
           longitude: nextProps.clubDTO.lng,
         }
-      }, () => {
-        this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor: 'rgba(136,197,254,.5)' });
+      }, async ()  => {
+        await this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor: 'rgba(136,197,254,.5)' });
       })
     }
   }

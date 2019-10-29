@@ -82,6 +82,7 @@ class SendMailScreen extends Component<Props,State> {
                 <View>
                     <Text style= {styles.label}> Your Email Address</Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         placeholder='Alona@morning.agency'
                         style={!this.state.emailError ? styles.inputError : styles.input}
                         onChangeText = {(email: string) => this.handleChange(email)}

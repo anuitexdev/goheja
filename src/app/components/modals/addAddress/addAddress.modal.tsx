@@ -123,6 +123,7 @@ class AddAddressModal extends Component<Props, State> {
                   <Text style={addAddress.label}>Address</Text>
                   <TextInput
                     placeholder="Street name..."
+                    placeholderTextColor={'#393838'}
                     style={addAddress.input}
                     onChangeText={value =>
                       this.setState({selectedAddress: value})

@@ -70,6 +70,7 @@ class SuccessRegisterScreen extends Component<Props, State> {
                         If you’r part of a team and got a team code from your coach, please type it below
                     </Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         style={connectTeam.input}
                         onChangeText={(value) => this.setGroupCode(value)}
                     >

@@ -114,6 +114,7 @@ class RockView extends Component<Props, State> {
                     <View style={rock.fullComponent}>
                         <View style={{ flexDirection: 'row' }}>
                             <TextInput
+                                placeholderTextColor={'#393838'}
                                 ref={(ref) => this.inputHundreds = ref}
                                 placeholder="0"
                                 onFocus={() => this.changeFocus(1)}
@@ -124,6 +125,7 @@ class RockView extends Component<Props, State> {
                             >
                             </TextInput>
                             <TextInput
+                                placeholderTextColor={'#393838'}
                                 placeholder="0"
                                 ref={(ref) => this.inputDozens = ref}
                                 maxLength={1}
@@ -134,6 +136,7 @@ class RockView extends Component<Props, State> {
                             >
                             </TextInput>
                             <TextInput
+                                placeholderTextColor={'#393838'}
                                 ref={(ref) => this.inputUnits = ref}
                                 style={[this.state.activeInputNumber === 3 ? rock.focusInput : rock.infoInput, { marginRight: 0 }]}
                                 placeholder="0"
