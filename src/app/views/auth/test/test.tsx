@@ -1467,20 +1467,19 @@ const dataSource = {
       ]
     }
   ],
-  events:{
-    dataPlotClick:  (eventObj, dataObj) => {
-
+  events: {
+    dataPlotClick: (eventObj, dataObj) => {
       console.log(eventObj);
     },
     beforeInitialize: function () {
       console.log("Initializing mychart...");
-  },
-  message: function () {
-    console.log("Initializing mychart...");
-},
-"entityClick": function () {
-    console.log("Initializing mychart...");
-},
+    },
+    message: function () {
+      console.log("Initializing mychart...");
+    },
+    "entityClick": function () {
+      console.log("Initializing mychart...");
+    },
   }
 
 };
@@ -1489,104 +1488,104 @@ export default class Test extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        type: 'zoomline',
-        width: window.width,
-        dataFormat: 'json',
-        height: '400',
-        dataSource,
-        events:{
-          dataPlotClick:  (eventObj, dataObj) => {
+      type: 'zoomline',
+      width: window.width,
+      dataFormat: 'json',
+      height: '400',
+      dataSource,
+      events: {
+        dataPlotClick: (eventObj, dataObj) => {
 
-            console.log(eventObj);
-          },
-          beforeInitialize: function () {
-            console.log("Initializing mychart...");
+          console.log(eventObj);
+        },
+        beforeInitialize: function () {
+          console.log("Initializing mychart...");
         },
         message: function () {
           console.log("Initializing mychart...");
-      },
-      "entityClick": function () {
+        },
+        "entityClick": function () {
           console.log("Initializing mychart...");
-      },
-        }
+        },
+      }
     };
 
     this.libraryPath = Platform.select({
       // Specify fusioncharts.html file location
-    //   ios: require("./assets/fusioncharts.html"),
+      //   ios: require("./assets/fusioncharts.html"),
       android: { uri: "file:///android_asset/fusioncharts.html" }
     });
   }
-private chartRef: any;
-    componentDidMount =() =>{
-// console.log(this.chartRef);
+  private chartRef: any;
+  componentDidMount = () => {
+    // console.log(this.chartRef);
 
-// this.chartRef.props.listener(e);
-// this.chartRef.props.handleChartEvents()
+    // this.chartRef.props.listener(e);
+    // this.chartRef.props.handleChartEvents()
 
-    }
- 
-  private test=()=>{
+  }
+
+  private test = () => {
     console.log('test');
   }
 
   render() {
     return (
       <ScrollView>
-      <View style={styles.container}>
-        <Text style={styles.heading}>
-          FusionCharts Integration with React Native
+        <View style={styles.container}>
+          <Text style={styles.heading}>
+            FusionCharts Integration with React Native
         </Text>
-        <View style={styles.chartContainer}>
-          <FusionCharts
-            type={this.state.type}
-            width={this.state.width}
-            height={this.state.height}
-            dataFormat={this.state.dataFormat}
-            dataSource={this.state.dataSource}
-            libraryPath={this.libraryPath} // set the libraryPath property
-            listener={(e:any) =>console.log(e)}
-            dataplotRollOver={(e:any) =>this.test(e)}
-            handleChartEvents={(e:any) =>this.test(e)}
-            // ref={(re) => this.chartRef = ref}
-            events={this.state.events}
-           
-          />
+          <View style={styles.chartContainer}>
+            <FusionCharts
+              type={this.state.type}
+              width={this.state.width}
+              height={this.state.height}
+              dataFormat={this.state.dataFormat}
+              dataSource={this.state.dataSource}
+              libraryPath={this.libraryPath} // set the libraryPath property
+              listener={(e: any) => console.log(e)}
+              // dataplotRollOver={(e: any) => this.test(e)}
+              // handleChartEvents={(e: any) => this.test(e)}
+              // // ref={(re) => this.chartRef = ref}
+              events={this.state.events}
+
+            />
+          </View>
+          <View style={styles.chartContainer}>
+            <FusionCharts
+              type={this.state.type}
+              width={this.state.width}
+              height={this.state.height}
+              dataFormat={this.state.dataFormat}
+              dataSource={this.state.dataSource}
+              libraryPath={this.libraryPath} // set the libraryPath property
+              listener={() => this.test()}
+            />
+          </View>
+          <View style={styles.chartContainer}>
+            <FusionCharts
+              type={this.state.type}
+              width={this.state.width}
+              height={this.state.height}
+              dataFormat={this.state.dataFormat}
+              dataSource={this.state.dataSource}
+              libraryPath={this.libraryPath} // set the libraryPath property
+              listener={() => this.test()}
+            />
+          </View>
+          <View style={styles.chartContainer}>
+            <FusionCharts
+              type={this.state.type}
+              width={this.state.width}
+              height={this.state.height}
+              dataFormat={this.state.dataFormat}
+              dataSource={this.state.dataSource}
+              libraryPath={this.libraryPath} // set the libraryPath property
+              listener={() => this.test()}
+            />
+          </View>
         </View>
-        <View style={styles.chartContainer}>
-          <FusionCharts
-            type={this.state.type}
-            width={this.state.width}
-            height={this.state.height}
-            dataFormat={this.state.dataFormat}
-            dataSource={this.state.dataSource}
-            libraryPath={this.libraryPath} // set the libraryPath property
-            listener={() =>this.test()}
-          />
-        </View>
-        <View style={styles.chartContainer}>
-          <FusionCharts
-            type={this.state.type}
-            width={this.state.width}
-            height={this.state.height}
-            dataFormat={this.state.dataFormat}
-            dataSource={this.state.dataSource}
-            libraryPath={this.libraryPath} // set the libraryPath property
-            listener={() =>this.test()}
-          />
-        </View>
-        <View style={styles.chartContainer}>
-          <FusionCharts
-            type={this.state.type}
-            width={this.state.width}
-            height={this.state.height}
-            dataFormat={this.state.dataFormat}
-            dataSource={this.state.dataSource}
-            libraryPath={this.libraryPath} // set the libraryPath property
-            listener={() =>this.test()}
-          />
-        </View>
-      </View>
       </ScrollView>
     );
   }

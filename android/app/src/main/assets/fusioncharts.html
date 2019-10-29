@@ -90,7 +90,12 @@ Chart is loading...
                         return
                     }
                     b[h.msgId] && (b[h.msgId].resolve(), delete b[h.msgId]), h.args && c[h.msgId] && (h.isSuccessfull ? c[h.msgId].onsuccess.apply(null, h.args) : c[h.msgId].onerror.apply(null, h.args), delete c[h.msgId])
+                }, window.document.addEventListener("onmouseover", function(g) {
+                    return Json.parse(g.data)
+                    console.log(g.data);
+                    
                 })
+                )
             })()
         })();
     </script>
@@ -99,14 +104,14 @@ Chart is loading...
     <script type='text/javascript' src="fusioncharts/fusioncharts.js"></script>
     <script type='text/javascript' src="fusioncharts/fusioncharts.charts.js"></script>
     <script type='text/javascript' src="fusioncharts/themes/fusioncharts.theme.fusion.js"></script>
-    <script type='text/javascript' src="fusioncharts/fusioncharts.powercharts"></script>
+    <!-- <script type='text/javascript' src="fusioncharts/fusioncharts.powercharts"></script>
     <script type='text/javascript' src="fusioncharts/fusioncharts.widgets"></script>
     <script type='text/javascript' src="fusioncharts/fusioncharts.gantt"></script>
     <script type='text/javascript' src="fusioncharts/fusioncharts.treemap"></script>
-    <script type='text/javascript' src="fusioncharts/fusioncharts.zoomscatter"></script>
+    <script type='text/javascript' src="fusioncharts/fusioncharts.zoomscatter"></script> -->
     <script type='text/javascript' src="fusioncharts/fusioncharts.zoomline"></script>
-    <script type='text/javascript' src="fusioncharts/fusioncharts.overlappedbar2d"></script>
-    <script type='text/javascript' src="fusioncharts/fusioncharts.overlappedcolumn2d"></script>
+    <!-- <script type='text/javascript' src="fusioncharts/fusioncharts.overlappedbar2d"></script>
+    <script type='text/javascript' src="fusioncharts/fusioncharts.overlappedcolumn2d"></script> -->
 
 </body>
 
