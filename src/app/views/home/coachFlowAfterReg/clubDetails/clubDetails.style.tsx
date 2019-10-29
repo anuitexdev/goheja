@@ -87,6 +87,7 @@ export default StyleSheet.create({
     paddingLeft: 20,
     paddingVertical: 0,
     height: 50,
+    color: '#282E44'
   },
   inputTimeFocused: {
     borderRadius: 3,
@@ -95,6 +96,7 @@ export default StyleSheet.create({
     paddingLeft: 20,
     paddingVertical: 0,
     height: 50,
+    color: '#282E44'
   },
   inputsWrapper: {
       flexDirection: 'row',
