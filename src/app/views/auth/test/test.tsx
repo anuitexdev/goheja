@@ -1466,7 +1466,22 @@ const dataSource = {
         },
       ]
     }
-  ]
+  ],
+  events:{
+    dataPlotClick:  (eventObj, dataObj) => {
+
+      console.log(eventObj);
+    },
+    beforeInitialize: function () {
+      console.log("Initializing mychart...");
+  },
+  message: function () {
+    console.log("Initializing mychart...");
+},
+"entityClick": function () {
+    console.log("Initializing mychart...");
+},
+  }
 
 };
 

@@ -131,12 +131,13 @@ export default StyleSheet.create({
         fontSize: 16,
     },
     signInBtn: {
-        paddingRight: 20,
-        paddingLeft: 20,
-        paddingBottom: 12,
-        paddingTop: 12,
         backgroundColor: '#b6c0c6',
         borderRadius: 2,
+        flex: 0,
+        borderWidth: 0,
+        width: 100,
+        paddingVertical: 12,
+        paddingHorizontal: 20,
     },
     signInText: {
         color: '#f2f8ff',
