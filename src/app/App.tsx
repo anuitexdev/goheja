@@ -31,11 +31,11 @@ export default class App extends Component {
   return (
     <Provider store={store}>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{backgroundColor: 'white'}}/>
+      <SafeAreaView style={{backgroundColor: 'grey'}}/>
 
       {Platform.OS === 'ios' ?  <Header/>: null} 
       <Navigation />
-      <SafeAreaView forceInset={Platform.OS == 'ios' ? {bottom: 'always'} :  {bottom: 'never'} } style={{backgroundColor: 'white'}}/>
+      <SafeAreaView forceInset={Platform.OS == 'ios' ? {bottom: 'always'} :  {bottom: 'never'} } style={{backgroundColor: 'grey'}}/>
     </Provider>
   )}
 };
