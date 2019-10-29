@@ -103,6 +103,7 @@ class ResetPasswordScreen extends Component<Props, State> {
                             secureTextEntry={true}
                             style={this.state.passwordError ? styles.inputError : styles.input}
                             onChangeText={(password) => this.handleChange({ password })}
+                            value={this.state.password}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
@@ -113,6 +114,7 @@ class ResetPasswordScreen extends Component<Props, State> {
                             secureTextEntry={true}
                             style={this.state.confirmPasswordError ? styles.inputError : styles.input}
                             onChangeText={(confirmPassword) => this.handleChange({ confirmPassword })}
+                            value={this.state.confirmPassword}
                         ></TextInput>
                     </View>
                     {this.state.confirmPasswordError || this.state.passwordError ? <Text style={styles.errorText}>Your Password does not match</Text> : null}
