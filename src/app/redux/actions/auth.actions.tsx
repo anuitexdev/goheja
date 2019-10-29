@@ -53,7 +53,7 @@ export const signIn = (userData: UserSignInData) => {
         await AuthService.signIn(userData).then(res => {
 
             if (!res.data.token) {
-                Alert.alert('Received empty object from API');
+                Alert.alert('User wasn`t found');
                 dispatch(failedAuth(res));
                 return;
             }
