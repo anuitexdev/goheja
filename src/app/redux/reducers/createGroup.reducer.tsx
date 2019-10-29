@@ -23,6 +23,12 @@ const CreateGroupReducer = (state = CreateGroupDefaultState, action: any) => {
                 }
             }
         }
+        case "GET_LOCATION_NAME": {
+            return {
+                ...state,
+                location: action.payload
+            }
+        }
         default: return { ...state }
     }
 }

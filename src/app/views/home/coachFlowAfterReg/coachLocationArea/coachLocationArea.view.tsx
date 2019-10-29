@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import coachLocationArea from './coachLocationArea.style';
-import MapView, {PROVIDER_GOOGLE, Circle, Marker} from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Circle, Marker } from 'react-native-maps';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconFeather from 'react-native-vector-icons/Feather';
@@ -19,8 +19,8 @@ import Slider from 'react-native-slider';
 import Geolocation from '@react-native-community/geolocation';
 import TranslateService from '../../../../services/translation.service';
 import * as translationReplaceHelper from '../../../../shared/helpers/translationReplace.helper';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import Config from 'react-native-config';
 
 interface State {
@@ -31,6 +31,7 @@ interface State {
   marker: any;
   editLocation: boolean;
   translateMethod: (str: string) => string;
+  location: string;
 }
 
 interface Props {
@@ -40,10 +41,11 @@ interface Props {
   clubDTO: any;
 }
 
-export let request_location_runtime_permission = async () => {};
+export let request_location_runtime_permission = async () => { };
 
 class CoachLocationAreaView extends Component<Props, State> {
   private destroyed: any;
+  private circle: any;
   constructor(props: Props, private translationService: TranslateService) {
     super(props);
     this.state = {
@@ -62,23 +64,43 @@ class CoachLocationAreaView extends Component<Props, State> {
       },
       rangeValue: 20,
       editLocation: false,
+      location: this.props.location
     };
   }
 
   componentWillMount() {
-    Geolocation.getCurrentPosition(info => {
-      this.setState({
-        region: {
-          latitude: info.coords.latitude,
-          longitude: info.coords.longitude,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.0121,
-        },
-        marker: {
-          latitude: info.coords.latitude,
-          longitude: info.coords.longitude,
-        }
-      })
+    Geolocation.getCurrentPosition(position => {
+      if (Platform.OS === 'android') {
+        this.setState({
+          ...this.state,
+          marker: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          },
+          region: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          },
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          marker: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          },
+          region: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          },
+        }, () => {
+          this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor: 'rgba(136,197,254,.5)' });
+        });
+      }
     });
     this.translationService = new TranslateService();
     this.destroyed = new Subject();
@@ -149,18 +171,36 @@ class CoachLocationAreaView extends Component<Props, State> {
   getCurrentLocation = async () => {
     await Geolocation.getCurrentPosition(
       async position => {
-        this.setState({
-          marker: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          },
-          region: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          },
-        });
+        if (Platform.OS === 'android') {
+          this.setState({
+            marker: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            region: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121,
+            },
+          });
+        } else {
+          this.setState({
+            marker: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            region: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121,
+            },
+          }, () => {
+            this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor: 'rgba(136,197,254,.5)' });
+          });
+        }
+
         await this.getLatLong(
           this.state.region.latitude,
           this.state.region.longitude,
@@ -169,70 +209,139 @@ class CoachLocationAreaView extends Component<Props, State> {
       error => {
         console.log(error);
       },
-      {enableHighAccuracy: true, timeout: 30000},
+      { enableHighAccuracy: true, timeout: 30000 },
     );
   };
-  setCurrentLocation = async () => {    
+  setCurrentLocation = async () => {
     if (Platform.OS === 'ios') {
       this.getCurrentLocation();;
     } else {
       await this.request_location_runtime_permission();
     }
   };
-  UNSAFE_componentWillReceiveProps(nextProps: any){
-    this.setState({
-      region:{
-        ...this.state.region,
-      latitude: nextProps.clubDTO.lat,
-      longitude: nextProps.clubDTO.lng,
-      },
-      marker: {
-        latitude: nextProps.clubDTO.lat,
-        longitude: nextProps.clubDTO.lng,
-      }
-    })
+  UNSAFE_componentWillReceiveProps(nextProps: any) {
+    if (Platform.OS === 'android') {
+      this.setState({
+        ...this.state,
+        region: {
+          ...this.state.region,
+          latitude: nextProps.clubDTO.lat,
+          longitude: nextProps.clubDTO.lng,
+        },
+        marker: {
+          latitude: nextProps.clubDTO.lat,
+          longitude: nextProps.clubDTO.lng,
+        }
+      })
+    } else {
+      this.setState({
+        ...this.state,
+        region: {
+          ...this.state.region,
+          latitude: nextProps.clubDTO.lat,
+          longitude: nextProps.clubDTO.lng,
+        },
+        marker: {
+          latitude: nextProps.clubDTO.lat,
+          longitude: nextProps.clubDTO.lng,
+        }
+      }, async ()  => {
+        await this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor: 'rgba(136,197,254,.5)' });
+      })
+    }
   }
 
   render() {
     return (
-      <View style={coachLocationArea.mapPageWrapper}>
-        <Text style={coachLocationArea.title}>
-          {translationReplaceHelper.translationReplace(
-            this.state.translateMethod(
-              'translation.exposeIDE.views.regestrationNewClub.WhereusuallyTeamsAreTraninig',
-            ),
-            this.props.clubName,
-          )}
-        </Text>
+      <View style={!this.state.editLocation ? coachLocationArea.mapPageWrapper : coachLocationArea.fullScreenMapPage}>
+        {
+          this.state.editLocation === false
+            ? <Text style={coachLocationArea.title}>
+              {translationReplaceHelper.translationReplace(
+                this.state.translateMethod(
+                  'translation.exposeIDE.views.regestrationNewClub.WhereusuallyTeamsAreTraninig',
+                ),
+                this.props.clubName,
+              )}
+            </Text>
+            : null
+        }
         <View style={coachLocationArea.mapWrapper}>
-          {this.state.region.latitude !== null 
+          {this.state.region.latitude !== null
             ? <MapView
-                provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-                style={coachLocationArea.map}
-                region={this.state.region}>
-                <Marker
-                coordinate={{latitude: this.state.marker.latitude,
-                  longitude: this.state.marker.longitude}}
-                title={'test'}
-                description={'test2'}
-              />
-                
-                <Circle
-                  radius={0 + this.state.rangeValue * 10}
-                  center={this.state.region}
-                  strokeColor={'rgba(136,197,254,.5)'}
-                  fillColor={'rgba(136,197,254,.5)'}
-                />
-                
-              </MapView>
+              provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+              style={coachLocationArea.map}
+              region={this.state.region}
+              onPress={e => {
+                this.setState({
+                  ...this.state,
+                  region: {
+                    ...this.state.region,
+                    longitude: e.nativeEvent.coordinate.longitude,
+                    latitude: e.nativeEvent.coordinate.latitude
+                  },
+                  marker: {
+                    longitude: e.nativeEvent.coordinate.longitude,
+                    latitude: e.nativeEvent.coordinate.latitude
+                  }
+                })
+              }}
+
+            >
+              {
+                !this.state.editLocation
+                  ? <Marker
+                    coordinate={{
+                      latitude: this.state.marker.latitude,
+                      longitude: this.state.marker.longitude
+                    }}
+                    title={'test'}
+                    description={'test2'}
+                  />
+                  : <Marker
+                    coordinate={{
+                      latitude: this.state.marker.latitude,
+                      longitude: this.state.marker.longitude
+                    }}
+                    title={'test'}
+                    description={'test2'}
+                    draggable
+                    onDragEnd={(e) => this.setState({
+                      region: {
+                        ...this.state.region,
+                        longitude: e.nativeEvent.coordinate.longitude,
+                        latitude: e.nativeEvent.coordinate.latitude
+                      }
+                    })}
+                  />
+              }
+
+              {
+                Platform.OS === 'android' ?
+                  <Circle
+                    ref={ref => { this.circle = ref }}
+                    radius={0 + this.state.rangeValue * 10}
+                    center={this.state.region}
+                    fillColor={'rgba(136,197,254,.5)'}
+                    strokeColor={'rgba(136,197,254,.5)'}
+                  />
+                  : <Circle
+                    ref={ref => { this.circle = ref }}
+                    radius={0 + this.state.rangeValue * 10}
+                    center={this.state.region}
+                  />
+              }
+
+
+            </MapView>
             : null}
-          
-          {this.props.location == '' ? 
+
+          {this.props.location == '' ?
             <TouchableOpacity
               style={coachLocationArea.currentLocationBtn}
               onPress={this.setCurrentLocation}>
               <Icon
-                style={{color: '#707B7F'}}
+                style={{ color: '#707B7F' }}
                 size={25}
                 name={'location-arrow'}
               />
@@ -242,13 +351,19 @@ class CoachLocationAreaView extends Component<Props, State> {
                 )}
               </Text>
             </TouchableOpacity>
-           : null}
-
-          {this.props.location != '' ? 
+            : null}
+          {
+            this.state.editLocation
+              ? <Text style={coachLocationArea.dragMap}>
+                Drag map to choose location
+              </Text>
+              : null
+          }
+          {this.props.location != '' ?
             <View style={coachLocationArea.finalLocation}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <Icon
-                  style={{color: '#707B7F'}}
+                  style={{ color: '#707B7F' }}
                   size={25}
                   name={'location-arrow'}
                 />
@@ -258,22 +373,22 @@ class CoachLocationAreaView extends Component<Props, State> {
               </View>
               <TouchableOpacity
                 onPress={() =>
-                  this.setState({editLocation: !this.state.editLocation})
+                  this.setState({ editLocation: !this.state.editLocation })
                 }>
-                {this.state.editLocation == false ? 
+                {this.state.editLocation == false ?
                   <IconFeather
-                    style={{color: '#707B7F'}}
+                    style={{ color: '#707B7F' }}
                     size={24}
                     name={'edit-2'}
                   />
-                 : 
+                  :
                   <Text style={coachLocationArea.doneBtn}>Done</Text>
                 }
               </TouchableOpacity>
             </View>
-           : null}
+            : null}
         </View>
-        {this.props.location == '' ? 
+        {this.props.location == '' ?
           <View style={coachLocationArea.addAddress}>
             <TouchableOpacity
               style={coachLocationArea.addressBtn}
@@ -290,8 +405,8 @@ class CoachLocationAreaView extends Component<Props, State> {
               </Text>
             </TouchableOpacity> */}
           </View>
-         : null}
-        {this.state.region.latitude != null ? 
+          : null}
+        {this.state.region.latitude != null ?
           <TouchableOpacity
             style={coachLocationArea.nextBtn}
             onPress={this.onSubmit}>
@@ -299,9 +414,9 @@ class CoachLocationAreaView extends Component<Props, State> {
               {this.state.translateMethod('translation.common.next')}
             </Text>
           </TouchableOpacity>
-         : null}
+          : null}
 
-        {this.state.editLocation == true ? 
+        {this.state.editLocation == true ?
           <View style={coachLocationArea.range}>
             <Text style={coachLocationArea.radiusText}>
               {this.state.translateMethod(
@@ -318,7 +433,7 @@ class CoachLocationAreaView extends Component<Props, State> {
                 step={1}
                 value={this.state.rangeValue}
                 onValueChange={(value: any) =>
-                  this.setState({rangeValue: value})
+                  this.setState({ rangeValue: value })
                 }
                 thumbTintColor={'white'}
                 thumbTouchSize={{
@@ -330,7 +445,7 @@ class CoachLocationAreaView extends Component<Props, State> {
                   width: 50,
                   borderRadius: 1000,
                   shadowColor: 'black',
-                  shadowOffset: {width: 4, height: 4},
+                  shadowOffset: { width: 4, height: 4 },
                   shadowOpacity: 0.2,
                   shadowRadius: 6,
                   elevation: 30,
@@ -341,7 +456,7 @@ class CoachLocationAreaView extends Component<Props, State> {
               </Text>
             </View>
           </View>
-         : null}
+          : null}
 
         <AddAddressModal
           toggleAddressModal={this.state.toggleAddressModal}

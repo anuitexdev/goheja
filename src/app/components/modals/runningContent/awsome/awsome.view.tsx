@@ -127,6 +127,7 @@ class AwsomeView extends Component<Props, State> {
             <View style={{ alignItems: 'center' }}>
               <View style={{ flexDirection: 'row' }}>
                 <TextInput
+                  placeholderTextColor={'#393838'}
                   ref={ref => (this.inputDozentsOfHours = ref)}
                   placeholder="0"
                   onFocus={() => this.changeFocus(1)}
@@ -141,6 +142,7 @@ class AwsomeView extends Component<Props, State> {
                 >
                 </TextInput>
                 <TextInput
+                  placeholderTextColor={'#393838'}
                   placeholder="0"
                   ref={ref => (this.inputUnitsOfHours = ref)}
                   maxLength={1}
@@ -165,6 +167,7 @@ class AwsomeView extends Component<Props, State> {
             <View style={{ alignItems: 'center' }}>
               <View style={{ flexDirection: 'row' }}>
                 <TextInput
+                  placeholderTextColor={'#393838'}
                   ref={ref => (this.inputDozentsOfMinutes = ref)}
                   style={[
                     this.state.activeInputNumber === 3
@@ -179,6 +182,7 @@ class AwsomeView extends Component<Props, State> {
                   onFocus={() => this.changeFocus(3)}>
                 </TextInput>
                 <TextInput
+                  placeholderTextColor={'#393838'}
                   ref={ref => (this.inputUnitsOfMinutes = ref)}
                   style={[
                     this.state.activeInputNumber === 4
@@ -216,6 +220,7 @@ class AwsomeView extends Component<Props, State> {
             <View style={{ alignItems: 'center' }}>
               <View style={{ flexDirection: 'row' }}>
                 <TextInput
+                  placeholderTextColor={'#393838'}
                   ref={ref => (this.inputDozentsOfSeconds = ref)}
                   style={[
                     this.state.activeInputNumber === 5
@@ -230,6 +235,7 @@ class AwsomeView extends Component<Props, State> {
                   onFocus={() => this.changeFocus(5)}>
                 </TextInput>
                 <TextInput
+                  placeholderTextColor={'#393838'}
                   ref={ref => (this.inputUnitsOfSeconds = ref)}
                   style={[
                     this.state.activeInputNumber === 6

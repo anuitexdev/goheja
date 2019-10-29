@@ -8,6 +8,10 @@ export const getLocation = (payload: any) => {
     return { type: 'GET_LOCATION', payload }
 }
 
+export const getLocationName = (payload: any) => {
+    return { type: 'GET_LOCATION_NAME', payload}
+}
+
 export const registerGroup = (groupData: any) => {
     
     return async (dispatch: any) => {

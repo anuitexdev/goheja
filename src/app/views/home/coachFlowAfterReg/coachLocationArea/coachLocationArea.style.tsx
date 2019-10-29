@@ -7,6 +7,13 @@ export default StyleSheet.create({
         height: window.height - 210,
         position: 'relative'
     },
+    fullScreenMapPage: {
+        height: window.height - 75,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        zIndex: 99999,
+    },
     title: {
         fontSize: 20,
         color: '#272D43',
@@ -41,6 +48,24 @@ export default StyleSheet.create({
         top:30,
         left: 20,
         zIndex: 9999
+    },
+    dragMap: {
+        position: 'absolute',
+        width: window.width - 50,
+        padding: 10,
+        backgroundColor: '#4D5A60',
+        textAlign: 'center',
+        borderRadius: 10,
+        paddingRight: 20,
+        paddingLeft: 20,
+        paddingBottom: 12,
+        paddingTop: 12,
+        top: 75,
+        left: 20,
+        zIndex: 9999,
+        color: 'white',
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     finalLocation: {
         position: 'absolute',
@@ -138,13 +163,15 @@ export default StyleSheet.create({
         height: 150,
         right: 0,
         zIndex: 9999,
-        width: window.width
+        width: window.width, 
     },
     rangeSlider: {
         height:  40,
-        width: window.width - 80
+        width: window.width - 120
     },
     sliderWrapper: {
+        display: 'flex',
+        justifyContent: 'space-between',
         flexDirection: 'row',
         alignItems: 'center'
     },
@@ -161,6 +188,6 @@ export default StyleSheet.create({
     },
     doneBtn: {
         color: '#1373FB',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     }
 })

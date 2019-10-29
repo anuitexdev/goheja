@@ -12,9 +12,12 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* gohejaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gohejaTests.m */; };
+		3128AFEA57801D2009678DF9 /* libPods-goheja-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB782275EEB1F126EC323247 /* libPods-goheja-tvOS.a */; };
 		4B427900234B2D5A00744BA2 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4278FF234B2D5A00744BA2 /* HealthKit.framework */; };
+		6FF324BCE5638CFB666AF63D /* libPods-gohejaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F86C88601CCC6546AB94698 /* libPods-gohejaTests.a */; };
 		8461BDC5236079700059DBCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8461BDC4236079700059DBCE /* Assets.xcassets */; };
-		AF1DF57A45594B7AC6C7971C /* libPods-goheja-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A10E01DB38C7F3DC5D2FEE /* libPods-goheja-tvOSTests.a */; };
+		F191D5B3EDA88E863AE48D6F /* libPods-goheja-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B90DCD08E7F22240B2F779FF /* libPods-goheja-tvOSTests.a */; };
+		F244046C32AA4F80A6251301 /* libPods-goheja.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6832DD9B294709EF476D62 /* libPods-goheja.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +67,6 @@
 		4E6832DD9B294709EF476D62 /* libPods-goheja.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-goheja.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F86C88601CCC6546AB94698 /* libPods-gohejaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gohejaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53B9F521D1934706A856AF5A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		7859B9189E7E3A74A89D7FD5 /* Pods-goheja-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goheja-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-goheja-tvOS/Pods-goheja-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		8461BDC4236079700059DBCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8943768669424CFF8DA38B28 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		8F0427DC21E2DFDE7226A99F /* Pods-gohejaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gohejaTests.debug.xcconfig"; path = "Target Support Files/Pods-gohejaTests/Pods-gohejaTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -89,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAFD9526C655A5EED8A01F79 /* libPods-gohejaTests.a in Frameworks */,
+				6FF324BCE5638CFB666AF63D /* libPods-gohejaTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B427900234B2D5A00744BA2 /* HealthKit.framework in Frameworks */,
-				BA588585407C189A39CD2707 /* libPods-goheja.a in Frameworks */,
+				F244046C32AA4F80A6251301 /* libPods-goheja.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0EEF3D47E1238E7B7E51D3C /* libPods-goheja-tvOS.a in Frameworks */,
+				3128AFEA57801D2009678DF9 /* libPods-goheja-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB6BED026641CDAA49EC5EA3 /* libPods-goheja-tvOSTests.a in Frameworks */,
+				F191D5B3EDA88E863AE48D6F /* libPods-goheja-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

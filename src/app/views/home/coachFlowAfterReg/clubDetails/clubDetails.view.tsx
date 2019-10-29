@@ -91,8 +91,9 @@ class ClubDetailsView extends Component<Props, State> {
       keyboardIsOpen: false
     })
   }
-
-
+  public setWorkTime = (time: string) => {
+    return (+time.substr(0,2) * 60) + (+time.substr(3,5));
+  }
   public onSubmit = (value: any) => {
 
     Alert.alert('end of the flow');
@@ -102,10 +103,8 @@ class ClubDetailsView extends Component<Props, State> {
       weekWorkDays: this.state.weekWorkDays,
     }
 
-
     const re = /^0[0-9]|1[0-9]|2[0-3]:[0-5][0-9]$/;
     if (re.test(value)) {
-      console.log(this.state.openTime, this.state.closeTime)
       const clubData = {
         name: this.props.clubDTO.name,
         code: "st",
@@ -114,10 +113,10 @@ class ClubDetailsView extends Component<Props, State> {
         radius: this.props.clubDTO.radius,
         imgPath: this.props.clubDTO.imgPath,
         weekWorkDays: this.state.weekWorkDays,
-        startOfDay: 360,
-        endOfDay: 1360,
+        startOfDay: this.setWorkTime(this.state.openTime),
+        endOfDay: this.setWorkTime(this.state.closeTime),
         firstDayInWeek: Math.min.apply(Math, this.state.weekWorkDays)
-      }   
+      }
       this.props.registerGroup(clubData);
       this.props.nextStepNumber(clubTime);
     } else {
