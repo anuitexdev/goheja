@@ -16,6 +16,16 @@ const CreateGroupReducer = (state = CreateGroupDefaultState, action: any) => {
         case "GET_LOCATION": {
             return {
                 ...state,
+                clubDTO: {
+                    ...state.clubDTO,
+                    lat: action.payload.lat,
+                    lng: action.payload.lng,
+                }
+            }
+        }
+        case "GET_LOCATION_NAME": {
+            return {
+                ...state,
                 location: action.payload
             }
         }

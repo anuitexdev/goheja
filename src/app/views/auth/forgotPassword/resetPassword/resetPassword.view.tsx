@@ -98,19 +98,23 @@ class ResetPasswordScreen extends Component<Props, State> {
                     <View style={styles.formField}>
                         <Text style={styles.label}>{this.state.translateMethod('translation.common.new')} {this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                         <TextInput
+                            placeholderTextColor={'#393838'}
                             placeholder='Type your new password...'
                             secureTextEntry={true}
                             style={this.state.passwordError ? styles.inputError : styles.input}
                             onChangeText={(password) => this.handleChange({ password })}
+                            value={this.state.password}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
                         <Text style={styles.label}>{this.state.translateMethod('translation.common.new')} {this.state.translateMethod('translation.exposeIDE.views.Login.password')} (again)</Text>
                         <TextInput
+                            placeholderTextColor={'#393838'}
                             placeholder='Type your new password (again)...'
                             secureTextEntry={true}
                             style={this.state.confirmPasswordError ? styles.inputError : styles.input}
                             onChangeText={(confirmPassword) => this.handleChange({ confirmPassword })}
+                            value={this.state.confirmPassword}
                         ></TextInput>
                     </View>
                     {this.state.confirmPasswordError || this.state.passwordError ? <Text style={styles.errorText}>Your Password does not match</Text> : null}

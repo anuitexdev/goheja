@@ -155,6 +155,7 @@ class YourSelfAthleteScreen extends Component<Props, State> {
                                 <Text style={styles.label}>Birth Day</Text>
                                 <TouchableOpacity onPress={this.showDateTimePicker} style={styles.datePicker}>
                                     <TextInput
+                                        placeholderTextColor={'#393838'}
                                         placeholder={this.state.translateMethod('translation.exposeIDE.views.regestration.bithDatePlaceHolder')}
                                         style={!this.state.birthDateError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
                                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}

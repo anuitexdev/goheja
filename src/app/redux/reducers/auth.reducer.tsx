@@ -35,6 +35,7 @@ const AuthReducer = (state = AuthDefaultState, action: any) => {
         case "FAILED_GROUP_CODE": {
             return {
                 ...state,
+                isLogged: false,
                 signUpData: {
                     ...state.signUpData,
                     specGroup: action.data.specGroup,

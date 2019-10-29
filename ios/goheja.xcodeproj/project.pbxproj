@@ -13,6 +13,7 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* gohejaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gohejaTests.m */; };
+		3128AFEA57801D2009678DF9 /* libPods-goheja-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB782275EEB1F126EC323247 /* libPods-goheja-tvOS.a */; };
 		4B427900234B2D5A00744BA2 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4278FF234B2D5A00744BA2 /* HealthKit.framework */; };
 		5A82E43970E157AAD433D349 /* libPods-goheja.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6832DD9B294709EF476D62 /* libPods-goheja.a */; };
 		70D26C745F227E698050E524 /* libPods-goheja-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB782275EEB1F126EC323247 /* libPods-goheja-tvOS.a */; };

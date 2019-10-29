@@ -195,6 +195,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                 <Text style={styles.label}>Birth Day</Text>
                                 <TouchableOpacity onPress={this.showDateTimePicker} style={styles.datePicker}>
                                     <TextInput
+                                        placeholderTextColor={'#393838'}
                                         placeholder={this.state.translateMethod('translation.exposeIDE.views.regestration.bithDatePlaceHolder')}
                                         style={!this.state.birthDateError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
                                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
@@ -289,6 +290,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                 </View>
                                 <View style={styles.formControl}>
                                     <TextInput
+                                        placeholderTextColor={'#393838'}
                                         style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                         placeholder="Type your height…"
                                         keyboardType="phone-pad"
@@ -305,6 +307,7 @@ class YourSelfCoachScreen extends Component<Props, State> {
                                 </View>
                                 <View style={styles.formControl}>
                                     <TextInput
+                                        placeholderTextColor={'#393838'}
                                         style={this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput}
                                         placeholder="Type your weight"
                                         keyboardType="phone-pad"

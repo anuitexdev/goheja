@@ -110,7 +110,8 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                 ...newValidationObject,
             }
         })
-
+        console.log(this.state.validationObject);
+        
         if (this.state.validationObject.formError) { return; }
         const { confirmPassword, ...basicData } = userDto;
         await this.props.changeCoachStep(basicData);

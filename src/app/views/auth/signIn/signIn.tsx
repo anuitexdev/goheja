@@ -19,6 +19,8 @@ import SafeAreaView from 'react-native-safe-area-view';
 import { Subject } from "rxjs";
 import { takeUntil } from 'rxjs/operators';
 
+import ButtonSpinner from 'react-native-button-spinner';
+
 interface State {
     email: string,
     password: string,
@@ -83,9 +85,9 @@ private destroyed:any;
         await this.props.signIn({ mail: this.state.email, psw: this.state.password, specGroup: 'gohejacode' });
 
 
-        // if (!this.props.isLogged) {
+        if (this.props.isLogged) {
             this.props.navigation.navigate('Home');
-        // }
+        }
     }
 
     public signUpRedirect = () => {
@@ -101,6 +103,9 @@ private destroyed:any;
     }
     public chartRedirect = () => {
         this.props.navigation.navigate('chart');
+    }
+    public d3chartRedirect= () => {
+        this.props.navigation.navigate('test');
     }
     private handleChange = (data: any): void => {
         const errors = this.validateFields(data);
@@ -150,7 +155,7 @@ private destroyed:any;
                             onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                             keyboardType={'email-address'}
                             autoCapitalize="none"
-                            keyboardType={"email-address"}
+                            value={this.state.email}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
@@ -161,6 +166,7 @@ private destroyed:any;
                             onChangeText={(password) => this.handleChange({ password, email: this.state.email, type: 'password' })}
                             style={!this.state.passwordError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
                              this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
+                             value={this.state.password}
                         />
                         <Icon
                             style={styles.showPassword}
@@ -179,12 +185,22 @@ private destroyed:any;
                     }
                     <View style={styles.links}>
                         <Text style={styles.forgotPasswordLink} onPress={this.forgotPasswordRedirect}>{this.state.translateMethod('translation.exposeIDE.views.Login.ForgotPasswordLink')}</Text>
-                        <TouchableOpacity
-                            style={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn}
-                            onPress={this.onSubmit}
-                            disabled={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === ''}>
-                            <Text style={styles.signInText}>{this.state.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
-                        </TouchableOpacity>
+                      {  // <TouchableOpacity
+                        //     style={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn}
+                        //     onPress={this.onSubmit}
+                        //     disabled={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === ''}>
+                        //     <Text style={styles.signInText}>{this.state.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
+                        // </TouchableOpacity> 
+                    }
+<ButtonSpinner
+   
+    style={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === '' ? styles.signInBtn : styles.nextBtn}
+    // disabled={this.state.emailError || this.state.email === '' || this.state.passwordError || this.state.password === ''}
+    onPress={this.onSubmit}
+    positionSpinner={'centered-over-text'}
+>
+<Text style={styles.signInText}>{this.state.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
+</ButtonSpinner>
                     </View>
                     <View style={styles.signUpRedirect}>
                         <Text style={styles.haveAccount}>{this.state.translateMethod('translation.exposeIDE.views.Login.Text')}</Text>
@@ -193,6 +209,7 @@ private destroyed:any;
                     <View style={styles.fbContainer}>
                     <FbLogin />
                     </View>
+
                     <View
                     style={{
                         flexDirection: 'row',
@@ -201,7 +218,7 @@ private destroyed:any;
                     }}
                     >
                     <TouchableOpacity
-                    onPress={()=>this.chartRedirect()}
+                    onPress={()=>this.d3chartRedirect()}
                     style={{
                         paddingTop: 20
                     }}
