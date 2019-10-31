@@ -105,6 +105,13 @@ export default StyleSheet.create({
         paddingBottom: 10,
         fontWeight: 'bold'
     },
+    labelHeb: {
+        textAlign: 'right',
+        fontSize: 14,
+        color: '#272e43',
+        paddingBottom: 10,
+        fontWeight: 'bold'
+    },
     formField: {
         paddingBottom: 39,
         position: 'relative'

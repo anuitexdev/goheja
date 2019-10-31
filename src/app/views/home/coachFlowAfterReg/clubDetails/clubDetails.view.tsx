@@ -155,7 +155,8 @@ class ClubDetailsView extends Component<Props, State> {
   render() {
     return (
       <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
-        <KeyboardAvoidingView behavior="padding" enabled keyboardVerticalOffset={50}>
+        <KeyboardAvoidingView 
+                keyboardVerticalOffset={-150} behavior={"position"} >
           <View style={{ position: 'relative' }}>
             <Text style={clubDetails.title}>Club Details</Text>
             <View style={clubDetails.clubDetailsWrapper}>

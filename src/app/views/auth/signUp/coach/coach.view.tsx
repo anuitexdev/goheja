@@ -25,8 +25,8 @@ class CoachScreen extends Component<Props> {
     render() {
         return (
             <Fragment>
-                <KeyboardAvoidingView enabled behavior="padding"
-                style={{ flex: 1 }} keyboardVerticalOffset={44}>
+                {/* <KeyboardAvoidingView enabled behavior="padding"
+                 keyboardVerticalOffset={0}> */}
                     <ScrollView>
                     {this.props.currentStep === 0 ? <CoachBasicInfoScreen /> :
                         this.props.currentStep === 1 ? <UnitsCoachScreen /> :
@@ -35,7 +35,7 @@ class CoachScreen extends Component<Props> {
                                     null
                     }
                     </ScrollView>
-                </KeyboardAvoidingView>
+                {/* </KeyboardAvoidingView> */}
             </Fragment>
         )
     }

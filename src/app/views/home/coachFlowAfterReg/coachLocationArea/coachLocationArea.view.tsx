@@ -245,7 +245,7 @@ class CoachLocationAreaView extends Component<Props, State> {
           latitude: nextProps.clubDTO.lat,
           longitude: nextProps.clubDTO.lng,
         }
-      }, async ()  => {
+      }, async () => {
         await this.circle.setNativeProps({ fillColor: 'rgba(136,197,254,.5)', strokeColor: 'rgba(136,197,254,.5)' });
       })
     }
@@ -457,12 +457,14 @@ class CoachLocationAreaView extends Component<Props, State> {
             </View>
           </View>
           : null}
-
-        <AddAddressModal
-          toggleAddressModal={this.state.toggleAddressModal}
-          hideAddressModal={this.hideAddressModal}
-        />
+       
+          <AddAddressModal
+            toggleAddressModal={this.state.toggleAddressModal}
+            hideAddressModal={this.hideAddressModal}
+          />
+       
       </View>
+
     );
   }
 }

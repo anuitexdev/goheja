@@ -142,7 +142,7 @@ private destroyed:any;
                 <View style={styles.container}>
                     <Text style={styles.screenTitle}>{this.state.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>{this.state.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
+                        <Text style={this.state.currentLanguage !== 'Hebrew' ? styles.label : styles.labelHeb}>{this.state.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
                         <TextInput
                             placeholder={this.state.translateMethod('translation.common.EmailPlaceHolder')}
                             style={!this.state.emailError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
@@ -154,7 +154,7 @@ private destroyed:any;
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
+                        <Text style={this.state.currentLanguage !== 'Hebrew' ? styles.label : styles.labelHeb}>{this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                         <TextInput
                             placeholder={this.state.translateMethod('translation.common.PasswordPlaceHolder')}
                             secureTextEntry={this.state.showPassword}
