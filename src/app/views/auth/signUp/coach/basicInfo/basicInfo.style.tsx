@@ -4,7 +4,7 @@ import window from '../../../../../theme/variables';
 export default StyleSheet.create({
     container: {
         width: window.width,
-        padding: 20
+        padding: 20,
     },
     screenTitle: {
         color: '#272e43',
@@ -15,6 +15,13 @@ export default StyleSheet.create({
         paddingBottom: 39,
     },
     label: {
+        fontSize: 14,
+        color: '#272e43',
+        paddingBottom: 10,
+        fontWeight: 'bold'
+    },
+    labelHeb: {
+        textAlign: 'right',
         fontSize: 14,
         color: '#272e43',
         paddingBottom: 10,
@@ -132,7 +139,7 @@ export default StyleSheet.create({
         paddingLeft: 15,
         textAlign: 'right',
         paddingRight: 50,
-
+        height: 50
     },
     hebInputDefault: {
         borderRadius: 2,
@@ -140,6 +147,7 @@ export default StyleSheet.create({
         borderColor: '#cfd8dc',
         paddingLeft: 15,
         textAlign: 'right',
+        paddingRight: 15,
         paddingVertical: 0,
         height: 50,
 
@@ -157,6 +165,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: 'red',
         paddingLeft: 15,
+        paddingRight: 15,
         textAlign: 'right',
         paddingVertical: 0,
         height: 50,

@@ -80,6 +80,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: '#cfd8dc',
         paddingLeft: 15,
+        color: '#282E44',
         textAlign: 'right',
         paddingRight: 50,
         paddingVertical: 0,
@@ -90,13 +91,22 @@ export default StyleSheet.create({
         borderRadius: 2,
         borderWidth: 1,
         borderColor: '#cfd8dc',
+        color: '#282E44',
         paddingLeft: 15,
+        paddingRight: 15,
         textAlign: 'right',
         paddingVertical: 0,
         height: 50,
 
     },
     label: {
+        fontSize: 14,
+        color: '#272e43',
+        paddingBottom: 10,
+        fontWeight: 'bold'
+    },
+    labelHeb: {
+        textAlign: 'right',
         fontSize: 14,
         color: '#272e43',
         paddingBottom: 10,
@@ -205,13 +215,16 @@ export default StyleSheet.create({
         paddingLeft: 15,
         textAlign: 'right',
         paddingRight: 50,
+        height: 50,
     },
     inputHebErrorDefault: {
         borderRadius: 2,
         borderWidth: 1,
         borderColor: 'red',
         paddingLeft: 15,
+        paddingRight: 15,
         textAlign: 'right',
+        height: 50,
     },
     shadow: {
         shadowColor: '#000',

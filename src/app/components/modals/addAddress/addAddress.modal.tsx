@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Modal,
   View,
@@ -7,13 +7,15 @@ import {
   Text,
   TouchableWithoutFeedback,
   TextInput,
+  KeyboardAvoidingView,
+  Platform
 } from 'react-native';
 import addAddress from './addAddress.style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import RNPickerSelect from 'react-native-picker-select';
 import IconMat from 'react-native-vector-icons/MaterialIcons';
 import * as actions from '../../../redux/actions/createGroup.actions';
-import {countriesList} from '../../../shared/helpers/countries.list';
+import { countriesList } from '../../../shared/helpers/countries.list';
 import axiosInstance from '../../../shared/interceptors/axios.interceptor';
 import Config from 'react-native-config';
 
@@ -28,7 +30,7 @@ interface Props {
   toggleAddressModal: boolean;
   hideAddressModal: (visible: boolean) => void;
   getLocation: (value: string) => void;
-  getLocationName: (value:string) => void;
+  getLocationName: (value: string) => void;
 }
 
 class AddAddressModal extends Component<Props, State> {
@@ -89,58 +91,70 @@ class AddAddressModal extends Component<Props, State> {
 
   render() {
     return (
+
       <View>
         <Modal
           animationType="fade"
           transparent={true}
           visible={this.props.toggleAddressModal}>
+            
           <View style={addAddress.backDrop}>
+          <KeyboardAvoidingView 
+                keyboardVerticalOffset={Platform.OS !== 'ios' ? -400  : 0 } behavior={"padding"} enabled>
             <View style={addAddress.modalWrapper}>
               <TouchableWithoutFeedback
                 onPress={() => this.props.hideAddressModal(false)}>
                 <Icon style={addAddress.close} size={30} name={'ios-close'} />
               </TouchableWithoutFeedback>
-              <View>
-                <Text style={addAddress.title}>Add Address Manually</Text>
-                <View style={addAddress.formField}>
-                  <Text style={addAddress.label}>Country</Text>
-                  <RNPickerSelect
-                    onValueChange={value =>
-                      this.setState({selectedCountry: value})
-                    }
-                    items={this.state.allCountries}>
-                    <View style={addAddress.selectCountry}>
-                      <Text>{this.state.selectedCountry}</Text>
-                      <IconMat
-                        style={addAddress.arrowDropDown}
-                        size={30}
-                        name={'arrow-drop-down'}
-                      />
-                    </View>
-                  </RNPickerSelect>
+              
+                <View>
+                  <Text style={addAddress.title}>Add Address Manually</Text>
+
+                  <View style={addAddress.formField}>
+                    <Text style={addAddress.label}>Country</Text>
+                    <RNPickerSelect
+                      onValueChange={value =>
+                        this.setState({ selectedCountry: value })
+                      }
+                      items={this.state.allCountries}>
+                      <View style={addAddress.selectCountry}>
+                        <Text>{this.state.selectedCountry}</Text>
+                        <IconMat
+                          style={addAddress.arrowDropDown}
+                          size={30}
+                          name={'arrow-drop-down'}
+                        />
+                      </View>
+                    </RNPickerSelect>
+                  </View>
+
+                  <View style={addAddress.formField}>
+                    <Text style={addAddress.label}>Address</Text>
+                    <TextInput
+                      placeholder="Street name..."
+                      placeholderTextColor={'#393838'}
+                      style={addAddress.input}
+                      onChangeText={value =>
+                        this.setState({ selectedAddress: value })
+                      }></TextInput>
+                  </View>
+
                 </View>
-                <View style={addAddress.formField}>
-                  <Text style={addAddress.label}>Address</Text>
-                  <TextInput
-                    placeholder="Street name..."
-                    placeholderTextColor={'#393838'}
-                    style={addAddress.input}
-                    onChangeText={value =>
-                      this.setState({selectedAddress: value})
-                    }></TextInput>
-                </View>
-              </View>
+              
               <View style={addAddress.locateBtnWrapper}>
                 <TouchableOpacity
                   onPress={this.getLocation}
-                  style={this.state.selectedAddress!== '' && this.state.selectedCountry!== '' ? addAddress.locateBtnActive : addAddress.locateBtn}>
+                  style={this.state.selectedAddress !== '' && this.state.selectedCountry !== '' ? addAddress.locateBtnActive : addAddress.locateBtn}>
                   <Text style={addAddress.locateBtnText}>Locate</Text>
                 </TouchableOpacity>
               </View>
             </View>
+            </KeyboardAvoidingView>
           </View>
+          
         </Modal>
       </View>
+
     );
   }
 }

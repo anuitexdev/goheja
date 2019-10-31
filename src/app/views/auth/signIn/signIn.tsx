@@ -147,7 +147,7 @@ private destroyed:any;
                 <View style={styles.container}>
                     <Text style={styles.screenTitle}>{this.state.translateMethod('translation.exposeIDE.views.Login.buttonCaption')}</Text>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>{this.state.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
+                        <Text style={this.state.currentLanguage !== 'Hebrew' ? styles.label : styles.labelHeb}>{this.state.translateMethod( 'translation.exposeIDE.views.Login.email')}</Text>
                         <TextInput
                             placeholder={this.state.translateMethod('translation.common.EmailPlaceHolder')}
                             style={!this.state.emailError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
@@ -155,17 +155,19 @@ private destroyed:any;
                             onChangeText={(email) => this.handleChange({ email, password: this.state.password, type: 'email' })}
                             keyboardType={'email-address'}
                             autoCapitalize="none"
+                            placeholderTextColor={'#393838'}
                             value={this.state.email}
                         ></TextInput>
                     </View>
                     <View style={styles.formField}>
-                        <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
+                        <Text style={this.state.currentLanguage !== 'Hebrew' ? styles.label : styles.labelHeb}>{this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                         <TextInput
                             placeholder={this.state.translateMethod('translation.common.PasswordPlaceHolder')}
                             secureTextEntry={this.state.showPassword}
                             onChangeText={(password) => this.handleChange({ password, email: this.state.email, type: 'password' })}
                             style={!this.state.passwordError ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInput :
                              this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebError}
+                             placeholderTextColor={'#393838'}
                              value={this.state.password}
                         />
                         <Icon
@@ -210,6 +212,38 @@ private destroyed:any;
                     <FbLogin />
                     </View>
 
+                    <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                    >
+                    <TouchableOpacity
+                    onPress={()=>this.d3chartRedirect()}
+                    style={{
+                        paddingTop: 20
+                    }}
+                    >
+                   <Text> Redirect to D3chart Page</Text>
+                    </TouchableOpacity>
+                    </View>
+                    <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                    >
+                    <TouchableOpacity
+                    onPress={()=>this.d3chartRedirect()}
+                    style={{
+                        paddingTop: 20
+                    }}
+                    >
+                   <Text> Redirect to D3chart Page</Text>
+                    </TouchableOpacity>
+                    </View>
                     <View
                     style={{
                         flexDirection: 'row',

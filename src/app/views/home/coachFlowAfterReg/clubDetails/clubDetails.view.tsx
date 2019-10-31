@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TouchableOpacity, Alert, Keyboard } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView } from 'react-native';
 import clubDetails from './clubDetails.style';
 import * as actions from '../../../../redux/actions/createGroup.actions';
 import { TextInputMask } from 'react-native-masked-text';
@@ -92,7 +92,7 @@ class ClubDetailsView extends Component<Props, State> {
     })
   }
   public setWorkTime = (time: string) => {
-    return (+time.substr(0,2) * 60) + (+time.substr(3,5));
+    return (+time.substr(0, 2) * 60) + (+time.substr(3, 5));
   }
   public onSubmit = (value: any) => {
 
@@ -154,76 +154,83 @@ class ClubDetailsView extends Component<Props, State> {
 
   render() {
     return (
-      <View style={{ position: 'relative' }}>
-        <Text style={clubDetails.title}>Club Details</Text>
-        <View style={clubDetails.clubDetailsWrapper}>
-          <Text style={clubDetails.titleTime}>  {translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays'), this.props.clubName)} </Text>
-          <View style={clubDetails.workingDaysWrapper}>
-            {this.state.arrayOfDays.map((item, index) => (
-              <TouchableOpacity
-                style={
-                  this.state.weekWorkDays.indexOf(item.value) == -1
-                    ? clubDetails.daysBtnDefault
-                    : clubDetails.daysBtnSelected
-                }
-                onPress={() => this.selectWorkingDays(item.value)}
-                key={index}>
-                <Text
-                  style={
-                    this.state.weekWorkDays.indexOf(item.value) == -1
-                      ? clubDetails.daysBtnTextDefault
-                      : clubDetails.daysBtnTextSelected
-                  }>
-                  {item.key}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-          <Text style={clubDetails.titleTime}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingHours'), this.props.clubName)}</Text>
-          <View style={clubDetails.inputsWrapper}>
-            <View style={clubDetails.inputWidth}>
-              <Text style={clubDetails.inputLabel}>Opening time</Text>
-              <TextInputMask
-                onSubmitEditing={Keyboard.dismiss}
-                type={'datetime'}
-                style={this.state.isFocused ? clubDetails.inputTimeFocused : clubDetails.inputTime}
-                options={{
-                  format: 'HH:mm'
-                }}
-                onFocus={this.changeFocus}
-                value={this.state.openTime}
-                onChangeText={(time) => this.setState({ openTime: time })}
-              />
-              <Text style={{ color: 'red' }}>
-                {this.state.error.openTimeError}
-              </Text>
-            </View>
-            <View style={[clubDetails.inputWidth, { marginRight: 0 }]}>
-              <Text style={clubDetails.inputLabel}>Closing time</Text>
-              <TextInputMask
-                type={'datetime'}
-                style={this.state.isFocused ? clubDetails.inputTimeFocused : clubDetails.inputTime}
-                onFocus={this.changeFocus}
-                options={{
-                  format: 'HH:mm'
-                }}
-                value={this.state.closeTime}
-                onChangeText={(time) => this.setState({ closeTime: time })}
-              />
-            </View>
-          </View>
+      <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
+        <KeyboardAvoidingView 
+                keyboardVerticalOffset={-150} behavior={"position"} >
+          <View style={{ position: 'relative' }}>
+            <Text style={clubDetails.title}>Club Details</Text>
+            <View style={clubDetails.clubDetailsWrapper}>
+              <Text style={clubDetails.titleTime}>  {translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingDays'), this.props.clubName)} </Text>
+              <View style={clubDetails.workingDaysWrapper}>
+                {this.state.arrayOfDays.map((item, index) => (
+                  <TouchableOpacity
+                    style={
+                      this.state.weekWorkDays.indexOf(item.value) == -1
+                        ? clubDetails.daysBtnDefault
+                        : clubDetails.daysBtnSelected
+                    }
+                    onPress={() => this.selectWorkingDays(item.value)}
+                    key={index}>
+                    <Text
+                      style={
+                        this.state.weekWorkDays.indexOf(item.value) == -1
+                          ? clubDetails.daysBtnTextDefault
+                          : clubDetails.daysBtnTextSelected
+                      }>
+                      {item.key}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+              <Text style={clubDetails.titleTime}>{translationReplaceHelper.translationReplace(this.state.translateMethod('translation.exposeIDE.views.regestrationNewClub.clubWorkingHours'), this.props.clubName)}</Text>
+              <View style={clubDetails.inputsWrapper}>
+                <View style={clubDetails.inputWidth}>
+                  <Text style={clubDetails.inputLabel}>Opening time</Text>
 
-          <View style={clubDetails.wrapperBtn}>
-            <TouchableOpacity
-              style={clubDetails.nextBtn}
-              onPress={() => this.onSubmit(this.state.openTime)}
-            >
-              <Text style={clubDetails.nextBtnText}>Next</Text>
-            </TouchableOpacity>
+                  <TextInputMask
+                    onSubmitEditing={Keyboard.dismiss}
+                    type={'datetime'}
+                    style={this.state.isFocused ? clubDetails.inputTimeFocused : clubDetails.inputTime}
+                    options={{
+                      format: 'HH:mm'
+                    }}
+                    onFocus={this.changeFocus}
+                    value={this.state.openTime}
+                    onChangeText={(time) => this.setState({ openTime: time })}
+                  />
 
+                  <Text style={{ color: 'red' }}>
+                    {this.state.error.openTimeError}
+                  </Text>
+                </View>
+                <View style={[clubDetails.inputWidth, { marginRight: 0 }]}>
+                  <Text style={clubDetails.inputLabel}>Closing time</Text>
+                  <TextInputMask
+                    type={'datetime'}
+                    style={this.state.isFocused ? clubDetails.inputTimeFocused : clubDetails.inputTime}
+                    onFocus={this.changeFocus}
+                    options={{
+                      format: 'HH:mm'
+                    }}
+                    value={this.state.closeTime}
+                    onChangeText={(time) => this.setState({ closeTime: time })}
+                  />
+                </View>
+              </View>
+
+              <View style={clubDetails.wrapperBtn}>
+                <TouchableOpacity
+                  style={clubDetails.nextBtn}
+                  onPress={() => this.onSubmit(this.state.openTime)}
+                >
+                  <Text style={clubDetails.nextBtnText}>Next</Text>
+                </TouchableOpacity>
+
+              </View>
+            </View>
           </View>
-        </View>
-      </View>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
     );
   }
 }

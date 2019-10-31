@@ -1,7 +1,7 @@
 import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import React from "react";
-import { ScrollView, SafeAreaView, Platform } from "react-native";
+import { ScrollView, SafeAreaView, Platform, KeyboardAvoidingView } from "react-native";
 import WelcomeScreen from './welcome/welcome';
 import CoachScreen from './coach/coach.view';
 import Header from '../../../components/header/header';
@@ -23,6 +23,8 @@ class SignUpScreen extends Component<Props> {
 
     render() {
         return (
+            <KeyboardAvoidingView enabled behavior="padding"
+                keyboardVerticalOffset={Platform.OS !== 'ios' ? -250  : 0 }>
                 <ScrollView> 
                     <SafeAreaView style={{flex: 1}}/>
                     {Platform.OS === 'android' ?  <Header/>: null} 
@@ -32,6 +34,7 @@ class SignUpScreen extends Component<Props> {
                         : <CoachScreen navigation={this.props.navigation} />
                     }
                 </ScrollView>
+                </KeyboardAvoidingView>
         )
     }
 }

@@ -24,6 +24,7 @@ export default StyleSheet.create({
         height: 50,
     },
     inputError: {
+        color: '#282E44',
         borderRadius: 2,
         borderWidth: 1,
         borderColor: 'red',

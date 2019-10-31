@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import React from 'react';
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, } from 'react-native';
 import styles from './basicInfo.style';
 import IconIon from 'react-native-vector-icons/Ionicons';
 import * as actions from '../../../../../redux/actions/auth.actions';
@@ -150,9 +150,11 @@ class CoachBasicInfoScreen extends Component<Props, State> {
         return (
             <View style={styles.container}>
                 <Text style={styles.screenTitle}>{this.state.translateMethod('translation.exposeIDE.views.regestration.yourBasicInfo')}</Text>
+                
                 <View style={styles.formField}>
-                    <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.regestration.firstNameTitle')}</Text>
+                    <Text style={this.state.currentLanguage !== 'Hebrew' ? styles.label : styles.labelHeb}>{this.state.translateMethod('translation.exposeIDE.views.regestration.firstNameTitle')}</Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         placeholder={this.state.translateMethod('translation.exposeIDE.views.regestration.firstNamePlaceholder')}
                         value={this.state.firstname}
                         style={!this.state.validationObject.firstname ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
@@ -163,30 +165,32 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                     {this.state.validationObject.firstname ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.regestration.lasttNameTitle')}</Text>
+                    <Text style={this.state.currentLanguage !== 'Hebrew' ? styles.label : styles.labelHeb}>{this.state.translateMethod('translation.exposeIDE.views.regestration.lasttNameTitle')}</Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         value={this.state.lastName}
                         placeholder="Type your last name..."
                         style={!this.state.validationObject.lastName ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
                         onChangeText={lastName =>
                             this.handleChange({ lastName })
+                            
                         }></TextInput>
                     {this.state.validationObject.lastName ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
                 <View style={styles.formField}>
-                    <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.Login.email')}</Text>
+                    <Text style={this.state.currentLanguage !== 'Hebrew' ? styles.label : styles.labelHeb}>{this.state.translateMethod('translation.exposeIDE.views.Login.email')}</Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         placeholder={this.state.translateMethod('translation.common.EmailPlaceHolder')}
                         keyboardType={'email-address'}
                         value={this.state.auth}
                         style={!this.state.validationObject.auth ? this.state.currentLanguage !== 'Hebrew' ? styles.input : styles.hebInputDefault :
                             this.state.currentLanguage !== 'Hebrew' ? styles.inputError : styles.inputHebErrorDefault}
-                        keyboardType={"email-address"}
                         onChangeText={auth => this.handleChange({ auth })}></TextInput>
                     {this.state.validationObject.auth ? <Text style={styles.errorText}>This field is mandatory</Text> : null}
                 </View>
-                <Text style={styles.label}>Phone No.</Text>
+                <Text style={this.state.currentLanguage !== 'Hebrew' ? styles.label : styles.labelHeb}>Phone No.</Text>
                 <View style={styles.formField}>
                     <View style={styles.phoneInput}>
                         <PhoneInput 
@@ -226,8 +230,9 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                 </View>
 
                 <View style={styles.formField}>
-                    <Text style={styles.label}>{this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
+                    <Text style={this.state.currentLanguage !== 'Hebrew' ? styles.label : styles.labelHeb}>{this.state.translateMethod('translation.exposeIDE.views.Login.password')}</Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         placeholder={this.state.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
                         value={this.state.password}
@@ -243,9 +248,12 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         onPress={this.toggleSwitch}
                     />
                 </View>
+                
                 <View style={styles.formField}>
-                    <Text style={styles.label}>Password Confirmation</Text>
+                
+                    <Text style={this.state.currentLanguage !== 'Hebrew' ? styles.label : styles.labelHeb}>Password Confirmation</Text>
                     <TextInput
+                        placeholderTextColor={'#393838'}
                         placeholder={this.state.translateMethod('translation.common.PasswordPlaceHolder')}
                         secureTextEntry={this.state.showPassword}
                         value={this.state.confirmPassword}
@@ -262,12 +270,15 @@ class CoachBasicInfoScreen extends Component<Props, State> {
                         name={'ios-eye'}
                         onPress={this.toggleSwitch}
                     />
+                    
                 </View>
+                
                 <View style={styles.nextBtnWrapper}>
                     <TouchableOpacity style={styles.nextBtnActive} onPress={this.onSubmit}>
                         <Text style={styles.nextBtnText}>{this.state.translateMethod('translation.common.next')}</Text>
                     </TouchableOpacity>
                 </View>
+                
             </View>
         );
     }
