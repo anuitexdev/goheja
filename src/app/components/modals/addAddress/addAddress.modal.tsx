@@ -7,7 +7,8 @@ import {
   Text,
   TouchableWithoutFeedback,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Platform
 } from 'react-native';
 import addAddress from './addAddress.style';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -99,7 +100,7 @@ class AddAddressModal extends Component<Props, State> {
             
           <View style={addAddress.backDrop}>
           <KeyboardAvoidingView 
-                keyboardVerticalOffset={-50} behavior={"position"} >
+                keyboardVerticalOffset={Platform.OS !== 'ios' ? -400  : 0 } behavior={"padding"} enabled>
             <View style={addAddress.modalWrapper}>
               <TouchableWithoutFeedback
                 onPress={() => this.props.hideAddressModal(false)}>

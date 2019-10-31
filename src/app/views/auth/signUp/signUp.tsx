@@ -24,7 +24,7 @@ class SignUpScreen extends Component<Props> {
     render() {
         return (
             <KeyboardAvoidingView enabled behavior="padding"
-                 keyboardVerticalOffset={0}>
+                keyboardVerticalOffset={Platform.OS !== 'ios' ? -250  : 0 }>
                 <ScrollView> 
                     <SafeAreaView style={{flex: 1}}/>
                     {Platform.OS === 'android' ?  <Header/>: null} 
