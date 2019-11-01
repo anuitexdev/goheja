@@ -139,6 +139,15 @@ export default StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 20,
     },
+    signInNextBtn:{
+        backgroundColor: '#4d5a5f',
+        borderRadius: 2,
+        flex: 0,
+        borderWidth: 0,
+        width: 100,
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+    },
     signInText: {
         color: '#f2f8ff',
         fontSize: 16,

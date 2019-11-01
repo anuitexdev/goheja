@@ -12,7 +12,7 @@ import UserSignInData from "src/app/shared/models/userSignInData.model";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import Header from '../../../components/header/header';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FbLogin from '../../../components/fbAuth/fbAuth';
+// import FbLogin from '../../../components/fbAuth/fbAuth';
 import * as regExp from '../../../shared/validation/regexps';
 import TranslateService from '../../../services/translation.service';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -45,7 +45,7 @@ interface Props {
 
 class SignInScreen extends Component<Props, State> {
 
-private destroyed:any;
+    private destroyed: any;
     constructor(props: Props, private translationService: TranslateService) {
         super(props);
         this.state = {
@@ -57,26 +57,26 @@ private destroyed:any;
             currentLanguage: '',
             translateMethod: (str: string) => '',
         }
-       
+
     }
 
     componentWillMount = () => {
-      this.translationService = new TranslateService();
-      this.destroyed = new Subject();
-       this.translationService.getCurrentLanguage().pipe(takeUntil(this.destroyed)).subscribe((res: any)=>{
-             this.setState({
-                 currentLanguage: res.language,
-             })
-            });
-        
+        this.translationService = new TranslateService();
+        this.destroyed = new Subject();
+        this.translationService.getCurrentLanguage().pipe(takeUntil(this.destroyed)).subscribe((res: any) => {
+            this.setState({
+                currentLanguage: res.language,
+            })
+        });
+
         this.translationService.getTranslateMethod().pipe(takeUntil(this.destroyed)).subscribe(res => {
             this.setState({
                 translateMethod: res,
             })
-        });   
+        });
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.destroyed.next();
         this.destroyed.complete();
     }
@@ -104,7 +104,7 @@ private destroyed:any;
     public chartRedirect = () => {
         this.props.navigation.navigate('chart');
     }
-    public d3chartRedirect= () => {
+    public d3chartRedirect = () => {
         this.props.navigation.navigate('test');
     }
     private handleChange = (data: any): void => {
@@ -135,8 +135,8 @@ private destroyed:any;
         return validationObject;
     }
 
-    render() {      
-     
+    render() {
+
         return (
             <ScrollView>
             {Platform.OS === 'android' ?  <Header/>: null} 

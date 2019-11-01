@@ -6,7 +6,8 @@ import ForgotPasswordScreen from '../views/auth/forgotPassword/forgotPassword.vi
 import WelcomeScreen from '../views/auth/signUp/welcome/welcome';
 // import ChartScreen from '../views/auth/chart/chart.view';
 // import D3Screen from '../views/auth/d3charts/d3charts';
-import TestScreen from '../views/auth/test/test';
+// import TestScreen from '../views/auth/test/test';
+// import Echart from '../views/auth/echarts/echarts.view';
 const AppNavigator = createStackNavigator(
   {
     signIn: SignInScreen,
@@ -14,7 +15,7 @@ const AppNavigator = createStackNavigator(
     welcome: WelcomeScreen,
     forgotPassword: ForgotPasswordScreen,
     // chart: ChartScreen,
-    test: TestScreen, 
+    // test: TestScreen, 
   },
   {
     initialRouteName: 'signIn',
