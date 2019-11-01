@@ -10,6 +10,7 @@ import Header from '../../../components/header/header';
 import SafeAreaView from 'react-native-safe-area-view';
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { NavigationScreenProp, NavigationState, NavigationParams } from "react-navigation";
 
 interface State {
     translateMethod: (str: string) => string;
@@ -22,7 +23,8 @@ interface Props {
     runningConfig: any,
     swimmingConfig: any,
     cyclingConfig: any,
-    userData: any
+    userData: any,
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>
 }
 
 class SportsView extends Component<Props, State> {
@@ -87,6 +89,7 @@ class SportsView extends Component<Props, State> {
                 }
             ]
         })
+        this.props.navigation.navigate('fullLayout')
     }
 
     render() {
@@ -130,12 +133,13 @@ class SportsView extends Component<Props, State> {
                         <SportModal />
                     </View>
                     <View style={sports.footer}>
-                        <TouchableOpacity
-                            onPress={() => Alert.alert('Will be soon')}>
-                            <Text style={sports.skipButton}>
-                                {this.state.translateMethod('translation.common.running')} >
-                            </Text>
-                        </TouchableOpacity>
+                      {  // <TouchableOpacity
+                        //     onPress={() => Alert.alert('Will be soon')}>
+                        //     <Text style={sports.skipButton}>
+                        //         {this.state.translateMethod('translation.common.running')} >
+                        //     </Text>
+                        // </TouchableOpacity>
+                      }
                         <TouchableOpacity
                             onPress={this.onSubmit}>
                             <Text style={sports.skipButton}>

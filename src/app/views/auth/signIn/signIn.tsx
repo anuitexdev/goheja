@@ -12,7 +12,7 @@ import UserSignInData from "src/app/shared/models/userSignInData.model";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import Header from '../../../components/header/header';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FbLogin from '../../../components/fbAuth/fbAuth';
+// import FbLogin from '../../../components/fbAuth/fbAuth';
 import * as regExp from '../../../shared/validation/regexps';
 import TranslateService from '../../../services/translation.service';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -206,26 +206,27 @@ class SignInScreen extends Component<Props, State> {
                             <Text style={styles.haveAccount}>{this.state.translateMethod('translation.exposeIDE.views.Login.Text')}</Text>
                             <Text style={styles.signUpLink} onPress={this.signUpRedirect}>{this.state.translateMethod('translation.exposeIDE.views.Login.signUpLink')}</Text>
                         </View>
-                        <View style={styles.fbContainer}>
-                            <FbLogin />
-                        </View>
-
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}
-                        >
-                            <TouchableOpacity
-                                onPress={() => this.d3chartRedirect()}
-                                style={{
-                                    paddingTop: 20
-                                }}
-                            >
-                                <Text> Redirect to chart Page</Text>
-                            </TouchableOpacity>
-                        </View>
+                       { // <View style={styles.fbContainer}>
+                        //     <FbLogin />
+                        // </View>
+                        
+                        // <View
+                        //     style={{
+                        //         flexDirection: 'row',
+                        //         justifyContent: 'center',
+                        //         alignItems: 'center',
+                        //     }}
+                        // >
+                        //     <TouchableOpacity
+                        //         onPress={() => this.d3chartRedirect()}
+                        //         style={{
+                        //             paddingTop: 20
+                        //         }}
+                        //     >
+                        //         <Text> Redirect to chart Page</Text>
+                        //     </TouchableOpacity>
+                        // </View>
+                       }
                     </View>
                 </SafeAreaView>
             </ScrollView>

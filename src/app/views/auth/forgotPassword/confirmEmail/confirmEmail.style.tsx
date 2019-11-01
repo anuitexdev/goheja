@@ -37,6 +37,9 @@ export default StyleSheet.create({
     },
     sendText: {
         color: '#fff',
+        flexDirection: 'row',
+        justifyContent:'flex-start',
+        alignItems: 'flex-start',
     }
 
 

@@ -36,7 +36,9 @@ target 'goheja' do
   pod 'react-native-maps', :podspec => '../node_modules/react-native-maps/react-native-maps.podspec'
   pod 'react-native-google-maps', :podspec =>  '../node_modules/react-native-maps/react-native-google-maps.podspec' # <~~ if you need GoogleMaps support on iOS
 
-  target 'gohejaTests' do
+  # pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
+  # target 'gohejaTests' do
     inherit! :search_paths
     # Pods for testing
   end
