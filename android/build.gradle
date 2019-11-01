@@ -29,6 +29,10 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.4.1")
+        // Flurry logger implementation
+        implementation 'com.google.android.gms:play-services-base:15.0.1'
+        implementation 'com.google.android.gms:play-services-ads:15.0.1'
+        implementation 'com.flurry.android:analytics:12.0.1@aar'
         // classpath("io.fabric.tools:gradle:1.22.1")
         // classpath 'com.google.gms:google-services:4.3.0'
         // classpath("com.google.gms:google-services:3.2.1") // <--- use this version or newer

@@ -41,6 +41,7 @@
     "react-native-d3-charts": "0.0.1",
     "react-native-datepicker": "^1.7.2",
     "react-native-fbsdk": "^1.0.4",
+    "react-native-flurry-sdk": "^5.1.0",
     "react-native-fs": "^2.14.1",
     "react-native-fusioncharts": "^4.1.1",
     "react-native-geocoding": "^0.4.0",

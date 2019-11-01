@@ -4,7 +4,7 @@ import { AppRegistry, StyleSheet, Text, View, Platform } from 'react-native';
 
 
 export default class Test extends Component {
-    private libraryPath: any;
+  private libraryPath: any;
 
   constructor(props: any) {
     super(props);

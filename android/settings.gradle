@@ -1,4 +1,6 @@
 rootProject.name = 'goheja'
+include ':react-native-flurry-sdk'
+project(':react-native-flurry-sdk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-flurry-sdk/android')
 include ':@react-native-community_geolocation'
 project(':@react-native-community_geolocation').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/geolocation/android')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
