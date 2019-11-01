@@ -208,58 +208,9 @@ class SignInScreen extends Component<Props, State> {
                         <Text style={styles.haveAccount}>{this.state.translateMethod('translation.exposeIDE.views.Login.Text')}</Text>
                         <Text style={styles.signUpLink} onPress={this.signUpRedirect}>{this.state.translateMethod('translation.exposeIDE.views.Login.signUpLink')}</Text>
                     </View>
-                    <View style={styles.fbContainer}>
-                    <FbLogin />
-                    </View>
+                  
 
-                    <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                    >
-                    <TouchableOpacity
-                    onPress={()=>this.d3chartRedirect()}
-                    style={{
-                        paddingTop: 20
-                    }}
-                    >
-                   <Text> Redirect to D3chart Page</Text>
-                    </TouchableOpacity>
-                    </View>
-                    <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                    >
-                    <TouchableOpacity
-                    onPress={()=>this.d3chartRedirect()}
-                    style={{
-                        paddingTop: 20
-                    }}
-                    >
-                   <Text> Redirect to D3chart Page</Text>
-                    </TouchableOpacity>
-                    </View>
-                    <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                    >
-                    <TouchableOpacity
-                    onPress={()=>this.d3chartRedirect()}
-                    style={{
-                        paddingTop: 20
-                    }}
-                    >
-                   <Text> Redirect to chart Page</Text>
-                    </TouchableOpacity>
-                    </View>
+               
                 </View>
                 </SafeAreaView>
             </ScrollView>
