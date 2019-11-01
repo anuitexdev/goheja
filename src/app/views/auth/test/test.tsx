@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, Platform } from 'react-native';
-import FusionCharts from 'react-native-fusioncharts';
+// import FusionCharts from 'react-native-fusioncharts';
 
 
 export default class Test extends Component {
+  private libraryPath: any;
 
-    private libraryPath: any;
   constructor(props: any) {
     super(props);
 
@@ -33,8 +33,8 @@ export default class Test extends Component {
 
     this.libraryPath = Platform.select({
       // Specify fusioncharts.html file location
-      ios: require('./assets/fusioncharts.html'),
-      android: { uri: 'goheja:///android_asset/fusioncharts.html' }
+      // ios: require('src/app/assets/fusioncharts.html'),
+      // android: { uri: 'goheja:///android_asset/fusioncharts.html' }
     });
   }
 
@@ -45,14 +45,14 @@ export default class Test extends Component {
           FusionCharts Integration with React Native
         </Text>
         <View style={styles.chartContainer}>
-          <FusionCharts
+          {/* <FusionCharts
             type={this.state.type}
             width={this.state.width}
             height={this.state.height}
             dataFormat={this.state.dataFormat}
             dataSource={this.state.dataSource}
             libraryPath={this.libraryPath} // set the libraryPath property
-          />
+          /> */}
         </View>
       </View>
     );
