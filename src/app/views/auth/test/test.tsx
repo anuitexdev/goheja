@@ -4,7 +4,7 @@ import { AppRegistry, StyleSheet, Text, View, Platform } from 'react-native';
 
 
 export default class Test extends Component {
-  private libraryPath: any;
+    private libraryPath: any;
 
   constructor(props: any) {
     super(props);
@@ -33,7 +33,7 @@ export default class Test extends Component {
 
     this.libraryPath = Platform.select({
       // Specify fusioncharts.html file location
-      // ios: require('src/app/assets/fusioncharts.html'),
+      // ios: require('./assets/fusioncharts.html'),
       // android: { uri: 'goheja:///android_asset/fusioncharts.html' }
     });
   }

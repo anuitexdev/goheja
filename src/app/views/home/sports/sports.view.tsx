@@ -90,12 +90,13 @@ class SportsView extends Component<Props, State> {
     }
 
     render() {
+        console.log(this.props);
         return (
             <SafeAreaView forceInset={{ bottom: 'always' }} style={{ backgroundColor: 'red' }}>
                 <View>
                     <View style={sports.container}>
                         <Text style={sports.title}>
-                            Hi Dafni : &#x2769;
+                            Hi {this.props.userData.userName} : &#x2769;
                     </Text>
                         <Text style={sports.subtitle}>
                             {this.state.translateMethod('translation.exposeIDE.views.confirmation.text')}
