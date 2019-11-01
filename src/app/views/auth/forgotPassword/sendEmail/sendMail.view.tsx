@@ -8,6 +8,7 @@ import { NavigationScreenProp, NavigationState, NavigationParams } from "react-n
 import TranslateService from '../../../../services/translation.service';
 import * as actions from '../../../../redux/actions/auth.actions';
 import ValidationService from '../../../../shared/validation/validation.service';
+import  AuthService from '../../../../services/auth.service';
 
 interface State{
     email: string,
@@ -64,7 +65,7 @@ class SendMailScreen extends Component<Props,State> {
         await this.setState({
             emailError,
         })
-
+        AuthService.checkEmail({email: this.state.email});
         if(!this.state.emailError){ return;}
 
         this.props.addEmail(this.state.email);

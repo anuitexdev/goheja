@@ -27,6 +27,20 @@ export class AuthService {
             });
     }
 
+    public checkEmail(email: any): Promise<any> {
+        console.log(`${Config.API_URL}Users`)
+        console.log(email);
+        return axiosInstance.get(`https://go-heja.com/testweb/api/Users`,  {params: email})
+            .then((response) => {
+                console.log(response);
+                return response 
+            })
+            .catch((error) => {
+                console.log(error);
+                return error;
+            });
+    }
+
     public signUp(userData: any): Promise<any> {
         return axiosInstance.post(`${Config.API_URL}Users`, userData)
             .then((response) => {
@@ -96,5 +110,6 @@ export class AuthService {
             })
 
     }
+
 }
 export default new AuthService();

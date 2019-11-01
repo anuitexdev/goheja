@@ -36,10 +36,10 @@ class HomeScreen extends Component<Props, State> {
                     {/* <Header/> */}
                     {
                          this.props.userType == 1 ?
-                         <SportsView />
+                         <SportsView navigation={this.props.navigation}/>
                         :
                         this.props.userType == 0 ?
-                        <CoachFlowAfterRegView />
+                        <CoachFlowAfterRegView navigation={this.props.navigation} />
                     :
                     null
                     }

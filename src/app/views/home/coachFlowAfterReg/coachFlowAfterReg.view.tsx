@@ -8,6 +8,8 @@ import Wizard from "../../../components/wizard/wizard.view";
 import CoachLocationAreaView from './coachLocationArea/coachLocationArea.view';
 import ClubDetailsView from './clubDetails/clubDetails.view';
 import TranslateService from '../../../services/translation.service';
+import { NavigationParams, NavigationScreenProp } from 'react-navigation';
+import { NavigationState } from 'react-navigation';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 interface State {
@@ -17,6 +19,7 @@ interface State {
 interface Props {
   currentGroupStep: number,
   userName: string,
+  navigation:  NavigationScreenProp<NavigationState, NavigationParams>
 }
 
 class CoachFlowAfterRegView extends Component<Props, State> {
