@@ -761,7 +761,11 @@
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+<<<<<<< HEAD
 				MARKETING_VERSION = 1.0.30;
+=======
+				MARKETING_VERSION = 1.0.26;
+>>>>>>> 5c54066215d936392ebbb3f0435b3b78dece0c3e
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -792,7 +796,11 @@
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+<<<<<<< HEAD
 				MARKETING_VERSION = 1.0.30;
+=======
+				MARKETING_VERSION = 1.0.26;
+>>>>>>> 5c54066215d936392ebbb3f0435b3b78dece0c3e
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",

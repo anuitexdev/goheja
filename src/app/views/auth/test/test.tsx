@@ -1,35 +1,27 @@
-import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Platform } from 'react-native';
-// import FusionCharts from 'react-native-fusioncharts';
+import React from 'react';
+import {
+  StyleSheet,
+  View
+} from 'react-native';
+// import HighchartsReactNative from '@highcharts/highcharts-react-native';
 
+export default class TestScreen extends React.Component {
 
-export default class Test extends Component {
-  private libraryPath: any;
-
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
+    let testArr = [];
+    for (let i = 0; i < 20000; i++) {
+      testArr.push(i);
+    }
     this.state = {
-      type: 'column2d',
-      width: '100%',
-      height: '100%',
-      dataFormat: 'json',
-      dataSource: {
-        chart: {
-          caption: "Harry's SuperMart",
-          subCaption: 'Top 5 stores in last month by revenue',
-          numberprefix: '$',
-          theme: 'fint'
-        },
-        data: [
-          { label: 'Bakersfield Central', value: '880000' },
-          { label: 'Garden Groove harbour', value: '730000' },
-          { label: 'Los Angeles Topanga', value: '590000' },
-          { label: 'Compton-Rancho Dom', value: '520000' },
-          { label: 'Daly City Serramonte', value: '330000' }
-        ]
+      chartOptions: {
+        series: [{
+          data: testArr
+        }]
       }
     };
+<<<<<<< HEAD
 
     this.libraryPath = Platform.select({
       // Specify fusioncharts.html file location
@@ -57,10 +49,19 @@ export default class Test extends Component {
       </View>
     );
   }
-}
+=======
+  }
 
+  render() {
+  //  
+  <>
+  </>
+}
+>>>>>>> 5c54066215d936392ebbb3f0435b3b78dece0c3e
+}
 const styles = StyleSheet.create({
   container: {
+<<<<<<< HEAD
     flex: 1,
     padding: 10
   },
@@ -76,3 +77,9 @@ const styles = StyleSheet.create({
 
 // skip this line if using Create React Native App
 AppRegistry.registerComponent('ReactNativeFusionCharts', () => Test);
+=======
+    backgroundColor: '#fff',
+    justifyContent: 'center'
+  }
+});
+>>>>>>> 5c54066215d936392ebbb3f0435b3b78dece0c3e

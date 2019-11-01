@@ -36,11 +36,17 @@ target 'goheja' do
   pod 'react-native-maps', :podspec => '../node_modules/react-native-maps/react-native-maps.podspec'
   pod 'react-native-google-maps', :podspec =>  '../node_modules/react-native-maps/react-native-google-maps.podspec' # <~~ if you need GoogleMaps support on iOS
 
+<<<<<<< HEAD
   pod 'react-native-flurry-sdk', :path => '../node_modules/react-native-flurry-sdk/ios', :subspecs => ['FlurrySDK-Push']
   pod 'Flurry-iOS-SDK/FlurrySDK'
   pod 'Flurry-iOS-SDK/FlurryAds'
 
   target 'gohejaTests' do
+=======
+  # pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
+  # target 'gohejaTests' do
+>>>>>>> 5c54066215d936392ebbb3f0435b3b78dece0c3e
     inherit! :search_paths
     # Pods for testing
   end

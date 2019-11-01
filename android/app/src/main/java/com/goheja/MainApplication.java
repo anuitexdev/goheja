@@ -7,7 +7,11 @@ import com.facebook.react.PackageList;
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
 import com.facebook.react.ReactApplication;
+<<<<<<< HEAD
 import com.flurry.android.reactnative.FlurryPackage;
+=======
+// import com.reactnativecommunity.webview.RNCWebViewPackage;
+>>>>>>> 5c54066215d936392ebbb3f0435b3b78dece0c3e
 import com.reactnativecommunity.geolocation.GeolocationPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;

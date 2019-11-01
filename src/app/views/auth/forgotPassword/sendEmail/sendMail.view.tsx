@@ -8,6 +8,7 @@ import { NavigationScreenProp, NavigationState, NavigationParams } from "react-n
 import TranslateService from '../../../../services/translation.service';
 import * as actions from '../../../../redux/actions/auth.actions';
 import ValidationService from '../../../../shared/validation/validation.service';
+import  AuthService from '../../../../services/auth.service';
 
 interface State{
     email: string,
@@ -64,7 +65,7 @@ class SendMailScreen extends Component<Props,State> {
         await this.setState({
             emailError,
         })
-
+        AuthService.checkEmail({email: this.state.email});
         if(!this.state.emailError){ return;}
 
         this.props.addEmail(this.state.email);
@@ -83,7 +84,7 @@ class SendMailScreen extends Component<Props,State> {
                     <Text style= {styles.label}> Your Email Address</Text>
                     <TextInput
                         placeholderTextColor={'#393838'}
-                        placeholder='Alona@morning.agency'
+                        placeholder={this.state.translateMethod('translation.exposeIDE.views.forgot-password.caption')}
                         style={!this.state.emailError ? styles.inputError : styles.input}
                         onChangeText = {(email: string) => this.handleChange(email)}
                         keyboardType={"email-address"}

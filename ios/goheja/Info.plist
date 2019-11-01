@@ -11,7 +11,11 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconName</key>
+<<<<<<< HEAD
 	<string>Assets.scassets/AppIcon.appiconset</string>
+=======
+	<string>Assets.xcassets/AppIcon.appiconset</string>
+>>>>>>> 5c54066215d936392ebbb3f0435b3b78dece0c3e
 	<key>CFBundleIcons</key>
 	<dict/>
 	<key>CFBundleIcons~ipad</key>

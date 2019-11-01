@@ -46,6 +46,7 @@ class Header extends Component<Props, State, BaseTranslateService> {
       key,
       dropDownIsVisible: !this.state.dropDownIsVisible,
     });
+
   }
 
   private toggleDropDown = () => {

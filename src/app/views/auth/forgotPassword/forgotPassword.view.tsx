@@ -9,6 +9,7 @@ import { NavigationScreenProp, NavigationState, NavigationParams } from "react-n
 import SendMailScreen from './sendEmail/sendMail.view';
 import ResetPasswordScreen from './resetPassword/resetPassword.view';
 import SuccessScreen from './success/success.view';
+import ConfirmationScreen from './confirmEmail/confirmEmail.view';
 
 
 interface State {
@@ -41,7 +42,8 @@ class ForgotPasswordScreen extends Component<Props, State> {
                 <View style={styles.container}>
                     <ScrollView>
                         {this.state.screenNumber === 1 ? <SendMailScreen navigation={this.props.navigation} changeScreen={this.getCurrentScreen} /> :
-                        this.state.screenNumber === 2 ?  <ResetPasswordScreen  changeScreen={ this.getCurrentScreen}/> :
+                        this.state.screenNumber === 2 ?  <ConfirmationScreen  changeScreen={ this.getCurrentScreen}/> :
+                        this.state.screenNumber === 3 ?  <ResetPasswordScreen  changeScreen={ this.getCurrentScreen}/> :
                         <SuccessScreen navigation={this.props.navigation} />
                         }
                     </ScrollView>

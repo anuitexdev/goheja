@@ -67,6 +67,10 @@ class ResetPasswordScreen extends Component<Props, State> {
 
         if (data.password || data.password === '') {
             passwordError = data.password === '';
+
+        }
+        if (data.password && data.password !== '' && this.state.confirmPassword !== '') {
+            confirmPasswordError = data.password !== this.state.confirmPassword;
         }
         if (data.confirmPassword || data.confirmPassword === '') {
             confirmPasswordError = this.state.password !== data.confirmPassword;
@@ -82,9 +86,9 @@ class ResetPasswordScreen extends Component<Props, State> {
         const resetData = {
             email: this.props.email,
             newPassword: this.state.password,
-        };       
+        };
         await this.props.resetPassword(resetData);
-        this.props.changeScreen(3);
+        this.props.changeScreen(4);
     }
 
     render() {
