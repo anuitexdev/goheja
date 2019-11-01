@@ -399,22 +399,20 @@ class CoachLocationAreaView extends Component<Props, State> {
                 )}
               </Text>
             </TouchableOpacity>
-            {/* <TouchableOpacity style={coachLocationArea.skipBtn}>
+            {<TouchableOpacity style={coachLocationArea.skipBtn} onPress={() => this.props.nextStepNumber({})}>
               <Text style={coachLocationArea.skipBtnText}>
                 {this.state.translateMethod('translation.common.skip')}
               </Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity> }
           </View>
-          : null}
-        {this.state.region.latitude != null ?
-          <TouchableOpacity
-            style={coachLocationArea.nextBtn}
-            onPress={this.onSubmit}>
-            <Text style={coachLocationArea.nextBtnText}>
-              {this.state.translateMethod('translation.common.next')}
-            </Text>
-          </TouchableOpacity>
-          : null}
+          :   <TouchableOpacity
+          style={coachLocationArea.nextBtn}
+          onPress={this.onSubmit}>
+          <Text style={coachLocationArea.nextBtnText}>
+            {this.state.translateMethod('translation.common.next')}
+          </Text>
+        </TouchableOpacity>}
+     
 
         {this.state.editLocation == true ?
           <View style={coachLocationArea.range}>

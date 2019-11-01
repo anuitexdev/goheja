@@ -83,7 +83,7 @@ class SendMailScreen extends Component<Props,State> {
                     <Text style= {styles.label}> Your Email Address</Text>
                     <TextInput
                         placeholderTextColor={'#393838'}
-                        placeholder='Alona@morning.agency'
+                        placeholder={this.state.translateMethod('translation.exposeIDE.views.forgot-password.caption')}
                         style={!this.state.emailError ? styles.inputError : styles.input}
                         onChangeText = {(email: string) => this.handleChange(email)}
                         keyboardType={"email-address"}
