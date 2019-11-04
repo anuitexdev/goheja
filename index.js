@@ -12,21 +12,22 @@ new Flurry.Builder()
     .withCrashReporting(true)
     .withLogEnabled(true)
     .withLogLevel(Flurry.LogLevel.DEBUG)
+    .withMessaging(true)
     .build("RB9KJ85FZFQ8K2HKDDP3", "SQGC5KQPXHCZ38DHZMQH");
 
-Flurry.getVersions().then((versions) => {
-    console.log('Versions: ' + versions.agentVersion + ' : ' + versions.releaseVersion + ' : ' + versions.sessionId);
-});
+// Flurry.getVersions().then((versions) => {
+//     console.log('Versions: ' + versions.agentVersion + ' : ' + versions.releaseVersion + ' : ' + versions.sessionId);
+// });
 
-// Set users preferences.
-Flurry.setAge(36);
-Flurry.setGender(Flurry.Gender.FEMALE);
-Flurry.setReportLocation(true);
+// // Set users preferences.
+// Flurry.setAge(36);
+// Flurry.setGender(Flurry.Gender.FEMALE);
+// Flurry.setReportLocation(true);
     
-// Log Flurry events.
-Flurry.logEvent('React Native Event');
-Flurry.logEvent('React Native Timed Event', {param: 'true'}, true);
-Flurry.endTimedEvent('React Native Timed Event');
+// // Log Flurry events.
+// Flurry.logEvent('React Native Event');
+// Flurry.logEvent('React Native Timed Event', {param: 'true'}, true);
+// Flurry.endTimedEvent('React Native Timed Event');
 
 // Example to get Flurry Remote Configurations.
 Flurry.addConfigListener((event) => {
@@ -47,6 +48,16 @@ Flurry.addConfigListener((event) => {
       // Fetch failed.
       console.log('Fetch error! Retrying: ' + event.isRetrying);
     }
+});
+
+Flurry.addMessagingListener((message) => {
+  if (message.Type === Flurry.MessageType.RECEIVED) {
+    Flurry.willHandleMessage(false);
+  } else if (message.Type === Flurry.MessageType.CLICKED) {
+    Flurry.willHandleMessage(false);
+  }
+ 
+  Flurry.printMessage(message);
 });
 
 Flurry.fetchConfig();
