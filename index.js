@@ -5,9 +5,16 @@
 import {AppRegistry} from 'react-native';
 import App from './src/app/App';
 import {name as appName} from './app.json';
+// Flurry
 import Flurry from 'react-native-flurry-sdk';
+// Bugsnag
+import { Client } from 'bugsnag-react-native';
+
+//--------------------- Bugsnag logger implementation START ------------------
+const bugsnag = new Client('58f3bfb23c77f4094f16a58772a4c033');
+//--------------------- Bugsnag logger implementation END ------------------
    
-//--------------------- Flurry logger implemnentation START------------------
+//--------------------- Flurry logger implemnentation START ------------------
 new Flurry.Builder()
     .withCrashReporting(true)
     .withLogEnabled(true)

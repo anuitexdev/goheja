@@ -34,6 +34,9 @@ export default class App extends Component {
   render() {
     console.disableYellowBox = true;
 
+    // Bugsnag
+    // Bugsnag.notify(RuntimeException("Test error"))
+
     // Set users preferences.
 // Flurry.setAge(36);
 // Flurry.setGender(Flurry.Gender.FEMALE);
